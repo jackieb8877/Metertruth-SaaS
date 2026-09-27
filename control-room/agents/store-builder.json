@@ -1,12 +1,12 @@
 {
   "id": "store-builder",
   "name": "Store Builder",
-  "status": "working",
-  "last_run": "2026-09-27T18:22:00.894Z",
+  "status": "waiting",
+  "last_run": "2026-09-27T18:22:57.031Z",
   "focus": "Expand the non-commercial multi-product storefront into a reusable 20–50 SKU architecture",
-  "summary": "Job-led storefront promoted to the main preview; 14/15 source checks pass. Homepage collections, PDP validation modules and catalogue mapping are implemented while commerce remains disabled.",
+  "summary": "Main non-commercial storefront now uses three job-led collections with reusable PDP validation states; 15/15 source checks pass.",
   "blocker": "Commercial launch still waits on validated suppliers, landed cost, final assets, fit/spec data, fulfillment, traceability and owner GO.",
-  "progress": 52,
+  "progress": 56,
   "events": [
     {
       "time": "2026-09-27T17:03:30Z",
@@ -32,6 +32,11 @@
       "time": "2026-09-27T18:22:00.894Z",
       "title": "Static storefront checks complete",
       "detail": "14/15 source-level checks passed; browser playback and external media delivery are still unverified."
+    },
+    {
+      "time": "2026-09-27T18:22:57.031Z",
+      "title": "Storefront verification passed",
+      "detail": "15/15 source-level checks pass after adding reusable PDP validation states."
     }
   ]
 }
