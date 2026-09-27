@@ -18,6 +18,11 @@
       "time": "2026-09-27T17:00:20Z",
       "title": "Supplier path improved",
       "detail": "Two core components have explicit dropship listings; the third bundle component still needs Spain/UE SLA verification."
+    },
+    {
+      "time": "2026-09-27T19:45:39Z",
+      "title": "Compliance claim gate added",
+      "detail": "Pet cleaning/deodorizing gloves remain WATCH only with non-biocidal positioning and verified formulation/CLP status; antimicrobial/disinfectant claims are BLOCK until BPR/PT3 evidence exists."
     }
   ]
 }

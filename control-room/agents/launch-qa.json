@@ -12,6 +12,11 @@
       "time": "2026-09-27T17:49:39Z",
       "title": "QA gate remains BLOCK",
       "detail": "Prototype quality improved, but launch-critical operational and compliance gates remain open."
+    },
+    {
+      "time": "2026-09-27T19:45:39Z",
+      "title": "Conditional biocide gate added",
+      "detail": "Pet cleaning/deodorizing gloves are QA FAIL if antimicrobial/disinfectant claims appear without verified BPR/PT3 evidence."
     }
   ],
   "decision": "BLOCK",
@@ -33,7 +38,9 @@
     "Verify full variable costs and fulfillment before locking price.",
     "Finalize shipping/returns and product traceability.",
     "Keep payments disabled until staging checkout and consent tests pass.",
-    "Run deployed mobile/accessibility/performance QA."
+    "Run deployed mobile/accessibility/performance QA.",
+    "Reject pet cleaning gloves if formulation/CLP status is unknown or listing copy implies antibacterial/disinfectant/antimicrobial action without verified BPR/PT3 authorisation.",
+    "Reject blocked electrical test SKUs without exact conformity/WEEE/battery and applicable food-contact evidence."
   ],
   "handoff": {
     "store_builder": [

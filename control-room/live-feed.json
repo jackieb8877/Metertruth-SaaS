@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T18:33:15Z",
+  "updated_at": "2026-09-27T19:45:39Z",
   "events": [
     {
       "id": "product-scout-20260927T170312Z-observation",
@@ -266,6 +266,39 @@
       "title": "Creative & Offer cycle complete",
       "detail": "Material catalogue changes persisted; next value gate is exact EU sourcing for the hard-bottom dog cover and a cheaper verified EU roller path.",
       "status": "ok"
+    },
+    {
+      "id": "compliance-risk-20260927T194539Z-pet-cleaning-claims",
+      "ts": "2026-09-27T19:45:39Z",
+      "agent_id": "compliance-risk",
+      "phase": "decision",
+      "title": "Pet cleaning gloves gated by claim type",
+      "detail": "WATCH only for ordinary cleaning/deodorizing with verified formulation/CLP status. Any antibacterial, disinfectant, antimicrobial or germ-control claim = BLOCK pending BPR/PT3 authorisation and Article 95 supply-chain evidence.",
+      "requirement_evaluated": "Biocidal Products Regulation/PT3 + CLP classification/labelling + marketplace restricted/dangerous-goods risk",
+      "evidence": [
+        "https://eur-lex.europa.eu/eli/reg/2012/528/oj/eng",
+        "https://echa.europa.eu/support/getting-started/biocides",
+        "https://echa.europa.eu/web/guest/regulations/clp/labelling"
+      ],
+      "decision": "WATCH_CONDITIONAL_BLOCK",
+      "status": "warning"
+    },
+    {
+      "id": "compliance-risk-20260927T194539Z-vacuum-sealer",
+      "ts": "2026-09-27T19:45:39Z",
+      "agent_id": "compliance-risk",
+      "phase": "decision",
+      "title": "Handheld vacuum sealer remains blocked",
+      "detail": "Exact SKU conformity package must cover applicable CE/EMC, RoHS, WEEE, battery duties if applicable and food-contact evidence for bundled plastic bags/containers.",
+      "requirement_evaluated": "Electrical conformity + WEEE/RoHS + Batteries Regulation + food-contact materials",
+      "evidence": [
+        "https://europa.eu/youreurope/business/product-rules-compliance/recycling-waste-management/weee-responsibilities/index_en.htm",
+        "https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en",
+        "https://echa.europa.eu/en/legislation-profile/-/legislationprofile/EU-BATTERIES_REGULATION",
+        "https://food.ec.europa.eu/food-safety/chemical-safety/food-contact-materials/legislation_en"
+      ],
+      "decision": "BLOCK",
+      "status": "warning"
     }
   ]
 }

@@ -2,11 +2,11 @@
   "id": "compliance-risk",
   "name": "Compliance & Risk",
   "status": "active",
-  "last_run": "2026-09-27T17:46:24Z",
-  "focus": "Spain/EU launch readiness",
-  "summary": "Material change: from 27 Sep 2026 the EU harmonised legal-guarantee notice applies to online shops. Kit Muda Cero is WATCH, not automatically CE-blocked if kept as simple non-electrical tools, but GPSR traceability and role mapping remain mandatory. Pet grooming vacuum remains BLOCK.",
-  "blocker": "Before any sale: verify manufacturer and EU responsible person where required, product identifier, applicable warnings/instructions, supplier safety evidence, Spain packaging producer/EPR status, and the new harmonised guarantee notice.",
-  "progress": 68,
+  "last_run": "2026-09-27T19:45:39Z",
+  "focus": "Spain/EU launch readiness — promoted SKU gate",
+  "summary": "Material update: pet deodorizing/cleaning gloves are WATCH only as ordinary cleaners. Any antibacterial, disinfectant, antimicrobial or germ-control positioning triggers BLOCK until the biocidal route is verified for Spain/EU. Handheld vacuum sealer remains BLOCK pending exact electrical/battery/food-contact conformity evidence.",
+  "blocker": "Before any sale: exact SKU/manufacturer/EU responsible-person mapping, GPSR online-offer data, Spain packaging EPR, legal-guarantee notice, and product-specific evidence. Pet cleaning/deodorizing gloves need full formulation/classification and non-biocidal claims unless authorised.",
+  "progress": 70,
   "decisions": [
     {
       "product": "Kit Muda Cero",
@@ -32,6 +32,26 @@
       "product": "Windshield sunshade",
       "decision": "WATCH",
       "detail": "GPSR applies; avoid universal-fit or measured temperature claims without evidence."
+    },
+    {
+      "product": "Muda Cero grooming core (glove + slicker)",
+      "decision": "WATCH",
+      "detail": "No automatic CE route identified for simple non-electrical grooming tools; GPSR traceability/safety, warnings/instructions and own-brand manufacturer-role mapping remain launch gates."
+    },
+    {
+      "product": "Pet deodorizing cleaning gloves",
+      "decision": "WATCH",
+      "detail": "Ordinary cleaning/deodorizing without a biocidal effect can remain outside BPR, but formulation and CLP classification must be checked. If copy claims antibacterial, disinfectant, antimicrobial, germ-killing or control of harmful organisms, BLOCK until BPR/PT3 authorisation and Article 95 supply-chain status are verified."
+    },
+    {
+      "product": "Portable pet water bottle",
+      "decision": "WATCH",
+      "detail": "GPSR and material safety/traceability apply. Do not make BPA-free, leak-proof, food-grade or human-use claims without supplier evidence. If marketed for human drinking too, food-contact rules need a specific compliance check."
+    },
+    {
+      "product": "Handheld vacuum sealer",
+      "decision": "BLOCK",
+      "detail": "Do not promote commercially until exact SKU documents cover applicable CE legislation, RoHS, WEEE, battery obligations if battery-powered, GPSR information and food-contact compliance for included bags/containers."
     }
   ],
   "requirements": [
@@ -41,23 +61,32 @@
     "Discounts need the lowest prior price from the previous 30 days.",
     "Non-essential analytics/advertising cookies require prior consent with reject offered at the same level as accept.",
     "Spain packaging producer status/RPP/SRAP must be mapped under the PPWR regime now applying.",
-    "Qualifying direct imports up to EUR150 can incur the temporary EUR3-per-item customs duty since 1 Jul 2026."
+    "Qualifying direct imports up to EUR150 can incur the temporary EUR3-per-item customs duty since 1 Jul 2026.",
+    "Pet cleaning/deodorizing gloves: obtain ingredient/formulation data and CLP classification before listing; prohibit antimicrobial/disinfectant/germ-control claims unless the BPR route is verified.",
+    "Battery/electrical test products: exact SKU conformity package before promotion; verify WEEE/RoHS/EMC and Batteries Regulation duties as applicable.",
+    "Food-contact accessories bundled with vacuum sealers: require applicable Declaration of Compliance/supporting migration evidence for plastic FCMs."
   ],
   "handoff": {
     "orchestrator": [
       "Muda Cero = WATCH; grooming vacuum = BLOCK.",
       "Treat own-brand role mapping and packaging EPR as launch gates.",
-      "Include current low-value import duty in direct non-EU fulfilment economics."
+      "Include current low-value import duty in direct non-EU fulfilment economics.",
+      "Pet deodorizing cleaning gloves stay WATCH only with non-biocidal positioning and verified formulation/CLP status; any antimicrobial/disinfectant claim = BLOCK pending BPR/PT3 verification.",
+      "Handheld vacuum sealer stays BLOCK until exact CE/WEEE/RoHS/battery/FCM package is complete."
     ],
     "store_builder": [
       "Add GPSR fields per SKU before commerce.",
       "Add official EU harmonised guarantee notice before checkout.",
-      "Keep non-essential trackers off until compliant consent UI exists."
+      "Keep non-essential trackers off until compliant consent UI exists.",
+      "Do not render antibacterial/disinfectant/antimicrobial/germ-killing claims for pet cleaning gloves unless Compliance clears the exact SKU and claim set.",
+      "Keep handheld vacuum sealer and pet grooming vacuum hidden/noindex/non-purchasable while BLOCK."
     ],
     "launch_qa": [
       "FAIL if guarantee notice or required GPSR fields are missing.",
       "FAIL discounts without 30-day price history.",
-      "FAIL non-EU direct-ship costing that omits current duty treatment."
+      "FAIL non-EU direct-ship costing that omits current duty treatment.",
+      "FAIL pet cleaning gloves if formulation/CLP status is unknown or copy implies a biocidal function without verified authorisation.",
+      "FAIL handheld vacuum sealer if exact conformity, WEEE/battery duties or bundled food-contact evidence are missing."
     ]
   },
   "sources": [
@@ -66,7 +95,14 @@
     "https://eur-lex.europa.eu/eli/reg_impl/2025/1960/oj/eng",
     "https://www.miteco.gob.es/es/calidad-y-evaluacion-ambiental/temas/prevencion-y-gestion-residuos/registro-productores-producto/registro-productores-producto-seccion-envases.html",
     "https://europa.eu/youreurope/business/product-rules-compliance/textiles-and-footwear/textile-label/index_en.htm",
-    "https://eur-lex.europa.eu/eli/reg/2026/382/oj/eng"
+    "https://eur-lex.europa.eu/eli/reg/2026/382/oj/eng",
+    "https://eur-lex.europa.eu/eli/reg/2012/528/oj/eng",
+    "https://echa.europa.eu/support/getting-started/biocides",
+    "https://echa.europa.eu/web/guest/regulations/clp/labelling",
+    "https://europa.eu/youreurope/business/product-rules-compliance/recycling-waste-management/weee-responsibilities/index_en.htm",
+    "https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en",
+    "https://echa.europa.eu/en/legislation-profile/-/legislationprofile/EU-BATTERIES_REGULATION",
+    "https://food.ec.europa.eu/food-safety/chemical-safety/food-contact-materials/legislation_en"
   ],
   "events": [
     {
@@ -86,6 +122,18 @@
       "severity": "medium",
       "title": "Muda Cero gate refined",
       "detail": "No automatic CE requirement identified for simple non-electrical tools; continue under WATCH pending GPSR evidence."
+    },
+    {
+      "time": "2026-09-27T19:45:39Z",
+      "severity": "high",
+      "title": "Pet cleaning glove claims gated",
+      "detail": "Ordinary cleaning/deodorizing can remain WATCH, but antibacterial/disinfectant/antimicrobial/germ-control claims trigger BLOCK until BPR/PT3 authorisation and Article 95 supply-chain evidence are verified."
+    },
+    {
+      "time": "2026-09-27T19:45:39Z",
+      "severity": "medium",
+      "title": "Vacuum sealer remains BLOCK",
+      "detail": "Exact electrical/battery/WEEE/RoHS and bundled food-contact documentation is still missing."
     }
   ]
 }
