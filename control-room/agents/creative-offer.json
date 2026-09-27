@@ -2,82 +2,207 @@
   "id": "creative-offer",
   "name": "Creative & Offer",
   "status": "active",
-  "last_run": "2026-09-27T17:29:39Z",
+  "last_run": "2026-09-27T18:30:30Z",
   "focus": "Multi-SKU merchandising, offer architecture and conversion creative",
-  "summary": "Material shift: move from one-product merchandising to three job-led collections. Keep Kit Muda Cero as HERO, elevate only differentiated hard-bottom dog-car cover as second HERO candidate, and keep packing cubes/sunshade as TEST until economics support them. Muda Cero first price test moves to €39.90, then €34.90.",
-  "blocker": "Final pricing still depends on Finance and verified landed cost.",
-  "progress": 94,
+  "summary": "Material update: Muda Cero remains HERO but the current 3-piece supplier path is too tight to treat as launch-ready; add a gated 2-piece grooming-core contingency, keep the hard-bottom dog cover as second HERO with fit-first positioning, demote windshield umbrella to seasonal CROSS-SELL, and keep packing cubes as TEST only.",
+  "blocker": "Full Muda Cero economics/fulfillment remain unresolved; exact EU hard-bottom dog-cover SKU is still missing; third collection lacks enough validated depth for launch prominence.",
+  "progress": 96,
   "material_change": true,
+  "material_change_reason": "Supplier economics and competitor/ads evidence materially change the offer hierarchy.",
   "collections": [
     {
       "name": "Mascotas en casa",
       "promise": "Menos pelo suelto. Menos pelo repartido.",
       "skus": [
-        {"name":"Kit Muda Cero","role":"HERO","price_test":"39.90 / 34.90 / 29.90 acquisition-only"},
-        {"name":"Reusable pet-hair roller","role":"CROSS-SELL"},
-        {"name":"Pet deodorizing cleaning gloves","role":"UPSELL"},
-        {"name":"Pet grooming vacuum kit","role":"TEST"}
+        {
+          "name": "Kit Muda Cero full 3-step",
+          "role": "HERO",
+          "price_test": "39.90 first / 34.90 secondary; only if Finance + fulfillment gate passes"
+        },
+        {
+          "name": "Muda Cero grooming core (glove + slicker contingency)",
+          "role": "CORE",
+          "price_test": "Finance to model 34.90 first / 29.90 second before any launch decision"
+        },
+        {
+          "name": "Reusable pet-hair roller",
+          "role": "CROSS-SELL",
+          "gate": "Spain/EU origin, SLA and same-shipment economics"
+        },
+        {
+          "name": "Pet deodorizing cleaning gloves",
+          "role": "UPSELL",
+          "gate": "claims/compliance"
+        },
+        {
+          "name": "Pet grooming vacuum kit",
+          "role": "TEST",
+          "gate": "electrical/compliance"
+        }
       ]
     },
     {
       "name": "Mascotas en movimiento",
       "promise": "Viajar con ellos sin entregarles el coche.",
       "skus": [
-        {"name":"Hard-bottom dog car cover / backseat extender","role":"HERO","price_test":"59.90 / 69.90"},
-        {"name":"Portable pet water bottle","role":"CROSS-SELL"},
-        {"name":"Reusable pet-hair roller","role":"CROSS-SELL"}
+        {
+          "name": "Hard-bottom dog car cover / backseat extender",
+          "role": "HERO",
+          "price_test": "59.90 first / 69.90 secondary",
+          "positioning": "fit confidence, exact dimensions, install and structural proof"
+        },
+        {
+          "name": "Portable pet water bottle",
+          "role": "CROSS-SELL"
+        },
+        {
+          "name": "Reusable pet-hair roller",
+          "role": "CROSS-SELL",
+          "gate": "only if fulfillment can be consolidated"
+        }
       ]
     },
     {
       "name": "Viaje y coche",
-      "promise": "Menos espacio perdido. Menos tiempo peleándote con el coche o la maleta.",
+      "status": "INCUBATOR",
+      "promise": "Menos espacio perdido. Menos fricción al viajar.",
       "skus": [
-        {"name":"Compression packing cubes","role":"TEST","price_test":"39.90 / 49.90"},
-        {"name":"Foldable windshield sunshade umbrella","role":"TEST","price_test":"29.90 / 34.90"},
-        {"name":"Handheld vacuum sealer","role":"HOLD"}
+        {
+          "name": "Compression packing cubes",
+          "role": "TEST",
+          "gate": "current supplier economics and saturation do not justify paid-acquisition priority"
+        },
+        {
+          "name": "Foldable windshield sunshade umbrella",
+          "role": "CROSS-SELL",
+          "gate": "seasonal only; no HERO/paid acquisition"
+        },
+        {
+          "name": "Handheld vacuum sealer",
+          "role": "TEST",
+          "gate": "compliance/sourcing"
+        }
       ]
     }
   ],
-  "creative_direction": {
-    "principle":"Real product footage first; motion must demonstrate use, not decorate.",
-    "avoid":["AI-looking pets or people","fake review cards","generic 3D lifestyle renders","unverified superlatives"],
-    "use":["phone-shot UGC","macro tactile footage","real before/after","3D only for construction or fit explanation"]
+  "pricing_psychology": {
+    "muda_cero": "39.90 first, 34.90 secondary; 29.90 not default paid-traffic price",
+    "dog_cover": "59.90 first, 69.90 secondary; avoid >79.90 without materially stronger proof/warranty",
+    "packing_cubes": "No price recommendation until sourcing improves",
+    "sunshade": "No paid-acquisition price recommendation; seasonal add-on only"
+  },
+  "hooks_by_cluster": {
+    "mascotas_en_casa": [
+      "3 problemas. 3 herramientas. Una rutina.",
+      "El pelo no se resuelve con una sola herramienta.",
+      "Primero el manto. Después el sofá."
+    ],
+    "mascotas_en_movimiento": [
+      "Antes de comprarla, mide esto.",
+      "¿De verdad queda plana? Te lo enseñamos."
+    ],
+    "viaje_y_coche": [
+      "La misma ropa. La misma maleta. ¿Cierra o no?",
+      "Mide el parabrisas antes de comprar."
+    ]
+  },
+  "ugc_concepts": {
+    "muda_cero": "15-20s real pet + real textile; map one tool to one job and end with visible collected hair.",
+    "dog_cover": "20-30s real car; measure seat, install exact SKU, show rigid platform, belt/seat fit and realistic dog use.",
+    "packing_cubes": "Fixed clothing list, same carry-on, exact before/after closure and thickness.",
+    "sunshade": "Real deployment, dimensions and mirror/dashboard clearance; seasonal supporting creative only."
   },
   "bundle_hypotheses": [
     {
-      "name":"Pack Viaje Limpio",
-      "components":["Hard-bottom dog car cover / backseat extender","Portable pet water bottle","Reusable pet-hair roller"],
-      "gate":"Only if same-shipment economics are verified"
+      "name": "Muda Cero Completo",
+      "components": [
+        "glove",
+        "self-cleaning slicker",
+        "reusable roller"
+      ],
+      "gate": "full economics + coherent fulfillment"
+    },
+    {
+      "name": "Muda Cero grooming core",
+      "components": [
+        "glove",
+        "self-cleaning slicker"
+      ],
+      "gate": "contingency only; Finance must model and copy must narrow to grooming/prevention"
+    },
+    {
+      "name": "Pack Viaje Limpio",
+      "components": [
+        "hard-bottom dog cover",
+        "portable water bottle",
+        "reusable roller"
+      ],
+      "gate": "same-shipment economics + verified fit/specs"
     }
   ],
-  "handoff": {
-    "store_builder":[
-      "Build navigation around three job-led collections, not supplier categories.",
-      "Use real looping video in hero and collection headers; 3D only as secondary fit/construction explainer.",
-      "Add compatibility/fit modules to Muda Cero, dog-cover and sunshade PDPs.",
-      "Prepare data-driven bundle and cross-sell components."
+  "merchandising_map": {
+    "homepage_order": [
+      "motion-led brand hero",
+      "Mascotas en casa HERO proof",
+      "Mascotas en movimiento HERO proof",
+      "shop-by-problem rail",
+      "proof/UGC strip",
+      "CORE + cross-sell rail",
+      "third-category teaser only after depth threshold",
+      "trust/returns/FAQ"
     ],
-    "seo_catalog":[
-      "Cluster around pet hair removal/dog grooming at home; dog car protection/pet travel; packing organization/windshield sun protection.",
-      "Build FAQs around coat type, textile compatibility, vehicle measurements, waterproofing, wash care, compression and windshield sizing.",
-      "Do not index thin TEST pages until product data and useful copy are complete."
+    "rule": "Do not give above-the-fold space to low-confidence TEST products; do not expose a public collection until it has at least 3 credible SKUs or 1 HERO + 2 coherent complements."
+  },
+  "handoff": {
+    "store_builder": [
+      "Keep three-category architecture but visually prioritize only collections with validated HERO/CORE depth.",
+      "Add validation state so TEST/CROSS-SELL candidates cannot render as launch-ready by accident.",
+      "Build Muda Cero modularly: full 3-step HERO plus hidden contingency CORE variant that can be activated only after Finance/fulfillment approval.",
+      "Dog-cover PDP must lead with dimensions/fit and structural proof; 3D only if it explains geometry of the exact SKU.",
+      "Seasonal windshield umbrella must never receive homepage HERO treatment."
+    ],
+    "seo_catalog": [
+      "Prioritize pet hair removal/dog grooming at home and dog car protection/pet travel.",
+      "Do not build a windshield-sunshade SEO cluster yet.",
+      "Keep TEST-only PDPs noindex until product/economic gates clear.",
+      "Muda Cero FAQ: coat type, textile compatibility, safe brushing, tool-to-job mapping.",
+      "Dog-cover FAQ: exact dimensions, how to measure, belt access, waterproofing, washing, explicit non-crash-safety wording."
+    ],
+    "finance": [
+      "Model 2-piece Muda Cero grooming-core contingency at 34.90 and 29.90 only as a fallback.",
+      "Current packing-cube supplier should not be treated as paid-acquisition viable without materially better landed cost."
     ]
   },
   "events": [
     {
-      "ts":"2026-09-27T17:29:39Z",
-      "title":"Portfolio architecture changed",
-      "detail":"Creative moved from one-product merchandising to three adjacent job-led collections so the store can scale toward 20–50 SKUs without looking like a bazaar."
+      "ts": "2026-09-27T17:29:39Z",
+      "title": "Portfolio architecture changed",
+      "detail": "Creative moved from one-product merchandising to three adjacent job-led collections so the store can scale toward 20–50 SKUs without looking like a bazaar."
     },
     {
-      "ts":"2026-09-27T17:29:39Z",
-      "title":"Muda Cero pricing order changed",
-      "detail":"Competitor benchmarks support testing €39.90 first, €34.90 second; €29.90 remains acquisition-only pending Finance."
+      "ts": "2026-09-27T17:29:39Z",
+      "title": "Muda Cero pricing order changed",
+      "detail": "Competitor benchmarks support testing €39.90 first, €34.90 second; €29.90 remains acquisition-only pending Finance."
     },
     {
-      "ts":"2026-09-27T17:29:39Z",
-      "title":"Second HERO narrowed",
-      "detail":"Generic dog hammocks are rejected; only a hard-bottom/backseat-extender version should advance as a HERO candidate."
+      "ts": "2026-09-27T17:29:39Z",
+      "title": "Second HERO narrowed",
+      "detail": "Generic dog hammocks are rejected; only a hard-bottom/backseat-extender version should advance as a HERO candidate."
+    },
+    {
+      "ts": "2026-09-27T18:30:30Z",
+      "title": "Muda Cero offer architecture gated",
+      "detail": "Current 3-piece sourcing is too tight for launch confidence; full system stays HERO concept but a 2-piece grooming-core contingency is added for Finance modeling."
+    },
+    {
+      "ts": "2026-09-27T18:30:30Z",
+      "title": "Commodity shelf demoted",
+      "detail": "Windshield umbrella moves to seasonal CROSS-SELL and packing cubes remain TEST only; neither receives HERO or paid-acquisition priority."
+    },
+    {
+      "ts": "2026-09-27T18:30:30Z",
+      "title": "Dog-cover story changed to fit proof",
+      "detail": "Hard-bottom alone is no longer enough differentiation; exact dimensions, measurement UX and structural proof become the merchandising spine."
     }
   ]
 }
