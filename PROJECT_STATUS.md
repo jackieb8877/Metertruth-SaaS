@@ -1,8 +1,10 @@
 # MeterTruth — live project record
 
 **Updated:** 2026-09-27 (Atlantic/Canary)  
-**Candidate:** v0.7 local private beta  
-**Spend:** €0. No paid hosting, accounts, APIs or campaigns used. Test dependencies were installed only in a temporary environment.
+**Candidate:** v0.7 private-beta candidate  
+**Spend:** €0. No paid hosting, accounts, APIs or campaigns used. Test dependencies were installed only in a temporary environment.  
+**GitHub:** Published to `jackieb8877/Metertruth-SaaS` on `main` at `0129911828dc7035206eda727d71a0cd471bd83b` (v0.7 JSON uploads and scan history).  
+**Deployment:** Not deployed. Render Blueprint is prepared; beta credentials must be entered during deployment.
 
 ## Product and positioning
 
@@ -98,7 +100,8 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 
 ## Next backlog, ordered
 
-1. Cent-safe Decimal pricing and independent arithmetic test oracle; keep event evidence distinct from estimated impact.
+1. Deploy the private beta on Render Free after entering `BETA_USERNAME` and `BETA_PASSWORD`; then verify `/health`, `/start`, `/demo`, CSV/JSON reconciliation and saved-history behavior. No Render connector is available in this workspace, so this account-bound step must be completed in the Render dashboard. Render Free storage is ephemeral and should not be used for durable customer history.
+2. Cent-safe Decimal pricing and independent arithmetic test oracle; keep event evidence distinct from estimated impact.
 2. Invoice-total and credit-ledger import plus `INVOICE_MISMATCH` / `CREDIT_MISMATCH` checks that avoid double-counting event exposure.
 3. Effective-dated price catalogs and `PRICING_DRIFT`; add volume/graduated tier and billing-boundary fixtures.
 4. User-adjustable field mapping / preflight for unknown JSON and CSV schemas.
@@ -110,4 +113,4 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 
 - No new spending without explicit approval.
 - No OAuth, automatic invoice changes, refunds, or production data changes in this phase.
-- Continue building local, inspectable increments. External GitHub/hosting steps remain gated by user account connection and repo selection.
+- v0.7 source delivery to the owner-selected GitHub repository is complete. The Render deployment has not been launched because this workspace has no Render account connection; do not treat the beta as live until its authenticated deployment is verified.
