@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T17:04:20Z",
+  "updated_at": "2026-09-27T17:15:00Z",
   "events": [
     {
       "id": "product-scout-20260927T164251Z-start",
@@ -259,6 +259,69 @@
       "phase": "done",
       "title": "Product discovery cycle complete",
       "detail": "Top-10 and handoffs updated. No challenger clears PROMOTE without verified supplier cost and SLA.",
+      "status": "ok"
+    },
+    {
+      "id": "customer-voice-20260927T171040Z-start",
+      "ts": "2026-09-27T17:10:40Z",
+      "agent_id": "customer-voice",
+      "phase": "start",
+      "title": "Starting customer-voice mining cycle",
+      "detail": "Mining objections and return drivers for the current leader and top challengers.",
+      "status": "running"
+    },
+    {
+      "id": "customer-voice-20260927T171140Z-action",
+      "ts": "2026-09-27T17:11:40Z",
+      "agent_id": "customer-voice",
+      "phase": "action",
+      "title": "Testing grooming-tool objections",
+      "detail": "Comparing coat-type suitability, comfort and misuse concerns around slicker brushes.",
+      "status": "running"
+    },
+    {
+      "id": "customer-voice-20260927T171220Z-observation",
+      "ts": "2026-09-27T17:12:20Z",
+      "agent_id": "customer-voice",
+      "phase": "observation",
+      "title": "Kit Muda Cero promise is too broad",
+      "detail": "Slicker suitability varies by coat/technique and reusable rollers have surface limitations; the offer should explain which tool is for which coat or textile.",
+      "status": "warning"
+    },
+    {
+      "id": "customer-voice-20260927T171315Z-observation",
+      "ts": "2026-09-27T17:13:15Z",
+      "agent_id": "customer-voice",
+      "phase": "observation",
+      "title": "Dog-car-cover return risks concentrated in fit and durability",
+      "detail": "Vehicle fit, clips, zippers, waterproof backing and sliding are the main quality risks to gate at sourcing.",
+      "status": "warning"
+    },
+    {
+      "id": "customer-voice-20260927T171405Z-observation",
+      "ts": "2026-09-27T17:14:05Z",
+      "agent_id": "customer-voice",
+      "phase": "observation",
+      "title": "Sunshade convenience wins, fit and handle durability lose",
+      "detail": "Compact fast deployment is the desired outcome; sizing and structural durability are the key objections.",
+      "status": "ok"
+    },
+    {
+      "id": "customer-voice-20260927T171445Z-decision",
+      "ts": "2026-09-27T17:14:45Z",
+      "agent_id": "customer-voice",
+      "phase": "decision",
+      "title": "Tighten Kit Muda Cero positioning",
+      "detail": "Recommend a coat/surface-specific 3-step routine and remove universal-surface implications from copy.",
+      "status": "ok"
+    },
+    {
+      "id": "customer-voice-20260927T171500Z-done",
+      "ts": "2026-09-27T17:15:00Z",
+      "agent_id": "customer-voice",
+      "phase": "done",
+      "title": "Customer Voice cycle complete",
+      "detail": "Five high-impact insights persisted and handed off to Creative, Store Builder and Compliance.",
       "status": "ok"
     }
   ]
