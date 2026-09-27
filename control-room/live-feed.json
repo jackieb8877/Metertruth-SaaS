@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T17:00:00Z",
+  "updated_at": "2026-09-27T17:06:10Z",
   "events": [
     {
       "id": "product-scout-20260927T164251Z-start",
@@ -96,6 +96,16 @@
       "phase": "done",
       "title": "Consolidation complete",
       "detail": "Current leader retained; finance and fulfillment are the next gates.",
+      "status": "ok"
+    },
+    {
+      "id": "store-builder-20260927T170610Z-done",
+      "ts": "2026-09-27T17:06:10Z",
+      "agent_id": "store-builder",
+      "phase": "done",
+      "title": "Pre-GO store architecture complete",
+      "detail": "Storefront spec v1 created and handed off to Creative, SEO and QA.",
+      "artifact_path": "control-room/artifacts/store-builder/kit-muda-cero-storefront-spec-v1.md",
       "status": "ok"
     }
   ]
