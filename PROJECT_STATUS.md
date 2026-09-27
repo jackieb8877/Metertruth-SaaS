@@ -1,8 +1,10 @@
 # MeterTruth — live project record
 
 **Updated:** 2026-09-27 (Atlantic/Canary)  
-**Candidate:** v0.7 local private beta  
-**Spend:** €0. No paid hosting, accounts, APIs or campaigns used. Test dependencies were installed only in a temporary environment.
+**Candidate:** v0.7 private beta (canonical finding-code update)  
+**Spend:** €0. Test dependencies were installed only in a temporary environment; no paid services or campaigns used.  
+**Repository:** `jackieb8877/Metertruth-SaaS`, `main`, commit `1f34acde3af2b3f86ff95b686b86065bc9bec169`.  
+**Deployment:** Vercel check reports success for this commit. The owner confirmed the hosted beta prompted for and accepted the configured credentials.
 
 ## Product and positioning
 
@@ -31,7 +33,7 @@ flowchart LR
   G[Stripe GET summaries] --> C
 ```
 
-Local source rows are passed in memory into the core. In history, a report may include customer IDs, event identifiers, quantities and issue evidence; Basic Auth is therefore required for an internet-facing private beta. Render Free storage is ephemeral and is not a durable-history offer.
+Local source rows are passed in memory into the core. In history, a report may include customer IDs, event identifiers, quantities and issue evidence; Basic Auth is therefore required for an internet-facing private beta. Vercel/serverless local storage is ephemeral and is not a durable-history offer.
 
 ## Current behavior
 
@@ -69,7 +71,7 @@ Local source rows are passed in memory into the core. In history, a report may i
 - The test dependencies installed from `requirements-dev.txt` into a temporary local virtual environment at €0. The full suite passes: 56/56.
 - Fresh local synthetic benchmarks: 100,000 adversarial raw events + 100,099 metered rows in 1.017s with 2,198 finding rows; €100 underbilling and €9.90 overbilling. One million clean raw + metered events reconciled in 11.82s with 0 findings and €0 exposure. These are workspace results, not production throughput guarantees.
 - RecoveryCore findings now include a canonical machine-readable `code` while preserving the existing `type` field for compatibility. `MISSING`, `DUPLICATE` and `ORPHAN_METERED` map to the product codes `MISSING_USAGE`, `DUPLICATE_USAGE` and `ORPHAN_METERED_EVENT`.
-- GitHub `main` contains the v0.7 source and the Vercel deployment. The Work browser could not independently load the hosted URL in this check; deployment health beyond the owner-confirmed login is unverified.
+- GitHub `main` commit `1f34acde3af2b3f86ff95b686b86065bc9bec169` has a successful Vercel status check. The Work browser could not independently load the hosted URL in this check; runtime behavior beyond the owner's login test remains unverified.
 
 ## Competitive review and attack plan
 
@@ -102,8 +104,7 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 2. Invoice, credit, and effective-date price reconciliation are missing and remain the most material product gaps.
 3. Stripe meter summaries are asynchronous and aggregate-level; a just-arrived usage event may not yet appear. A premature scan can create a false missing signal.
 4. Vercel/serverless local storage is ephemeral; current history is only a tester convenience, not persistent SaaS storage. Render Free also has ephemeral storage and sleeps.
-5. Basic Auth is one shared beta gate, not tenant isolation or a production identity system.
-6. Shared Basic Auth is not tenant isolation or a production identity system; no sensitive customer data should be used in this hosted beta.
+5. Basic Auth is one shared beta gate, not tenant isolation or a production identity system; no sensitive customer data should be used in this hosted beta.
 
 ## Next backlog, ordered
 
@@ -119,4 +120,4 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 
 - No new spending without explicit approval.
 - No OAuth, automatic invoice changes, refunds, or production data changes in this phase.
-- The user connected `jackieb8877/Metertruth-SaaS` and deployed the v0.7 candidate at Vercel. Repository updates are within the ongoing project scope; do not incur hosting or service costs without explicit approval.
+- The user connected `jackieb8877/Metertruth-SaaS` and deployed the v0.7 candidate at Vercel. Repository updates continue on `main`; do not incur hosting or service costs without explicit approval.
