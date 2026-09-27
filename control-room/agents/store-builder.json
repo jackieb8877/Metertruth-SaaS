@@ -7,5 +7,21 @@
   "summary": "Storefront spec v1 completed; production build remains gated by economics, fulfillment, traceability and final assets.",
   "blocker": "Production build waits on landed cost, shipping SLA, traceability, policies and final price.",
   "progress": 34,
-  "events": []
+  "events": [
+    {
+      "time": "2026-09-27T17:03:30Z",
+      "title": "Premium pet DTC benchmark complete",
+      "detail": "Compared bundle framing, proof placement, trust, visual hierarchy and routine-led merchandising."
+    },
+    {
+      "time": "2026-09-27T17:05:30Z",
+      "title": "Storefront spec v1 created",
+      "detail": "Mobile-first hero, 3-step routine, demo flow, trust, FAQ, sticky CTA, analytics hooks and performance budgets are ready for handoff."
+    },
+    {
+      "time": "2026-09-27T17:05:45Z",
+      "title": "3D excluded from launch v1",
+      "detail": "Real product demonstration video is preferred because it improves comprehension at lower mobile performance cost."
+    }
+  ]
 }
