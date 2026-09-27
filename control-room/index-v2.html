@@ -14,7 +14,7 @@
 </div></div>
 <script>
 const ROOT='https://raw.githubusercontent.com/jackieb8877/Metertruth-SaaS/project-rich-control-room/control-room/';
-const AGENT_FILES=['product-scout','competitor-watch','orchestrator','supplier-margin','creative-offer','seo-catalog','store-builder','launch-qa'];
+const AGENT_FILES=['product-scout','store-builder','customer-voice','supplier-margin','ads-intelligence','competitor-watch','creative-offer','finance-profit','seo-catalog','compliance-risk','launch-qa','orchestrator'];
 const DEFAULT_SHORT=[{name:'Kit Muda Cero',status:'LEADER',offer:'€29.90 target',strength:'High',next:'Validate landed cost + blind EU fulfillment'},{name:'Reusable pet-hair roller',status:'WATCH',offer:'€18–24 reference',strength:'Margin potential',next:'Confirm blind dropshipping'},{name:'Pet grooming vacuum',status:'RESERVE',offer:'TBD',strength:'Visual / viral',next:'Assess electronics + returns risk'}];
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function age(iso){if(!iso)return Infinity;return (Date.now()-new Date(iso))/60000}
@@ -23,16 +23,16 @@ function health(a){if(a.blocker)return 'blocked';const m=age(a.last_run);if(!isF
 async function j(url){const r=await fetch(url+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error(r.status);return r.json()}
 async function load(){
  try{
-  const [agents,state]=await Promise.all([Promise.all(AGENT_FILES.map(x=>j(ROOT+'agents/'+x+'.json'))),j(ROOT+'state.json').catch(()=>({shortlist:DEFAULT_SHORT,events:[],blocker:null,updated_at:null}))]);
+  const [agents,state,live]=await Promise.all([Promise.all(AGENT_FILES.map(x=>j(ROOT+'agents/'+x+'.json'))),j(ROOT+'state.json').catch(()=>({shortlist:DEFAULT_SHORT,events:[],blocker:null,updated_at:null})),j(ROOT+'live-feed.json').catch(()=>({events:[],updated_at:null}))]);
   const hs=agents.map(a=>({...a,health:health(a)})); document.getElementById('nAgents').textContent=hs.length;document.getElementById('nFresh').textContent=hs.filter(x=>x.health==='fresh').length;document.getElementById('nBlocked').textContent=hs.filter(x=>x.health==='blocked').length;document.getElementById('nStale').textContent=hs.filter(x=>x.health==='stale').length;
   const shortlist=state.shortlist||DEFAULT_SHORT,lead=shortlist.find(x=>x.status==='LEADER');document.getElementById('leader').textContent=lead?.name||'—';
   document.getElementById('agents').innerHTML=hs.map(a=>'<div class="agent"><div class="row"><div><div class="name">'+esc(a.name)+'</div><div class="focus">'+esc(a.focus)+'</div></div><span class="chip '+a.health+'">'+a.health.toUpperCase()+'</span></div><div class="bar"><div class="fill" style="width:'+Math.max(0,Math.min(100,a.progress||0))+'%"></div></div><div class="meta"><span>'+esc(a.status)+'</span><span>'+ago(a.last_run)+'</span></div><div class="summary">'+esc(a.summary)+'</div></div>').join('');
-  let events=[];hs.forEach(a=>(a.events||[]).forEach(e=>events.push({...e,agent:e.agent||a.name})));events=events.concat(state.events||[]).sort((a,b)=>new Date(b.time||0)-new Date(a.time||0)).slice(0,8);
-  document.getElementById('events').innerHTML=events.length?events.map(e=>'<div class="event"><div class="evtitle">'+esc(e.title||'Update')+'</div><div class="evmeta">'+esc(e.agent||'Agent')+' · '+ago(e.time)+'</div><div class="evtext">'+esc(e.detail||'')+'</div></div>').join(''):'<div class="mut">No events yet.</div>';
+  let events=(live.events||[]).map(e=>({...e,time:e.ts,agent:e.agent_id,live:true})); if(!events.length){hs.forEach(a=>(a.events||[]).forEach(e=>events.push({...e,agent:e.agent||a.name})));events=events.concat(state.events||[]);} events=events.sort((a,b)=>new Date(b.time||b.ts||0)-new Date(a.time||a.ts||0)).slice(0,18);
+  document.getElementById('events').innerHTML=events.length?events.map(e=>'<div class="event"><div class="evtitle">'+esc((e.phase?e.phase.toUpperCase()+' · ':'')+(e.title||'Update'))+'</div><div class="evmeta">'+esc(e.agent||e.agent_id||'Agent')+' · '+ago(e.time||e.ts)+(e.status?' · '+esc(e.status):'')+'</div><div class="evtext">'+esc(e.detail||'')+(e.source_url?'<br><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener" style="color:var(--b)">ver fuente ↗</a>':'')+(e.artifact_path?'<br><span style="color:var(--vio)">'+esc(e.artifact_path)+'</span>':'')+'</div></div>').join(''):'<div class="mut">No live events yet.</div>';
   const needs=hs.filter(a=>a.blocker);document.getElementById('needs').innerHTML=needs.length?needs.map(a=>'<div class="need"><b>'+esc(a.name)+'</b><p>'+esc(a.blocker)+'</p></div>').join('<div style="height:8px"></div>'):'<div class="mut">No human action required right now.</div>';
   document.getElementById('shortlist').innerHTML=shortlist.map(x=>'<tr><td><b>'+esc(x.name)+'</b></td><td>'+esc(x.status)+'</td><td>'+esc(x.offer)+'</td><td>'+esc(x.strength)+'</td><td>'+esc(x.next)+'</td></tr>').join('');
   document.getElementById('health').innerHTML=hs.map(a=>'<div class="meta" style="padding:7px 0;border-bottom:1px solid #202838"><span>'+esc(a.name)+'</span><span class="chip '+a.health+'">'+a.health+'</span></div>').join('');
-  document.getElementById('updated').textContent='Live agent heartbeats · '+new Date().toLocaleTimeString('es-ES',{timeZone:'Atlantic/Canary'});
+  document.getElementById('updated').textContent='Live telemetry · '+new Date().toLocaleTimeString('es-ES',{timeZone:'Atlantic/Canary'})+(live.updated_at?' · feed '+ago(live.updated_at):'');
   document.getElementById('warn').style.display='none';
  }catch(e){document.getElementById('warn').style.display='block';document.getElementById('warn').textContent='Live feed unavailable in this viewer. Open from a normal web host to enable external fetches.';document.getElementById('badge').textContent='OFFLINE VIEWER'}
 }
