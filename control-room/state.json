@@ -1,124 +1,24 @@
 {
-  "updated_at": "2026-09-27T16:14:35Z",
+  "updated_at": "2026-09-27T16:26:24Z",
   "project": "Project Rich — Dropshipping",
   "agents": [
-    {
-      "id": "product-scout",
-      "name": "Product Scout",
-      "status": "waiting",
-      "cadence": "hourly",
-      "last_run": null,
-      "focus": "Discover products with real EU/Spain potential",
-      "summary": "Waiting for next scan",
-      "blocker": null,
-      "progress": 32
-    },
-    {
-      "id": "competitor-watch",
-      "name": "Competitor Watch",
-      "status": "waiting",
-      "cadence": "daily",
-      "last_run": null,
-      "focus": "Monitor competitors, saturation and creative angles",
-      "summary": "No new alert yet",
-      "blocker": null,
-      "progress": 20
-    },
-    {
-      "id": "build-loop",
-      "name": "Build Loop",
-      "status": "scheduled",
-      "cadence": "hourly",
-      "last_run": null,
-      "focus": "Orchestrate the highest-impact next task",
-      "summary": "Next build cycle pending",
-      "blocker": null,
-      "progress": 42
-    },
-    {
-      "id": "supplier-margin",
-      "name": "Supplier & Margin",
-      "status": "active",
-      "cadence": "hourly :15",
-      "last_run": "2026-09-27T16:14:13Z",
-      "focus": "EU sourcing, landed cost and fulfillment",
-      "summary": "Validating blind dropshipping and landed cost",
-      "blocker": "Verified blind dropshipping + landed cost",
-      "progress": 84
-    },
-    {
-      "id": "creative-offer",
-      "name": "Creative & Offer",
-      "status": "active",
-      "cadence": "hourly :30",
-      "last_run": "2026-09-27T16:13:53Z",
-      "focus": "Offer, hooks, bundles, UGC and CRO",
-      "summary": "Kit Muda Cero offer defined at €29.90 target",
-      "blocker": null,
-      "progress": 91
-    },
-    {
-      "id": "seo-catalog",
-      "name": "SEO & Catalog",
-      "status": "scheduled",
-      "cadence": "hourly :45",
-      "last_run": null,
-      "focus": "Commercial SEO and product merchandising",
-      "summary": "First cycle pending",
-      "blocker": null,
-      "progress": 29
-    },
-    {
-      "id": "launch-qa",
-      "name": "Launch QA",
-      "status": "scheduled",
-      "cadence": "daily",
-      "last_run": null,
-      "focus": "Checkout, legal, trust, mobile and analytics QA",
-      "summary": "First QA cycle pending",
-      "blocker": null,
-      "progress": 15
-    }
+    {"id":"product-scout","name":"Product Scout","status":"waiting","cadence":"hourly","last_run":null,"focus":"Discover products with real EU/Spain potential","summary":"Waiting for next scan","blocker":null,"progress":32},
+    {"id":"competitor-watch","name":"Competitor Watch","status":"waiting","cadence":"daily","last_run":null,"focus":"Monitor competitors, saturation and creative angles","summary":"No new alert yet","blocker":null,"progress":20},
+    {"id":"build-loop","name":"Build Loop","status":"scheduled","cadence":"hourly","last_run":null,"focus":"Orchestrate the highest-impact next task","summary":"Next build cycle pending","blocker":null,"progress":42},
+    {"id":"supplier-margin","name":"Supplier & Margin","status":"active","cadence":"hourly :15","last_run":"2026-09-27T16:14:13Z","focus":"EU sourcing, landed cost and fulfillment","summary":"Validating blind dropshipping and landed cost","blocker":"Verified blind dropshipping + landed cost","progress":84},
+    {"id":"creative-offer","name":"Creative & Offer","status":"active","cadence":"hourly :30","last_run":"2026-09-27T16:26:24Z","focus":"Turn Kit Muda Cero into a defensible 3-step pet + home system","summary":"Upgrade: glove + self-cleaning slicker + reusable home roller; target €29.90–34.90 pending landed cost.","blocker":"Validate reusable roller blind fulfillment and 3-piece landed cost before locking price.","progress":96},
+    {"id":"seo-catalog","name":"SEO & Catalog","status":"scheduled","cadence":"hourly :45","last_run":null,"focus":"Commercial SEO and product merchandising","summary":"First cycle pending","blocker":null,"progress":29},
+    {"id":"launch-qa","name":"Launch QA","status":"scheduled","cadence":"daily","last_run":null,"focus":"Checkout, legal, trust, mobile and analytics QA","summary":"First QA cycle pending","blocker":null,"progress":15}
   ],
   "shortlist": [
-    {
-      "name": "Kit Muda Cero",
-      "status": "LEADER",
-      "offer": "€29.90 target",
-      "strength": "High",
-      "next": "Validate total landed cost + blind EU fulfillment"
-    },
-    {
-      "name": "Reusable pet-hair roller",
-      "status": "WATCH",
-      "offer": "€18–24 reference",
-      "strength": "Margin potential",
-      "next": "Confirm blind dropshipping"
-    },
-    {
-      "name": "Pet grooming vacuum",
-      "status": "RESERVE",
-      "offer": "TBD",
-      "strength": "Visual / viral",
-      "next": "Electronics + returns risk"
-    }
+    {"name":"Kit Muda Cero","status":"LEADER","offer":"3-piece system €29.90–34.90 target","strength":"High — full pet-to-home problem coverage","next":"Validate roller sourcing + 3-piece landed cost; keep 2-piece only as entry offer if margin supports it"},
+    {"name":"Reusable pet-hair roller","status":"WATCH","offer":"€18–24 reference","strength":"Margin potential","next":"Confirm blind dropshipping"},
+    {"name":"Pet grooming vacuum","status":"RESERVE","offer":"TBD","strength":"Visual / viral","next":"Electronics + returns risk"}
   ],
   "events": [
-    {
-      "time": "2026-09-27T16:14:13Z",
-      "agent": "Supplier & Margin",
-      "title": "EU sourcing improved",
-      "detail": "Reusable pet-hair roller found with attractive wholesale spread; blind fulfillment still unverified."
-    },
-    {
-      "time": "2026-09-27T16:13:53Z",
-      "agent": "Creative & Offer",
-      "title": "Hero offer defined",
-      "detail": "Kit Muda Cero positioned around preventing shed hair before it reaches sofa, clothes or car."
-    }
+    {"time":"2026-09-27T16:26:24Z","agent":"Creative & Offer","title":"Offer upgraded to 3-step system","detail":"Two-piece €29.90 is weak versus current retail references for the exact brush + glove. Hero proposal: glove + slicker + reusable furniture/clothes roller at €29.90–34.90, with one visual story from pet coat to sofa/car. Landing must qualify the slicker for long/semi-long/hard coats."},
+    {"time":"2026-09-27T16:14:13Z","agent":"Supplier & Margin","title":"EU sourcing improved","detail":"Reusable pet-hair roller found with attractive wholesale spread; blind fulfillment still unverified."},
+    {"time":"2026-09-27T16:13:53Z","agent":"Creative & Offer","title":"Hero offer defined","detail":"Kit Muda Cero positioned around preventing shed hair before it reaches sofa, clothes or car."}
   ],
-  "blocker": {
-    "title": "EU fulfillment verification",
-    "detail": "Need verified stock, landed cost, delivery SLA and blind dropshipping before GO."
-  }
+  "blocker":{"title":"EU fulfillment verification","detail":"Need verified stock, landed cost, delivery SLA and blind dropshipping before GO."}
 }
