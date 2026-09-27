@@ -198,7 +198,7 @@ async def analyze(
     rows = []
     for i, f in enumerate(findings):
         rows.append(f'''<tr><td>{escape(str(f["event_id"]))}</td><td>{escape(str(f.get("customer") or "—"))}</td>
-<td><b>{escape(f["type"])}</b><div class="detail">{escape(f["detail"])}</div></td><td>{badge(f["status"])}</td>
+<td><b>{escape(f.get("code", f["type"]))}</b><div class="detail">{escape(f["detail"])}</div></td><td>{badge(f["status"])}</td>
 <td class="money">{money(float(f["impact_eur"]))}</td><td>{escape(f["action"])}</td></tr>''')
     table = "".join(rows) or '<tr><td colspan="6" class="empty">No discrepancies found in this scan.</td></tr>'
     report_json = escape(json.dumps(report, ensure_ascii=False))
@@ -262,7 +262,7 @@ def _report_document(report: dict[str, Any], scan_id: int) -> str:
             evidence_html = escape(json.dumps(item.get("evidence", {}), ensure_ascii=False, indent=2))
             rows.append(
                 "<tr>"
-                f"<td><b>{escape(str(item['type']))}</b><br>{escape(str(item['status']))}</td>"
+                f"<td><b>{escape(str(item.get('code') or item['type']))}</b><br>{escape(str(item['status']))}</td>"
                 f"<td>{escape(str(item.get('customer') or '—'))}</td>"
                 f"<td>{escape(str(item.get('event_id') or '—'))}</td>"
                 f"<td>{cash(item.get('impact_eur', 0))}</td>"
@@ -286,7 +286,7 @@ def history_page() -> str:
         f'<td>{x["findings"]}</td><td>{money(x["underbilling"])}</td><td>{money(x["overbilling"])}</td>'
         f'<td><a href="/history/{x["id"]}">Open report</a></td></tr>' for x in scans
     ) or '<tr><td colspan="8" class="empty">No saved scans yet. Uploaded source files are not retained.</td></tr>'
-    body = f'''<section class="results-head"><div><p class="eyebrow">LOCAL SCAN HISTORY</p><h1>Previous reconciliations</h1><p class="lede">Reports and summary metadata are saved. Original uploads and API keys are not.</p></div><a class="buttonlink" href="/">Run a scan</a></section><section class="panel tablepanel"><div class="scroll"><table><thead><tr><th>Scan</th><th>Date UTC</th><th>Product file</th><th>Metered file</th><th>Findings</th><th>Underbilling</th><th>Overbilling</th><th>Report</th></tr></thead><tbody>{rows}</tbody></table></div></section><p class="footnote">On Render Free this history uses ephemeral local storage and can disappear when the instance restarts or is replaced.</p>'''
+    body = f'''<section class="results-head"><div><p class="eyebrow">LOCAL SCAN HISTORY</p><h1>Previous reconciliations</h1><p class="lede">Reports and summary metadata are saved. Original uploads and API keys are not.</p></div><a class="buttonlink" href="/">Run a scan</a></section><section class="panel tablepanel"><div class="scroll"><table><thead><tr><th>Scan</th><th>Date UTC</th><th>Product file</th><th>Metered file</th><th>Findings</th><th>Underbilling</th><th>Overbilling</th><th>Report</th></tr></thead><tbody>{rows}</tbody></table></div></section><p class="footnote">On serverless hosting (including Vercel), this history uses temporary local storage and may disappear after a restart or run in a separate instance.</p>'''
     return layout(body, "MeterTruth · Scan History")
 
 

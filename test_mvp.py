@@ -17,6 +17,8 @@ def test_demo_analysis_and_export():
     assert r.status_code == 200
     assert 'confirmed findings' in r.text
     assert 'Underbilling' in r.text
+    assert 'MISSING_USAGE' in r.text
+    assert 'DUPLICATE_USAGE' in r.text
     assert 'Export JSON' in r.text
 
 def test_bad_csv_gets_400():

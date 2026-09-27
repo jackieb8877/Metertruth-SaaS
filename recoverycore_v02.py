@@ -49,6 +49,14 @@ ACTIONS = {
     "IDEMPOTENCY_COLLISION": "Review possible replay/duplicate across event IDs",
 }
 
+# Stable machine-readable taxonomy. Keep the legacy ``type`` values in reports
+# for v0.x consumers; ``code`` exposes the canonical product classification.
+ISSUE_CODES = {
+    "MISSING": "MISSING_USAGE",
+    "DUPLICATE": "DUPLICATE_USAGE",
+    "ORPHAN_METERED": "ORPHAN_METERED_EVENT",
+}
+
 
 def norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", s.strip().lower()).strip("_")
@@ -162,6 +170,7 @@ def finding(*, event_id: str, customer: str | None, kind: str, impact: float,
         "event_id": event_id,
         "customer": customer,
         "type": kind,
+        "code": ISSUE_CODES.get(kind, kind),
         "status": status,
         "impact_eur": round_money(impact),
         "detail": detail,

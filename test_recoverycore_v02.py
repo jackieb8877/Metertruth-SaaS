@@ -28,6 +28,28 @@ class RecoveryCoreV02Tests(unittest.TestCase):
         f = [x for x in out["findings"] if x["type"] == "MISSING"]
         self.assertEqual(f[0]["impact_eur"], 20)
 
+    def test_canonical_machine_codes_preserve_legacy_types(self):
+        raw = [
+            row("e1", "c1", "2026-09-01T00:00:00Z", 10),
+            row("e2", "c1", "2026-09-01T00:00:00Z", 2),
+            row("e3", "c1", "2026-09-01T00:00:00Z", 1),
+        ]
+        metered = [
+            row("e1", "c1", "2026-09-01T00:01:00Z", 6),
+            row("e1", "c1", "2026-09-01T00:02:00Z", 4),
+            row("e3", "c1", "2026-09-02T01:00:00Z", 1),
+            row("orphan", "c1", "2026-09-01T00:00:00Z", 3),
+        ]
+        out = reconcile(raw, metered, self.cfg(late_hours=24))
+        codes_by_type = {}
+        for item in out["findings"]:
+            codes_by_type[item["type"]] = item["code"]
+
+        self.assertEqual(codes_by_type["MISSING"], "MISSING_USAGE")
+        self.assertEqual(codes_by_type["DUPLICATE"], "DUPLICATE_USAGE")
+        self.assertEqual(codes_by_type["ORPHAN_METERED"], "ORPHAN_METERED_EVENT")
+        self.assertEqual(codes_by_type["LATE_EVENT"], "LATE_EVENT")
+
     def test_duplicate_does_not_double_count_quantity(self):
         r = [row("e1", "c1", "2026-09-01T00:00:00Z", 10)]
         m = [row("e1", "c1", "2026-09-01T00:01:00Z", 10), row("e1", "c1", "2026-09-01T00:02:00Z", 10)]
