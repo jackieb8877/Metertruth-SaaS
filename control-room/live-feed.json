@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T16:49:00Z",
+  "updated_at": "2026-09-27T17:00:00Z",
   "events": [
     {
       "id": "product-scout-20260927T164251Z-start",
@@ -87,6 +87,15 @@
       "phase": "done",
       "title": "Discovery cycle complete",
       "detail": "Watchlist updated internally; no user notification required.",
+      "status": "ok"
+    },
+    {
+      "id": "orchestrator-20260927T170000Z-done",
+      "ts": "2026-09-27T17:00:00Z",
+      "agent_id": "orchestrator",
+      "phase": "done",
+      "title": "Consolidation complete",
+      "detail": "Current leader retained; finance and fulfillment are the next gates.",
       "status": "ok"
     }
   ]
