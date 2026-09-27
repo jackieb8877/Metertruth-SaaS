@@ -5,13 +5,42 @@
   "last_run": "2026-09-27T17:49:39Z",
   "focus": "Pre-launch QA",
   "summary": "Launch remains blocked after QA review; current prototype is non-commercial and key legal, economics, fulfillment and checkout gates remain open.",
-  "blocker": "Supplier economics, staging storefront and compliance data must be completed before launch.",
-  "progress": 24,
+  "blocker": "Commercial launch is blocked by incomplete economics, fulfillment, legal/compliance, policies and production checkout validation.",
+  "progress": 42,
   "events": [
     {
-      "time": "2026-09-27T16:50:42Z",
-      "title": "QA cycle complete",
-      "detail": "Pre-launch blockers identified."
+      "time": "2026-09-27T17:49:39Z",
+      "title": "QA gate remains BLOCK",
+      "detail": "Prototype quality improved, but launch-critical operational and compliance gates remain open."
     }
-  ]
+  ],
+  "decision": "BLOCK",
+  "qa_summary": {
+    "pricing_margin": "WARN",
+    "shipping_returns": "FAIL",
+    "checkout": "FAIL",
+    "mobile_ux": "WARN",
+    "trust": "WARN",
+    "accessibility": "WARN",
+    "legal": "FAIL",
+    "tracking_analytics": "WARN",
+    "links_assets": "WARN",
+    "claims": "PASS",
+    "performance": "WARN"
+  },
+  "prioritized_fixes": [
+    "Complete the current legal/compliance launch gate.",
+    "Verify full variable costs and fulfillment before locking price.",
+    "Finalize shipping/returns and product traceability.",
+    "Keep payments disabled until staging checkout and consent tests pass.",
+    "Run deployed mobile/accessibility/performance QA."
+  ],
+  "handoff": {
+    "store_builder": [
+      "Prepare production legal/footer/consent slots and deployed-device QA without enabling sales."
+    ],
+    "orchestrator": [
+      "Global launch remains BLOCK; retain economics, fulfillment and compliance as P0 gates."
+    ]
+  }
 }
