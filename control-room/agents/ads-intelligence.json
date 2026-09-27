@@ -1,0 +1,11 @@
+{
+  "id": "ads-intelligence",
+  "name": "Ads Intelligence",
+  "status": "waiting",
+  "last_run": null,
+  "focus": "Track winning ad angles, creatives and offers",
+  "summary": "Waiting for first ad-intelligence cycle",
+  "blocker": null,
+  "progress": 10,
+  "events": []
+}
