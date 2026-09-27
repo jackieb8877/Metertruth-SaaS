@@ -1,55 +1,177 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Project Rich — Agent Control Room</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Project Rich — Live Agent Control Room</title>
 <style>
-:root{--bg:#07090d;--panel:#11151d;--panel2:#151a24;--line:#252c39;--text:#f6f7fb;--muted:#8e97a8;--green:#6ee7a8;--amber:#ffd166;--blue:#78a8ff;--red:#ff7a7a}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0,#18243a 0,#07090d 38%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1500px;margin:auto;padding:28px}.top{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:22px}.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:800}h1{font-size:34px;margin:7px 0 3px}.sub{font-size:13px;color:var(--muted)}.live{border:1px solid #24513b;background:#0d281c;color:var(--green);padding:9px 13px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:15px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:0 16px 42px rgba(0,0,0,.23)}.kpi{grid-column:span 3}.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:1/-1}.label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.value{font-size:31px;font-weight:850;margin-top:7px}.note{font-size:12px;color:var(--muted);margin-top:4px}.title{font-size:16px;font-weight:850;margin:0 0 14px}.agents{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.agent{background:#0d1118;border:1px solid var(--line);border-radius:14px;padding:13px}.agent-top{display:flex;justify-content:space-between;gap:8px}.name{font-weight:800;font-size:14px}.role{font-size:11px;color:var(--muted);margin-top:3px}.state{padding:5px 8px;border-radius:999px;font-size:10px;font-weight:850;height:max-content}.active{background:#112a20;color:var(--green)}.waiting{background:#2b2412;color:var(--amber)}.scheduled{background:#17233a;color:var(--blue)}.bar{height:6px;background:#202633;border-radius:99px;overflow:hidden;margin:12px 0 8px}.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:99px}.meta{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted)}.pipeline{display:flex;align-items:center;gap:7px;overflow-x:auto}.node{min-width:135px;text-align:center;padding:12px 10px;border:1px solid var(--line);border-radius:13px;background:#0d1118}.node b{display:block;font-size:11px}.node span{display:block;font-size:10px;color:var(--muted);margin-top:4px}.arrow{color:#526079}.table{width:100%;border-collapse:collapse;font-size:12px}.table th{text-align:left;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--line);padding:8px}.table td{padding:10px 8px;border-bottom:1px solid #1d2330}.pill{display:inline-block;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:850}.leader{background:#142c21;color:var(--green)}.watch{background:#2e2613;color:var(--amber)}.reserve{background:#1b2438;color:var(--blue)}.event{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #1d2330}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);margin-top:6px;box-shadow:0 0 16px var(--green)}.event b{font-size:12px}.event p{font-size:11px;color:var(--muted);line-height:1.45;margin:3px 0 0}.blocker{border-left:3px solid var(--amber);padding-left:11px;font-size:12px;line-height:1.5}.footer{font-size:10px;color:var(--muted);margin-top:14px}.error{display:none;margin-top:12px;padding:10px;border:1px solid #5a2b2b;background:#2a1212;border-radius:10px;color:#ffb0b0;font-size:12px}
-@media(max-width:900px){.kpi,.wide,.side{grid-column:1/-1}.agents{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+:root{
+ --bg:#07090d;--panel:#10151e;--panel2:#151b27;--line:#283144;--text:#f5f7fb;--muted:#8f9bad;
+ --green:#70e3a6;--amber:#ffd166;--blue:#79a9ff;--red:#ff7d7d;--vio:#b18cff;--cyan:#69e7ff;
+ --glass:rgba(15,21,31,.86);--shadow:0 20px 60px rgba(0,0,0,.32)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+ radial-gradient(circle at 82% 0,#1a2945 0,#0a0d13 34%,#06080c 72%);min-height:100vh}
+a{color:var(--blue);text-decoration:none}button,select{font:inherit}
+.wrap{max-width:1680px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:18px}
+.ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:900}.top h1{font-size:34px;margin:6px 0 3px}.sub{font-size:12px;color:var(--muted)}
+.conn{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid #29543f;border-radius:999px;background:#102a20;color:var(--green);font-size:11px;font-weight:900;white-space:nowrap}
+.conn.degraded{border-color:#604f24;background:#2a230f;color:var(--amber)}.conn.error{border-color:#623131;background:#2a1212;color:var(--red)}
+.pulse{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 15px currentColor;animation:pulse 1.5s infinite}@keyframes pulse{50%{opacity:.35;box-shadow:none}}
+.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:14px}.metric{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+.mlabel{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}.mval{font-size:26px;font-weight:900;margin-top:6px}.mnote{font-size:10px;color:var(--muted);margin-top:2px}
+.layout{display:grid;grid-template-columns:1.6fr .9fr;gap:14px}.card{background:linear-gradient(180deg,var(--glass),rgba(10,14,21,.94));backdrop-filter:blur(9px);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
+.card h2{font-size:14px;margin:0 0 12px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:11px}.toolbar select,.toolbar button{background:#0c1119;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-size:10px}.toolbar button{cursor:pointer}.toolbar button:hover{border-color:#40506b}
+.console{height:520px;overflow:auto;border:1px solid #202a39;border-radius:14px;background:#080b10;padding:8px}.console::-webkit-scrollbar{width:8px}.console::-webkit-scrollbar-thumb{background:#293449;border-radius:20px}
+.event{display:grid;grid-template-columns:66px 120px 92px 1fr;gap:8px;padding:9px;border-bottom:1px solid #171f2b;align-items:flex-start}.event:hover{background:#0d131d}.time{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:#728098}.agent{font-size:10px;font-weight:900}.phase{display:inline-block;font-size:8px;font-weight:900;letter-spacing:.07em;padding:4px 6px;border-radius:999px;text-align:center}.phase.start,.phase.action{background:#13253e;color:var(--blue)}.phase.observation{background:#102c28;color:#7ce7ca}.phase.decision{background:#2c2411;color:var(--amber)}.phase.artifact{background:#231a35;color:var(--vio)}.phase.blocked,.phase.error{background:#351616;color:var(--red)}.phase.done{background:#10291e;color:var(--green)}
+.etitle{font-size:11px;font-weight:850}.edetail{font-size:10px;color:var(--muted);line-height:1.4;margin-top:3px}.links{margin-top:5px;display:flex;gap:9px;flex-wrap:wrap}.links a,.artifact{font-size:9px}.artifact{color:var(--vio)}
+.now{display:grid;gap:9px}.nowrow{border:1px solid var(--line);background:#0c1119;border-radius:12px;padding:11px}.nowhead{display:flex;justify-content:space-between;gap:8px}.nowname{font-size:11px;font-weight:900}.nowstate{font-size:9px;font-weight:850}.running{color:var(--green)}.idle{color:var(--muted)}.blocked{color:var(--red)}.nowtext{font-size:10px;color:#c7ceda;margin-top:5px;line-height:1.4}
+.graph{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.node{position:relative;border:1px solid var(--line);background:#0b1017;border-radius:13px;padding:11px;min-height:82px;overflow:hidden}.node.active{border-color:#2d7655;box-shadow:0 0 25px rgba(112,227,166,.08)}.node.blocked{border-color:#6a3131}.node:after{content:"";position:absolute;right:-24px;top:50%;width:36px;height:2px;background:linear-gradient(90deg,var(--blue),transparent);opacity:.35;animation:flow 1.5s linear infinite}@keyframes flow{50%{opacity:1;transform:translateX(4px)}}.node:nth-child(4n):after{display:none}.nname{font-size:10px;font-weight:900}.nmeta{font-size:9px;color:var(--muted);margin-top:4px;line-height:1.35}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;background:var(--muted)}.node.active .dot{background:var(--green);box-shadow:0 0 10px var(--green)}.node.blocked .dot{background:var(--red)}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.table{width:100%;border-collapse:collapse;font-size:10px}.table th{text-align:left;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:8px;border-bottom:1px solid var(--line)}.table td{padding:9px 8px;border-bottom:1px solid #1d2532}.tag{font-size:8px;padding:4px 6px;border-radius:999px;font-weight:900}.leader{background:#10291e;color:var(--green)}.watch{background:#2b2411;color:var(--amber)}.reserve{background:#17233b;color:var(--blue)}
+.replay{display:grid;grid-template-columns:170px 1fr;gap:12px}.sessions{max-height:330px;overflow:auto}.session{padding:9px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;cursor:pointer;background:#0b1017}.session:hover,.session.sel{border-color:#4b5d7d}.session b{font-size:10px}.session div{font-size:9px;color:var(--muted);margin-top:3px}.replaypane{border:1px solid var(--line);border-radius:12px;padding:12px;background:#090d13}.stephead{display:flex;justify-content:space-between;align-items:center}.stephead button{background:#0d131d;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 8px;cursor:pointer}.stepbody{margin-top:12px}.bigphase{font-size:9px;font-weight:900;color:var(--vio);letter-spacing:.1em}.steptitle{font-size:16px;font-weight:900;margin-top:5px}.stepdetail{font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px}.scrub{width:100%;margin-top:13px}
+.alert{border-left:3px solid var(--amber);padding:9px 11px;background:#201b0d;border-radius:8px;font-size:10px;color:#e8dca6;line-height:1.45;margin-bottom:8px}.alert.critical{border-color:var(--red);background:#241010;color:#efb3b3}
+.foot{font-size:9px;color:var(--muted);margin-top:12px}.empty{font-size:10px;color:var(--muted);padding:12px}
+@media(max-width:1200px){.metrics{grid-template-columns:repeat(3,1fr)}.layout{grid-template-columns:1fr}.graph{grid-template-columns:repeat(3,1fr)}}@media(max-width:780px){.metrics{grid-template-columns:repeat(2,1fr)}.graph{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}.event{grid-template-columns:55px 90px 78px 1fr}.replay{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
-<body><div class="wrap">
-<div class="top"><div><div class="eyebrow">Project Rich / Dropshipping</div><h1>Agent Control Room</h1><div class="sub" id="updated">Cargando estado…</div></div><div class="live">● LIVE FEED</div></div>
-<div id="err" class="error"></div>
-<div class="grid">
-<div class="card kpi"><div class="label">Agentes</div><div class="value" id="agentCount">—</div><div class="note">especialistas coordinados</div></div>
-<div class="card kpi"><div class="label">Activos</div><div class="value" id="activeCount">—</div><div class="note">último estado compartido</div></div>
-<div class="card kpi"><div class="label">Candidato líder</div><div class="value" id="leader" style="font-size:21px">—</div><div class="note">mejor oportunidad actual</div></div>
-<div class="card kpi"><div class="label">Bloqueos</div><div class="value" id="blockers">—</div><div class="note">requieren resolución</div></div>
-<div class="card wide"><h2 class="title">Agentes</h2><div id="agents" class="agents"></div></div>
-<div class="card side"><h2 class="title">Últimos eventos</h2><div id="events"></div><div class="footer">Refresco automático cada 30 s.</div></div>
-<div class="card full"><h2 class="title">Pipeline</h2><div class="pipeline">
-<div class="node"><b>DISCOVER</b><span>Product Scout</span></div><div class="arrow">→</div>
-<div class="node"><b>VALIDATE</b><span>Competitor Watch</span></div><div class="arrow">→</div>
-<div class="node"><b>SOURCE</b><span>Supplier & Margin</span></div><div class="arrow">→</div>
-<div class="node"><b>POSITION</b><span>Creative & Offer</span></div><div class="arrow">→</div>
-<div class="node"><b>MERCHANDISE</b><span>SEO & Catalog</span></div><div class="arrow">→</div>
-<div class="node"><b>BUILD</b><span>Build Loop</span></div><div class="arrow">→</div>
-<div class="node"><b>QA</b><span>Launch QA</span></div></div></div>
-<div class="card wide"><h2 class="title">Shortlist</h2><table class="table"><thead><tr><th>Producto</th><th>Estado</th><th>Oferta</th><th>Fortaleza</th><th>Siguiente</th></tr></thead><tbody id="shortlist"></tbody></table></div>
-<div class="card side"><h2 class="title">Bloqueo actual</h2><div class="blocker"><b id="blockTitle">—</b><br/><span id="blockDetail">—</span></div></div>
-</div></div>
+<body>
+<div class="wrap">
+ <div class="top">
+  <div><div class="ey">Project Rich / Autonomous Commerce</div><h1>Agent Control Room</h1><div class="sub" id="subtitle">Connecting telemetry…</div></div>
+  <div id="conn" class="conn"><span class="pulse"></span><span>CONNECTING</span></div>
+ </div>
+
+ <div class="metrics">
+  <div class="metric"><div class="mlabel">Agents</div><div class="mval" id="mAgents">—</div><div class="mnote">fleet size</div></div>
+  <div class="metric"><div class="mlabel">Working now</div><div class="mval" id="mWorking">—</div><div class="mnote">latest phase active</div></div>
+  <div class="metric"><div class="mlabel">Events / 60m</div><div class="mval" id="mEvents">—</div><div class="mnote">real telemetry</div></div>
+  <div class="metric"><div class="mlabel">Sources / 60m</div><div class="mval" id="mSources">—</div><div class="mnote">public URLs inspected</div></div>
+  <div class="metric"><div class="mlabel">Blocked</div><div class="mval" id="mBlocked">—</div><div class="mnote">needs resolution</div></div>
+  <div class="metric"><div class="mlabel">Leader</div><div class="mval" id="mLeader" style="font-size:17px">—</div><div class="mnote">current product</div></div>
+ </div>
+
+ <div class="layout">
+  <div class="card">
+   <div class="toolbar">
+    <h2 style="margin:0 auto 0 0">Live Action Console</h2>
+    <select id="agentFilter"><option value="">All agents</option></select>
+    <select id="phaseFilter"><option value="">All phases</option><option>start</option><option>action</option><option>observation</option><option>decision</option><option>artifact</option><option>blocked</option><option>done</option><option>error</option></select>
+    <button id="pauseBtn">Pause</button><button id="clearFilter">Reset</button>
+   </div>
+   <div id="console" class="console"></div>
+  </div>
+  <div class="card">
+   <h2>Now Working</h2>
+   <div id="now" class="now"></div>
+   <h2 style="margin-top:18px">Needs You / Critical</h2>
+   <div id="needs"></div>
+  </div>
+ </div>
+
+ <div class="card" style="margin-top:14px">
+  <h2>Agent Graph</h2>
+  <div id="graph" class="graph"></div>
+ </div>
+
+ <div class="lower">
+  <div class="card">
+   <h2>Opportunity Board</h2>
+   <table class="table"><thead><tr><th>Product</th><th>Status</th><th>Offer</th><th>Strength</th><th>Next</th></tr></thead><tbody id="shortlist"></tbody></table>
+  </div>
+  <div class="card">
+   <h2>Execution Replay</h2>
+   <div class="replay">
+    <div id="sessions" class="sessions"></div>
+    <div class="replaypane">
+     <div class="stephead"><button id="prevStep">←</button><div id="stepCount" class="sub">No session</div><button id="nextStep">→</button></div>
+     <input id="scrub" class="scrub" type="range" min="0" max="0" value="0"/>
+     <div id="stepBody" class="stepbody"><div class="empty">Select a session to replay.</div></div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="foot">Live telemetry from GitHub agent state · polling 5s · exponential reconnect backoff · no synthetic activity.</div>
+</div>
 <script>
-const STATE_URL='https://raw.githubusercontent.com/jackieb8877/Metertruth-SaaS/project-rich-control-room/control-room/state.json';
+const ROOT='https://raw.githubusercontent.com/jackieb8877/Metertruth-SaaS/project-rich-control-room/control-room/';
+const AGENTS=['product-scout','store-builder','customer-voice','supplier-margin','ads-intelligence','competitor-watch','creative-offer','finance-profit','seo-catalog','compliance-risk','launch-qa','orchestrator'];
+const LABELS={
+ 'product-scout':'Product Scout','store-builder':'Store Builder','customer-voice':'Customer Voice','supplier-margin':'Supplier & Margin',
+ 'ads-intelligence':'Ads Intelligence','competitor-watch':'Competitor Watch','creative-offer':'Creative & Offer','finance-profit':'Finance & Profit',
+ 'seo-catalog':'SEO & Catalog','compliance-risk':'Compliance & Risk','launch-qa':'Launch QA','orchestrator':'Orchestrator'
+};
+let paused=false,lastData=null,retries=0,selectedSession=null,stepIndex=0,timer=null;
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function timeAgo(iso){if(!iso)return 'sin ejecución';const d=new Date(iso),m=Math.max(0,Math.floor((Date.now()-d)/60000));if(m<1)return 'ahora';if(m<60)return m+' min';const h=Math.floor(m/60);if(h<24)return h+' h';return Math.floor(h/24)+' d'}
-function cls(s){return ['active','waiting','scheduled'].includes(s)?s:'waiting'}
-async function load(){
- try{
-  const r=await fetch(STATE_URL+'?t='+Date.now(),{cache:'no-store'}); if(!r.ok)throw new Error('HTTP '+r.status); const d=await r.json();
-  document.getElementById('err').style.display='none';
-  document.getElementById('updated').textContent='Estado actualizado: '+new Date(d.updated_at).toLocaleString('es-ES',{timeZone:'Atlantic/Canary'});
-  document.getElementById('agentCount').textContent=d.agents.length;
-  document.getElementById('activeCount').textContent=d.agents.filter(a=>a.status==='active').length;
-  const lead=d.shortlist.find(x=>x.status==='LEADER');document.getElementById('leader').textContent=lead?lead.name:'—';
-  document.getElementById('blockers').textContent=d.agents.filter(a=>a.blocker).length;
-  document.getElementById('agents').innerHTML=d.agents.map(a=>'<div class="agent"><div class="agent-top"><div><div class="name">'+esc(a.name)+'</div><div class="role">'+esc(a.focus)+'</div></div><div class="state '+cls(a.status)+'">'+esc(a.status.toUpperCase())+'</div></div><div class="bar"><div class="fill" style="width:'+Math.min(100,Math.max(0,a.progress||0))+'%"></div></div><div class="meta"><span>'+esc(a.cadence)+'</span><span>'+esc(timeAgo(a.last_run))+'</span></div><div class="role" style="margin-top:8px">'+esc(a.summary)+'</div></div>').join('');
-  document.getElementById('events').innerHTML=d.events.map(e=>'<div class="event"><div class="dot"></div><div><b>'+esc(e.title)+'</b><p>'+esc(e.agent)+' · '+esc(timeAgo(e.time))+'<br>'+esc(e.detail)+'</p></div></div>').join('');
-  document.getElementById('shortlist').innerHTML=d.shortlist.map(x=>'<tr><td><b>'+esc(x.name)+'</b></td><td><span class="pill '+(x.status==='LEADER'?'leader':x.status==='WATCH'?'watch':'reserve')+'">'+esc(x.status)+'</span></td><td>'+esc(x.offer)+'</td><td>'+esc(x.strength)+'</td><td>'+esc(x.next)+'</td></tr>').join('');
-  document.getElementById('blockTitle').textContent=d.blocker?.title||'Sin bloqueo';
-  document.getElementById('blockDetail').textContent=d.blocker?.detail||'—';
- }catch(e){const el=document.getElementById('err');el.style.display='block';el.textContent='No pude leer el estado compartido: '+e.message}
+function ageMin(ts){if(!ts)return Infinity;return Math.max(0,(Date.now()-new Date(ts))/60000)}
+function ago(ts){const m=ageMin(ts);if(!isFinite(m))return 'never';if(m<1)return 'now';if(m<60)return Math.floor(m)+'m';if(m<1440)return Math.floor(m/60)+'h';return Math.floor(m/1440)+'d'}
+function clock(ts){try{return new Date(ts).toLocaleTimeString('es-ES',{timeZone:'Atlantic/Canary',hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch{return '—'}}
+function deriveRunId(e){if(e.run_id)return e.run_id;const d=new Date(e.ts||0);const bucket=[d.getUTCFullYear(),String(d.getUTCMonth()+1).padStart(2,'0'),String(d.getUTCDate()).padStart(2,'0'),String(d.getUTCHours()).padStart(2,'0')].join('');return (e.agent_id||'agent')+'-'+bucket}
+async function getJson(path){const r=await fetch(ROOT+path+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error(path+' HTTP '+r.status);return r.json()}
+function latestByAgent(events){const map={};[...events].sort((a,b)=>new Date(a.ts)-new Date(b.ts)).forEach(e=>map[e.agent_id]=e);return map}
+function workingAgents(events,states){const latest=latestByAgent(events),now=[];for(const id of AGENTS){const e=latest[id],s=states.find(x=>x.id===id);let work=false;if(e&&['start','action','observation','artifact','decision'].includes(e.phase)&&ageMin(e.ts)<20)work=true;now.push({id,event:e,state:s,work})}return now}
+function setConn(mode,msg){const el=document.getElementById('conn');el.className='conn'+(mode==='ok'?'':mode==='degraded'?' degraded':' error');el.innerHTML='<span class="pulse"></span><span>'+esc(msg)+'</span>'}
+function render(data){
+ lastData=data;
+ const {events,states,state}=data;const recent=events.filter(e=>ageMin(e.ts)<=60),work=workingAgents(events,states);
+ document.getElementById('mAgents').textContent=states.length;
+ document.getElementById('mWorking').textContent=work.filter(x=>x.work).length;
+ document.getElementById('mEvents').textContent=recent.length;
+ document.getElementById('mSources').textContent=new Set(recent.map(e=>e.source_url).filter(Boolean)).size;
+ document.getElementById('mBlocked').textContent=states.filter(s=>s.blocker||s.status==='blocked').length;
+ const lead=(state.shortlist||[]).find(x=>x.status==='LEADER');document.getElementById('mLeader').textContent=lead?.name||'—';
+ document.getElementById('subtitle').textContent='Live telemetry · feed '+ago(data.feedUpdated)+' · '+new Date().toLocaleTimeString('es-ES',{timeZone:'Atlantic/Canary'});
+ renderFilters(states);renderConsole(events);renderNow(work);renderNeeds(states,state);renderGraph(work);renderShortlist(state.shortlist||[]);renderSessions(events);
 }
-load();setInterval(load,30000);
-</script></body></html>
+function renderFilters(states){
+ const sel=document.getElementById('agentFilter'),cur=sel.value;sel.innerHTML='<option value="">All agents</option>'+states.map(s=>'<option value="'+esc(s.id)+'">'+esc(s.name||LABELS[s.id]||s.id)+'</option>').join('');sel.value=cur;
+}
+function renderConsole(events){
+ const af=document.getElementById('agentFilter').value,pf=document.getElementById('phaseFilter').value;
+ let list=[...events].sort((a,b)=>new Date(b.ts)-new Date(a.ts));if(af)list=list.filter(e=>e.agent_id===af);if(pf)list=list.filter(e=>e.phase===pf);list=list.slice(0,120);
+ document.getElementById('console').innerHTML=list.length?list.map(e=>'<div class="event"><div class="time">'+esc(clock(e.ts))+'</div><div class="agent">'+esc(LABELS[e.agent_id]||e.agent_id)+'</div><div><span class="phase '+esc(e.phase||'action')+'">'+esc((e.phase||'action').toUpperCase())+'</span></div><div><div class="etitle">'+esc(e.title||'Update')+'</div><div class="edetail">'+esc(e.detail||'')+'</div><div class="links">'+(e.source_url?'<a href="'+esc(e.source_url)+'" target="_blank" rel="noopener">source ↗</a>':'')+(e.artifact_path?'<span class="artifact">'+esc(e.artifact_path)+'</span>':'')+(e.run_id?'<span class="artifact">run '+esc(e.run_id)+'</span>':'')+'</div></div></div>').join(''):'<div class="empty">No events match the filters.</div>';
+}
+function renderNow(work){
+ const items=work.filter(x=>x.work||x.state?.blocker).sort((a,b)=>(b.work?1:0)-(a.work?1:0));document.getElementById('now').innerHTML=items.length?items.map(x=>'<div class="nowrow"><div class="nowhead"><div class="nowname">'+esc(x.state?.name||LABELS[x.id]||x.id)+'</div><div class="nowstate '+(x.state?.blocker?'blocked':x.work?'running':'idle')+'">'+(x.state?.blocker?'BLOCKED':x.work?'WORKING':'IDLE')+'</div></div><div class="nowtext">'+esc(x.event?.title||x.state?.summary||'Waiting')+'</div><div class="sub" style="margin-top:4px">'+(x.event?'last action '+ago(x.event.ts):'no live action yet')+'</div></div>').join(''):'<div class="empty">No agent is actively executing at this second.</div>';
+}
+function renderNeeds(states,state){
+ const arr=states.filter(s=>s.blocker);if(state.blocker?.detail&&!arr.some(x=>x.blocker===state.blocker.detail))arr.unshift({name:state.blocker.title||'Global blocker',blocker:state.blocker.detail,status:'blocked'});
+ document.getElementById('needs').innerHTML=arr.length?arr.slice(0,5).map(x=>'<div class="alert '+(x.status==='blocked'?'critical':'')+'"><b>'+esc(x.name||'Blocker')+'</b><br>'+esc(x.blocker)+'</div>').join(''):'<div class="empty">No human action required.</div>';
+}
+function renderGraph(work){
+ document.getElementById('graph').innerHTML=work.map(x=>'<div class="node '+(x.state?.blocker?'blocked':x.work?'active':'')+'"><div class="nname"><span class="dot"></span>'+esc(x.state?.name||LABELS[x.id]||x.id)+'</div><div class="nmeta">'+esc(x.event?.title||x.state?.summary||'Waiting')+'</div><div class="nmeta" style="margin-top:6px">'+(x.state?.last_run?'heartbeat '+ago(x.state.last_run):'no heartbeat')+'</div></div>').join('');
+}
+function renderShortlist(list){
+ document.getElementById('shortlist').innerHTML=list.length?list.map(x=>'<tr><td><b>'+esc(x.name)+'</b></td><td><span class="tag '+(x.status==='LEADER'?'leader':x.status==='WATCH'?'watch':'reserve')+'">'+esc(x.status)+'</span></td><td>'+esc(x.offer)+'</td><td>'+esc(x.strength)+'</td><td>'+esc(x.next)+'</td></tr>').join(''):'<tr><td colspan="5" class="empty">No shortlist yet.</td></tr>';
+}
+function buildSessions(events){
+ const map={};events.forEach(e=>{const id=deriveRunId(e);(map[id]??=[]).push(e)});return Object.entries(map).map(([id,evs])=>({id,events:evs.sort((a,b)=>new Date(a.ts)-new Date(b.ts)),agent:evs[0]?.agent_id,start:evs[0]?.ts,end:evs[evs.length-1]?.ts})).sort((a,b)=>new Date(b.start)-new Date(a.start));
+}
+function renderSessions(events){
+ const ss=buildSessions(events).slice(0,30);if(selectedSession&&!ss.some(s=>s.id===selectedSession))selectedSession=null;if(!selectedSession&&ss.length)selectedSession=ss[0].id;
+ document.getElementById('sessions').innerHTML=ss.length?ss.map(s=>'<div class="session '+(s.id===selectedSession?'sel':'')+'" data-id="'+esc(s.id)+'"><b>'+esc(LABELS[s.agent]||s.agent)+'</b><div>'+esc(clock(s.start))+' · '+s.events.length+' steps</div></div>').join(''):'<div class="empty">No sessions yet.</div>';
+ document.querySelectorAll('.session').forEach(el=>el.onclick=()=>{selectedSession=el.dataset.id;stepIndex=0;renderSessions(events)});
+ const current=ss.find(s=>s.id===selectedSession);renderReplay(current);
+}
+function renderReplay(session){
+ const body=document.getElementById('stepBody'),scrub=document.getElementById('scrub');if(!session){body.innerHTML='<div class="empty">Select a session to replay.</div>';document.getElementById('stepCount').textContent='No session';scrub.max=0;scrub.value=0;return}
+ stepIndex=Math.max(0,Math.min(stepIndex,session.events.length-1));const e=session.events[stepIndex];scrub.max=Math.max(0,session.events.length-1);scrub.value=stepIndex;document.getElementById('stepCount').textContent=(stepIndex+1)+' / '+session.events.length+' · '+esc(LABELS[session.agent]||session.agent);
+ body.innerHTML='<div class="bigphase">'+esc((e.phase||'action').toUpperCase())+' · '+esc(clock(e.ts))+'</div><div class="steptitle">'+esc(e.title||'Update')+'</div><div class="stepdetail">'+esc(e.detail||'')+'</div><div class="links">'+(e.source_url?'<a href="'+esc(e.source_url)+'" target="_blank" rel="noopener">open source ↗</a>':'')+(e.artifact_path?'<span class="artifact">'+esc(e.artifact_path)+'</span>':'')+'</div>';
+}
+async function tick(){
+ if(paused){schedule(5000);return}
+ try{
+  const [feed,state,...states]=await Promise.all([getJson('live-feed.json'),getJson('state.json').catch(()=>({shortlist:[],blocker:null})),...AGENTS.map(id=>getJson('agents/'+id+'.json').catch(()=>({id,name:LABELS[id],status:'stale',last_run:null,summary:'State unavailable',blocker:null,progress:0})))]);
+  retries=0;setConn('ok','LIVE');render({events:feed.events||[],feedUpdated:feed.updated_at,states,state});schedule(5000);
+ }catch(err){retries++;setConn(retries<3?'degraded':'error',retries<3?'RECONNECTING':'FEED ERROR');document.getElementById('subtitle').textContent='Telemetry retry '+retries+' · '+err.message;schedule(Math.min(3000*Math.pow(2,retries-1),30000))}
+}
+function schedule(ms){clearTimeout(timer);timer=setTimeout(tick,ms)}
+document.getElementById('pauseBtn').onclick=()=>{paused=!paused;document.getElementById('pauseBtn').textContent=paused?'Resume':'Pause';if(!paused)tick()}
+document.getElementById('clearFilter').onclick=()=>{document.getElementById('agentFilter').value='';document.getElementById('phaseFilter').value='';if(lastData)renderConsole(lastData.events)}
+document.getElementById('agentFilter').onchange=()=>lastData&&renderConsole(lastData.events);document.getElementById('phaseFilter').onchange=()=>lastData&&renderConsole(lastData.events);
+document.getElementById('prevStep').onclick=()=>{stepIndex--;if(lastData)renderSessions(lastData.events)};document.getElementById('nextStep').onclick=()=>{stepIndex++;if(lastData)renderSessions(lastData.events)};
+document.getElementById('scrub').oninput=e=>{stepIndex=Number(e.target.value);if(lastData){const s=buildSessions(lastData.events).find(x=>x.id===selectedSession);renderReplay(s)}}
+window.addEventListener('error',e=>setConn('degraded','UI WARNING'));window.addEventListener('unhandledrejection',e=>setConn('degraded','UI WARNING'));
+tick();
+</script>
+</body>
+</html>
