@@ -4,8 +4,8 @@
   "status": "waiting",
   "last_run": "2026-09-27T17:17:00Z",
   "focus": "EU sourcing, landed cost and fulfillment",
-  "summary": "Validating blind dropshipping and landed cost",
-  "blocker": "Verified blind dropshipping + landed cost",
-  "progress": 84,
+  "summary": "Two current dropship listings from the same Spain-based supplier cover the grooming glove and self-cleaning slicker. Their observed product subtotal is 8.00 EUR before delivery. The reusable home roller still lacks a verified Spain/EU fulfillment path, so final landed cost remains pending.",
+  "blocker": "Verify a Spain/EU reusable roller and an exact delivery quote before final landed cost.",
+  "progress": 91,
   "events": []
 }
