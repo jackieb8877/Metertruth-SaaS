@@ -2,10 +2,10 @@
   "id": "customer-voice",
   "name": "Customer Voice",
   "status": "waiting",
-  "last_run": null,
+  "last_run": "2026-09-27T17:15:00Z",
   "focus": "Mine reviews, complaints, objections and unmet needs",
-  "summary": "Waiting for first review-mining cycle",
-  "blocker": null,
-  "progress": 10,
+  "summary": "Research cycle completed; handoff pending persistence.",
+  "blocker": "GitHub state write blocked by safety guard in this run.",
+  "progress": 68,
   "events": []
 }
