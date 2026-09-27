@@ -1,0 +1,39 @@
+{
+  "strategy_id": "adrian-one-product-v1",
+  "run_id": "supplier-margin-20260927T211708Z",
+  "checked_at": "2026-09-27T21:17:08Z",
+  "market": "Spain mainland",
+  "product": "Reusable self-cleaning pet-hair brush",
+  "supplier": "Almacén Escriv Ecom",
+  "sku": "100102",
+  "product_cost_eur": 6.2,
+  "shipping_exact_eur": null,
+  "public_shipping_floor_eur": 4.7,
+  "stock_status": "low stock",
+  "stock_units": null,
+  "ship_from": "Spain",
+  "delivery": "24/48 business hours",
+  "moq": 0,
+  "supplier_monthly_fee_eur": 0,
+  "neutral_packaging": true,
+  "return_window_days": 14,
+  "price_hypothesis_eur": 24.9,
+  "payment_fee_model_eur": 0.82,
+  "return_reserve_model_eur": 1.25,
+  "tax_eur": null,
+  "variable_cost_floor_model_eur": 12.97,
+  "contribution_before_marketing_tax_fixed_eur": 11.93,
+  "max_acquisition_cost_before_tax_fixed_eur": 11.93,
+  "break_even_roas_before_tax_fixed": 2.09,
+  "blockers": [
+    "exact shipping quote",
+    "exact stock units",
+    "invoice and tax treatment",
+    "media usage permission"
+  ],
+  "sources": [
+    "https://almacen-escriv-ecom.com/products/cepillo-autolimpiable-para-perros-y-gatos",
+    "https://almacen-escriv-ecom.com/policies/shipping-policy",
+    "https://almacen-escriv-ecom.com/policies/refund-policy"
+  ]
+}
