@@ -1,0 +1,66 @@
+{
+  "experiment_id": "PR-TEST-001",
+  "strategy_id": "adrian-one-product-v1",
+  "updated_at": "2026-09-27T20:54:14Z",
+  "status": "DRAFT_PRODUCT_NOT_SELECTED",
+  "product": null,
+  "supplier": null,
+  "market_proposal": "España / español; cobertura pendiente",
+  "page_url": null,
+  "avatar": null,
+  "problem": null,
+  "offer": null,
+  "retail_price_total_eur": null,
+  "costs_eur": {
+    "product": null,
+    "delivery": null,
+    "payment_fee": null,
+    "platform_variable_fee": null,
+    "tax_treatment": null,
+    "returns_allowance": null,
+    "other": null
+  },
+  "contribution_before_ads_eur": null,
+  "break_even_cpa_eur": null,
+  "break_even_roas": null,
+  "creatives": [
+    {"id": "A", "hypothesis": null, "asset": null, "rights_verified": false},
+    {"id": "B", "hypothesis": null, "asset": null, "rights_verified": false}
+  ],
+  "ad_design": "Una campaña de ventas, dos conjuntos con un vídeo cada uno; ejemplo docente de 10 EUR/día por conjunto, NO autorizado.",
+  "approved_spend_eur": 0,
+  "proposed_total_budget_eur": null,
+  "max_loss_eur": null,
+  "start_at": null,
+  "end_at": null,
+  "measurement": {
+    "spend": null,
+    "impressions": null,
+    "link_clicks": null,
+    "landing_page_views": null,
+    "add_to_cart": null,
+    "begin_checkout": null,
+    "purchases": null,
+    "attributed_revenue": null,
+    "refunds": null,
+    "net_contribution": null
+  },
+  "review": {
+    "course_window_example_days": [3, 7],
+    "window_not_automatic_kill_rule": true,
+    "attribution_and_sample_required": true,
+    "vary_one_factor_at_a_time": true
+  },
+  "launch_gate": {
+    "product_selected": false,
+    "supplier_cost_and_delivery_checked": false,
+    "claims_and_asset_rights_checked": false,
+    "store_and_tracking_tested": false,
+    "owner_budget_approval": false
+  },
+  "decision": {
+    "result": "NOT_STARTED",
+    "reason": "Fuente de estrategia actualizada; faltan los inputs del test. No hay ventas o resultados publicitarios medidos.",
+    "next": "Comparar candidatos según los dos criterios de Adrián, su suministro y la posibilidad de presentar dos anuncios."
+  }
+}
