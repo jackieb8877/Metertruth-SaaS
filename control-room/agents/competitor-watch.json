@@ -2,159 +2,112 @@
   "id": "competitor-watch",
   "name": "Competitor Watch",
   "status": "waiting",
-  "last_run": "2026-09-27T17:23:08Z",
+  "last_run": "2026-09-27T18:27:38Z",
   "focus": "Pricing, positioning and saturation for priority candidates",
-  "summary": "First full benchmark complete. Kit Muda Cero shows pricing headroom; generic dog-car hammocks and compression cubes are genuinely saturated.",
+  "summary": "Fresh scan changes portfolio priority: hard-bottom dog-seat extenders are already a real EU price ladder; windshield umbrella shades are too commoditized for HERO treatment; Kit Muda Cero still has system-level whitespace but must beat stronger Spain-facing trust and delivery standards.",
   "blocker": null,
-  "progress": 76,
+  "progress": 84,
   "material_change": true,
-  "material_change_reason": "Test Kit Muda Cero at 39.90 EUR before 34.90 EUR. Keep 29.90 EUR as a lower-price test only if Finance supports it. Dog-car cover should advance only as a differentiated hard-bottom or extender product.",
+  "material_change_reason": "Revise hard-bottom dog-cover saturation to medium-high, demote windshield umbrella to seasonal cross-sell/HOLD, and keep Muda Cero at 39.90 EUR only if the complete 3-tool routine clearly justifies the premium over strong single-tool offers.",
   "findings": [
     {
       "candidate": "Kit Muda Cero",
-      "saturation": "medium system-level / high component-level",
-      "benchmarks": [
-        {
-          "name": "Uproot Clean bundle",
-          "price": "58.49-64.99 USD",
-          "proof": "4.9 rating, 24,893 displayed reviews, 60-day guarantee",
-          "url": "https://uprootclean.com/products/uproot-cleaner-mini-pro-xtra-bundle"
-        },
-        {
-          "name": "Petifo grooming glove",
-          "price": "19 EUR",
-          "proof": "31 reviews, EU shipping, 30-day returns",
-          "url": "https://petifo.it/products/grooming-glove"
-        },
-        {
-          "name": "Hertzko self-cleaning slicker",
-          "price": "14.95 USD",
-          "proof": "4.4 rating, 108 ratings",
-          "url": "https://www.walmart.com/ip/499570545"
-        }
-      ],
-      "positioning": "Own the 3-step pet-to-home routine instead of claiming one tool works everywhere.",
-      "pricing_handoff": "Primary test 39.90 EUR; secondary 34.90 EUR; 29.90 EUR only as value or acquisition test. Do not use an artificial reference-price anchor."
+      "saturation": "medium system-level / very high component-level",
+      "change": "SoftPet adds a Spain-facing 19.99 EUR single-tool benchmark with displayed 24/48h shipping, 100-day trial and 13,560 reviews; Uproot continues aggressive multi-buy pricing and a 60-day guarantee.",
+      "positioning": "Sell a verified 3-step pet-to-home routine, not another hair remover. Explain coat and textile limits.",
+      "pricing_handoff": "Keep 39.90 EUR as first test only if real demonstrations make the 3-tool system obviously more useful than a ~19.99 EUR single tool.",
+      "urls": [
+        "https://softpet.es/en/products/manopla-quita-pelos-mascota",
+        "https://uprootclean.com/en-gb/products/uproot-clean-glove-bogo"
+      ]
     },
     {
-      "candidate": "Dog car seat cover / hammock",
-      "saturation": "high generic / medium hard-bottom",
-      "benchmarks": [
-        {
-          "name": "KONG / Medpets",
-          "price": "59.95 EUR",
-          "proof": "30-day returns shown at category level",
-          "url": "https://www.medpets.es/kong-2-1-bench-seat-cover-hammock"
-        },
-        {
-          "name": "VEVOR EU hard-bottom",
-          "price": "47.90-59.90 EUR",
-          "proof": "about 4.7 rating on multiple variants",
-          "url": "https://eur.vevor.com/pet-seat-covers-c_43397/vevor-54-x-26-5-in-dog-car-seat-cover-for-back-seat-waterproof-600d-for-suv-p_010938703944"
-        },
-        {
-          "name": "Ragi Dog stiffened hammock",
-          "price": "84.00 EUR",
-          "proof": "EU stock",
-          "url": "https://ragidog.com/produkt/stiffened-dog-car-seat-cover-hammock/"
-        },
-        {
-          "name": "AtouPet full-coverage hammock",
-          "price": "104.95 EUR",
-          "proof": "premium full-coverage positioning",
-          "url": "https://atoupet.com/en-fr/products/dog-car-hammock-seat-protector"
-        }
-      ],
-      "positioning": "Only pursue a hard-bottom or backseat-extender version with exact dimensions, fit guidance, mesh visibility and washable waterproof construction.",
-      "pricing_handoff": "Indicative differentiated test band 59.90-69.90 EUR if landed cost works; avoid a generic 39.90 EUR hammock."
+      "candidate": "Hard-bottom dog car cover / backseat extender",
+      "saturation": "high generic / medium-high hard-bottom",
+      "change": "Current EU/DTC ladder spans about 52.99-57.90 EUR at VEVOR, 69.95 EUR at Phaedra/Zoospot, 79.95 EUR at FluffyPuppy and above 100 EUR at several specialists. Phaedra already uses exact dimensions, measurement warnings and wash/fit detail.",
+      "positioning": "Differentiate on fit confidence: exact usable floor dimensions, how to measure, belt access, split-seat use, cleaning and honest exclusions.",
+      "pricing_handoff": "Keep 59.90-69.90 EUR test band. Above 79.90 EUR enters stronger warranty/proof territory.",
+      "urls": [
+        "https://eur.vevor.com/pet-car-seat-c_13367/vevor-51-2-x-27-6-in-dog-car-seat-cover-for-back-seat-waterproof-600d-for-suv-p_010342953672",
+        "https://zoospot.nl/en/collections/dog-car-seats/products/hard-bottom-dog-car-seat-cover",
+        "https://fluffypuppypetstore.com/en-eu/products/waterproof-dog-car-seat-cover-hard-bottom",
+        "https://pekopets.com/products/pekopets-k9-hard-bottom-dog-car-seat-cover"
+      ]
     },
     {
       "candidate": "Compression packing cubes",
-      "saturation": "high",
-      "benchmarks": [
-        {
-          "name": "Travel Dude 7pc",
-          "price": "49.99 EUR",
-          "proof": "Spain delivery 1-2 working days, 1-year money-back, 250k+ customer claim",
-          "url": "https://www.travel-dude.com/es/products/packing-cubes-7-set"
-        },
-        {
-          "name": "Thule set",
-          "price": "44.95 EUR",
-          "proof": "30-day returns and warranty",
-          "url": "https://www.thule.com/es-es/organizers/packing-cubes-and-folders/thule-compression-cube-set-_-3205112"
-        },
-        {
-          "name": "Samsonite 3pc",
-          "price": "60.00 EUR",
-          "proof": "free returns",
-          "url": "https://www.samsonite.es/ta-revolution-set-of-3-packing-cubes-negro/155602-1041.html"
-        },
-        {
-          "name": "BAGSMART Blast",
-          "price": "49.99 EUR",
-          "proof": "about 192 reviews on EU collection plus multi-buy promos",
-          "url": "https://eu.bagsmart.com/collections/blast-set"
-        }
-      ],
-      "positioning": "Only viable with a specific travel job such as carry-on packing, wet/dry separation or trip-length-specific set composition.",
-      "pricing_handoff": "WATCH at 39.90-49.90 EUR. Above that competes directly with trusted travel brands."
+      "saturation": "very high",
+      "change": "Reismonkey is merchandising a 3-piece compression set around 34.99 EUR with 1-4 day delivery, 2-year guarantee and 30-day returns; WAYKS starts around 20 EUR and already uses clean/dirty separation.",
+      "positioning": "Do not promote a generic multi-piece set. Keep only as TEST/CROSS-SELL unless sourcing unlocks a much better use-case or margin.",
+      "urls": [
+        "https://reismonkey.de/products/packing-cubes-compress-it-transparent",
+        "https://wayks.com/collections/accessories/products/compression-packing-cubes"
+      ]
+    },
+    {
+      "candidate": "Foldable windshield sunshade umbrella",
+      "saturation": "very high / commodity",
+      "change": "Marketplace pricing now spans roughly 5.80 EUR to 25.35 EUR across working umbrella shades, compressing DTC CAC headroom.",
+      "positioning": "Seasonal convenience add-on only.",
+      "pricing_handoff": "HOLD for paid acquisition; consider only as summer cross-sell if landed cost is exceptionally low and sizing is explicit.",
+      "urls": [
+        "https://www.skroutz.gr/s/54197856/TnS-Car-Windshield-Sunshade-Umbrella-130x76cm-41677.html",
+        "https://www.skroutz.gr/s/42943878/Baseus-CoolRide-Internal-Sunshade-Umbrella-for-Car-Windshield-131x69cm-CRKX000001.html"
+      ]
     }
   ],
   "opportunities": [
     {
       "rank": 1,
-      "title": "Muda Cero: system positioning plus 39.90 EUR first test",
+      "title": "Muda Cero: sell the whole routine, not another glove",
+      "detail": "Use real 3-step demonstrations, compatibility guidance and Spain-grade shipping/returns trust to justify 39.90 EUR.",
       "handoff": ["creative-offer", "finance-profit", "orchestrator"]
     },
     {
       "rank": 2,
-      "title": "Dog car cover: hard-bottom or extender only",
-      "handoff": ["supplier-margin", "creative-offer", "orchestrator"]
+      "title": "Dog cover: fit-first mid-market wedge",
+      "detail": "Target 59.90-69.90 EUR with measurement UX, exact dimensions, belt/split-seat compatibility and cleaning proof.",
+      "handoff": ["creative-offer", "finance-profit", "orchestrator", "supplier-margin"]
     },
     {
       "rank": 3,
-      "title": "Packing cubes: specialist segment only",
+      "title": "Protect HERO budget from commodities",
+      "detail": "Packing cubes stay TEST/CROSS-SELL and windshield umbrellas move to seasonal CROSS-SELL/HOLD unless economics materially change.",
       "handoff": ["creative-offer", "finance-profit", "orchestrator"]
     }
   ],
   "handoff": {
     "creative_offer": [
-      "Lead Kit Muda Cero with the pet-to-home 3-step system; prepare 39.90 EUR first and 34.90 EUR second.",
-      "Do not develop generic dog-car hammock creative; require hard-bottom or extender differentiation.",
-      "Packing cubes need a specific traveler use-case."
+      "Make Muda Cero visibly justify its premium versus ~19.99 EUR single-tool offers through three distinct jobs and real demos.",
+      "Make vehicle-fit confidence the dog-cover core story.",
+      "Downgrade packing cubes and windshield umbrella from HERO priority."
     ],
     "finance_profit": [
-      "Model Kit Muda Cero at 39.90, 34.90 and 29.90 EUR in that order.",
-      "Model differentiated dog-car cover at 59.90 and 69.90 EUR only.",
-      "Use about 49.90 EUR as a practical DTC packing-cube ceiling before premium-brand territory."
+      "Keep Muda Cero 39.90 EUR as first test pending full landed cost.",
+      "Model dog cover at 59.90 and 69.90 EUR; treat >79.90 EUR as premium territory.",
+      "No paid-acquisition budget for windshield umbrellas at present."
     ],
     "orchestrator": [
-      "Keep Kit Muda Cero leader; competitor evidence improves pricing confidence but does not clear supplier or compliance gates.",
-      "Dog car cover remains number 2 WATCH only with hard-bottom or extender sourcing.",
-      "Packing cubes are confirmed high saturation."
+      "Muda Cero remains leader but trust/delivery proof is now table stakes.",
+      "Hard-bottom dog cover remains second HERO candidate with saturation revised upward to medium-high.",
+      "Demote windshield umbrella to seasonal cross-sell/HOLD; packing cubes remain TEST."
     ]
   },
   "events": [
     {
-      "ts": "2026-09-27T17:18:30Z",
-      "title": "Pet-hair benchmark",
-      "detail": "Adjacent DTC bundles price materially above the current 29.90 EUR Muda Cero test."
+      "ts": "2026-09-27T18:27:38Z",
+      "title": "Spain-facing pet-hair competition strengthened",
+      "detail": "A 19.99 EUR local-facing single-tool offer with fast-shipping and long-trial messaging raises the trust bar for Muda Cero."
     },
     {
-      "ts": "2026-09-27T17:20:00Z",
-      "title": "Dog-car split",
-      "detail": "Hard-bottom or extender variants provide a clearer premium segment than generic hammocks."
+      "ts": "2026-09-27T18:27:38Z",
+      "title": "Hard-bottom saturation revised upward",
+      "detail": "Multiple EU/DTC extenders create a clear 52.99 EUR to 131.11 EUR price ladder; fit guidance is becoming table stakes."
     },
     {
-      "ts": "2026-09-27T17:21:30Z",
-      "title": "Packing cubes saturation",
-      "detail": "Established brands cluster around 45-60 EUR with strong trust signals."
-    },
-    {
-      "ts": "2026-09-27T17:23:08Z",
-      "title": "Pricing handoff",
-      "detail": "Recommend 39.90 EUR as first Muda Cero test, pending Finance and landed cost."
+      "ts": "2026-09-27T18:27:38Z",
+      "title": "Commodity candidates demoted",
+      "detail": "Packing cubes show stronger branded competition near 20-35 EUR, while windshield umbrella pricing reaches single digits."
     }
   ]
 }
