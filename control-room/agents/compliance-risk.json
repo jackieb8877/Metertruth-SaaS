@@ -1,0 +1,11 @@
+{
+  "id": "compliance-risk",
+  "name": "Compliance & Risk",
+  "status": "waiting",
+  "last_run": null,
+  "focus": "EU consumer law, product safety, claims and operational risk",
+  "summary": "Waiting for first compliance cycle",
+  "blocker": null,
+  "progress": 10,
+  "events": []
+}
