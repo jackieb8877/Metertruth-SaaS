@@ -196,6 +196,128 @@ def test_period_invoice_upload_shows_separate_period_findings_in_saved_report(tm
     assert 'Excluded from usage exposure cards' in saved
 
 
+def test_effective_price_catalog_detects_invoice_rate_drift_with_one_economic_finding():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[{'event_id':'e1','customer_id':'cus_1','timestamp':'2026-01-15T10:00:00Z','quantity':'100','metric':'api'}]
+    invoice=[{'invoice_id':'i1','customer_id':'cus_1','metric':'api','line_type':'usage','amount':'5.00','unit_price':'0.05',
+              'period_start':'2026-01-01T00:00:00Z','period_end':'2026-02-01T00:00:00Z'}]
+    catalog=[
+        {'metric':'api','unit_price':'0.08','effective_from':'2025-12-01T00:00:00Z','effective_to':'2026-01-01T00:00:00Z'},
+        {'metric':'api','unit_price':'0.10','effective_from':'2026-01-01T00:00:00Z','effective_to':'2026-02-01T00:00:00Z'},
+    ]
+    result=reconcile_ledgers(metered,invoice,None,{'price_per_unit':'9.99','pricing':{}},catalog)
+    assert len(result['findings']) == 1  # no duplicate INVOICE_MISMATCH row
+    finding=result['findings'][0]
+    assert finding['code'] == 'PRICING_DRIFT'
+    assert finding['status'] == 'CONFIRMED'
+    assert finding['impact_eur'] == 5.0  # 100 × (€0.10 - €0.05)
+    assert finding['evidence']['effective_catalog_rate'] == '0.10'
+    assert result['summary']['potential_underbilling_eur'] == 5.0
+
+
+def test_catalog_price_change_boundary_rates_each_invoice_period_correctly():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[
+        {'event_id':'old','customer_id':'cus_1','timestamp':'2026-01-14T23:59:59Z','quantity':'2','metric':'api'},
+        {'event_id':'new','customer_id':'cus_1','timestamp':'2026-01-15T00:00:00Z','quantity':'2','metric':'api'},
+    ]
+    invoice=[
+        {'customer_id':'cus_1','metric':'api','line_type':'usage','amount':'0.10','unit_price':'0.05',
+         'period_start':'2026-01-01T00:00:00Z','period_end':'2026-01-15T00:00:00Z'},
+        {'customer_id':'cus_1','metric':'api','line_type':'usage','amount':'0.20','unit_price':'0.10',
+         'period_start':'2026-01-15T00:00:00Z','period_end':'2026-02-01T00:00:00Z'},
+    ]
+    catalog=[
+        {'metric':'api','unit_price':'0.05','effective_from':'2026-01-01T00:00:00Z','effective_to':'2026-01-15T00:00:00Z'},
+        {'metric':'api','unit_price':'0.10','effective_from':'2026-01-15T00:00:00Z','effective_to':'2026-02-01T00:00:00Z'},
+    ]
+    result=reconcile_ledgers(metered,invoice,None,{'price_per_unit':'9.99','pricing':{}},catalog)
+    assert result['findings'] == []
+
+
+def test_effective_price_catalog_marks_rate_only_drift_suspected_without_inflating_leak():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[{'event_id':'e1','customer_id':'cus_1','timestamp':'2026-01-15T10:00:00Z','quantity':'100','metric':'api'}]
+    invoice=[{'customer_id':'cus_1','metric':'api','line_type':'usage','amount':'10.00','unit_price':'0.05',
+              'period_start':'2026-01-01T00:00:00Z','period_end':'2026-02-01T00:00:00Z'}]
+    catalog=[{'metric':'api','unit_price':'0.10','effective_from':'2026-01-01T00:00:00Z','effective_to':'2026-02-01T00:00:00Z'}]
+    result=reconcile_ledgers(metered,invoice,None,{'price_per_unit':'0.10','pricing':{}},catalog)
+    assert result['findings'][0]['code'] == 'PRICING_DRIFT'
+    assert result['findings'][0]['status'] == 'SUSPECTED'
+    assert result['findings'][0]['impact_eur'] == 0
+    assert result['summary']['potential_underbilling_eur'] == 0
+    assert result['summary']['suspected_findings'] == 1
+
+
+def test_effective_price_catalog_rejects_invoice_period_crossing_price_change():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[{'event_id':'e1','customer_id':'cus_1','timestamp':'2026-01-15T10:00:00Z','quantity':'1','metric':'api'}]
+    invoice=[{'customer_id':'cus_1','metric':'api','line_type':'usage','amount':'0.10','unit_price':'0.10',
+              'period_start':'2026-01-01T00:00:00Z','period_end':'2026-02-01T00:00:00Z'}]
+    catalog=[
+        {'metric':'api','unit_price':'0.05','effective_from':'2026-01-01T00:00:00Z','effective_to':'2026-01-15T00:00:00Z'},
+        {'metric':'api','unit_price':'0.10','effective_from':'2026-01-15T00:00:00Z','effective_to':'2026-02-01T00:00:00Z'},
+    ]
+    try:
+        reconcile_ledgers(metered,invoice,None,{'price_per_unit':'0.10','pricing':{}},catalog)
+    except ValueError as exc:
+        assert 'Split invoice usage periods' in str(exc)
+    else:
+        assert False, 'a single invoice line must not be rated across multiple effective prices'
+
+
+def test_effective_price_catalog_rejects_overlaps_and_uncovered_invoice_periods():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[{'event_id':'e1','customer_id':'cus_1','timestamp':'2026-01-15T10:00:00Z','quantity':'1','metric':'api'}]
+    invoice=[{'customer_id':'cus_1','metric':'api','line_type':'usage','amount':'0.10','unit_price':'0.10',
+              'period_start':'2026-01-01T00:00:00Z','period_end':'2026-02-01T00:00:00Z'}]
+    overlapping=[
+        {'metric':'api','unit_price':'0.10','effective_from':'2026-01-01T00:00:00Z','effective_to':'2026-01-20T00:00:00Z'},
+        {'metric':'api','unit_price':'0.12','effective_from':'2026-01-15T00:00:00Z','effective_to':'2026-02-01T00:00:00Z'},
+    ]
+    try:
+        reconcile_ledgers(metered,invoice,None,{'price_per_unit':'0.10','pricing':{}},overlapping)
+    except ValueError as exc:
+        assert 'versions overlap' in str(exc)
+    else:
+        assert False, 'overlapping catalog versions must be rejected'
+
+    gapped=[{'metric':'api','unit_price':'0.10','effective_from':'2026-01-20T00:00:00Z','effective_to':'2026-02-01T00:00:00Z'}]
+    try:
+        reconcile_ledgers(metered,invoice,None,{'price_per_unit':'0.10','pricing':{}},gapped)
+    except ValueError as exc:
+        assert 'does not cover' in str(exc) or 'Split invoice usage periods' in str(exc)
+    else:
+        assert False, 'catalog gaps inside an invoice window must not receive guessed pricing'
+
+
+def test_price_catalog_upload_reports_pricing_drift_and_inferred_catalog_mapping(tmp_path, monkeypatch):
+    monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'pricing-drift.sqlite3'))
+    events=(
+        b'event_id,customer_id,timestamp,quantity,metric\n'
+        b'e1,cus_1,2026-01-15T10:00:00Z,100,api\n'
+    )
+    invoice=(
+        b'invoice_id,customer_id,metric,line_type,amount,unit_price,period_start,period_end\n'
+        b'i1,cus_1,api,usage,5.00,0.05,2026-01-01T00:00:00Z,2026-02-01T00:00:00Z\n'
+    )
+    catalog=(
+        b'metric,unit_price,effective_from,effective_to\n'
+        b'api,0.10,2026-01-01T00:00:00Z,2026-02-01T00:00:00Z\n'
+    )
+    r=client.post('/analyze',files={
+        'raw_file':('raw.csv',events,'text/csv'), 'metered_file':('metered.csv',events,'text/csv'),
+        'invoice_file':('invoice.csv',invoice,'text/csv'), 'price_catalog_file':('catalog.csv',catalog,'text/csv'),
+    },data={'price_per_unit':'0.10','late_hours':'24','quantity_tolerance':'0','annualization_periods':'12','pricing_json':''})
+    assert r.status_code == 200
+    assert '<b>PRICING_DRIFT</b>' in r.text
+    assert '<b>Price catalog:</b>' in r.text and 'effective_from' in r.text
+    assert '€5.00' in r.text
+    match=re.search(r'href="/history/(\d+)"',r.text)
+    saved=client.get(f'/history/{match.group(1)}').text
+    assert 'PRICING_DRIFT' in saved and '0.10' in saved and '0.05' in saved
+
+
 def test_jsonl_and_bad_json_upload(tmp_path, monkeypatch):
     monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'scans.sqlite3'))
     raw=b'{"event_id":"e1","customer_id":"cus_1","timestamp":"2026-09-27T00:10:00Z","quantity":2}\n'

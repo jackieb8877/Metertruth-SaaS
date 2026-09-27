@@ -1,7 +1,7 @@
 # MeterTruth — live project record
 
 **Updated:** 2026-09-27 (Atlantic/Canary)  
-**Candidate:** v0.8 private beta (invoice and credit ledger checks)
+**Candidate:** v0.9 private beta (period-aware invoice and credit checks; effective price drift)
 
 **Spend:** €0. Test dependencies were installed only in a temporary environment; no paid services or campaigns used.
 
@@ -55,9 +55,10 @@ Local source rows are passed in memory into the core. In history, a report may i
 | Invoice usage line check | Implemented as optional CSV/JSON upload; metered quantities are priced and compared by customer + metric, optionally per billing period |
 | Credit ledger check | Implemented as optional CSV/JSON against invoice credit lines; period columns are required when invoice periods are supplied |
 | Ledger exposure isolation | Implemented; invoice/credit amounts are separate from source-to-meter exposure to prevent double counting |
+| Effective-dated price drift | Implemented for flat unit prices: compares invoice unit prices with non-overlapping catalog versions; fee impact is classified once with any invoice amount delta |
 | Scan history for CSV/JSON and Stripe scans | Implemented in local SQLite; ephemeral on Vercel/serverless hosting |
 | Direct Stripe connector | Existing GET-only, aggregate-level, one meter at a time |
-| Pricing drift by price version | Not implemented |
+| Pricing drift by price version | Implemented for flat-price catalogs when invoice lines include unit_price and period_start/end; effective tiers, line periods that cross price changes, and tax/discount decomposition remain unsupported |
 | Credit ledger reconciliation | Not implemented |
 | Invoice-total reconciliation | Not implemented |
 | Durable multi-tenant hosted persistence/auth | Not implemented |
@@ -65,7 +66,7 @@ Local source rows are passed in memory into the core. In history, a report may i
 
 ## Verification record
 
-- 71 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents, portfolio-rollup, precision-preserving input and invoice/credit period-boundary tests.
+- 77 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents, portfolio-rollup, precision-preserving input, invoice/credit period boundaries and effective-price drift tests.
 - Python compile check passes for app, import layer, history, RecoveryCore and connector modules.
 - An earlier v0.6 project note recorded 44 passing tests; v0.7 added tests on top of that baseline.
 
@@ -79,6 +80,9 @@ Local source rows are passed in memory into the core. In history, a report may i
 - Optional invoice imports compare invoice usage lines with metered quantity × configured prices by customer and metric, optionally grouped by UTC-normalized `[period_start, period_end)` windows. Overlapping invoice windows fail closed; events at a window's end belong to the next window, and events outside supplied windows are excluded. Optional credit imports compare positive ledger totals with absolute invoice credit-line amounts, requiring matching period columns when invoices are period-grouped. These are separate downstream deltas and are not included in the source-to-meter headline exposure. Taxes, proration, refunds and provider-specific line semantics are not inferred.
 - New adversarial tests confirm source-to-meter and invoice/credit deltas remain separate; tiered prices aggregate per period; two periods with offsetting invoice deltas are not netted together; boundary timestamps use half-open windows; overlapping periods fail closed; ambiguous metrics are rejected; the upload flow persists period findings in the reopenable report. Full suite: 71/71.
 - Synthetic period-index benchmark: 100,000 metered rows across 12 daily invoice windows reconciled in 0.193s locally, with zero findings when the invoice matched. This tests the in-memory ledger function, not upload limits or production throughput.
+- Synthetic effective-catalog benchmark: 100,000 metered rows across 12 daily price versions reconciled in 0.395s locally, with zero findings when invoices matched. This is an in-memory workspace benchmark, not a hosted throughput guarantee.
+- Optional flat price catalogs accept `metric, unit_price, effective_from, effective_to` and compare invoice `unit_price` against the catalog rate for each customer/metric/period. Effective ranges are UTC half-open intervals, must not overlap, and each invoice usage line period must be covered wholly by one version. A rate mismatch with an invoice amount delta is a single `PRICING_DRIFT` finding; if the amount still reconciles, it is `SUSPECTED` with zero confirmed exposure. A line spanning a price change fails with instructions to split it.
+- Six new tests cover stale invoice rates, no-double-count classification, rate-only suspected signals, effective-price boundaries, catalog overlaps and uncovered periods. Full suite: 77/77.
 - The canonical-code and event-level Decimal source commits had successful Vercel status checks. The Work browser could not independently load the hosted URL in this check; runtime behavior beyond the owner's login test remains unverified.
 
 ## Competitive review and attack plan
@@ -109,15 +113,15 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 ## Risks / findings
 
 1. Current reports assume EUR with two decimal places; multi-currency and non-two-decimal currencies are not modeled.
-2. Invoice and credit checks use a narrow CSV/JSON schema. Periods are optional and provider exports with unusual line semantics need mapping; taxes/refunds and effective-date pricing are still missing.
+2. Invoice and credit checks use a narrow CSV/JSON schema. Periods are optional and provider exports with unusual line semantics need mapping; taxes/refunds and tiered effective-date pricing are not inferred.
 3. Stripe meter summaries are asynchronous and aggregate-level; a just-arrived usage event may not yet appear. A premature scan can create a false missing signal.
 4. Vercel/serverless local storage is ephemeral; current history is only a tester convenience, not persistent SaaS storage. Render Free also has ephemeral storage and sleeps.
 5. Basic Auth is one shared beta gate, not tenant isolation or a production identity system; no sensitive customer data should be used in this hosted beta.
 
 ## Next backlog, ordered
 
-1. Make invoice and credit mapping user-adjustable; add taxes, refunds and provider-export fixtures.
-2. Effective-dated price catalogs and `PRICING_DRIFT`; test pricing changes and tier resets at billing boundaries.
+1. Make invoice, credit and catalog mapping user-adjustable; add taxes, refunds and provider-export fixtures.
+2. Support tiered effective-dated catalogs and invoice lines that span price changes; add more price-change boundary fixtures.
 3. Connector adapter seam and delayed re-check window for Stripe's asynchronous meter summaries; evaluate Lago export before credentials or OAuth.
 4. Durable history, tenant isolation and credential handling only after a design partner validates ongoing monitoring.
 5. Pricing validation: ask prospects to quantify existing month-end reconciliation time, missed-usage frequency, invoice disputes, and acceptable recovery fee.
@@ -127,4 +131,4 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 - No new spending without explicit approval.
 - No OAuth, automatic invoice changes, refunds, or production data changes in this phase.
 - The user connected `jackieb8877/Metertruth-SaaS` and deployed the v0.7 candidate at Vercel. Repository updates continue on `main`; do not incur hosting or service costs without explicit approval.
-- v0.8 adds read-only invoice usage and credit checks. No billing mutations are performed; all output remains review evidence.
+- v0.8 added read-only invoice usage and credit checks. v0.9 adds period separation and flat effective-price drift review. No billing mutations are performed; all output remains review evidence.

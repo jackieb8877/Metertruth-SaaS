@@ -26,7 +26,7 @@ from data_import import MAX_UPLOAD as IMPORT_MAX_UPLOAD, parse_data_bytes
 from ledger_reconciliation import reconcile_ledgers
 import scan_history
 
-app = FastAPI(title="MeterTruth MVP", version="0.8.0")
+app = FastAPI(title="MeterTruth MVP", version="0.9.0")
 app.mount("/static", StaticFiles(directory=str(Path(__file__).with_name("static"))), name="static")
 
 MAX_UPLOAD = IMPORT_MAX_UPLOAD
@@ -147,7 +147,7 @@ def layout(body: str, title: str = "MeterTruth") -> str:
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)}</title><link rel="stylesheet" href="/static/app.css"></head>
 <body><header><div class="brand">MeterTruth <span>MVP</span></div><div class="tag">Independent usage → billing reconciliation · <a href="/history">Scan history</a></div></header>
-<main>{body}</main><footer>MeterTruth private beta v0.8 · RecoveryCore v0.2 · uploads are processed in memory</footer></body></html>'''
+<main>{body}</main><footer>MeterTruth private beta v0.9 · RecoveryCore v0.2 · uploads are processed in memory</footer></body></html>'''
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -164,7 +164,8 @@ def home() -> str:
 <details><summary>Optional invoice and credit checks</summary><div class="settings grid2">
 <label>Invoice lines CSV or JSON<input type="file" name="invoice_file" accept=".csv,.json,.jsonl,.ndjson,text/csv,application/json"></label>
 <label>Credit ledger CSV or JSON<input type="file" name="credit_file" accept=".csv,.json,.jsonl,.ndjson,text/csv,application/json"></label>
-<p class="hint wide">Invoice usage lines need customer_id and amount (metric and line_type are optional). Credit rows need customer_id and credit_amount/amount; invoice credit lines need line_type=credit and a signed or unsigned amount. Credit checks require an invoice file. These downstream checks are shown separately from usage leakage to avoid double counting.</p>
+<label>Effective price catalog CSV or JSON<input type="file" name="price_catalog_file" accept=".csv,.json,.jsonl,.ndjson,text/csv,application/json"></label>
+<p class="hint wide">Invoice usage lines need customer_id and amount (metric and line_type are optional). Credit rows need customer_id and credit_amount/amount; invoice credit lines need line_type=credit and a signed or unsigned amount. Price catalog columns: metric, unit_price, effective_from, optional effective_to. For PRICING_DRIFT, invoice lines also need unit_price and period_start/period_end, with one price version per line period. Credit and price checks require invoice input. These downstream checks are shown separately from usage leakage to avoid double counting.</p>
 </div></details>
 <details><summary>Pricing & detection settings</summary><div class="settings grid2">
 <label>Fallback price per unit (€)<input name="price_per_unit" value="0.01" inputmode="decimal"></label>
@@ -187,6 +188,7 @@ async def analyze(
     metered_file: UploadFile = File(...),
     invoice_file: UploadFile | None = File(None),
     credit_file: UploadFile | None = File(None),
+    price_catalog_file: UploadFile | None = File(None),
     price_per_unit: str = Form("0.01"),
     late_hours: str = Form("24"),
     quantity_tolerance: str = Form("0"),
@@ -200,13 +202,16 @@ async def analyze(
         report = reconcile(raw, metered, cfg)
         invoices = parse_data_bytes(await invoice_file.read(), invoice_file.filename or "invoice.csv") if invoice_file and invoice_file.filename else None
         credits = parse_data_bytes(await credit_file.read(), credit_file.filename or "credits.csv") if credit_file and credit_file.filename else None
+        price_catalog = parse_data_bytes(await price_catalog_file.read(), price_catalog_file.filename or "price-catalog.csv") if price_catalog_file and price_catalog_file.filename else None
         if credits and not invoices:
             raise ValueError("Upload invoice lines to check credit applications against the credit ledger")
-        ledger = reconcile_ledgers(metered, invoices, credits, cfg)
+        ledger = reconcile_ledgers(metered, invoices, credits, cfg, price_catalog)
         report["ledger_reconciliation"] = ledger
         report["findings"].extend(ledger["findings"])
         report["summary"]["findings"] += ledger["summary"]["findings"]
-        report["summary"]["confirmed_findings"] += ledger["summary"]["findings"]
+        report["summary"]["confirmed_findings"] += ledger["summary"]["confirmed_findings"]
+        report["summary"]["suspected_findings"] += ledger["summary"]["suspected_findings"]
+        report["summary"]["unverifiable_findings"] += ledger["summary"]["unverifiable_findings"]
         report["created_at"] = datetime.now(timezone.utc).isoformat()
         scan_id = scan_history.save(report, raw_file.filename or "raw.csv", metered_file.filename or "metered.csv")
     except (ValueError, KeyError) as exc:
@@ -226,7 +231,8 @@ async def analyze(
     map_meter = ", ".join(f"{escape(k)} → {escape(v)}" for k,v in mapping["metered"].items())
     map_invoice = ", ".join(f"{escape(k)} → {escape(v)}" for k,v in ledger["input_mapping"]["invoice"].items() if v)
     map_credits = ", ".join(f"{escape(k)} → {escape(v)}" for k,v in ledger["input_mapping"]["credits"].items() if v)
-    ledger_mapping = (f'<p><b>Invoice:</b> {map_invoice or "—"}</p><p><b>Credit ledger:</b> {map_credits or "—"}</p>' if invoices else "")
+    map_catalog = ", ".join(f"{escape(k)} → {escape(v)}" for k,v in ledger["input_mapping"]["price_catalog"].items() if v)
+    ledger_mapping = (f'<p><b>Invoice:</b> {map_invoice or "—"}</p><p><b>Credit ledger:</b> {map_credits or "—"}</p><p><b>Price catalog:</b> {map_catalog or "—"}</p>' if invoices else "")
     body = f'''
 <section class="results-head"><div><p class="eyebrow">SCAN COMPLETE · #{scan_id}</p><h1>{s["confirmed_findings"]} confirmed findings</h1><p class="lede">{s["raw_events"]} source events compared with {s["metered_rows"]} metered rows.</p></div><div><a class="buttonlink secondary" href="/">New scan</a> <a class="buttonlink" href="/history/{scan_id}">Open saved report</a></div></section>
 <section class="cards"><div class="card"><span>Underbilling</span><strong>{money(s["potential_underbilling_eur"])}</strong></div>
@@ -254,7 +260,7 @@ def export(report_json: str = Form(...)) -> Response:
 
 @app.get("/health")
 def health() -> dict[str, str]:
-    return {"status": "ok", "app": "MeterTruth 0.8.0", "kernel": "RecoveryCore 0.2.0"}
+    return {"status": "ok", "app": "MeterTruth 0.9.0", "kernel": "RecoveryCore 0.2.0"}
 
 
 def _report_document(report: dict[str, Any], scan_id: int) -> str:

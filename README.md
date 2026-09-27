@@ -1,8 +1,8 @@
-# MeterTruth MVP v0.8 — private beta candidate
+# MeterTruth MVP v0.9 — private beta candidate
 
 MeterTruth is an independent revenue-assurance layer for usage-based SaaS. It compares product-source usage with metered/billing usage, flags discrepancies with evidence, and produces a reviewable Revenue Leak Report. It does not issue invoices or mutate billing providers.
 
-## v0.8 changes
+## v0.9 changes
 
 - Main reconciliation upload accepts CSV, JSON arrays/objects, common `data`/`events`/`rows` wrappers, JSONL and NDJSON (UTF-8; maximum 5 MiB per file).
 - Schema aliases remain inferred by RecoveryCore v0.2.
@@ -12,6 +12,7 @@ MeterTruth is an independent revenue-assurance layer for usage-based SaaS. It co
 - Event-level and read-only Stripe scans are stored in local SQLite scan history; original uploads and API keys are not stored.
 - Each scan can be reopened as an evidence-rich HTML Revenue Leak Report.
 - Optional invoice lines and credit ledger uploads detect `INVOICE_MISMATCH` and `CREDIT_MISMATCH`; invoice rows can be grouped by billing period and the report displays inferred ledger columns while keeping downstream deltas separate from raw-to-meter leakage.
+- Optional effective-dated flat price catalogs detect `PRICING_DRIFT` against invoice line unit prices; economic deltas are reported once, without a duplicate invoice mismatch.
 - The existing guided onboarding, preflight, demo, customer mapping and read-only Stripe portfolio scan remain in place.
 - Optional Basic Auth, CSP/security headers and `/health` remain part of the private beta.
 
@@ -43,6 +44,8 @@ pytest -q
 
 RecoveryCore v0.2 covers missing, duplicate, wrong quantity, customer mismatch, metric mismatch, late/out-of-period events, orphan metered rows, idempotency collisions, flat/tiered price configuration and an economic exposure report. CSV↔JSON event-level reconciliation and stored scan reports are now supported.
 
-Invoice and credit checks are available as optional uploads. Invoice usage lines need `customer_id` and `amount`; `metric` and `line_type` can be provided to disambiguate multiple meters and identify credit rows (`line_type=credit`). When a single metric is present, an omitted invoice metric is inferred. Add both `period_start` and `period_end` to every invoice row to reconcile separate billing periods; ranges are UTC-normalized and half-open (`start ≤ event time < end`), and overlapping periods are rejected. Metered events outside supplied invoice windows are excluded. Credit ledger rows need `customer_id` and `credit_amount` (or `amount`). For period-grouped invoices, the credit ledger must also carry matching period columns. The invoice file must include its credit lines for credit reconciliation. Invoice usage totals are compared with metered quantities priced using the configured flat or tiered catalog, aggregated per customer, metric and period (tier thresholds reset per period). Taxes, refunds, effective-dated price catalogs and proof that a recovery action was applied are not inferred. These downstream findings are shown separately from source-to-meter leakage to avoid double counting. Stripe portfolio mode remains aggregate-level and read-only. See `PROJECT_STATUS.md` for assumptions and limits.
+Invoice and credit checks are available as optional uploads. Invoice usage lines need `customer_id` and `amount`; `metric` and `line_type` can be provided to disambiguate multiple meters and identify credit rows (`line_type=credit`). When a single metric is present, an omitted invoice metric is inferred. Add both `period_start` and `period_end` to every invoice row to reconcile separate billing periods; ranges are UTC-normalized and half-open (`start ≤ event time < end`), and overlapping periods are rejected. Metered events outside supplied invoice windows are excluded. Credit ledger rows need `customer_id` and `credit_amount` (or `amount`). For period-grouped invoices, the credit ledger must also carry matching period columns. The invoice file must include its credit lines for credit reconciliation. Invoice usage totals are compared with metered quantities priced using the configured flat or tiered catalog, aggregated per customer, metric and period (tier thresholds reset per period).
+
+For effective price drift, upload a catalog with `metric`, `unit_price`, `effective_from`, and optional `effective_to` (empty means open-ended), plus invoice usage lines with `unit_price`, `period_start`, and `period_end`. Catalog ranges are UTC-normalized, half-open, and may not overlap. Each invoice usage-line period must fit wholly within one catalog version; split the line when it spans a price change. A mismatched unit rate becomes `PRICING_DRIFT`; if the line amount still reconciles to catalog-rated usage, it is marked suspected with €0 confirmed exposure. Taxes, refunds, tiered effective-dated catalogs and proof that a recovery action was applied are not inferred. These downstream findings are shown separately from source-to-meter leakage to avoid double counting. Stripe portfolio mode remains aggregate-level and read-only. See `PROJECT_STATUS.md` for assumptions and limits.
 
 No original upload, Stripe key, invoice adjustment, refund or customer mutation is retained/performed. Hosted deployment on Vercel uses ephemeral local storage; scan history can disappear on restart. Do not use production customer data until authentication, retention and storage requirements are independently reviewed.

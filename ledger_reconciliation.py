@@ -20,9 +20,16 @@ INVOICE_ALIASES = {
     "customer_id": ["customer_id", "customer", "account_id", "customer_external_id"],
     "metric": ["metric", "meter", "usage_type", "sku"],
     "amount": ["amount", "line_amount", "amount_due", "total", "subtotal", "net_amount"],
+    "unit_price": ["unit_price", "price_per_unit", "rate", "unit_amount"],
     "line_type": ["line_type", "type", "kind", "category"],
     "period_start": ["period_start", "billing_period_start", "service_period_start", "start_date"],
     "period_end": ["period_end", "billing_period_end", "service_period_end", "end_date"],
+}
+CATALOG_ALIASES = {
+    "metric": ["metric", "meter", "usage_type", "sku"],
+    "unit_price": ["unit_price", "price_per_unit", "rate", "unit_amount"],
+    "effective_from": ["effective_from", "valid_from", "starts_at", "start_date"],
+    "effective_to": ["effective_to", "valid_to", "ends_at", "end_date"],
 }
 CREDIT_ALIASES = {
     "customer_id": ["customer_id", "customer", "account_id", "customer_external_id"],
@@ -65,13 +72,62 @@ def _period_for_timestamp(timestamp: Any, starts: list[datetime],
     return (start_text, end_text) if start <= moment < end else None
 
 
+def _load_price_catalog(rows: list[dict[str, str]]) -> tuple[
+    dict[str, list[tuple[datetime, datetime | None, Decimal, dict[str, str]]]], dict[str, str]
+]:
+    mapping = _infer(list(rows[0]), CATALOG_ALIASES)
+    if not mapping["metric"] or not mapping["unit_price"] or not mapping["effective_from"]:
+        raise ValueError("Price catalog needs metric, unit_price and effective_from columns")
+    schedules: dict[str, list[tuple[datetime, datetime | None, Decimal, dict[str, str]]]] = defaultdict(list)
+    for row in rows:
+        metric = str(row.get(mapping["metric"], "")).strip()
+        start = parse_time(row.get(mapping["effective_from"]))
+        end_text = str(row.get(mapping["effective_to"], "")).strip() if mapping["effective_to"] else ""
+        end = parse_time(end_text) if end_text else None
+        rate = required_decimal(row.get(mapping["unit_price"]), "Catalog unit price")
+        if not metric or start is None or (end_text and end is None) or (end is not None and start >= end):
+            raise ValueError("Price catalog has an invalid metric or effective date range")
+        if rate < 0:
+            raise ValueError("Catalog unit price must be non-negative")
+        schedules[metric].append((start, end, rate, row))
+    for metric, versions in schedules.items():
+        versions.sort(key=lambda item: item[0])
+        for previous, current in zip(versions, versions[1:]):
+            if previous[1] is None or current[0] < previous[1]:
+                raise ValueError(f"Price catalog versions overlap for metric {metric}")
+    return dict(schedules), mapping
+
+
+def _catalog_rate_at(versions: list[tuple[datetime, datetime | None, Decimal, dict[str, str]]],
+                     timestamp: Any) -> tuple[Decimal, dict[str, str]]:
+    moment = parse_time(timestamp)
+    if moment is None:
+        raise ValueError("Metered timestamps must be valid to use an effective-dated price catalog")
+    starts = [item[0] for item in versions]
+    index = bisect_right(starts, moment) - 1
+    if index < 0:
+        raise ValueError("Price catalog does not cover a metered event timestamp; add the missing effective price version")
+    start, end, rate, evidence = versions[index]
+    if end is not None and moment >= end:
+        raise ValueError("Price catalog does not cover a metered event timestamp; add the missing effective price version")
+    return rate, evidence
+
+
 def reconcile_ledgers(metered: list[dict[str, str]], invoice: list[dict[str, str]] | None,
-                      credits: list[dict[str, str]] | None, cfg: dict[str, Any]) -> dict[str, Any]:
+                      credits: list[dict[str, str]] | None, cfg: dict[str, Any],
+                      price_catalog: list[dict[str, str]] | None = None) -> dict[str, Any]:
     findings: list[dict[str, Any]] = []
     invoice_mapping: dict[str, str] = {}
     credit_mapping: dict[str, str] = {}
+    catalog_mapping: dict[str, str] = {}
     invoice_rows = invoice or []
     credit_rows = credits or []
+    catalog_rows = price_catalog or []
+    schedules: dict[str, list[tuple[datetime, datetime | None, Decimal, dict[str, str]]]] = {}
+    if catalog_rows:
+        if not invoice_rows:
+            raise ValueError("Upload invoice lines to compare observed prices with the effective-dated catalog")
+        schedules, catalog_mapping = _load_price_catalog(catalog_rows)
 
     if invoice_rows:
         invoice_mapping = _infer(list(invoice_rows[0]), INVOICE_ALIASES)
@@ -81,6 +137,11 @@ def reconcile_ledgers(metered: list[dict[str, str]], invoice: list[dict[str, str
         if not invoice_mapping["customer_id"] or not invoice_mapping["amount"]:
             raise ValueError("Invoice file needs customer_id and amount columns")
         period_columns = bool(invoice_mapping["period_start"] or invoice_mapping["period_end"])
+        if schedules:
+            if not (invoice_mapping["period_start"] and invoice_mapping["period_end"]):
+                raise ValueError("Price drift checks need period_start and period_end on invoice usage lines")
+            if not invoice_mapping["unit_price"]:
+                raise ValueError("Price drift checks need unit_price on invoice usage lines")
         invoice_periods: set[tuple[str, str]] = set()
         invoice_row_periods: list[tuple[str, str] | None] = []
         for row in invoice_rows:
@@ -99,9 +160,13 @@ def reconcile_ledgers(metered: list[dict[str, str]], invoice: list[dict[str, str
             for start, end in ordered_periods
         ]
         period_starts = [period[0] for period in period_intervals]
+        catalog_rate_by_key: dict[tuple[str, str, str | None, str | None], Decimal] = {}
+        catalog_evidence_by_key: dict[tuple[str, str, str | None, str | None], dict[str, str]] = {}
+        invoice_price_by_key: dict[tuple[str, str, str | None, str | None], list[tuple[Decimal, dict[str, str]]]] = defaultdict(list)
 
         metric_col = mm.get("metric")
         expected_quantities: dict[tuple[str, str, str | None, str | None], Decimal] = defaultdict(lambda: ZERO)
+        expected_catalog_amounts: dict[tuple[str, str, str | None, str | None], Decimal] = defaultdict(lambda: ZERO)
         for row in metered:
             customer = str(row.get(mm["customer_id"], "")).strip()
             metric = str(row.get(metric_col, "default")).strip() if metric_col else "default"
@@ -116,7 +181,15 @@ def reconcile_ledgers(metered: list[dict[str, str]], invoice: list[dict[str, str
                 if period is None:
                     continue
             quantity = required_decimal(row.get(mm["quantity"]), "Metered quantity")
-            expected_quantities[(customer, metric or "default", *(period or (None, None)))] += quantity
+            key = (customer, metric or "default", *(period or (None, None)))
+            expected_quantities[key] += quantity
+            if schedules:
+                versions = schedules.get(metric or "default")
+                if not versions:
+                    raise ValueError(f"Price catalog has no versions for metered metric {metric or 'default'}")
+                rate, catalog_row = _catalog_rate_at(versions, row.get(mm.get("timestamp", "")))
+                expected_catalog_amounts[key] += quantity * rate
+                catalog_evidence_by_key.setdefault(key, catalog_row)
         metrics = {metric for _, metric, _, _ in expected_quantities}
 
         billed: dict[tuple[str, str, str | None, str | None], Decimal] = defaultdict(lambda: ZERO)
@@ -149,25 +222,58 @@ def reconcile_ledgers(metered: list[dict[str, str]], invoice: list[dict[str, str
                 key = (customer, metric or "default", period_start, period_end)
                 billed[key] += amount
                 evidence[key].append(row)
+                if schedules:
+                    versions = schedules.get(metric or "default")
+                    if not versions:
+                        raise ValueError(f"Price catalog has no versions for invoice metric {metric or 'default'}")
+                    invoice_start, invoice_end = parse_time(period_start), parse_time(period_end)
+                    matches = [v for v in versions if v[0] <= invoice_start and (v[1] is None or invoice_end <= v[1])]
+                    if len(matches) != 1:
+                        raise ValueError(f"Split invoice usage periods at effective price changes for metric {metric or 'default'}")
+                    catalog_rate_by_key[key] = matches[0][2]
+                    catalog_evidence_by_key.setdefault(key, matches[0][3])
+                    invoice_rate = required_decimal(row.get(invoice_mapping["unit_price"]), "Invoice unit price")
+                    if invoice_rate < 0:
+                        raise ValueError("Invoice unit price must be non-negative for usage lines")
+                    invoice_price_by_key[key].append((invoice_rate, row))
 
-        expected = {key: _price_amount(key[1], quantity, cfg) for key, quantity in expected_quantities.items()}
+        expected = {
+            key: expected_catalog_amounts[key] if schedules else _price_amount(key[1], quantity, cfg)
+            for key, quantity in expected_quantities.items()
+        }
         for key in sorted(set(expected) | set(billed)):
             customer, metric, period_start, period_end = key
             expected_amount = expected[key]
             billed_amount = billed[key]
             delta = expected_amount - billed_amount
-            if round_money(abs(delta)) == 0:
+            rate = catalog_rate_by_key.get(key)
+            actual_rates = invoice_price_by_key.get(key, [])
+            rate_mismatch = bool(schedules and rate is not None and any(actual != rate for actual, _ in actual_rates))
+            rounded_delta = round_money(delta)
+            if round_money(abs(delta)) == 0 and not rate_mismatch:
                 continue
             period_detail = f" for [{period_start}, {period_end})" if period_start else ""
+            if rate_mismatch:
+                code = "PRICING_DRIFT"
+                status = "CONFIRMED" if rounded_delta != 0 else "SUSPECTED"
+                rate_detail = f"Effective catalog rate €{rate:.8f}; invoice rate(s) " + ", ".join(f"€{actual:.8f}" for actual, _ in actual_rates) + ". "
+                action = "Review the effective price version and correct the invoice rate after approval"
+            else:
+                code = "INVOICE_MISMATCH"
+                status = "CONFIRMED"
+                rate_detail = ""
+                action = "Inspect invoice line mapping; prepare a reviewed invoice correction candidate"
             findings.append({
                 "event_id": f"invoice:{customer}:{metric}:{period_start or 'all'}", "customer": customer,
-                "type": "INVOICE_MISMATCH", "code": "INVOICE_MISMATCH", "status": "CONFIRMED",
-                "impact_eur": round_money(delta),
-                "detail": f"Metered usage priced at €{expected_amount:.2f}; invoice usage lines total €{billed_amount:.2f} for {metric}{period_detail}.",
-                "action": "Inspect invoice line mapping; prepare a reviewed invoice correction candidate",
+                "type": code, "code": code, "status": status,
+                "impact_eur": rounded_delta,
+                "detail": f"{rate_detail}Metered usage priced at €{expected_amount:.2f}; invoice usage lines total €{billed_amount:.2f} for {metric}{period_detail}.",
+                "action": action,
                 "evidence": {"expected_metered_eur": str(expected_amount), "invoice_usage_eur": str(billed_amount),
                              "metric": metric, "period_start": period_start, "period_end": period_end,
-                             "invoice_lines": evidence[key]},
+                             "effective_catalog_rate": str(rate) if rate is not None else None,
+                             "applied_invoice_rates": [str(actual) for actual, _ in actual_rates],
+                             "catalog_version": catalog_evidence_by_key.get(key), "invoice_lines": evidence[key]},
             })
 
         if credit_rows:
@@ -211,10 +317,13 @@ def reconcile_ledgers(metered: list[dict[str, str]], invoice: list[dict[str, str
     positive = sum((required_decimal(f["impact_eur"], "Ledger impact") for f in findings if f["impact_eur"] > 0), ZERO)
     negative = sum((-required_decimal(f["impact_eur"], "Ledger impact") for f in findings if f["impact_eur"] < 0), ZERO)
     return {
-        "input_mapping": {"invoice": invoice_mapping, "credits": credit_mapping},
+        "input_mapping": {"invoice": invoice_mapping, "credits": credit_mapping, "price_catalog": catalog_mapping},
         "findings": findings,
         "summary": {"findings": len(findings), "potential_underbilling_eur": round_money(positive),
                     "potential_overbilling_eur": round_money(negative),
                     "period_exposure_eur": round_money(positive + negative),
+                    "confirmed_findings": sum(f["status"] == "CONFIRMED" for f in findings),
+                    "suspected_findings": sum(f["status"] == "SUSPECTED" for f in findings),
+                    "unverifiable_findings": sum(f["status"] == "UNVERIFIABLE" for f in findings),
                     "additive_to_usage_exposure": False},
     }
