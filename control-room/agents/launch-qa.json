@@ -2,9 +2,9 @@
   "id": "launch-qa",
   "name": "Launch QA",
   "status": "blocked",
-  "last_run": "2026-09-27T16:50:42Z",
+  "last_run": "2026-09-27T17:49:39Z",
   "focus": "Pre-launch QA",
-  "summary": "Launch not ready: store and key operational inputs are incomplete.",
+  "summary": "Launch remains blocked after QA review; current prototype is non-commercial and key legal, economics, fulfillment and checkout gates remain open.",
   "blocker": "Supplier economics, staging storefront and compliance data must be completed before launch.",
   "progress": 24,
   "events": [
