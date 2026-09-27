@@ -1,7 +1,7 @@
 {
-  "version": 1,
+  "version": 2,
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-27T20:54:14Z",
+  "updated_at": "2026-09-27T22:37:22.816335Z",
   "status": "ACTIVE_PLANNING_NOT_LAUNCHED",
   "authority": "El propietario pide seguir el curso incluso si sustituye la estrategia anterior.",
   "source": {
@@ -9,8 +9,17 @@
     "author": "Adrián Sáenz y colaboradores",
     "video_url": "https://www.youtube.com/watch?v=Q4Ykcwh5Osc",
     "transcript": "curso dropshipping.txt",
-    "full_course_review_complete": false,
-    "review_scope": "Bloques estratégicos de arranque, pasajes de configuración, primer test de Meta, análisis/optimización y selección para orgánico/TikTok Shop; no auditoría íntegra de 27 horas."
+    "full_course_review_complete": true,
+    "completion_definition": "Lectura y análisis completos de la transcripción aportada; no revisión audiovisual íntegra ni auditoría independiente.",
+    "full_transcript_review_complete": true,
+    "full_audiovisual_review_complete": false,
+    "external_linked_materials_review_complete": false,
+    "external_fact_check_complete": false,
+    "review_scope": "Transcripción completa, revisada consecutivamente desde 00:00 hasta 27:45:38: arranque, Meta Ads, tráfico orgánico, Google Ads, TikTok Ads, Amazon y TikTok Shop. Excluye menús/comentarios/recomendaciones de YouTube, material de la comunidad no aportado, fiscalidad externa, códigos solo en pantalla y verificación actual de políticas/precios/afirmaciones.",
+    "review_completed_at": "2026-09-27T22:32:55.125023Z",
+    "source_sha256": "21e76869996c7869505a00755330a49ede2a06da01060911057d49c2a6e8f794",
+    "review_handoff": "control-room/artifacts/course-adrian/revision-completa-transcripcion.md",
+    "agent_read_instruction": "Antes de aplicar enseñanzas del curso, leer el handoff de revisión completa. Sustituye los registros de lectura parcial; conserva las diferencias entre profesores y separa enseñanza, ejemplo, evidencia propia y adaptación. No autoriza acciones comerciales."
   },
   "read_first": "control-room/strategy/plan_aplicacion_adrian.md",
   "launch_model": "one_product_store_sequential_tests",
