@@ -1,24 +1,205 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T17:33:00Z",
+  "updated_at": "2026-09-27T17:35:00Z",
   "events": [
-    {"id":"product-scout-20260927T170312Z-observation","ts":"2026-09-27T17:03:12Z","agent_id":"product-scout","phase":"observation","title":"Dog car seat cover is a lower-regulation challenger","detail":"The category remains active and has a strong dirt/hair before-after demo without electrical compliance, but fit and waterproofing returns need validation.","status":"ok"},
-    {"id":"product-scout-20260927T170328Z-observation","ts":"2026-09-27T17:03:28Z","agent_id":"product-scout","phase":"observation","title":"Dog car cover price band passes","detail":"Current mainstream references leave room for a differentiated mid-market offer if landed cost is low enough.","status":"ok"},
-    {"id":"product-scout-20260927T170344Z-observation","ts":"2026-09-27T17:03:44Z","agent_id":"product-scout","phase":"observation","title":"Packing cubes pass price fit but competition is heavy","detail":"Current branded references cluster around the target band, but generic saturation means supplier economics and positioning must be exceptional.","status":"warning"},
-    {"id":"product-scout-20260927T170400Z-observation","ts":"2026-09-27T17:04:00Z","agent_id":"product-scout","phase":"observation","title":"Windshield sunshade passes price/demo filters with seasonality risk","detail":"Current listings fit the target band, but universal-fit complaints and seasonality are material risks.","status":"warning"},
-    {"id":"product-scout-20260927T170410Z-decision","ts":"2026-09-27T17:04:10Z","agent_id":"product-scout","phase":"decision","title":"Leader retained; three challengers strengthened","detail":"Kit Muda Cero remains first; dog car seat cover moves to WATCH; packing cubes and windshield sunshade enter the top five pending supplier economics.","status":"ok"},
-    {"id":"product-scout-20260927T170420Z-done","ts":"2026-09-27T17:04:20Z","agent_id":"product-scout","phase":"done","title":"Product discovery cycle complete","detail":"Top candidates and handoffs updated.","status":"ok"},
-    {"id":"customer-voice-20260927T171040Z-start","ts":"2026-09-27T17:10:40Z","agent_id":"customer-voice","phase":"start","title":"Starting customer-voice mining cycle","detail":"Mining objections and return drivers for the current leader and top challengers.","status":"running"},
-    {"id":"customer-voice-20260927T171220Z-observation","ts":"2026-09-27T17:12:20Z","agent_id":"customer-voice","phase":"observation","title":"Kit Muda Cero promise is too broad","detail":"Slicker suitability varies by coat and technique and reusable rollers have surface limitations; the offer should explain which tool is for which coat or textile.","status":"warning"},
-    {"id":"customer-voice-20260927T171315Z-observation","ts":"2026-09-27T17:13:15Z","agent_id":"customer-voice","phase":"observation","title":"Dog-car-cover return risks concentrated in fit and durability","detail":"Vehicle fit, clips, zippers, waterproof backing and sliding are the main quality risks to gate at sourcing.","status":"warning"},
-    {"id":"customer-voice-20260927T171405Z-observation","ts":"2026-09-27T17:14:05Z","agent_id":"customer-voice","phase":"observation","title":"Sunshade convenience wins, fit and handle durability lose","detail":"Compact fast deployment is the desired outcome; sizing and structural durability are the key objections.","status":"ok"},
-    {"id":"customer-voice-20260927T171445Z-decision","ts":"2026-09-27T17:14:45Z","agent_id":"customer-voice","phase":"decision","title":"Tighten Kit Muda Cero positioning","detail":"Recommend a coat and surface specific 3-step routine and remove universal-surface implications from copy.","status":"ok"},
-    {"id":"customer-voice-20260927T171500Z-done","ts":"2026-09-27T17:15:00Z","agent_id":"customer-voice","phase":"done","title":"Customer Voice cycle complete","detail":"Five high-impact insights persisted and handed off.","status":"ok"},
-    {"id":"creative-offer-20260927T172939Z-start","ts":"2026-09-27T17:29:39Z","agent_id":"creative-offer","phase":"start","title":"Starting multi-SKU offer cycle","detail":"Synthesizing current product, customer voice, supplier and competitor handoffs into a coherent catalogue structure.","status":"running"},
-    {"id":"creative-offer-20260927T173040Z-decision","ts":"2026-09-27T17:30:40Z","agent_id":"creative-offer","phase":"decision","title":"Three job-led collections selected","detail":"Portfolio organized as Mascotas en casa, Mascotas en movimiento, and Viaje y coche.","status":"ok"},
-    {"id":"creative-offer-20260927T173120Z-decision","ts":"2026-09-27T17:31:20Z","agent_id":"creative-offer","phase":"decision","title":"Muda Cero price-test order raised","detail":"Test 39.90 EUR first, then 34.90 EUR; 29.90 EUR remains acquisition-only pending Finance.","status":"ok"},
-    {"id":"creative-offer-20260927T173200Z-decision","ts":"2026-09-27T17:32:00Z","agent_id":"creative-offer","phase":"decision","title":"Second HERO narrowed","detail":"Only a differentiated hard-bottom or backseat-extender cover should advance as second HERO candidate.","status":"ok"},
-    {"id":"creative-offer-20260927T173245Z-artifact","ts":"2026-09-27T17:32:45Z","agent_id":"creative-offer","phase":"artifact","title":"Merchandising map v1 created","detail":"Roles, collections, price tests, creative direction and downstream handoffs are defined.","artifact_path":"control-room/artifacts/creative-offer/merchandising-map-v1.md","status":"ok"},
-    {"id":"creative-offer-20260927T173300Z-done","ts":"2026-09-27T17:33:00Z","agent_id":"creative-offer","phase":"done","title":"Creative & Offer cycle complete","detail":"Material catalogue architecture and pricing changes persisted for downstream agents.","status":"ok"}
+    {
+      "id": "product-scout-20260927T170312Z-observation",
+      "ts": "2026-09-27T17:03:12Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Dog car seat cover is a lower-regulation challenger",
+      "detail": "The category remains active and has a strong dirt/hair before-after demo without electrical compliance, but fit and waterproofing returns need validation.",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T170328Z-observation",
+      "ts": "2026-09-27T17:03:28Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Dog car cover price band passes",
+      "detail": "Current mainstream references leave room for a differentiated mid-market offer if landed cost is low enough.",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T170344Z-observation",
+      "ts": "2026-09-27T17:03:44Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Packing cubes pass price fit but competition is heavy",
+      "detail": "Current branded references cluster around the target band, but generic saturation means supplier economics and positioning must be exceptional.",
+      "status": "warning"
+    },
+    {
+      "id": "product-scout-20260927T170400Z-observation",
+      "ts": "2026-09-27T17:04:00Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Windshield sunshade passes price/demo filters with seasonality risk",
+      "detail": "Current listings fit the target band, but universal-fit complaints and seasonality are material risks.",
+      "status": "warning"
+    },
+    {
+      "id": "product-scout-20260927T170410Z-decision",
+      "ts": "2026-09-27T17:04:10Z",
+      "agent_id": "product-scout",
+      "phase": "decision",
+      "title": "Leader retained; three challengers strengthened",
+      "detail": "Kit Muda Cero remains first; dog car seat cover moves to WATCH; packing cubes and windshield sunshade enter the top five pending supplier economics.",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T170420Z-done",
+      "ts": "2026-09-27T17:04:20Z",
+      "agent_id": "product-scout",
+      "phase": "done",
+      "title": "Product discovery cycle complete",
+      "detail": "Top candidates and handoffs updated.",
+      "status": "ok"
+    },
+    {
+      "id": "customer-voice-20260927T171040Z-start",
+      "ts": "2026-09-27T17:10:40Z",
+      "agent_id": "customer-voice",
+      "phase": "start",
+      "title": "Starting customer-voice mining cycle",
+      "detail": "Mining objections and return drivers for the current leader and top challengers.",
+      "status": "running"
+    },
+    {
+      "id": "customer-voice-20260927T171220Z-observation",
+      "ts": "2026-09-27T17:12:20Z",
+      "agent_id": "customer-voice",
+      "phase": "observation",
+      "title": "Kit Muda Cero promise is too broad",
+      "detail": "Slicker suitability varies by coat and technique and reusable rollers have surface limitations; the offer should explain which tool is for which coat or textile.",
+      "status": "warning"
+    },
+    {
+      "id": "customer-voice-20260927T171315Z-observation",
+      "ts": "2026-09-27T17:13:15Z",
+      "agent_id": "customer-voice",
+      "phase": "observation",
+      "title": "Dog-car-cover return risks concentrated in fit and durability",
+      "detail": "Vehicle fit, clips, zippers, waterproof backing and sliding are the main quality risks to gate at sourcing.",
+      "status": "warning"
+    },
+    {
+      "id": "customer-voice-20260927T171405Z-observation",
+      "ts": "2026-09-27T17:14:05Z",
+      "agent_id": "customer-voice",
+      "phase": "observation",
+      "title": "Sunshade convenience wins, fit and handle durability lose",
+      "detail": "Compact fast deployment is the desired outcome; sizing and structural durability are the key objections.",
+      "status": "ok"
+    },
+    {
+      "id": "customer-voice-20260927T171445Z-decision",
+      "ts": "2026-09-27T17:14:45Z",
+      "agent_id": "customer-voice",
+      "phase": "decision",
+      "title": "Tighten Kit Muda Cero positioning",
+      "detail": "Recommend a coat and surface specific 3-step routine and remove universal-surface implications from copy.",
+      "status": "ok"
+    },
+    {
+      "id": "customer-voice-20260927T171500Z-done",
+      "ts": "2026-09-27T17:15:00Z",
+      "agent_id": "customer-voice",
+      "phase": "done",
+      "title": "Customer Voice cycle complete",
+      "detail": "Five high-impact insights persisted and handed off.",
+      "status": "ok"
+    },
+    {
+      "id": "creative-offer-20260927T172939Z-start",
+      "ts": "2026-09-27T17:29:39Z",
+      "agent_id": "creative-offer",
+      "phase": "start",
+      "title": "Starting multi-SKU offer cycle",
+      "detail": "Synthesizing current product, customer voice, supplier and competitor handoffs into a coherent catalogue structure.",
+      "status": "running"
+    },
+    {
+      "id": "creative-offer-20260927T173040Z-decision",
+      "ts": "2026-09-27T17:30:40Z",
+      "agent_id": "creative-offer",
+      "phase": "decision",
+      "title": "Three job-led collections selected",
+      "detail": "Portfolio organized as Mascotas en casa, Mascotas en movimiento, and Viaje y coche.",
+      "status": "ok"
+    },
+    {
+      "id": "creative-offer-20260927T173120Z-decision",
+      "ts": "2026-09-27T17:31:20Z",
+      "agent_id": "creative-offer",
+      "phase": "decision",
+      "title": "Muda Cero price-test order raised",
+      "detail": "Test 39.90 EUR first, then 34.90 EUR; 29.90 EUR remains acquisition-only pending Finance.",
+      "status": "ok"
+    },
+    {
+      "id": "creative-offer-20260927T173200Z-decision",
+      "ts": "2026-09-27T17:32:00Z",
+      "agent_id": "creative-offer",
+      "phase": "decision",
+      "title": "Second HERO narrowed",
+      "detail": "Only a differentiated hard-bottom or backseat-extender cover should advance as second HERO candidate.",
+      "status": "ok"
+    },
+    {
+      "id": "creative-offer-20260927T173245Z-artifact",
+      "ts": "2026-09-27T17:32:45Z",
+      "agent_id": "creative-offer",
+      "phase": "artifact",
+      "title": "Merchandising map v1 created",
+      "detail": "Roles, collections, price tests, creative direction and downstream handoffs are defined.",
+      "artifact_path": "control-room/artifacts/creative-offer/merchandising-map-v1.md",
+      "status": "ok"
+    },
+    {
+      "id": "creative-offer-20260927T173300Z-done",
+      "ts": "2026-09-27T17:33:00Z",
+      "agent_id": "creative-offer",
+      "phase": "done",
+      "title": "Creative & Offer cycle complete",
+      "detail": "Material catalogue architecture and pricing changes persisted for downstream agents.",
+      "status": "ok"
+    },
+    {
+      "id": "finance-profit-20260927T173500Z-start",
+      "ts": "2026-09-27T17:35:00Z",
+      "agent_id": "finance-profit",
+      "phase": "start",
+      "title": "Running finance gate",
+      "detail": "Using verified component costs and current competitor price bands; unknown costs remain explicit.",
+      "status": "running"
+    },
+    {
+      "id": "finance-profit-20260927T173501Z-decision",
+      "ts": "2026-09-27T17:35:00Z",
+      "agent_id": "finance-profit",
+      "phase": "decision",
+      "title": "39.90 EUR is finance-preferred Muda Cero test",
+      "detail": "At a 50% pre-ad contribution target on ex-VAT revenue, total non-ad variable costs must stay <=16.49 EUR/order; 8.49 EUR headroom remains after the two verified components.",
+      "status": "ok"
+    },
+    {
+      "id": "finance-profit-20260927T173502Z-warning",
+      "ts": "2026-09-27T17:35:00Z",
+      "agent_id": "finance-profit",
+      "phase": "decision",
+      "title": "29.90 EUR is too tight for default paid acquisition",
+      "detail": "At the same 50% target, only 4.36 EUR remains for roller + shipping + fees + returns after the two verified components.",
+      "status": "warning"
+    },
+    {
+      "id": "finance-profit-20260927T173503Z-done",
+      "ts": "2026-09-27T17:35:00Z",
+      "agent_id": "finance-profit",
+      "phase": "done",
+      "title": "Finance gate complete",
+      "detail": "Kit Muda Cero remains WATCH leaning GO at 39.90 EUR pending full non-ad variable-cost verification.",
+      "status": "ok"
+    }
   ]
 }

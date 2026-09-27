@@ -2,10 +2,126 @@
   "id": "finance-profit",
   "name": "Finance & Profit",
   "status": "waiting",
-  "last_run": null,
+  "last_run": "2026-09-27T17:35:00Z",
   "focus": "Break-even CAC, ROAS, contribution margin and profitability",
-  "summary": "Waiting for first finance cycle",
-  "blocker": null,
-  "progress": 10,
-  "events": []
+  "summary": "Kit Muda Cero is WATCH leaning GO at 39.90 EUR. Exact margin is pending because reusable roller landed cost, shipping, payment/platform fees and return reserve are not verified. 29.90 EUR is too tight for a 50% pre-ad contribution target unless sourcing improves materially.",
+  "blocker": "Need verified full-kit non-ad variable costs: reusable roller EU landed cost/SLA, shipping, fees and return reserve.",
+  "progress": 68,
+  "tax_basis": {
+    "mainland_spain_hypothesis": "Retail modeled VAT-inclusive at 21%; revenue ex-VAT = retail/1.21.",
+    "canary_note": "Canary sales require separate IGIC/import treatment and are excluded from this cycle."
+  },
+  "verified_inputs": {
+    "grooming_glove_eur": 2.57,
+    "self_cleaning_slicker_eur": 5.43,
+    "confirmed_component_subtotal_eur": 8,
+    "reusable_roller": "WATCH listing 6.73 USD; EU fulfillment and EUR landed cost unverified",
+    "shipping": "PENDING",
+    "payment_platform_fees": "PENDING",
+    "return_refund_reserve": "PENDING"
+  },
+  "thresholds": {
+    "GO": "pre-ad contribution margin >=50% of ex-VAT revenue",
+    "WATCH": "40-49.9% or key costs pending",
+    "NO_GO": "<40% unless a non-paid acquisition case justifies an exception"
+  },
+  "price_models": [
+    {
+      "retail_eur": 29.9,
+      "revenue_ex_vat_eur": 24.71,
+      "max_non_ad_cost_at_50pct_cm_eur": 12.36,
+      "headroom_after_verified_8eur_eur": 4.36,
+      "break_even_cac_at_50pct_cm_eur": 12.36,
+      "break_even_roas_net": 2,
+      "break_even_roas_gross_checkout": 2.42,
+      "decision": "WATCH / likely reject as primary paid-traffic price"
+    },
+    {
+      "retail_eur": 34.9,
+      "revenue_ex_vat_eur": 28.84,
+      "max_non_ad_cost_at_50pct_cm_eur": 14.42,
+      "headroom_after_verified_8eur_eur": 6.42,
+      "break_even_cac_at_50pct_cm_eur": 14.42,
+      "break_even_roas_net": 2,
+      "break_even_roas_gross_checkout": 2.42,
+      "decision": "WATCH"
+    },
+    {
+      "retail_eur": 39.9,
+      "revenue_ex_vat_eur": 32.98,
+      "max_non_ad_cost_at_50pct_cm_eur": 16.49,
+      "headroom_after_verified_8eur_eur": 8.49,
+      "break_even_cac_at_50pct_cm_eur": 16.49,
+      "break_even_roas_net": 2,
+      "break_even_roas_gross_checkout": 2.42,
+      "decision": "WATCH leaning GO"
+    }
+  ],
+  "scenario_ranges": {
+    "explanation": "Unknown costs are not estimated. Instead, 40/50/60% pre-ad contribution targets define allowable total non-ad variable-cost ceilings.",
+    "at_39_90": {
+      "conservative_40pct_cm": {
+        "max_non_ad_cost_eur": 19.79,
+        "break_even_cac_eur": 13.19,
+        "gross_checkout_break_even_roas": 3.03
+      },
+      "base_50pct_cm": {
+        "max_non_ad_cost_eur": 16.49,
+        "break_even_cac_eur": 16.49,
+        "gross_checkout_break_even_roas": 2.42
+      },
+      "aggressive_60pct_cm": {
+        "max_non_ad_cost_eur": 13.19,
+        "break_even_cac_eur": 19.79,
+        "gross_checkout_break_even_roas": 2.02
+      }
+    }
+  },
+  "sensitivity": [
+    "Each additional 1 EUR of variable cost reduces break-even CAC by 1 EUR.",
+    "At 39.90 EUR, each extra 1 EUR variable cost reduces contribution margin by about 3.0 percentage points of ex-VAT revenue.",
+    "At 34.90 EUR, each extra 1 EUR reduces it by about 3.5 points.",
+    "At 29.90 EUR, each extra 1 EUR reduces it by about 4.0 points."
+  ],
+  "candidate_decisions": [
+    {
+      "candidate": "Kit Muda Cero",
+      "decision": "WATCH leaning GO at 39.90 EUR",
+      "gate": "Verify total non-ad variable costs <=16.49 EUR/order to clear 50% contribution target."
+    },
+    {
+      "candidate": "Dog car seat cover / hard-bottom extender",
+      "decision": "PENDING",
+      "gate": "No verified supplier cost yet."
+    },
+    {
+      "candidate": "Compression packing cubes",
+      "decision": "PENDING / WATCH",
+      "gate": "No verified supplier cost and category saturation is high."
+    }
+  ],
+  "handoff": {
+    "orchestrator": [
+      "Keep Kit Muda Cero leader; 39.90 EUR is the finance-preferred test price.",
+      "Do not mark GO until verified total non-ad variable costs are <=16.49 EUR/order."
+    ],
+    "creative_offer": [
+      "Prepare 39.90 EUR primary and 34.90 EUR secondary; retain 29.90 EUR only as a deliberate lower-margin experiment."
+    ],
+    "supplier_margin": [
+      "Priority missing inputs: exact EUR roller landed cost/SLA and full-kit shipping quote."
+    ]
+  },
+  "events": [
+    {
+      "ts": "2026-09-27T17:35:00Z",
+      "title": "Finance gate completed",
+      "detail": "39.90 EUR is preferred pending full variable-cost verification."
+    },
+    {
+      "ts": "2026-09-27T17:35:00Z",
+      "title": "29.90 EUR flagged tight",
+      "detail": "Only 4.36 EUR remains after the two verified components at a 50% contribution target."
+    }
+  ]
 }
