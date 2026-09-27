@@ -102,12 +102,12 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 
 1. Deploy the private beta on Render Free after entering `BETA_USERNAME` and `BETA_PASSWORD`; then verify `/health`, `/start`, `/demo`, CSV/JSON reconciliation and saved-history behavior. No Render connector is available in this workspace, so this account-bound step must be completed in the Render dashboard. Render Free storage is ephemeral and should not be used for durable customer history.
 2. Cent-safe Decimal pricing and independent arithmetic test oracle; keep event evidence distinct from estimated impact.
-2. Invoice-total and credit-ledger import plus `INVOICE_MISMATCH` / `CREDIT_MISMATCH` checks that avoid double-counting event exposure.
-3. Effective-dated price catalogs and `PRICING_DRIFT`; add volume/graduated tier and billing-boundary fixtures.
-4. User-adjustable field mapping / preflight for unknown JSON and CSV schemas.
-5. Connector adapter seam and delayed re-check window for Stripe's asynchronous meter summaries; then evaluate Lago export before any credentials or OAuth.
-6. Durable history, tenant isolation and credential handling only after a design partner validates ongoing monitoring.
-7. Pricing validation: ask prospects to quantify existing month-end reconciliation time, missed-usage frequency, invoice disputes, and acceptable recovery fee.
+3. Invoice-total and credit-ledger import plus `INVOICE_MISMATCH` / `CREDIT_MISMATCH` checks that avoid double-counting event exposure.
+4. Effective-dated price catalogs and `PRICING_DRIFT`; add volume/graduated tier and billing-boundary fixtures.
+5. User-adjustable field mapping / preflight for unknown JSON and CSV schemas.
+6. Connector adapter seam and delayed re-check window for Stripe's asynchronous meter summaries; then evaluate Lago export before any credentials or OAuth.
+7. Durable history, tenant isolation and credential handling only after a design partner validates ongoing monitoring.
+8. Pricing validation: ask prospects to quantify existing month-end reconciliation time, missed-usage frequency, invoice disputes, and acceptable recovery fee.
 
 ## Decisions
 
