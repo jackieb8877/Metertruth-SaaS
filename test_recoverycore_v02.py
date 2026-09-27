@@ -1,6 +1,6 @@
 import unittest
 from copy import deepcopy
-from recoverycore_v02 import DEFAULT_CONFIG, price_for_quantity, reconcile
+from recoverycore_v02 import DEFAULT_CONFIG, price_for_quantity, reconcile, round_money
 
 
 def row(event_id, customer, ts, qty, metric="api", **extra):
@@ -49,6 +49,33 @@ class RecoveryCoreV02Tests(unittest.TestCase):
         self.assertEqual(codes_by_type["DUPLICATE"], "DUPLICATE_USAGE")
         self.assertEqual(codes_by_type["ORPHAN_METERED"], "ORPHAN_METERED_EVENT")
         self.assertEqual(codes_by_type["LATE_EVENT"], "LATE_EVENT")
+
+    def test_decimal_quantity_sum_avoids_false_mismatch(self):
+        raw = [row("e1", "c1", "2026-09-01T00:00:00Z", "0.3")]
+        metered = [
+            row("e1", "c1", "2026-09-01T00:00:01Z", "0.1"),
+            row("e1", "c1", "2026-09-01T00:00:02Z", "0.2"),
+        ]
+        out = reconcile(raw, metered, self.cfg())
+        self.assertTrue(any(x["type"] == "DUPLICATE" for x in out["findings"]))
+        self.assertFalse(any(x["type"] == "WRONG_QUANTITY" for x in out["findings"]))
+
+    def test_financial_rounding_is_decimal_half_up(self):
+        self.assertEqual(round_money("0.125"), 0.13)
+        self.assertEqual(round_money("-0.125"), -0.13)
+        raw = [row("e1", "c1", "2026-09-01T00:00:00Z", 1)]
+        out = reconcile(raw, [row("other", "c1", "2026-09-01T00:00:01Z", 1)],
+                        self.cfg(price_per_unit="0.125"))
+        missing = next(x for x in out["findings"] if x["type"] == "MISSING")
+        self.assertEqual(missing["impact_eur"], 0.13)
+        self.assertEqual(out["summary"]["potential_underbilling_eur"], 0.13)
+
+    def test_tiered_decimal_arithmetic_at_boundary(self):
+        cfg = self.cfg(pricing={"api": {"tiers": [
+            {"up_to": "0.3", "unit_price": "0.10"},
+            {"up_to": None, "unit_price": "0.20"},
+        ]}})
+        self.assertEqual(price_for_quantity("api", "0.4", cfg), 0.05)
 
     def test_duplicate_does_not_double_count_quantity(self):
         r = [row("e1", "c1", "2026-09-01T00:00:00Z", 10)]

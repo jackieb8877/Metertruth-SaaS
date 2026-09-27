@@ -14,6 +14,7 @@ import sys
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -91,15 +92,28 @@ def parse_time(value: Any) -> datetime | None:
         return None
 
 
-def to_float(value: Any) -> float | None:
+CENT = Decimal("0.01")
+ZERO = Decimal("0")
+
+
+def to_decimal(value: Any) -> Decimal | None:
     try:
-        return float(value)
-    except (TypeError, ValueError):
+        number = Decimal(str(value))
+    except (InvalidOperation, TypeError, ValueError):
         return None
+    return number if number.is_finite() else None
 
 
-def round_money(v: float) -> float:
-    return round(v + 0.0, 2)
+def _required_decimal(value: Any, label: str) -> Decimal:
+    number = to_decimal(value)
+    if number is None:
+        raise ValueError(f"{label} must be a finite number")
+    return number
+
+
+def round_money(value: Any) -> float:
+    amount = _required_decimal(value, "Money amount")
+    return float(amount.quantize(CENT, rounding=ROUND_HALF_UP))
 
 
 def metric_name(row: dict[str, str], mapping: dict[str, str]) -> str:
@@ -107,7 +121,7 @@ def metric_name(row: dict[str, str], mapping: dict[str, str]) -> str:
     return str(row.get(col, "default") if col else "default") or "default"
 
 
-def price_for_quantity(metric: str, quantity: float, cfg: dict[str, Any]) -> float:
+def _price_amount(metric: str, quantity: Any, cfg: dict[str, Any]) -> Decimal:
     """Return total price for a quantity, supporting flat and graduated tiers.
 
     pricing config examples:
@@ -115,38 +129,51 @@ def price_for_quantity(metric: str, quantity: float, cfg: dict[str, Any]) -> flo
       {"tokens": {"tiers": [{"up_to": 1000, "unit_price": 0.01},
                               {"up_to": null, "unit_price": 0.005}]}}
     """
+    qty = _required_decimal(quantity, "Quantity")
     spec = (cfg.get("pricing") or {}).get(metric) or (cfg.get("pricing") or {}).get("default")
     if not spec:
-        return quantity * float(cfg.get("price_per_unit", 0.01))
+        return qty * _required_decimal(cfg.get("price_per_unit", 0.01), "Price per unit")
     if "unit_price" in spec:
-        return quantity * float(spec["unit_price"])
+        return qty * _required_decimal(spec["unit_price"], "Unit price")
     tiers = spec.get("tiers") or []
-    remaining = max(quantity, 0.0)
-    previous = 0.0
-    total = 0.0
+    remaining = max(qty, ZERO)
+    previous = ZERO
+    total = ZERO
     for tier in tiers:
         up_to = tier.get("up_to")
-        unit_price = float(tier["unit_price"])
+        unit_price = _required_decimal(tier["unit_price"], "Tier unit price")
         if up_to is None:
             units = remaining
         else:
-            cap = max(float(up_to) - previous, 0.0)
+            cap = max(_required_decimal(up_to, "Tier boundary") - previous, ZERO)
             units = min(remaining, cap)
         total += units * unit_price
         remaining -= units
         if up_to is not None:
-            previous = float(up_to)
+            previous = _required_decimal(up_to, "Tier boundary")
         if remaining <= 0:
             break
     if remaining > 0:
-        fallback = float(tiers[-1]["unit_price"]) if tiers else float(cfg.get("price_per_unit", 0.01))
+        fallback = (
+            _required_decimal(tiers[-1]["unit_price"], "Tier unit price")
+            if tiers else _required_decimal(cfg.get("price_per_unit", 0.01), "Price per unit")
+        )
         total += remaining * fallback
     return total
 
 
+def price_for_quantity(metric: str, quantity: float, cfg: dict[str, Any]) -> float:
+    """Float-compatible public wrapper around exact decimal pricing."""
+    return float(_price_amount(metric, quantity, cfg))
+
+
+def _delta_amount(metric: str, expected_qty: Any, actual_qty: Any, cfg: dict[str, Any]) -> Decimal:
+    return _price_amount(metric, expected_qty, cfg) - _price_amount(metric, actual_qty, cfg)
+
+
 def delta_value(metric: str, expected_qty: float, actual_qty: float, cfg: dict[str, Any]) -> float:
     """Economic delta without double-counting: expected total minus actual total."""
-    return price_for_quantity(metric, expected_qty, cfg) - price_for_quantity(metric, actual_qty, cfg)
+    return float(_delta_amount(metric, expected_qty, actual_qty, cfg))
 
 
 def period_bounds(cfg: dict[str, Any]) -> tuple[datetime | None, datetime | None]:
@@ -194,7 +221,7 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
 
     issues: list[dict[str, Any]] = []
     start, end = period_bounds(cfg)
-    tolerance = float(cfg.get("quantity_tolerance", 0.0))
+    tolerance = _required_decimal(cfg.get("quantity_tolerance", 0.0), "Quantity tolerance")
     late_hours = float(cfg.get("late_hours", 24))
 
     # Keep duplicates in raw visible rather than silently overwriting.
@@ -230,7 +257,7 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
     for eid, raw_rows in raw_by_id.items():
         r = raw_rows[0]
         cust = str(r[rm["customer_id"]])
-        rq = to_float(r[rm["quantity"]])
+        rq = to_decimal(r[rm["quantity"]])
         raw_metric = metric_name(r, rm)
         rt = parse_time(r[rm["timestamp"]])
         expected_ev = evidence(r, rm)
@@ -254,7 +281,7 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
                                   expected=expected_ev, actual=[]))
 
         if not ms:
-            impact = price_for_quantity(raw_metric, rq, cfg)
+            impact = _price_amount(raw_metric, rq, cfg)
             issues.append(finding(event_id=eid, customer=cust, kind="MISSING", impact=impact,
                                   status="CONFIRMED", detail="Source event has no observed/metered counterpart",
                                   expected=expected_ev, actual=[]))
@@ -263,7 +290,7 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
         valid_ms: list[tuple[dict[str, str], float, datetime]] = []
         malformed = False
         for m in ms:
-            mq = to_float(m[mm["quantity"]])
+            mq = to_decimal(m[mm["quantity"]])
             mt = parse_time(m[mm["timestamp"]])
             if mq is None or mt is None:
                 malformed = True
@@ -293,7 +320,7 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
 
         total_mq = sum(x[1] for x in valid_ms)
         # One economic delta per event prevents duplicate + quantity mismatch double counting.
-        economic_delta = delta_value(raw_metric, rq, total_mq, cfg)
+        economic_delta = _delta_amount(raw_metric, rq, total_mq, cfg)
 
         if len(valid_ms) > 1:
             issues.append(finding(event_id=eid, customer=cust, kind="DUPLICATE", impact=economic_delta,
@@ -317,13 +344,13 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
     for eid, ms in metered_by_id.items():
         if eid in raw_by_id:
             continue
-        valid_quantities = [to_float(x[mm["quantity"]]) for x in ms]
+        valid_quantities = [to_decimal(x[mm["quantity"]]) for x in ms]
         valid_quantities = [q for q in valid_quantities if q is not None]
         first = ms[0]
         metric = metric_name(first, mm)
         qty = sum(valid_quantities)
         cust = str(first[mm["customer_id"]])
-        impact = -price_for_quantity(metric, qty, cfg)
+        impact = -_price_amount(metric, qty, cfg)
         status = "CONFIRMED" if len(valid_quantities) == len(ms) else "UNVERIFIABLE"
         issues.append(finding(event_id=eid, customer=cust, kind="ORPHAN_METERED", impact=impact if status == "CONFIRMED" else 0,
                               status=status, detail="Observed/metered event has no source counterpart",
@@ -333,8 +360,9 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
     # Economic impact appears exactly once per event among economic finding types.
     economic_types = {"MISSING", "DUPLICATE", "WRONG_QUANTITY", "ORPHAN_METERED"}
     economic = [x for x in confirmed if x["type"] in economic_types]
-    under = sum(max(x["impact_eur"], 0) for x in economic)
-    over = sum(max(-x["impact_eur"], 0) for x in economic)
+    impacts = [_required_decimal(x["impact_eur"], "Finding impact") for x in economic]
+    under = sum((max(amount, ZERO) for amount in impacts), ZERO)
+    over = sum((max(-amount, ZERO) for amount in impacts), ZERO)
     periods = int(cfg.get("annualization_periods", 12))
 
     return {

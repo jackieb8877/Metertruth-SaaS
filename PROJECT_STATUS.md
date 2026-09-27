@@ -1,10 +1,13 @@
 # MeterTruth — live project record
 
 **Updated:** 2026-09-27 (Atlantic/Canary)  
-**Candidate:** v0.7 private beta (canonical finding-code update)  
-**Spend:** €0. Test dependencies were installed only in a temporary environment; no paid services or campaigns used.  
-**Repository:** `jackieb8877/Metertruth-SaaS`, `main`, commit `1f34acde3af2b3f86ff95b686b86065bc9bec169`.  
-**Deployment:** Vercel check reports success for this commit. The owner confirmed the hosted beta prompted for and accepted the configured credentials.
+**Candidate:** v0.7 private beta (canonical finding-code and Decimal-arithmetic updates)
+
+**Spend:** €0. Test dependencies were installed only in a temporary environment; no paid services or campaigns used.
+
+**Repository:** `jackieb8877/Metertruth-SaaS`, `main`.
+
+**Deployment:** GitHub reports Vercel deployment checks; the owner confirmed the hosted beta prompted for and accepted the configured credentials.
 
 ## Product and positioning
 
@@ -45,7 +48,7 @@ Local source rows are passed in memory into the core. In history, a report may i
 | Schema inference and event-level reconciliation | Implemented |
 | Missing, duplicate, wrong quantity, late, orphan | Implemented |
 | Customer/metric mismatch and idempotency-collision signals | Implemented |
-| Flat and tiered configured prices | Implemented in RecoveryCore v0.2 |
+| Flat and tiered configured prices | Event-level core uses Decimal; Stripe aggregate bridge still needs conversion |
 | Evidence and recovery recommendation | Implemented as review candidates |
 | Stable machine-readable codes for implemented findings | Implemented; legacy `type` values retained for existing consumers |
 | Revenue Leak Report | Implemented; reopenable from history |
@@ -59,19 +62,18 @@ Local source rows are passed in memory into the core. In history, a report may i
 
 ## Verification record
 
-- 56 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history and canonical finding-code tests.
+- 59 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity and rounding tests.
 - Python compile check passes for app, import layer, history, RecoveryCore and connector modules.
-- Previous baseline: 1,000,000 raw + 1,000,000 metered clean events reconciled in 11.181 s; see the fresh continuation benchmark below. These are local synthetic runs, not a production throughput promise.
-- Reproducible 100,000-event adversarial run (`python benchmark_recoverycore.py 100000`): 100,099 metered rows, 2,198 finding rows, €100 underbilling and €9.90 overbilling at €0.001/unit. The economic summary is counted once per event in RecoveryCore v0.2.
 - An earlier v0.6 project note recorded 44 passing tests; v0.7 added tests on top of that baseline.
 
 ## 2026-09-27 continuation check
 
 - Owner confirmed the deployed Vercel URL prompted for and accepted the configured beta credentials. This verifies the user-visible shared beta gate; it does not verify tenant isolation or persistence.
-- The test dependencies installed from `requirements-dev.txt` into a temporary local virtual environment at €0. The full suite passes: 56/56.
-- Fresh local synthetic benchmarks: 100,000 adversarial raw events + 100,099 metered rows in 1.017s with 2,198 finding rows; €100 underbilling and €9.90 overbilling. One million clean raw + metered events reconciled in 11.82s with 0 findings and €0 exposure. These are workspace results, not production throughput guarantees.
-- RecoveryCore findings now include a canonical machine-readable `code` while preserving the existing `type` field for compatibility. `MISSING`, `DUPLICATE` and `ORPHAN_METERED` map to the product codes `MISSING_USAGE`, `DUPLICATE_USAGE` and `ORPHAN_METERED_EVENT`.
-- GitHub `main` commit `1f34acde3af2b3f86ff95b686b86065bc9bec169` has a successful Vercel status check. The Work browser could not independently load the hosted URL in this check; runtime behavior beyond the owner's login test remains unverified.
+- The test dependencies installed from `requirements-dev.txt` into a temporary local virtual environment at €0. The full suite passes: 59/59.
+- Fresh local synthetic benchmarks: 100,000 adversarial raw events + 100,099 metered rows in 1.357s with 2,198 finding rows; €100 underbilling and €9.90 overbilling. One million clean raw + metered events reconciled in 15.525s with 0 findings and €0 exposure. These are workspace results, not production throughput guarantees.
+- RecoveryCore findings include a canonical machine-readable `code` while preserving the existing `type` field for compatibility. `MISSING`, `DUPLICATE` and `ORPHAN_METERED` map to `MISSING_USAGE`, `DUPLICATE_USAGE` and `ORPHAN_METERED_EVENT`.
+- Event-level reconciliation now parses quantities and rates as Decimal and uses half-up cent rounding. Tests cover `0.1 + 0.2`, decimal tier boundaries, and positive/negative half-cent rounding. Stripe aggregate and multi-customer totals still use floats; they remain a finance-accuracy risk.
+- The canonical-code source commit had a successful Vercel status check. The Work browser could not independently load the hosted URL in this check; runtime behavior beyond the owner's login test remains unverified.
 
 ## Competitive review and attack plan
 
@@ -100,7 +102,7 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 
 ## Risks / findings
 
-1. Monetary calculations in RecoveryCore v0.2 use binary floats. Existing event-level tests pass, but exact cent-safe tier/credit/invoice arithmetic is still required before finance-grade use.
+1. Stripe aggregate and multi-customer monetary calculations still use binary floats and Python's default rounding. Convert those paths to Decimal, then independently verify large rollups and currency rounding before finance-grade use.
 2. Invoice, credit, and effective-date price reconciliation are missing and remain the most material product gaps.
 3. Stripe meter summaries are asynchronous and aggregate-level; a just-arrived usage event may not yet appear. A premature scan can create a false missing signal.
 4. Vercel/serverless local storage is ephemeral; current history is only a tester convenience, not persistent SaaS storage. Render Free also has ephemeral storage and sleeps.
@@ -108,7 +110,7 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 
 ## Next backlog, ordered
 
-1. Cent-safe Decimal pricing and independent arithmetic test oracle; keep event evidence distinct from estimated impact.
+1. Convert Stripe aggregate and multi-customer rollups to Decimal and add an independent arithmetic oracle; keep event evidence distinct from estimated impact.
 2. Invoice-total and credit-ledger import plus `INVOICE_MISMATCH` / `CREDIT_MISMATCH` checks that avoid double-counting event exposure.
 3. Effective-dated price catalogs and `PRICING_DRIFT`; add volume/graduated tier and billing-boundary fixtures.
 4. User-adjustable field mapping / preflight for unknown JSON and CSV schemas.
