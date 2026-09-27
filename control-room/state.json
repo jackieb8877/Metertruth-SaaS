@@ -1,1 +1,195 @@
-{"updated_at":"2026-09-27T16:57:00Z","project":"Project Rich — Dropshipping","current_goal":"Validate Kit Muda Cero for launch","next_action":"Complete finance and fulfillment checks before locking price","global_progress":39,"agents":[{"id":"product-scout","health":"fresh"},{"id":"store-builder","health":"scheduled"},{"id":"customer-voice","health":"scheduled"},{"id":"supplier-margin","health":"blocked"},{"id":"ads-intelligence","health":"scheduled"},{"id":"competitor-watch","health":"scheduled"},{"id":"creative-offer","health":"fresh"},{"id":"finance-profit","health":"scheduled"},{"id":"seo-catalog","health":"fresh"},{"id":"compliance-risk","health":"blocked"},{"id":"launch-qa","health":"blocked"},{"id":"orchestrator","health":"fresh"}],"shortlist":[{"name":"Kit Muda Cero","status":"LEADER"},{"name":"Reusable pet-hair roller","status":"WATCH"},{"name":"Pet grooming vacuum","status":"RESERVE"}],"timeline":[{"time":"2026-09-27T16:57:00Z","agent":"Orchestrator","title":"Fleet consolidated","detail":"Leader retained; launch remains gated by economics and fulfillment."}],"needs_you":[],"blocker":{"title":"Launch evidence gate","detail":"Verify economics and fulfillment before launch."}}
+{
+  "updated_at": "2026-09-27T17:00:20Z",
+  "project": "Project Rich — Dropshipping",
+  "current_goal": "Turn Kit Muda Cero into a launchable offer with verified economics, fulfillment and compliance.",
+  "next_action": "Finance should model the 3-piece offer at €29.90, €34.90 and €39.90 while sourcing verifies one coherent Spain/UE fulfillment path.",
+  "global_progress": 39,
+  "agents": [
+    {
+      "id": "product-scout",
+      "name": "Product Scout",
+      "health": "fresh",
+      "status": "waiting",
+      "last_run": "2026-09-27T16:49:00Z",
+      "focus": "Discover products with real EU/Spain potential",
+      "summary": "No new candidate beat the current leader.",
+      "blocker": null,
+      "progress": 62
+    },
+    {
+      "id": "store-builder",
+      "name": "Store Builder",
+      "health": "scheduled",
+      "status": "waiting",
+      "last_run": null,
+      "focus": "Build premium storefront, product pages and conversion UX",
+      "summary": "Waiting for validated hero product before production build.",
+      "blocker": "Needs validated hero product before production build",
+      "progress": 10
+    },
+    {
+      "id": "customer-voice",
+      "name": "Customer Voice",
+      "health": "scheduled",
+      "status": "waiting",
+      "last_run": null,
+      "focus": "Mine reviews, complaints, objections and unmet needs",
+      "summary": "First review-mining cycle pending.",
+      "blocker": null,
+      "progress": 10
+    },
+    {
+      "id": "supplier-margin",
+      "name": "Supplier & Margin",
+      "health": "blocked",
+      "status": "active",
+      "last_run": "2026-09-27T16:14:13Z",
+      "focus": "EU sourcing, landed cost and fulfillment",
+      "summary": "EU sourcing and landed-cost validation in progress.",
+      "blocker": "Verified blind dropshipping + landed cost",
+      "progress": 84
+    },
+    {
+      "id": "ads-intelligence",
+      "name": "Ads Intelligence",
+      "health": "scheduled",
+      "status": "waiting",
+      "last_run": null,
+      "focus": "Track winning ad angles, creatives and offers",
+      "summary": "First ad-intelligence cycle pending.",
+      "blocker": null,
+      "progress": 10
+    },
+    {
+      "id": "competitor-watch",
+      "name": "Competitor Watch",
+      "health": "scheduled",
+      "status": "waiting",
+      "last_run": null,
+      "focus": "Monitor competitors, saturation and creative angles",
+      "summary": "First hourly competitor cycle pending.",
+      "blocker": null,
+      "progress": 20
+    },
+    {
+      "id": "creative-offer",
+      "name": "Creative & Offer",
+      "health": "fresh",
+      "status": "active",
+      "last_run": "2026-09-27T16:29:13Z",
+      "focus": "Offer, hooks, bundles, UGC and CRO",
+      "summary": "Kit Muda Cero remains the strongest offer; price is not locked.",
+      "blocker": null,
+      "progress": 93
+    },
+    {
+      "id": "finance-profit",
+      "name": "Finance & Profit",
+      "health": "scheduled",
+      "status": "waiting",
+      "last_run": null,
+      "focus": "Break-even CAC, ROAS, contribution margin and profitability",
+      "summary": "First finance cycle pending.",
+      "blocker": null,
+      "progress": 10
+    },
+    {
+      "id": "seo-catalog",
+      "name": "SEO & Catalog",
+      "health": "fresh",
+      "status": "active",
+      "last_run": "2026-09-27T16:24:10Z",
+      "focus": "Commercial SEO and product merchandising",
+      "summary": "SEO cycle completed; awaiting next pass.",
+      "blocker": null,
+      "progress": 38
+    },
+    {
+      "id": "compliance-risk",
+      "name": "Compliance & Risk",
+      "health": "blocked",
+      "status": "blocked",
+      "last_run": "2026-09-27T16:38:04Z",
+      "focus": "Gate Spain/EU launch readiness",
+      "summary": "Electrical grooming vacuum stays reserve; launch needs traceability and safety data.",
+      "blocker": "Compliance package and economic-operator chain must be verified before launch",
+      "progress": 58
+    },
+    {
+      "id": "launch-qa",
+      "name": "Launch QA",
+      "health": "blocked",
+      "status": "blocked",
+      "last_run": "2026-09-27T16:50:42Z",
+      "focus": "Pre-launch QA",
+      "summary": "Launch not ready: storefront and operational inputs are incomplete.",
+      "blocker": "Supplier economics, staging storefront and compliance data must be completed before launch",
+      "progress": 24
+    },
+    {
+      "id": "orchestrator",
+      "name": "Project Rich Orchestrator",
+      "health": "fresh",
+      "status": "active",
+      "last_run": "2026-09-27T17:00:20Z",
+      "focus": "Convert the leader into a launchable, margin-safe offer",
+      "summary": "Fleet consolidated; finance and fulfillment are the active gates.",
+      "blocker": null,
+      "progress": 46
+    }
+  ],
+  "shortlist": [
+    {
+      "name": "Kit Muda Cero",
+      "status": "LEADER",
+      "offer": "3-piece system; test €29.90 / €34.90 / €39.90",
+      "strength": "High — full pet-to-home problem coverage",
+      "next": "Finance gate + coherent fulfillment path"
+    },
+    {
+      "name": "Reusable pet-hair roller",
+      "status": "WATCH",
+      "offer": "Standalone or bundle component",
+      "strength": "Strong visual cleaning utility",
+      "next": "Verify Spain/UE supplier location, SLA and traceability"
+    },
+    {
+      "name": "Pet grooming vacuum",
+      "status": "RESERVE",
+      "offer": "TBD",
+      "strength": "Visual / viral",
+      "next": "Keep reserve until compliance package is verified"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-27T17:00:20Z",
+      "agent": "Orchestrator",
+      "title": "Sourcing uncertainty reduced",
+      "detail": "Public catalog checks found explicit dropship listings for two core bundle components; the reusable roller still needs Spain/UE fulfillment verification."
+    },
+    {
+      "time": "2026-09-27T16:50:42Z",
+      "agent": "Launch QA",
+      "title": "Pre-launch blockers confirmed",
+      "detail": "Storefront and operational inputs are not yet launch-ready."
+    },
+    {
+      "time": "2026-09-27T16:49:00Z",
+      "agent": "Product Scout",
+      "title": "Leader retained",
+      "detail": "No newly scanned product beat Kit Muda Cero on combined criteria."
+    },
+    {
+      "time": "2026-09-27T16:38:04Z",
+      "agent": "Compliance & Risk",
+      "title": "Compliance gate raised",
+      "detail": "Electrical reserve product requires a verified EU conformity and economic-operator chain before launch."
+    }
+  ],
+  "needs_you": [],
+  "blocker": {
+    "title": "Finance + fulfillment gate",
+    "detail": "Do not lock the launch price or production checkout until landed cost, shipping SLA and traceability are verified."
+  }
+}

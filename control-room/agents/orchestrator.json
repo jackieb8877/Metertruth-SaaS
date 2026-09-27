@@ -1,11 +1,23 @@
 {
-  "id":"orchestrator",
-  "name":"Orchestrator",
-  "status":"active",
-  "last_run":"2026-09-27T16:56:30Z",
-  "focus":"Consolidate agent outputs",
-  "summary":"Cycle completed.",
-  "blocker":null,
-  "progress":46,
-  "events":[]
+  "id": "orchestrator",
+  "name": "Project Rich Orchestrator",
+  "status": "active",
+  "last_run": "2026-09-27T17:00:20Z",
+  "focus": "Convert Kit Muda Cero into a launchable, margin-safe offer",
+  "summary": "Kit Muda Cero remains leader. Sourcing uncertainty is lower because explicit dropship listings exist for two core components; the remaining gates are full landed cost, one coherent Spain/UE fulfillment path and traceability data.",
+  "blocker": null,
+  "progress": 46,
+  "next_action": "Finance models €29.90 / €34.90 / €39.90 and Supplier & Margin verifies a single-supplier or same-warehouse fulfillment path.",
+  "events": [
+    {
+      "time": "2026-09-27T17:00:20Z",
+      "title": "Consolidation complete",
+      "detail": "Leader retained; no human action required yet."
+    },
+    {
+      "time": "2026-09-27T17:00:20Z",
+      "title": "Supplier path improved",
+      "detail": "Two core components have explicit dropship listings; the third bundle component still needs Spain/UE SLA verification."
+    }
+  ]
 }
