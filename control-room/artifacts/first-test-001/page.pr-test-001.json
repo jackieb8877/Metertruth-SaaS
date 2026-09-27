@@ -1,0 +1,88 @@
+{
+  "sections": {
+    "pr_test_001": {
+      "type": "pr-product-story",
+      "settings": {
+        "product": "",
+        "heading_level": "h1",
+        "eyebrow": "rato. · cuidado del hogar con mascotas",
+        "heading": "Menos pelo en el sofá. Más rato juntos.",
+        "introduction": "<p>Retira pelos de ropa y tapicerías con un cepillo de doble cara. Después, introdúcelo en su base para recoger el pelo acumulado y prepararlo para el siguiente uso.</p>",
+        "delivery_note": "",
+        "video_description": "",
+        "media_verified": false,
+        "offer_verified": false,
+        "autoplay": false,
+        "publication_approved": false
+      },
+      "blocks": {
+        "textiles": {
+          "type": "benefit",
+          "settings": {
+            "title": "Para los textiles de cada día",
+            "text": "<p>Un cepillo para retirar pelo de ropa y tapicerías. Comprueba la compatibilidad con el tejido y sigue las instrucciones del fabricante.</p>",
+            "verified": false
+          }
+        },
+        "base": {
+          "type": "benefit",
+          "settings": {
+            "title": "El pelo recogido, en su base",
+            "text": "<p>Introduce el cepillo en su base autolimpiadora para recoger el pelo acumulado en su superficie.</p>",
+            "verified": false
+          }
+        },
+        "reuse": {
+          "type": "benefit",
+          "settings": {
+            "title": "Sin hojas adhesivas",
+            "text": "<p>Vuelve a utilizar el cepillo después de limpiarlo en su base y vaciar el compartimento.</p>",
+            "verified": false
+          }
+        },
+        "step_one": {
+          "type": "step",
+          "settings": {
+            "title": "1. Pasa el cepillo por el tejido",
+            "text": "<p>Utiliza el sentido de cepillado y las superficies indicadas por el fabricante. Prueba primero en una zona discreta.</p>",
+            "verified": false
+          }
+        },
+        "step_two": {
+          "type": "step",
+          "settings": {
+            "title": "2. Limpia el cepillo en su base",
+            "text": "<p>Introduce el cepillo en la base para retirar el pelo que ha quedado en las caras de limpieza.</p>",
+            "verified": false
+          }
+        },
+        "step_three": {
+          "type": "step",
+          "settings": {
+            "title": "3. Vacía el compartimento",
+            "text": "<p>Vacía los pelos recogidos siguiendo las instrucciones del fabricante y guarda el conjunto para el siguiente uso.</p>",
+            "verified": false
+          }
+        },
+        "faq_pet": {
+          "type": "faq",
+          "settings": {
+            "title": "¿Es para cepillar a mi perro o gato?",
+            "text": "<p>No. Esta propuesta corresponde a un quitapelos para ropa y tapicerías, no a un cepillo de aseo para utilizar directamente sobre el animal.</p>",
+            "verified": false
+          }
+        },
+        "faq_refills": {
+          "type": "faq",
+          "settings": {
+            "title": "¿Necesita hojas adhesivas de recambio?",
+            "text": "<p>El modelo descrito por el proveedor utiliza caras reutilizables y una base de limpieza, no hojas adhesivas.</p>",
+            "verified": false
+          }
+        }
+      },
+      "block_order": ["textiles", "base", "reuse", "step_one", "step_two", "step_three", "faq_pet", "faq_refills"]
+    }
+  },
+  "order": ["pr_test_001"]
+}
