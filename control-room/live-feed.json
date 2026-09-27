@@ -1,0 +1,74 @@
+{
+  "project": "Project Rich Dropshipping",
+  "updated_at": "2026-09-27T20:01:03Z",
+  "events": [
+    {
+      "ts": "2026-09-27T20:01:03Z",
+      "agent": "Product Scout",
+      "type": "material_catalog_advance",
+      "message": "Catálogo maestro inicializado. 23 candidatos totales; 21 PROMOTE/WATCH; 6 macro-categorías. Umbral scouting pre-lanzamiento alcanzado.",
+      "new_candidates": [
+        {
+          "id": "pet-dog-car-hammock",
+          "score": 84,
+          "decision": "WATCH"
+        },
+        {
+          "id": "travel-compression-packing-cubes",
+          "score": 83,
+          "decision": "WATCH"
+        },
+        {
+          "id": "home-under-sink-pullout-organizer",
+          "score": 79,
+          "decision": "WATCH"
+        },
+        {
+          "id": "travel-tech-pouch",
+          "score": 78,
+          "decision": "WATCH"
+        },
+        {
+          "id": "car-seatback-organizer-tray",
+          "score": 76,
+          "decision": "WATCH"
+        },
+        {
+          "id": "pet-manual-paw-cleaner",
+          "score": 72,
+          "decision": "WATCH"
+        },
+        {
+          "id": "outdoor-sandfree-beach-mat",
+          "score": 68,
+          "decision": "WATCH"
+        },
+        {
+          "id": "pet-premium-water-bottle",
+          "score": 67,
+          "decision": "WATCH"
+        },
+        {
+          "id": "travel-luggage-cup-holder",
+          "score": 61,
+          "decision": "KILL"
+        },
+        {
+          "id": "home-adjustable-drawer-dividers",
+          "score": 60,
+          "decision": "KILL"
+        }
+      ],
+      "key_findings": [
+        "Dog car hammock: retail UE ~€60 y CJ supplier listing $6.30 antes de shipping; EU warehouse no confirmado.",
+        "Compression packing cubes: retail UE €39.99–49.99; CJ 8-piece listing $2.27–4.62 antes de shipping; EU warehouse no confirmado.",
+        "Under-sink pull-out organizer: retail UE observado ~€45–81; fuerte before/after y ticket sano.",
+        "Tech pouch: retail UE observado ~€25–50; bajo riesgo y fuerte cross-sell con viaje."
+      ],
+      "blockers": [
+        "No hay supplier MOQ1 con stock UE confirmado todavía para los dos candidatos mejor puntuados.",
+        "El umbral 20 PROMOTE/WATCH es de scouting; no autoriza lanzamiento hasta validar landed cost, SLA, devoluciones y compliance."
+      ]
+    }
+  ]
+}
