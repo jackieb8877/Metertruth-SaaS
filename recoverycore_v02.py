@@ -14,9 +14,11 @@ import sys
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from decimal import Decimal
 from pathlib import Path
 from typing import Any, Iterable
+
+from money import ZERO, round_money, required_decimal, to_decimal
 
 ALIASES = {
     "event_id": ["event_id", "id", "usage_id", "request_id", "transaction_id", "event"],
@@ -92,30 +94,6 @@ def parse_time(value: Any) -> datetime | None:
         return None
 
 
-CENT = Decimal("0.01")
-ZERO = Decimal("0")
-
-
-def to_decimal(value: Any) -> Decimal | None:
-    try:
-        number = Decimal(str(value))
-    except (InvalidOperation, TypeError, ValueError):
-        return None
-    return number if number.is_finite() else None
-
-
-def _required_decimal(value: Any, label: str) -> Decimal:
-    number = to_decimal(value)
-    if number is None:
-        raise ValueError(f"{label} must be a finite number")
-    return number
-
-
-def round_money(value: Any) -> float:
-    amount = _required_decimal(value, "Money amount")
-    return float(amount.quantize(CENT, rounding=ROUND_HALF_UP))
-
-
 def metric_name(row: dict[str, str], mapping: dict[str, str]) -> str:
     col = mapping.get("metric")
     return str(row.get(col, "default") if col else "default") or "default"
@@ -129,34 +107,34 @@ def _price_amount(metric: str, quantity: Any, cfg: dict[str, Any]) -> Decimal:
       {"tokens": {"tiers": [{"up_to": 1000, "unit_price": 0.01},
                               {"up_to": null, "unit_price": 0.005}]}}
     """
-    qty = _required_decimal(quantity, "Quantity")
+    qty = required_decimal(quantity, "Quantity")
     spec = (cfg.get("pricing") or {}).get(metric) or (cfg.get("pricing") or {}).get("default")
     if not spec:
-        return qty * _required_decimal(cfg.get("price_per_unit", 0.01), "Price per unit")
+        return qty * required_decimal(cfg.get("price_per_unit", 0.01), "Price per unit")
     if "unit_price" in spec:
-        return qty * _required_decimal(spec["unit_price"], "Unit price")
+        return qty * required_decimal(spec["unit_price"], "Unit price")
     tiers = spec.get("tiers") or []
     remaining = max(qty, ZERO)
     previous = ZERO
     total = ZERO
     for tier in tiers:
         up_to = tier.get("up_to")
-        unit_price = _required_decimal(tier["unit_price"], "Tier unit price")
+        unit_price = required_decimal(tier["unit_price"], "Tier unit price")
         if up_to is None:
             units = remaining
         else:
-            cap = max(_required_decimal(up_to, "Tier boundary") - previous, ZERO)
+            cap = max(required_decimal(up_to, "Tier boundary") - previous, ZERO)
             units = min(remaining, cap)
         total += units * unit_price
         remaining -= units
         if up_to is not None:
-            previous = _required_decimal(up_to, "Tier boundary")
+            previous = required_decimal(up_to, "Tier boundary")
         if remaining <= 0:
             break
     if remaining > 0:
         fallback = (
-            _required_decimal(tiers[-1]["unit_price"], "Tier unit price")
-            if tiers else _required_decimal(cfg.get("price_per_unit", 0.01), "Price per unit")
+            required_decimal(tiers[-1]["unit_price"], "Tier unit price")
+            if tiers else required_decimal(cfg.get("price_per_unit", 0.01), "Price per unit")
         )
         total += remaining * fallback
     return total
@@ -221,7 +199,7 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
 
     issues: list[dict[str, Any]] = []
     start, end = period_bounds(cfg)
-    tolerance = _required_decimal(cfg.get("quantity_tolerance", 0.0), "Quantity tolerance")
+    tolerance = required_decimal(cfg.get("quantity_tolerance", 0.0), "Quantity tolerance")
     late_hours = float(cfg.get("late_hours", 24))
 
     # Keep duplicates in raw visible rather than silently overwriting.
@@ -360,7 +338,7 @@ def reconcile(raw: list[dict[str, str]], metered: list[dict[str, str]], cfg: dic
     # Economic impact appears exactly once per event among economic finding types.
     economic_types = {"MISSING", "DUPLICATE", "WRONG_QUANTITY", "ORPHAN_METERED"}
     economic = [x for x in confirmed if x["type"] in economic_types]
-    impacts = [_required_decimal(x["impact_eur"], "Finding impact") for x in economic]
+    impacts = [required_decimal(x["impact_eur"], "Finding impact") for x in economic]
     under = sum((max(amount, ZERO) for amount in impacts), ZERO)
     over = sum((max(-amount, ZERO) for amount in impacts), ZERO)
     periods = int(cfg.get("annualization_periods", 12))

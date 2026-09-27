@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Iterable
 
+from money import ZERO, required_decimal, round_money
 from stripe_bridge import reconcile_stripe_summaries
 from stripe_client import StripeReadError
 
@@ -22,8 +23,8 @@ def scan_stripe_customers(
     start_time: int,
     end_time: int,
     grouping: str = "hour",
-    tolerance: float = 0.0,
-    unit_price: float = 0.0,
+    tolerance: Any = 0.0,
+    unit_price: Any = 0.0,
     max_customers: int = 250,
 ) -> dict[str, Any]:
     """Reconcile one Stripe meter across every matching Stripe customer in raw usage.
@@ -36,7 +37,9 @@ def scan_stripe_customers(
         raise ValueError("max_customers must be positive")
     if grouping not in {"hour", "day"}:
         raise ValueError("Grouping must be hour or day")
-    if unit_price < 0 or tolerance < 0:
+    tolerance_amount = required_decimal(tolerance, "Usage tolerance")
+    unit_price_amount = required_decimal(unit_price, "Unit price")
+    if unit_price_amount < 0 or tolerance_amount < 0:
         raise ValueError("Unit price and tolerance must be non-negative")
 
     eligible: list[dict[str, Any]] = []
@@ -64,14 +67,14 @@ def scan_stripe_customers(
             "customer_id": str(row["customer_id"]),
             "source_customer_id": str(row.get("source_customer_id") or row["customer_id"]),
             "timestamp": row["timestamp"],
-            "quantity": float(row["quantity"]),
+            "quantity": row["quantity"],
             "metric": str(row.get("metric") or "default"),
         })
 
     results: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
     all_findings: list[dict[str, Any]] = []
-    total_under = total_over = 0.0
+    total_under = total_over = ZERO
 
     for customer_id in customer_ids:
         try:
@@ -87,16 +90,16 @@ def scan_stripe_customers(
                 stripe_rows,
                 meter_to_metric={meter_id: metric},
                 grouping=grouping,
-                tolerance=tolerance,
-                unit_prices={metric: unit_price},
+                tolerance=tolerance_amount,
+                unit_prices={metric: unit_price_amount},
             )
         except (StripeReadError, ValueError, KeyError) as exc:
             errors.append({"customer_id": customer_id, "error": str(exc)})
             continue
 
         summary = report["summary"]
-        total_under += float(summary["potential_underbilling_eur"])
-        total_over += float(summary["potential_overbilling_eur"])
+        total_under += required_decimal(summary["potential_underbilling_eur"], "Underbilling total")
+        total_over += required_decimal(summary["potential_overbilling_eur"], "Overbilling total")
         for finding in report["findings"]:
             item = dict(finding)
             item["customer_id"] = customer_id
@@ -128,9 +131,9 @@ def scan_stripe_customers(
             "customers_clean": sum(1 for r in results if not r["findings"]),
             "customers_failed": len(errors),
             "findings": len(all_findings),
-            "potential_underbilling_eur": round(total_under, 2),
-            "potential_overbilling_eur": round(total_over, 2),
-            "period_exposure_eur": round(total_under + total_over, 2),
+            "potential_underbilling_eur": round_money(total_under),
+            "potential_overbilling_eur": round_money(total_over),
+            "period_exposure_eur": round_money(total_under + total_over),
         },
         "customers": results,
         "errors": errors,

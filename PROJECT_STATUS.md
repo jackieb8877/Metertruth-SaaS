@@ -1,7 +1,7 @@
 # MeterTruth — live project record
 
 **Updated:** 2026-09-27 (Atlantic/Canary)  
-**Candidate:** v0.7 private beta (canonical finding-code and Decimal-arithmetic updates)
+**Candidate:** v0.7 private beta (canonical finding codes and Decimal arithmetic)
 
 **Spend:** €0. Test dependencies were installed only in a temporary environment; no paid services or campaigns used.
 
@@ -48,7 +48,7 @@ Local source rows are passed in memory into the core. In history, a report may i
 | Schema inference and event-level reconciliation | Implemented |
 | Missing, duplicate, wrong quantity, late, orphan | Implemented |
 | Customer/metric mismatch and idempotency-collision signals | Implemented |
-| Flat and tiered configured prices | Event-level core uses Decimal; Stripe aggregate bridge still needs conversion |
+| Flat and tiered configured prices | Event-level core uses Decimal; Stripe aggregate/portfolio totals use shared Decimal helpers |
 | Evidence and recovery recommendation | Implemented as review candidates |
 | Stable machine-readable codes for implemented findings | Implemented; legacy `type` values retained for existing consumers |
 | Revenue Leak Report | Implemented; reopenable from history |
@@ -62,18 +62,18 @@ Local source rows are passed in memory into the core. In history, a report may i
 
 ## Verification record
 
-- 59 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity and rounding tests.
+- 62 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents and portfolio-rollup tests.
 - Python compile check passes for app, import layer, history, RecoveryCore and connector modules.
 - An earlier v0.6 project note recorded 44 passing tests; v0.7 added tests on top of that baseline.
 
 ## 2026-09-27 continuation check
 
 - Owner confirmed the deployed Vercel URL prompted for and accepted the configured beta credentials. This verifies the user-visible shared beta gate; it does not verify tenant isolation or persistence.
-- The test dependencies installed from `requirements-dev.txt` into a temporary local virtual environment at €0. The full suite passes: 59/59.
-- Fresh local synthetic benchmarks: 100,000 adversarial raw events + 100,099 metered rows in 1.357s with 2,198 finding rows; €100 underbilling and €9.90 overbilling. One million clean raw + metered events reconciled in 15.525s with 0 findings and €0 exposure. These are workspace results, not production throughput guarantees.
+- The test dependencies installed from `requirements-dev.txt` into a temporary local virtual environment at €0. The full suite passes: 62/62.
+- Fresh local synthetic benchmarks: 100,000 adversarial raw events + 100,099 metered rows in 1.475s with 2,198 finding rows; €100 underbilling and €9.90 overbilling. One million clean raw + metered events reconciled in 15.525s with 0 findings and €0 exposure. These are workspace results, not production throughput guarantees.
 - RecoveryCore findings include a canonical machine-readable `code` while preserving the existing `type` field for compatibility. `MISSING`, `DUPLICATE` and `ORPHAN_METERED` map to `MISSING_USAGE`, `DUPLICATE_USAGE` and `ORPHAN_METERED_EVENT`.
-- Event-level reconciliation now parses quantities and rates as Decimal and uses half-up cent rounding. Tests cover `0.1 + 0.2`, decimal tier boundaries, and positive/negative half-cent rounding. Stripe aggregate and multi-customer totals still use floats; they remain a finance-accuracy risk.
-- The canonical-code source commit had a successful Vercel status check. The Work browser could not independently load the hosted URL in this check; runtime behavior beyond the owner's login test remains unverified.
+- Event-level and Stripe aggregate/portfolio reconciliation now use shared Decimal helpers, with half-up cent rounding. Tests cover `0.1 + 0.2`, tier boundaries, positive/negative half cents, and rollups across customers.
+- The canonical-code and event-level Decimal source commits had successful Vercel status checks. The Work browser could not independently load the hosted URL in this check; runtime behavior beyond the owner's login test remains unverified.
 
 ## Competitive review and attack plan
 
@@ -102,7 +102,7 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 
 ## Risks / findings
 
-1. Stripe aggregate and multi-customer monetary calculations still use binary floats and Python's default rounding. Convert those paths to Decimal, then independently verify large rollups and currency rounding before finance-grade use.
+1. Current reports assume EUR with two decimal places; multi-currency and non-two-decimal currencies are not modeled.
 2. Invoice, credit, and effective-date price reconciliation are missing and remain the most material product gaps.
 3. Stripe meter summaries are asynchronous and aggregate-level; a just-arrived usage event may not yet appear. A premature scan can create a false missing signal.
 4. Vercel/serverless local storage is ephemeral; current history is only a tester convenience, not persistent SaaS storage. Render Free also has ephemeral storage and sleeps.
@@ -110,13 +110,12 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 
 ## Next backlog, ordered
 
-1. Convert Stripe aggregate and multi-customer rollups to Decimal and add an independent arithmetic oracle; keep event evidence distinct from estimated impact.
-2. Invoice-total and credit-ledger import plus `INVOICE_MISMATCH` / `CREDIT_MISMATCH` checks that avoid double-counting event exposure.
-3. Effective-dated price catalogs and `PRICING_DRIFT`; add volume/graduated tier and billing-boundary fixtures.
-4. User-adjustable field mapping / preflight for unknown JSON and CSV schemas.
-5. Connector adapter seam and delayed re-check window for Stripe's asynchronous meter summaries; then evaluate Lago export before any credentials or OAuth.
-6. Durable history, tenant isolation and credential handling only after a design partner validates ongoing monitoring.
-7. Pricing validation: ask prospects to quantify existing month-end reconciliation time, missed-usage frequency, invoice disputes, and acceptable recovery fee.
+1. Add invoice-total and credit-ledger import plus `INVOICE_MISMATCH` / `CREDIT_MISMATCH` checks that avoid double-counting event exposure.
+2. Effective-dated price catalogs and `PRICING_DRIFT`; add volume/graduated tier and billing-boundary fixtures.
+3. User-adjustable field mapping / preflight for unknown JSON and CSV schemas.
+4. Connector adapter seam and delayed re-check window for Stripe's asynchronous meter summaries; then evaluate Lago export before any credentials or OAuth.
+5. Durable history, tenant isolation and credential handling only after a design partner validates ongoing monitoring.
+6. Pricing validation: ask prospects to quantify existing month-end reconciliation time, missed-usage frequency, invoice disputes, and acceptable recovery fee.
 
 ## Decisions
 

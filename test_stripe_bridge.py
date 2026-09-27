@@ -32,3 +32,38 @@ def test_unknown_meter_rejected():
         assert 'No metric mapping' in str(e)
     else:
         raise AssertionError('expected error')
+
+
+def test_decimal_aggregation_does_not_create_false_usage_delta():
+    raw = [
+        {"customer_id":"cus_A","metric":"api","timestamp":"2026-09-27T10:02:00Z","quantity":"0.1"},
+        {"customer_id":"cus_A","metric":"api","timestamp":"2026-09-27T10:42:00Z","quantity":"0.2"},
+    ]
+    agg = aggregate_raw_usage(raw, grouping="hour")
+    start = next(iter(agg))[2]
+    report = reconcile_stripe_summaries(
+        raw,
+        [{"customer_id":"cus_A","meter":"mtr_api","start_time":start,"aggregated_value":"0.3"}],
+        meter_to_metric={"mtr_api":"api"},
+        unit_prices={"api":"0.125"},
+    )
+    assert report["findings"] == []
+    assert report["summary"]["period_exposure_eur"] == 0.0
+
+
+def test_stripe_under_and_over_half_cents_round_half_up():
+    raw = [
+        {"customer_id":"cus_under","metric":"api","timestamp":"2026-09-27T10:02:00Z","quantity":"1"},
+        {"customer_id":"cus_over","metric":"api","timestamp":"2026-09-27T10:02:00Z","quantity":"0"},
+    ]
+    over_bucket = next(key[2] for key in aggregate_raw_usage(raw) if key[0] == "cus_over")
+    report = reconcile_stripe_summaries(
+        raw,
+        [{"customer_id":"cus_over","meter":"mtr_api","start_time":over_bucket,"aggregated_value":"1"}],
+        meter_to_metric={"mtr_api":"api"},
+        unit_prices={"api":"0.125"},
+    )
+    assert {x["type"] for x in report["findings"]} == {"AGGREGATE_UNDER", "AGGREGATE_OVER"}
+    assert report["summary"]["potential_underbilling_eur"] == 0.13
+    assert report["summary"]["potential_overbilling_eur"] == 0.13
+    assert report["summary"]["period_exposure_eur"] == 0.26

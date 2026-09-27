@@ -54,3 +54,22 @@ def test_requires_stripe_customer_ids():
     rows = [{"customer_id":"acct_1","timestamp":"2026-09-27T00:00:00Z","timestamp_epoch":1790467200,"quantity":1,"metric":"api"}]
     with pytest.raises(ValueError, match="cus_\\*"):
         scan_stripe_customers(rows, client=FakeClient(), meter_id="mtr_1", metric="api", start_time=1790467200, end_time=1790470800)
+
+
+def test_decimal_customer_rollup_is_cent_exact():
+    rows = [
+        {"customer_id":f"cus_{letter}","timestamp":"2026-09-27T00:05:00Z",
+         "timestamp_epoch":1790467500,"quantity":"1","metric":"api"}
+        for letter in "abc"
+    ]
+
+    class EmptyStripe:
+        def list_meter_event_summaries(self, **kwargs):
+            return []
+
+    report = scan_stripe_customers(
+        rows, client=EmptyStripe(), meter_id="mtr_1", metric="api",
+        start_time=1790467200, end_time=1790470800, unit_price="0.005",
+    )
+    assert report["summary"]["potential_underbilling_eur"] == 0.03
+    assert report["summary"]["period_exposure_eur"] == 0.03
