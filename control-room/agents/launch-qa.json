@@ -1,11 +1,17 @@
 {
   "id": "launch-qa",
   "name": "Launch QA",
-  "status": "scheduled",
-  "last_run": null,
-  "focus": "Checkout, legal, trust, mobile and analytics QA",
-  "summary": "First QA cycle pending",
-  "blocker": null,
-  "progress": 15,
-  "events": []
+  "status": "blocked",
+  "last_run": "2026-09-27T16:50:42Z",
+  "focus": "Pre-launch QA",
+  "summary": "Launch not ready: store and key operational inputs are incomplete.",
+  "blocker": "Supplier economics, staging storefront and compliance data must be completed before launch.",
+  "progress": 24,
+  "events": [
+    {
+      "time": "2026-09-27T16:50:42Z",
+      "title": "QA cycle complete",
+      "detail": "Pre-launch blockers identified."
+    }
+  ]
 }
