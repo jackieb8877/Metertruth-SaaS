@@ -1,0 +1,11 @@
+{
+  "id": "store-builder",
+  "name": "Store Builder",
+  "status": "waiting",
+  "last_run": null,
+  "focus": "Build premium storefront, product pages and conversion UX",
+  "summary": "Waiting for GO product",
+  "blocker": "Needs validated hero product before production build",
+  "progress": 10,
+  "events": []
+}
