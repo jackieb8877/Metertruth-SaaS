@@ -1,0 +1,149 @@
+{
+  "generated_at": "2026-09-27T20:58:18Z",
+  "status": "research_snapshot",
+  "note": "PROMOTE is research priority, not permission to sell. No SKU is TEST_READY.",
+  "categories": [
+    "Pet grooming & home",
+    "Pet travel",
+    "Travel organization",
+    "Car organization",
+    "Home organization"
+  ],
+  "candidates": [
+    {
+      "name": "Convertible pet carrier → bed",
+      "score": 83,
+      "decision": "PROMOTE",
+      "category": "Pet travel",
+      "retail": "€85",
+      "cost": null,
+      "url": "https://eu.bagsmart.com/products/pet-travel-carrier"
+    },
+    {
+      "name": "Kit Muda Cero",
+      "score": 81,
+      "decision": "WATCH",
+      "category": "Pet grooming & home",
+      "retail": "€39.90 test hypothesis",
+      "cost": "partial €8.00 + roller/shipping pending",
+      "url": "https://velocityspy.com/trending/pet-supplies/"
+    },
+    {
+      "name": "Foldable trunk organizer",
+      "score": 80,
+      "decision": "WATCH",
+      "category": "Car organization",
+      "retail": "€32.58 + shipping",
+      "cost": "€6.91 ex VAT MOQ1 Poland",
+      "url": "https://merkandi.com/products/foldable-car-organizer-for-the-trunk/1338812"
+    },
+    {
+      "name": "Dog drying robe / microfiber bathrobe",
+      "score": 77,
+      "decision": "WATCH",
+      "category": "Pet grooming & home",
+      "retail": "€20.99–53.95",
+      "cost": null,
+      "url": "https://wilderpaw.com/es/products/wilderpaw-dryden-microfibre-dog-drying-robe"
+    },
+    {
+      "name": "Dog car seat cover / hammock",
+      "score": 76,
+      "decision": "WATCH",
+      "category": "Pet travel",
+      "retail": "€39.99–59.95",
+      "cost": null,
+      "url": "https://tienda.deterrajaras.es/en/products/funda-asiento-coche-hamaca-perro"
+    },
+    {
+      "name": "Pet travel organizer bag",
+      "score": 76,
+      "decision": "WATCH",
+      "category": "Pet travel",
+      "retail": "€41.25",
+      "cost": "MOQ100 private-label source only",
+      "url": "https://cashymart.com/es-es/collections/pet-accessories/products/dog-travel-bag"
+    },
+    {
+      "name": "Waterproof pet sofa blanket",
+      "score": 75,
+      "decision": "WATCH",
+      "category": "Pet grooming & home",
+      "retail": "€37–86",
+      "cost": "MOQ100 wholesale source only",
+      "url": "https://lebeddie.com/en/product/cream-waterproof-blanket/"
+    },
+    {
+      "name": "Compression packing cubes set",
+      "score": 73,
+      "decision": "WATCH",
+      "category": "Travel organization",
+      "retail": "€34.90–60",
+      "cost": "~€19.97 candidate; EU origin pending",
+      "url": "https://www.travel-dude.com/es/products/packing-cubes-7-set"
+    },
+    {
+      "name": "Foldable windshield sunshade umbrella",
+      "score": 70,
+      "decision": "WATCH",
+      "category": "Car organization",
+      "retail": "€25.58–52.70",
+      "cost": "~€14.09 candidate; EU origin pending",
+      "url": "https://eu.3wliners.com/products/front-windshield-sunshade-umbrella"
+    },
+    {
+      "name": "Reusable pet-hair roller",
+      "score": 68,
+      "decision": "WATCH",
+      "category": "Pet grooming & home",
+      "retail": "€20.58–21.58 + shipping",
+      "cost": null,
+      "url": "https://www.fruugo.es/rodillo-reutilizable-para-quitar-el-pelo-de-mascotas-ideal-para-muebles-ropa-tapiceria-y-asientos-de-coche-ecologico/p-475920953-992832201"
+    },
+    {
+      "name": "Portable pet water bottle",
+      "score": 67,
+      "decision": "WATCH",
+      "category": "Pet travel",
+      "retail": null,
+      "cost": null,
+      "url": "https://velocityspy.com/trending/pet-supplies/"
+    },
+    {
+      "name": "Pet grooming vacuum kit",
+      "score": 55,
+      "decision": "KILL",
+      "category": "Pet grooming & home",
+      "retail": null,
+      "cost": null,
+      "url": "https://velocityspy.com/trending/pet-supplies/"
+    },
+    {
+      "name": "Pet deodorizing cleaning gloves",
+      "score": 54,
+      "decision": "KILL",
+      "category": "Pet grooming & home",
+      "retail": "€8.68–11.21",
+      "cost": null,
+      "url": "https://velocityspy.com/trending/pet-supplies/"
+    },
+    {
+      "name": "Handheld vacuum sealer",
+      "score": 50,
+      "decision": "KILL",
+      "category": "Home organization",
+      "retail": null,
+      "cost": null,
+      "url": null
+    },
+    {
+      "name": "3D printed cat wall bed",
+      "score": 48,
+      "decision": "KILL",
+      "category": "Pet grooming & home",
+      "retail": ">€118",
+      "cost": null,
+      "url": "https://www.decords.de/en/collections/3d-printed-pet-furniture-feeding-accessories/products/3d-printed-cat-ear-wall-bed"
+    }
+  ]
+}
