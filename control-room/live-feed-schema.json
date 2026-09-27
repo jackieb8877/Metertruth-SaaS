@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "description": "Append-only live activity feed schema for Project Rich agents",
+  "event_fields": {
+    "id": "unique event id",
+    "ts": "ISO8601 timestamp",
+    "agent_id": "agent identifier",
+    "phase": "start|action|observation|artifact|decision|blocked|done|error",
+    "title": "short human-readable action",
+    "detail": "concise detail",
+    "source_url": "optional public URL being inspected",
+    "artifact_path": "optional repository/file path",
+    "status": "running|ok|warning|blocked|error"
+  }
+}
