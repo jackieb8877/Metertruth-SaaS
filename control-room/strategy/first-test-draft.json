@@ -1,18 +1,36 @@
 {
   "experiment_id": "PR-TEST-001",
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-27T22:48:28Z",
-  "status": "PREPARATION_STARTED_LAUNCH_BLOCKED",
-  "authority": "El propietario pide pasar a la primera prueba. Se preparan producto, oferta, ficha y anuncios; no hay aprobación de gasto ni de publicación comercial.",
+  "updated_at": "2026-09-27T23:09:09Z",
+  "status": "SHOPIFY_DRAFT_CREATED_LAUNCH_BLOCKED",
+  "authority": "El propietario pide pasar a la primera prueba y confirma la instalación de Shopify. Se ha verificado acceso y creado el producto en borrador; no hay aprobación de gasto ni publicación comercial.",
   "product": {
     "name": "Cepillo quitapelos reutilizable con base autolimpiadora",
     "supplier_sku": "100102",
     "use": "Ropa y tapicerías; no cepillado directo del animal",
     "selection_status": "SELECTED_FOR_PREPARATION_NOT_VALIDATED",
-    "store_product_id": null,
-    "store_variant_id": null,
+    "store_product_id": "gid://shopify/Product/11226693370199",
+    "store_variant_id": "gid://shopify/ProductVariant/55179956126039",
+    "shopify_status": "DRAFT",
+    "shopify_readback_verified": true,
+    "shopify_inventory_item_id": "gid://shopify/InventoryItem/57285212930391",
+    "shopify_location_id": "gid://shopify/Location/125600104791",
+    "shopify_available_inventory": 0,
     "package_contents_verified": false,
     "supplier_description_verified_physically": false
+  },
+  "shopify": {
+    "domain": "ghg2tn-1u.myshopify.com",
+    "connection_status": "READ_AND_DRAFT_PRODUCT_WRITE_VERIFIED",
+    "plan_observed": "trial",
+    "currency": "EUR",
+    "theme_observed": {"id": "gid://shopify/OnlineStoreTheme/205995376983", "name": "Horizon", "role": "MAIN"},
+    "unpublished_theme_found": false,
+    "theme_modified": false,
+    "custom_section_installed": false,
+    "theme_write_permission_tested": false,
+    "contact_email_needs_owner_check": true,
+    "note": "No reinstalar: el conector ha leído la tienda y creado un DRAFT. La landing personalizada aún no está instalada y no se ha probado checkout/medición."
   },
   "supplier": {
     "name": "Almacén Escriv Ecom",
@@ -39,7 +57,7 @@
   "problem": "Pelo visible en textiles y trabajo de limpiar el propio útil de limpieza.",
   "offer": "Una unidad con base a 24,90 EUR de precio final con envío incluido a Península; contenido y viabilidad pendientes. Sin kit, descuento ficticio ni suscripción.",
   "retail_price_total_eur": 24.9,
-  "price_status": "HYPOTHESIS_NOT_PUBLISHED",
+  "price_status": "HYPOTHESIS_SAVED_TO_SHOPIFY_DRAFT_NOT_PUBLISHED",
   "costs_eur": {
     "product": null,
     "delivery": null,
@@ -109,6 +127,8 @@
   "launch_gate": {
     "product_selected": true,
     "product_selection_scope": "Solo candidato para preparar",
+    "shopify_connection_verified": true,
+    "shopify_product_draft_created": true,
     "supplier_cost_and_delivery_checked": false,
     "stock_confirmed": false,
     "tax_and_consumer_terms_reviewed": false,
@@ -123,11 +143,12 @@
   "artifacts": {
     "brief_copy_scripts_supplier_request": "control-room/artifacts/first-test-001/preparacion-20260927.md",
     "unpublished_shopify_page_config": "control-room/artifacts/first-test-001/page.pr-test-001.json",
-    "existing_section_to_reuse": "control-room/artifacts/course-adrian/one-product-kit/pr-product-story.liquid"
+    "existing_section_to_reuse": "control-room/artifacts/course-adrian/one-product-kit/pr-product-story.liquid",
+    "shopify_connection_and_draft_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md"
   },
   "decision": {
-    "result": "PREPARATION_GO_COMMERCIAL_LAUNCH_HOLD",
-    "reason": "Candidato concreto y dos guiones preparados. Faltan confirmación del proveedor, acceso a tienda, costes completos, activos reales/derechos, QA y aprobación del piloto. No hay resultados de venta medidos.",
-    "next": "Conectar Shopify sin contratar extras; revisar herramientas y crear borrador de producto/ficha cuando haya acceso. Obtener confirmación del proveedor antes de pagar publicidad."
+    "result": "SHOPIFY_DRAFT_VERIFIED_COMMERCIAL_LAUNCH_HOLD",
+    "reason": "Acceso de Shopify y creación del borrador comprobados mediante lectura posterior. Candidato y dos guiones preparados. Faltan confirmación del proveedor, costes completos, activos reales/derechos, integración visual en un tema no publicado, QA y aprobación del piloto. No hay resultados de venta medidos.",
+    "next": "Continuar sobre el producto Shopify existente, sin duplicarlo. Integrar la sección y plantilla en un tema no publicado; confirmar suministro y activos antes de publicidad. No pedir reinstalar Shopify."
   }
 }
