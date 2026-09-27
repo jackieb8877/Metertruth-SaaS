@@ -94,13 +94,13 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 1. Monetary calculations in RecoveryCore v0.2 use binary floats. Existing event-level tests pass, but exact cent-safe tier/credit/invoice arithmetic is still required before finance-grade use.
 2. Invoice, credit, and effective-date price reconciliation are missing and remain the most material product gaps.
 3. Stripe meter summaries are asynchronous and aggregate-level; a just-arrived usage event may not yet appear. A premature scan can create a false missing signal.
-4. Render Free has ephemeral storage and sleeps; current history is only a tester convenience, not persistent SaaS storage.
+4. Render Free spins down after 15 minutes idle and loses local SQLite history on spin-down/restart/redeploy; history is only a temporary tester convenience, not persistent SaaS storage.
 5. Basic Auth is one shared beta gate, not tenant isolation or a production identity system.
 6. Local source is currently not connected to the user's GitHub repository. Do not deploy or publish until the user completes the previously requested GitHub connection and confirms the repo target.
 
 ## Next backlog, ordered
 
-1. Deploy the private beta on Render Free after entering `BETA_USERNAME` and `BETA_PASSWORD`; then verify `/health`, `/start`, `/demo`, CSV/JSON reconciliation and saved-history behavior. No Render connector is available in this workspace, so this account-bound step must be completed in the Render dashboard. Render Free storage is ephemeral and should not be used for durable customer history.
+1. Deploy the private beta on Render Free after entering `BETA_USERNAME` and `BETA_PASSWORD`; then verify `/health`, `/start`, `/demo` and CSV/JSON reconciliation. No Render connector is available in this workspace, so this account-bound step must be completed in the Render dashboard. Keep the €0 cap: choose Free, do not attach a payment method, and monitor included usage. History will disappear on spin-down/restart/redeploy, so only synthetic or consented beta data belongs here.
 2. Cent-safe Decimal pricing and independent arithmetic test oracle; keep event evidence distinct from estimated impact.
 3. Invoice-total and credit-ledger import plus `INVOICE_MISMATCH` / `CREDIT_MISMATCH` checks that avoid double-counting event exposure.
 4. Effective-dated price catalogs and `PRICING_DRIFT`; add volume/graduated tier and billing-boundary fixtures.
