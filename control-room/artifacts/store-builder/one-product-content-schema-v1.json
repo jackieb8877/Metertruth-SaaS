@@ -1,0 +1,53 @@
+{
+  "strategy_id": "adrian-one-product-v1",
+  "status": "TEMPLATE_PRODUCT_NOT_SELECTED",
+  "market": {
+    "country": "ES",
+    "language": "es",
+    "coverage_status": "PROPOSED_NOT_CONFIGURED"
+  },
+  "product": {
+    "sku": null,
+    "handle": null,
+    "title": null,
+    "variant": null,
+    "supplier": null,
+    "hero_media": null,
+    "gallery_media": [],
+    "demo_video": null,
+    "model_3d": null,
+    "primary_problem": null,
+    "primary_benefit": null,
+    "differentiator": null,
+    "promise": null,
+    "price_total_eur": null,
+    "how_to_steps": [],
+    "compatibility": [],
+    "faq": [],
+    "claims": [],
+    "trust_facts": [],
+    "returns_fact": null,
+    "delivery_fact": null,
+    "asset_rights_verified": false
+  },
+  "commerce": {
+    "shopify_connected": false,
+    "autods_connected": false,
+    "checkout_enabled": false,
+    "payments_enabled": false,
+    "subscriptions_enabled": false,
+    "ads_enabled": false,
+    "data_capture_enabled": false
+  },
+  "launch_gate": {
+    "exact_product_selected": false,
+    "supplier_cost_delivery_verified": false,
+    "market_coverage_verified": false,
+    "copy_claims_verified": false,
+    "media_rights_verified": false,
+    "product_page_populated": false,
+    "tracking_tested": false,
+    "owner_commerce_authorization": false,
+    "owner_paid_budget_approval": false
+  }
+}
