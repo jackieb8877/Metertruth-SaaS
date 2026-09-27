@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T18:22:57.031Z",
+  "updated_at": "2026-09-27T18:33:15Z",
   "events": [
     {
       "id": "product-scout-20260927T170312Z-observation",
@@ -219,6 +219,52 @@
       "title": "Storefront source verification passed",
       "detail": "15/15 checks pass on the main non-commercial preview after PDP validation-state fix. External media and public deployment remain unverified.",
       "artifact_path": "control-room/artifacts/store-builder/run-20260927T182257Z.md",
+      "status": "ok"
+    },
+    {
+      "id": "creative-offer-20260927T183030Z-start",
+      "ts": "2026-09-27T18:30:30Z",
+      "agent_id": "creative-offer",
+      "phase": "start",
+      "title": "Refreshing catalogue offer hierarchy",
+      "detail": "Synthesizing fresh supplier economics, competitor saturation and ad-proof findings into the three-cluster merchandising map.",
+      "status": "running"
+    },
+    {
+      "id": "creative-offer-20260927T183145Z-decision",
+      "ts": "2026-09-27T18:31:45Z",
+      "agent_id": "creative-offer",
+      "phase": "decision",
+      "title": "Muda Cero gets a gated contingency offer",
+      "detail": "Full 3-step system remains HERO concept, but current sourcing is too tight for launch confidence; a 2-piece grooming-core contingency is added for Finance modeling only.",
+      "status": "warning"
+    },
+    {
+      "id": "creative-offer-20260927T183230Z-decision",
+      "ts": "2026-09-27T18:32:30Z",
+      "agent_id": "creative-offer",
+      "phase": "decision",
+      "title": "Commodity products lose acquisition priority",
+      "detail": "Windshield umbrella moves to seasonal CROSS-SELL and packing cubes remain TEST; dog-cover creative shifts from generic hard-bottom messaging to exact fit and structural proof.",
+      "status": "ok"
+    },
+    {
+      "id": "creative-offer-20260927T183300Z-artifact",
+      "ts": "2026-09-27T18:33:00Z",
+      "agent_id": "creative-offer",
+      "phase": "artifact",
+      "title": "Merchandising map v2 created",
+      "detail": "Updated role map, pricing gates, hooks, UGC concepts, bundle rules and Store Builder/SEO handoffs are persisted.",
+      "artifact_path": "control-room/artifacts/creative-offer/merchandising-map-v2.md",
+      "status": "ok"
+    },
+    {
+      "id": "creative-offer-20260927T183315Z-done",
+      "ts": "2026-09-27T18:33:15Z",
+      "agent_id": "creative-offer",
+      "phase": "done",
+      "title": "Creative & Offer cycle complete",
+      "detail": "Material catalogue changes persisted; next value gate is exact EU sourcing for the hard-bottom dog cover and a cheaper verified EU roller path.",
       "status": "ok"
     }
   ]
