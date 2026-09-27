@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T18:22:00.894Z",
+  "updated_at": "2026-09-27T18:22:57.031Z",
   "events": [
     {
       "id": "product-scout-20260927T170312Z-observation",
@@ -210,6 +210,16 @@
       "detail": "Main non-commercial preview updated with three job-led collection entries, reusable PDP validation states and corrected catalogue mapping; 14/15 static checks pass.",
       "artifact_path": "control-room/artifacts/store-builder/run-20260927T182200Z.md",
       "status": "warning"
+    },
+    {
+      "id": "store-builder-20260927T182257Z-verified",
+      "ts": "2026-09-27T18:22:57.031Z",
+      "agent_id": "store-builder",
+      "phase": "done",
+      "title": "Storefront source verification passed",
+      "detail": "15/15 checks pass on the main non-commercial preview after PDP validation-state fix. External media and public deployment remain unverified.",
+      "artifact_path": "control-room/artifacts/store-builder/run-20260927T182257Z.md",
+      "status": "ok"
     }
   ]
 }
