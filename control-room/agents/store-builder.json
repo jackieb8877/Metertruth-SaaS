@@ -2,10 +2,10 @@
   "id": "store-builder",
   "name": "Store Builder",
   "status": "waiting",
-  "last_run": null,
+  "last_run": "2026-09-27T17:06:00Z",
   "focus": "Build premium storefront, product pages and conversion UX",
-  "summary": "Waiting for GO product",
-  "blocker": "Needs validated hero product before production build",
-  "progress": 10,
+  "summary": "Storefront spec v1 completed; production build remains gated by economics, fulfillment, traceability and final assets.",
+  "blocker": "Production build waits on landed cost, shipping SLA, traceability, policies and final price.",
+  "progress": 34,
   "events": []
 }
