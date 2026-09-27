@@ -4,8 +4,88 @@
   "status": "waiting",
   "last_run": "2026-09-27T17:15:00Z",
   "focus": "Mine reviews, complaints, objections and unmet needs",
-  "summary": "Research cycle completed; handoff pending persistence.",
-  "blocker": "GitHub state write blocked by safety guard in this run.",
+  "summary": "Material change: Kit Muda Cero should be positioned by coat and surface, not as universal. Slicker suitability depends on coat type and technique; reusable rollers are strongest on flat textiles but weaker on clothing, leather and slick surfaces.",
+  "blocker": null,
   "progress": 68,
-  "events": []
+  "insights": [
+    {
+      "rank": 1,
+      "tag": "PRODUCT",
+      "candidate": "Kit Muda Cero",
+      "insight": "Slicker suitability depends on coat type, pin length, pressure and repeated passes; misuse can cause irritation or brush burn.",
+      "action": "Add coat-type suitability and safe-use guidance; avoid universal claims."
+    },
+    {
+      "rank": 2,
+      "tag": "COPY",
+      "candidate": "Kit Muda Cero",
+      "insight": "Reusable pet-hair rollers perform best on sofas, bedding and fabric car seats, while clothing, leather and slick surfaces are recurring misses.",
+      "action": "Narrow the promise to textiles and demonstrate the back-and-forth technique."
+    },
+    {
+      "rank": 3,
+      "tag": "RISK",
+      "candidate": "Dog car seat cover / hammock",
+      "insight": "Fit, clip/zipper durability, waterproof-backing wear and sliding are the main quality/return risks.",
+      "action": "Require exact dimensions, reinforced hardware, seat anchors and wash durability; avoid vague universal-fit claims."
+    },
+    {
+      "rank": 4,
+      "tag": "RISK",
+      "candidate": "Dog car seat cover / hammock",
+      "insight": "Seat protection is a strong benefit, but the hammock or bundled tether should not be treated as crash protection.",
+      "action": "Separate cleanliness/containment claims from restraint-safety claims."
+    },
+    {
+      "rank": 5,
+      "tag": "OFFER",
+      "candidate": "Foldable windshield sunshade umbrella",
+      "insight": "Convenience and compact storage are the primary desire; wrong size, weak handles/ribs and mirror/dashboard interference drive objections.",
+      "action": "Prefer multi-size variants with flexible/padded handles and a measure-before-buy fit guide."
+    }
+  ],
+  "handoff": {
+    "creative_offer": [
+      "Make Kit Muda Cero a coat/surface-specific 3-step routine.",
+      "Do not hero clothes or leather for the reusable roller.",
+      "Use prevention plus cleanup, not one-tool-does-all messaging."
+    ],
+    "store_builder": [
+      "Add a tool-by-coat/surface matrix near the bundle demo.",
+      "Add a short roller-technique demo.",
+      "If the car-cover challenger advances, add vehicle measurement guidance."
+    ],
+    "compliance": [
+      "Review slicker safety wording.",
+      "Do not imply crash protection for dog hammocks without evidence.",
+      "Avoid unsupported universal-fit claims."
+    ]
+  },
+  "events": [
+    {
+      "ts": "2026-09-27T17:11:40Z",
+      "title": "Slicker suitability risk found",
+      "detail": "Coat type and technique materially affect comfort and irritation risk."
+    },
+    {
+      "ts": "2026-09-27T17:12:20Z",
+      "title": "Roller promise narrowed",
+      "detail": "Strong on flat textiles; recurring misses on clothing and slick surfaces."
+    },
+    {
+      "ts": "2026-09-27T17:13:15Z",
+      "title": "Car hammock return drivers mapped",
+      "detail": "Fit and hardware/backing durability dominate complaints."
+    },
+    {
+      "ts": "2026-09-27T17:14:05Z",
+      "title": "Sunshade objections mapped",
+      "detail": "Fit, handle strength and mirror/dashboard interference are the main objections."
+    },
+    {
+      "ts": "2026-09-27T17:15:00Z",
+      "title": "Customer Voice cycle complete",
+      "detail": "Five high-impact insights handed off; Kit Muda Cero copy materially tightened."
+    }
+  ]
 }
