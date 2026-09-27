@@ -1,16 +1,45 @@
 {
   "experiment_id": "PR-TEST-001",
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-27T20:54:14Z",
-  "status": "DRAFT_PRODUCT_NOT_SELECTED",
-  "product": null,
-  "supplier": null,
-  "market_proposal": "España / español; cobertura pendiente",
+  "updated_at": "2026-09-27T22:48:28Z",
+  "status": "PREPARATION_STARTED_LAUNCH_BLOCKED",
+  "authority": "El propietario pide pasar a la primera prueba. Se preparan producto, oferta, ficha y anuncios; no hay aprobación de gasto ni de publicación comercial.",
+  "product": {
+    "name": "Cepillo quitapelos reutilizable con base autolimpiadora",
+    "supplier_sku": "100102",
+    "use": "Ropa y tapicerías; no cepillado directo del animal",
+    "selection_status": "SELECTED_FOR_PREPARATION_NOT_VALIDATED",
+    "store_product_id": null,
+    "store_variant_id": null,
+    "package_contents_verified": false,
+    "supplier_description_verified_physically": false
+  },
+  "supplier": {
+    "name": "Almacén Escriv Ecom",
+    "product_url": "https://almacen-escriv-ecom.com/products/cepillo-autolimpiable-para-perros-y-gatos",
+    "shipping_policy_url": "https://almacen-escriv-ecom.com/policies/shipping-policy",
+    "refund_policy_url": "https://almacen-escriv-ecom.com/policies/refund-policy",
+    "contact_email": "info@almacen-escriv-ecom.com",
+    "public_price_eur": 6.2,
+    "public_shipping_from_eur": 4.7,
+    "stock_status": "AMBIGUOUS_PUBLIC_PAGE_SOLD_OUT_AND_STOCK_LABELS",
+    "stock_units": null,
+    "stock_confirmed_by_supplier": false,
+    "exact_quote_received": false,
+    "shipping_claim": "24/48 horas hábiles después de procesar el pedido, según política pública; no entrega total garantizada",
+    "checked_date": "2026-09-27",
+    "contact_message_status": "DRAFT_NOT_SENT",
+    "neutral_packaging": "SUPPLIER_PUBLIC_CLAIM_NOT_TESTED",
+    "fulfilment_proposal": "Manual al inicio; no contratar integración adicional antes de validar. No pedido realizado.",
+    "previous_research": "control-room/artifacts/supplier-margin-economics-20260927T211708Z.json"
+  },
+  "market_proposal": "España peninsular / español / EUR; confirmar códigos postales cubiertos. No abrir islas ni otros países en este piloto.",
   "page_url": null,
-  "avatar": null,
-  "problem": null,
-  "offer": null,
-  "retail_price_total_eur": null,
+  "avatar": "Hipótesis: persona que convive con perro o gato y retira pelo de ropa o tapicería con frecuencia.",
+  "problem": "Pelo visible en textiles y trabajo de limpiar el propio útil de limpieza.",
+  "offer": "Una unidad con base a 24,90 EUR de precio final con envío incluido a Península; contenido y viabilidad pendientes. Sin kit, descuento ficticio ni suscripción.",
+  "retail_price_total_eur": 24.9,
+  "price_status": "HYPOTHESIS_NOT_PUBLISHED",
   "costs_eur": {
     "product": null,
     "delivery": null,
@@ -23,16 +52,38 @@
   "contribution_before_ads_eur": null,
   "break_even_cpa_eur": null,
   "break_even_roas": null,
+  "economics_note": "6,20 EUR es precio de ficha, no coste neto facturado verificado. 4,70 EUR es un desde, no porte exacto. No utilizar los 11,93 EUR del modelo previo como margen/CPA verificado: excluían impuestos y fijos y usaban costes supuestos.",
   "creatives": [
-    {"id": "A", "hypothesis": null, "asset": null, "rights_verified": false},
-    {"id": "B", "hypothesis": null, "asset": null, "rights_verified": false}
+    {
+      "id": "A",
+      "hypothesis": "El gancho sobre pelos en el sofá puede atraer compradores interesados en la utilidad del producto.",
+      "hook": "Tu mascota tiene sitio en el sofá. Los pelos no tienen por qué quedarse.",
+      "asset": null,
+      "script_status": "DRAFT_COMPLETE_NOT_RECORDED",
+      "rights_verified": false
+    },
+    {
+      "id": "B",
+      "hypothesis": "El gancho sobre limpiar el propio cepillo puede despertar más interés que el problema del sofá.",
+      "hook": "¿Lo pesado es quitar el pelo… o limpiar después el cepillo?",
+      "asset": null,
+      "script_status": "DRAFT_COMPLETE_NOT_RECORDED",
+      "rights_verified": false
+    }
   ],
-  "ad_design": "Una campaña de ventas, dos conjuntos con un vídeo cada uno; ejemplo docente de 10 EUR/día por conjunto, NO autorizado.",
+  "shared_video_body": "Demostración real del mismo SKU sobre tejido, limpieza en su base y vaciado; cierre idéntico, unos 25 segundos en total. No demostración de eficacia generada por IA ni testimonios inventados.",
+  "ad_design": "Receta inicial de Víctor: una campaña de ventas, dos conjuntos con un vídeo cada uno, compra y destino ficha. Mantener oferta, audiencia y cuerpo iguales; variar gancho. No tratar como A/B aleatorio controlado.",
+  "course_budget_example": {"daily_eur_per_adset": 10, "adsets": 2, "authorization": false},
   "approved_spend_eur": 0,
-  "proposed_total_budget_eur": null,
+  "proposed_total_budget_eur": 60,
+  "budget_scope": "Solo inversión publicitaria propuesta; impuestos/comisiones de facturación, muestra, tienda, pedidos y devoluciones no están incluidos ni autorizados.",
+  "proposed_total_eur_per_creative": 30,
+  "proposed_max_duration_days": 3,
+  "total_cap_configuration_verified": false,
   "max_loss_eur": null,
   "start_at": null,
   "end_at": null,
+  "external_campaign_id": null,
   "measurement": {
     "spend": null,
     "impressions": null,
@@ -49,18 +100,34 @@
     "course_window_example_days": [3, 7],
     "window_not_automatic_kill_rule": true,
     "attribution_and_sample_required": true,
-    "vary_one_factor_at_a_time": true
+    "vary_one_factor_at_a_time": true,
+    "stop_immediately_on_supply_or_payment_failure": true,
+    "no_auto_budget_extension": true,
+    "no_scale_on_ctr_or_one_purchase": true,
+    "technical_test_orders_are_not_sales": true
   },
   "launch_gate": {
-    "product_selected": false,
+    "product_selected": true,
+    "product_selection_scope": "Solo candidato para preparar",
     "supplier_cost_and_delivery_checked": false,
+    "stock_confirmed": false,
+    "tax_and_consumer_terms_reviewed": false,
+    "traceability_and_product_safety_checked": false,
     "claims_and_asset_rights_checked": false,
+    "creative_video_files_ready": false,
     "store_and_tracking_tested": false,
-    "owner_budget_approval": false
+    "owner_budget_approval": false,
+    "owner_commercial_publication_approval": false,
+    "ad_total_cap_verified": false
+  },
+  "artifacts": {
+    "brief_copy_scripts_supplier_request": "control-room/artifacts/first-test-001/preparacion-20260927.md",
+    "unpublished_shopify_page_config": "control-room/artifacts/first-test-001/page.pr-test-001.json",
+    "existing_section_to_reuse": "control-room/artifacts/course-adrian/one-product-kit/pr-product-story.liquid"
   },
   "decision": {
-    "result": "NOT_STARTED",
-    "reason": "Fuente de estrategia actualizada; faltan los inputs del test. No hay ventas o resultados publicitarios medidos.",
-    "next": "Comparar candidatos según los dos criterios de Adrián, su suministro y la posibilidad de presentar dos anuncios."
+    "result": "PREPARATION_GO_COMMERCIAL_LAUNCH_HOLD",
+    "reason": "Candidato concreto y dos guiones preparados. Faltan confirmación del proveedor, acceso a tienda, costes completos, activos reales/derechos, QA y aprobación del piloto. No hay resultados de venta medidos.",
+    "next": "Conectar Shopify sin contratar extras; revisar herramientas y crear borrador de producto/ficha cuando haya acceso. Obtener confirmación del proveedor antes de pagar publicidad."
   }
 }
