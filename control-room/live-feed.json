@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T16:42:51Z",
+  "updated_at": "2026-09-27T16:46:00Z",
   "events": [
     {
       "id": "product-scout-20260927T164251Z-start",
@@ -10,6 +10,26 @@
       "title": "Starting product discovery cycle",
       "detail": "Scanning recent EU/Spain demand, visual potential, margin, logistics and saturation signals.",
       "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T164400Z-action",
+      "ts": "2026-09-27T16:44:00Z",
+      "agent_id": "product-scout",
+      "phase": "action",
+      "title": "Scanning TikTok product velocity",
+      "detail": "Checking recent pet, automotive, tech and kitchen product velocity for visual products with low return risk.",
+      "source_url": "https://velocityspy.com/trending/pet-supplies/",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T164600Z-observation",
+      "ts": "2026-09-27T16:46:00Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Pet-hair niche still has demand, but supply reliability is the risk",
+      "detail": "Pet grooming vacuum, pet hair remover mitt and portable pet products show strong recent view velocity; a recent seller report also flags fulfillment failures on a portable pet-hair remover, reinforcing supplier risk.",
+      "source_url": "https://velocityspy.com/trending/pet-supplies/",
+      "status": "ok"
     }
   ]
 }
