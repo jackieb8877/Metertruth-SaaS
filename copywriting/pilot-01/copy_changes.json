@@ -1,0 +1,81 @@
+{
+  "version": "0.1",
+  "status": "PROPOSED_NOT_APPLIED",
+  "target": "app.py",
+  "scope": "home() only",
+  "base_commit": "f8958724399c6d13cfa31e3c73a3f651ce07350c",
+  "expected_blob_sha": "1c2367fb25654f46fd3fc0b76a6ce025cab97a9e",
+  "constraints": [
+    "Refetch current app.py before editing. Stop and reconcile if its blob SHA has changed.",
+    "Do not edit upload field names, form action, method, encodings, defaults, authentication or reconciliation logic.",
+    "Preserve /start, /stripe and /history access. Do not weaken CSP.",
+    "Run the full app test suite and verify an authenticated preview before merging."
+  ],
+  "replacements": [
+    {
+      "before": "Find usage that never became revenue.",
+      "after": "Find the gaps between product usage and billing.",
+      "reason": "Cover both missing usage and other discrepancies, without asserting recovery."
+    },
+    {
+      "before": "Compare raw product usage against metered or billing usage. MeterTruth flags missing, duplicate, mismatched, late and orphan events and estimates the economic exposure.",
+      "after": "Compare your product events with metered usage. Get an evidence-backed list of discrepancies and their estimated financial impact, so your team knows what to investigate.",
+      "reason": "Connect the concrete operation to a reviewable result."
+    },
+    {
+      "before": "MVP privacy model",
+      "after": "Before you upload",
+      "reason": "Put data handling in the context of the decision."
+    },
+    {
+      "before": "Original uploads and API keys are not stored. Reports and finding evidence are saved to local SQLite scan history.",
+      "after": "Original files and API keys are not retained. Findings and evidence are stored on the machine running the app, which is the server for hosted use. Use test data until production-data safeguards have been independently reviewed. Vercel history may disappear on restart.",
+      "reason": "Do not imply browser-local storage or permanent hosted history."
+    },
+    {
+      "before": "PRIVATE BETA FLOW",
+      "after": "START WITH FILES",
+      "reason": "Prioritize the existing file workflow."
+    },
+    {
+      "before": "First time here?",
+      "after": "Two exports. A reviewable report.",
+      "reason": "Explain inputs and output."
+    },
+    {
+      "before": "Use the guided preflight before connecting Stripe, or inspect a synthetic portfolio report.",
+      "after": "Start with two usage exports, use the guided preflight when you need it, or inspect a synthetic report before uploading.",
+      "reason": "Make the beta alternatives explicit without removing /start."
+    },
+    {
+      "before": "<section class=\"panel\"><h2>Run a reconciliation</h2>",
+      "after": "<section class=\"panel\" id=\"file-scan\"><h2>Compare your usage files</h2><p class=\"hint\">This first check compares source events with metered usage. Invoice, credit and effective-price checks need the additional compatible uploads below.</p>",
+      "reason": "Anchor for the primary action and explicit boundary."
+    },
+    {
+      "before": "<a class=\"buttonlink\" href=\"/start\">Start guided scan</a>",
+      "after": "<a class=\"buttonlink\" href=\"#file-scan\">Compare usage files</a><a class=\"buttonlink secondary\" href=\"/start\">Guided preflight</a>",
+      "reason": "File scan first, preflight still available."
+    },
+    {
+      "before": "View demo",
+      "after": "View synthetic report",
+      "reason": "Label evidence honestly."
+    },
+    {
+      "before": "Source / raw usage CSV or JSON",
+      "after": "1. Product usage export (CSV or JSON)",
+      "reason": "Clarify the origin of the first file."
+    },
+    {
+      "before": "Metered / billing usage CSV or JSON",
+      "after": "2. Metered usage export (CSV or JSON)",
+      "reason": "Avoid implying an invoice file is the second required input."
+    },
+    {
+      "before": "Analyze leakage",
+      "after": "Compare files",
+      "reason": "Name the operation rather than presuppose leakage."
+    }
+  ]
+}

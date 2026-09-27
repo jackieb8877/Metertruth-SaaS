@@ -1,0 +1,30 @@
+{
+  "scope": "Static editorial preview only; not a backend or conversion test.",
+  "static_tests_passed": 10,
+  "browser_checks": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "heading_visible": true,
+      "no_horizontal_overflow": true,
+      "primary_anchor_works": true,
+      "faq_opens_and_closes": true,
+      "keyboard_skip_link_works": true,
+      "external_requests": [],
+      "page_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "heading_visible": true,
+      "no_horizontal_overflow": true,
+      "primary_anchor_works": true,
+      "faq_opens_and_closes": true,
+      "keyboard_skip_link_works": true,
+      "external_requests": [],
+      "page_errors": []
+    }
+  ]
+}
