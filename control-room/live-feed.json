@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T17:06:20Z",
+  "updated_at": "2026-09-27T17:04:20Z",
   "events": [
     {
       "id": "product-scout-20260927T164251Z-start",
@@ -152,6 +152,113 @@
       "phase": "decision",
       "title": "No WebGL/3D for launch v1",
       "detail": "Real product demonstration video provides more comprehension with lower mobile performance cost.",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T170258Z-start",
+      "ts": "2026-09-27T17:02:58Z",
+      "agent_id": "product-scout",
+      "phase": "start",
+      "title": "Starting fresh EU product scan",
+      "detail": "Rechecking recent demand signals, Spain/EU retail bands, visual demo strength and low-regulation candidates.",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T170305Z-action",
+      "ts": "2026-09-27T17:03:05Z",
+      "agent_id": "product-scout",
+      "phase": "action",
+      "title": "Rechecking September pet-product velocity",
+      "detail": "Reviewing grooming, pet-cleaning and travel-with-pet candidates against the current leader.",
+      "source_url": "https://velocityspy.com/trending/pet-supplies/",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T170312Z-observation",
+      "ts": "2026-09-27T17:03:12Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Dog car seat cover is a lower-regulation challenger",
+      "detail": "The category remains active and has a strong dirt/hair before-after demo without electrical compliance, but fit and waterproofing returns need validation.",
+      "source_url": "https://velocityspy.com/trending/pet-supplies/",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T170320Z-action",
+      "ts": "2026-09-27T17:03:20Z",
+      "agent_id": "product-scout",
+      "phase": "action",
+      "title": "Checking EU retail bands for dog car covers",
+      "detail": "Validating target-price fit before supplier economics.",
+      "source_url": "https://www.medpets.es/kong-2-1-bench-seat-cover-hammock",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T170328Z-observation",
+      "ts": "2026-09-27T17:03:28Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Dog car cover price band passes",
+      "detail": "Current mainstream references around €39.99-59.95 leave room for a differentiated mid-market offer if landed cost is low enough.",
+      "source_url": "https://tienda.deterrajaras.es/en/products/funda-asiento-coche-hamaca-perro",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T170336Z-action",
+      "ts": "2026-09-27T17:03:36Z",
+      "agent_id": "product-scout",
+      "phase": "action",
+      "title": "Testing compression packing cubes",
+      "detail": "Comparing current Spain/EU retail prices, delivery and saturation for a low-regulation travel candidate.",
+      "source_url": "https://www.travel-dude.com/es/products/packing-cubes-7-set",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T170344Z-observation",
+      "ts": "2026-09-27T17:03:44Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Packing cubes pass price fit but competition is heavy",
+      "detail": "Current branded references cluster around €35-60, but generic saturation means supplier economics and positioning must be exceptional.",
+      "source_url": "https://www.samsonite.es/ta-revolution-set-of-3-packing-cubes-lime/155602-1515.html",
+      "status": "warning"
+    },
+    {
+      "id": "product-scout-20260927T170352Z-action",
+      "ts": "2026-09-27T17:03:52Z",
+      "agent_id": "product-scout",
+      "phase": "action",
+      "title": "Checking rising car-accessory candidates",
+      "detail": "Testing foldable windshield sunshade umbrella for visual demo, target retail range and regulatory simplicity.",
+      "source_url": "https://www.velocityspy.com/trending/car-accessories/",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T170400Z-observation",
+      "ts": "2026-09-27T17:04:00Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Windshield sunshade passes price/demo filters with seasonality risk",
+      "detail": "September data shows the automatic sunshade rising and current EU listings fit the €25-100 band, but universal-fit complaints and seasonality are material risks.",
+      "source_url": "https://www.fruugo.es/parasol-tipo-paraguas-para-parabrisas-de-coche-parasol-plegable-mejorado-2026-de-57x32-parasol-para-ventana-delantera-de-coche-protege-el-interior-y-mantiene/p-506524960-1036429149",
+      "status": "warning"
+    },
+    {
+      "id": "product-scout-20260927T170410Z-decision",
+      "ts": "2026-09-27T17:04:10Z",
+      "agent_id": "product-scout",
+      "phase": "decision",
+      "title": "Leader retained; three challengers strengthened",
+      "detail": "Kit Muda Cero remains #1. Dog car seat cover moves to #2 WATCH; compression packing cubes and windshield sunshade enter the top five pending EU supplier economics.",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T170420Z-done",
+      "ts": "2026-09-27T17:04:20Z",
+      "agent_id": "product-scout",
+      "phase": "done",
+      "title": "Product discovery cycle complete",
+      "detail": "Top-10 and handoffs updated. No challenger clears PROMOTE without verified supplier cost and SLA.",
       "status": "ok"
     }
   ]
