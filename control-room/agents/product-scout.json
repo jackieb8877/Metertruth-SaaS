@@ -2,31 +2,254 @@
   "id": "product-scout",
   "name": "Product Scout",
   "status": "waiting",
-  "last_run": "2026-09-27T16:49:00Z",
+  "last_run": "2026-09-27T17:04:20Z",
   "focus": "Discover products with real EU/Spain potential",
-  "summary": "No candidate clearly beats Kit Muda Cero yet. Portable pet water bottles and handheld vacuum sealers are worth watching, but price competition, non-EU fulfillment or compliance risk prevent promotion.",
+  "summary": "No challenger clearly beats Kit Muda Cero. Fresh scan adds three evidence-backed WATCH candidates: dog car seat cover/hammock, compression packing cubes, and foldable windshield sunshade umbrella. Their product risk is lower than electronics, but EU dropshipping cost/SLA still needs supplier validation.",
   "blocker": null,
-  "progress": 62,
+  "progress": 72,
+  "scoring_note": "0-100 composite of recent demand evidence, retail price fit, visual demo, likely margin, saturation, logistics, returns and regulatory complexity. Unknown supplier cost is penalized.",
+  "shortlist": [
+    {
+      "rank": 1,
+      "name": "Kit Muda Cero",
+      "score": 87,
+      "decision": "PROMOTE",
+      "retail_observed_eur": "29.90-34.90 target",
+      "supplier_cost_eur": null,
+      "demand_evidence": "Pet Hair Remover Mitt is active on VelocitySpy September 2026 with 745.3K tracked views; reusable pet-hair rollers are currently listed in Spain around €20.58 plus shipping.",
+      "evidence_urls": [
+        "https://velocityspy.com/trending/pet-supplies/",
+        "https://www.fruugo.es/rodillo-quitapelusas-reutilizable-para-gatos-y-perros-lavable-color-verde-y-blanco/p-478381092-996143117"
+      ],
+      "saturation": "medium",
+      "creative_potential": "high",
+      "risks": [
+        "3-piece landed cost still unverified",
+        "blind EU fulfillment not yet verified"
+      ],
+      "next": "Supplier & Margin: verify one-EU-warehouse landed cost and blind dropshipping for the full kit."
+    },
+    {
+      "rank": 2,
+      "name": "Dog car seat cover / hammock",
+      "score": 78,
+      "decision": "WATCH",
+      "retail_observed_eur": "39.99-59.95 mainstream references; premium examples higher",
+      "supplier_cost_eur": null,
+      "demand_evidence": "VelocitySpy lists Dog Car Seat Cover as an active September 2026 pet product. Spanish/EU retail references show €39.99 at Deterrajaras and €59.95 for KONG at Medpets.",
+      "evidence_urls": [
+        "https://velocityspy.com/trending/pet-supplies/",
+        "https://tienda.deterrajaras.es/en/products/funda-asiento-coche-hamaca-perro",
+        "https://www.medpets.es/kong-2-1-bench-seat-cover-hammock"
+      ],
+      "saturation": "medium",
+      "creative_potential": "high",
+      "risks": [
+        "fit/size complaints",
+        "waterproofing/zipper quality drives returns",
+        "supplier/SLA unverified"
+      ],
+      "next": "Supplier & Margin: find EU-stock 600D/mesh-window version under landed-cost threshold; Customer Voice: mine fit and waterproofing complaints."
+    },
+    {
+      "rank": 3,
+      "name": "Pet grooming vacuum kit",
+      "score": 77,
+      "decision": "WATCH",
+      "retail_observed_eur": "TBD",
+      "supplier_cost_eur": null,
+      "demand_evidence": "VelocitySpy September 2026 ranks Pet Grooming Vacuum Kit active with 933.8K tracked views.",
+      "evidence_urls": [
+        "https://velocityspy.com/trending/pet-supplies/"
+      ],
+      "saturation": "medium",
+      "creative_potential": "very high",
+      "risks": [
+        "CE/GPSR/electrical compliance",
+        "returns/warranty",
+        "noise and pet acceptance",
+        "supplier documentation"
+      ],
+      "next": "Compliance + Supplier: only advance if EU conformity package and returns economics are verified."
+    },
+    {
+      "rank": 4,
+      "name": "Compression packing cubes set",
+      "score": 76,
+      "decision": "WATCH",
+      "retail_observed_eur": "34.90-60.00 typical branded references",
+      "supplier_cost_eur": null,
+      "demand_evidence": "Current EU retail validates a €35-60 category: Travel Dude 7pc €49.99 with 1-2 day Spain delivery, Thule €44.95, Samsonite €60.",
+      "evidence_urls": [
+        "https://www.travel-dude.com/es/products/packing-cubes-7-set",
+        "https://www.thule.com/es-es/organizers/packing-cubes-and-folders/thule-compression-cube-set-_-3205112",
+        "https://www.samsonite.es/ta-revolution-set-of-3-packing-cubes-lime/155602-1515.html"
+      ],
+      "saturation": "high",
+      "creative_potential": "high",
+      "risks": [
+        "brand-heavy category",
+        "generic sets commoditized",
+        "supplier cost not verified"
+      ],
+      "next": "Competitor Watch: quantify generic vs branded saturation; Supplier: search EU-stock 4-7pc set with compression zipper and landed cost allowing >60% gross margin."
+    },
+    {
+      "rank": 5,
+      "name": "Foldable windshield sunshade umbrella",
+      "score": 74,
+      "decision": "WATCH",
+      "retail_observed_eur": "25.58-52.70",
+      "supplier_cost_eur": null,
+      "demand_evidence": "VelocitySpy September 2026 lists Automatic Car Windshield Sunshade as rising with 58.2K tracked views. Current EU listings range from €25.58 on Fruugo ES to €52.70 at 3Wliners.",
+      "evidence_urls": [
+        "https://www.velocityspy.com/trending/car-accessories/",
+        "https://www.fruugo.es/parasol-tipo-paraguas-para-parabrisas-de-coche-parasol-plegable-mejorado-2026-de-57x32-parasol-para-ventana-delantera-de-coche-protege-el-interior-y-mantiene/p-506524960-1036429149",
+        "https://eu.3wliners.com/products/front-windshield-sunshade-umbrella"
+      ],
+      "saturation": "high",
+      "creative_potential": "high",
+      "risks": [
+        "seasonality",
+        "universal-fit complaints",
+        "cheap marketplace substitutes"
+      ],
+      "next": "Supplier: verify EU stock and dimensions; Customer Voice: focus on fit, handle interference and durability."
+    },
+    {
+      "rank": 6,
+      "name": "Reusable pet-hair roller",
+      "score": 73,
+      "decision": "WATCH",
+      "retail_observed_eur": "20.58-21.58 plus shipping",
+      "supplier_cost_eur": null,
+      "demand_evidence": "Multiple fresh Fruugo ES listings remain in stock around €20.58-21.58; strongest role is as a bundle component rather than standalone due sub-€25 ticket.",
+      "evidence_urls": [
+        "https://www.fruugo.es/rodillo-reutilizable-para-quitar-el-pelo-de-mascotas-ideal-para-muebles-ropa-tapiceria-y-asientos-de-coche-ecologico/p-475920953-992832201",
+        "https://www.fruugo.es/rodillo-quitapelusas-reutilizable-y-quitapelos-de-mascotas-lavable-para-ropa-sofa-coche-viajes-beige-1-paquete/p-467746775-981362258"
+      ],
+      "saturation": "high",
+      "creative_potential": "high",
+      "risks": [
+        "standalone AOV below target",
+        "commodity competition"
+      ],
+      "next": "Keep as Kit Muda Cero component, not primary standalone offer."
+    },
+    {
+      "rank": 7,
+      "name": "Portable pet water bottle",
+      "score": 69,
+      "decision": "WATCH",
+      "retail_observed_eur": "TBD",
+      "supplier_cost_eur": null,
+      "demand_evidence": "VelocitySpy September 2026 shows 547.9K tracked views and 2 sellers in its snapshot.",
+      "evidence_urls": [
+        "https://velocityspy.com/trending/pet-supplies/"
+      ],
+      "saturation": "high",
+      "creative_potential": "medium-high",
+      "risks": [
+        "commodity pricing",
+        "leak complaints",
+        "weak differentiation"
+      ],
+      "next": "Only revisit if EU supplier enables differentiated bundle or unusually low landed cost."
+    },
+    {
+      "rank": 8,
+      "name": "Pet deodorizing cleaning gloves",
+      "score": 67,
+      "decision": "WATCH",
+      "retail_observed_eur": "8.68-11.21 for low-count packs",
+      "supplier_cost_eur": null,
+      "demand_evidence": "VelocitySpy September 2026 shows 786.4K tracked views. SHEIN Spain lists variants around €8.68 with current reviews.",
+      "evidence_urls": [
+        "https://velocityspy.com/trending/pet-supplies/",
+        "https://es.shein.com/1pc-Trial-Pack-6pcs-Per-Pack-No-Rinse-Pet-Cleaning-Gloves%2C-Suitable-For-Dogs-And-Cats%2C-Daily-Convenient-Waterless-Pet-Dry-Cleaning-Wipes%2C-Essential-Waterless-Pet-Grooming-Gloves-For-Cats-And-Dogs-%28Puppies-Kittens%29%2C-Popular-Pet-Deodorizing-Cleaning-Wipes-For-Fast-Hygienic-Care%2C-Multi-Purpose-Pet-Cleaning-Gloves-For-Home-Pet-Grooming-p-292158960.html?channelId=10&contentIds=&goods_id=292158960&pageType=topBanner"
+      ],
+      "saturation": "high",
+      "creative_potential": "high",
+      "risks": [
+        "ticket too low standalone",
+        "consumable formulation/claims need review",
+        "mixed effectiveness reviews"
+      ],
+      "next": "Consider only as upsell or bundle consumable."
+    },
+    {
+      "rank": 9,
+      "name": "Handheld vacuum sealer",
+      "score": 65,
+      "decision": "WATCH",
+      "retail_observed_eur": "TBD",
+      "supplier_cost_eur": null,
+      "demand_evidence": "Visual before/after remains strong, but this cycle found no verified EU dropshipping source strong enough to remove prior concerns.",
+      "evidence_urls": [],
+      "saturation": "medium-high",
+      "creative_potential": "very high",
+      "risks": [
+        "battery/electrical compliance",
+        "food-contact accessory compliance",
+        "returns"
+      ],
+      "next": "Do not promote until EU stock and conformity evidence are verified."
+    },
+    {
+      "rank": 10,
+      "name": "3D printed cat wall bed",
+      "score": 58,
+      "decision": "KILL",
+      "retail_observed_eur": "~118.83 and above",
+      "supplier_cost_eur": null,
+      "demand_evidence": "VelocitySpy shows 3D Printed Cat Bed rising with 404.2K tracked views, but current EU examples are above target price and several are unavailable/backordered.",
+      "evidence_urls": [
+        "https://velocityspy.com/trending/pet-supplies/",
+        "https://www.decords.de/en/collections/3d-printed-pet-furniture-feeding-accessories/products/3d-printed-cat-ear-wall-bed"
+      ],
+      "saturation": "low",
+      "creative_potential": "very high",
+      "risks": [
+        "retail above target",
+        "bulky/fragile",
+        "installation liability",
+        "availability weak"
+      ],
+      "next": "Kill for current model; revisit only if compact EU-produced version appears under €100 retail."
+    }
+  ],
+  "handoff": {
+    "customer_voice": [
+      "Dog car seat cover / hammock — mine fit, waterproofing, zipper, smell and cleaning complaints.",
+      "Kit Muda Cero — continue mining hair-removal efficacy and coat-type objections.",
+      "Foldable windshield sunshade umbrella — mine fit, handle/dashboard interference and durability complaints."
+    ],
+    "competitor_watch": [
+      "Dog car seat cover / hammock — benchmark €39.99-59.95 offers, bundles and proof claims.",
+      "Compression packing cubes — quantify generic saturation vs premium positioning at €35-60.",
+      "Kit Muda Cero — monitor bundle substitutes and standalone component pricing."
+    ],
+    "supplier_margin": [
+      "Dog car seat cover / hammock — seek EU stock, 600D/mesh-window, verified blind dropshipping and landed cost.",
+      "Compression packing cubes — seek EU-stock 4-7pc compression sets with margin room at €39.90-49.90.",
+      "Kit Muda Cero — continue one-warehouse 3-piece landed-cost validation."
+    ]
+  },
   "events": [
     {
-      "ts": "2026-09-27T16:46:00Z",
-      "title": "Pet niche validated",
-      "detail": "Pet hair remover mitt, portable pet water bottle and grooming vacuum show strong recent TikTok velocity."
+      "ts": "2026-09-27T17:03:05Z",
+      "title": "Fresh trend scan completed",
+      "detail": "September 2026 pet and car snapshots rechecked; pet grooming vacuum remains high-velocity but high-risk, while dog car seat covers and windshield sunshades offer lower-regulation alternatives."
     },
     {
-      "ts": "2026-09-27T16:47:00Z",
-      "title": "Portable pet water bottle watchlisted",
-      "detail": "Strong recent views and low seller count, but current Spain retail pricing is highly commoditized."
+      "ts": "2026-09-27T17:03:35Z",
+      "title": "Retail price bands validated",
+      "detail": "Dog car seat covers show viable €39.99-59.95 mainstream references; compression packing cubes cluster around €35-60; windshield umbrella listings span roughly €25.58-52.70."
     },
     {
-      "ts": "2026-09-27T16:48:00Z",
-      "title": "Handheld vacuum sealer watchlisted",
-      "detail": "Excellent visual demo and kitchen-storage trend fit, but verified EU dropshipping stock and food-contact/battery compliance remain unresolved."
-    },
-    {
-      "ts": "2026-09-27T16:49:00Z",
-      "title": "Cycle complete",
-      "detail": "No product promoted above the current leader."
+      "ts": "2026-09-27T17:04:20Z",
+      "title": "Shortlist updated",
+      "detail": "Leader unchanged. Dog car seat cover/hammock moves to #2 WATCH; compression packing cubes and windshield sunshade enter the top five. No new candidate clears PROMOTE without supplier economics."
     }
   ]
 }
