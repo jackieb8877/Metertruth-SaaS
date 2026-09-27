@@ -1,0 +1,11 @@
+{
+  "id": "launch-qa",
+  "name": "Launch QA",
+  "status": "scheduled",
+  "last_run": null,
+  "focus": "Checkout, legal, trust, mobile and analytics QA",
+  "summary": "First QA cycle pending",
+  "blocker": null,
+  "progress": 15,
+  "events": []
+}
