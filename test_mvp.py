@@ -124,6 +124,78 @@ def test_invoice_omitted_metric_is_safe_only_for_single_metered_metric():
         assert False, 'ambiguous invoice line must not create misleading findings'
 
 
+def test_invoice_reconciliation_separates_periods_and_uses_half_open_boundaries():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[
+        {'event_id':'e1','customer_id':'cus_1','timestamp':'2026-09-27T23:59:59Z','quantity':'1','metric':'api'},
+        {'event_id':'e2','customer_id':'cus_1','timestamp':'2026-09-28T00:00:00Z','quantity':'1','metric':'api'},
+    ]
+    invoice=[
+        {'invoice_id':'i1','customer_id':'cus_1','metric':'api','line_type':'usage','amount':'0.05',
+         'period_start':'2026-09-27T00:00:00Z','period_end':'2026-09-28T00:00:00Z'},
+        {'invoice_id':'i2','customer_id':'cus_1','metric':'api','line_type':'usage','amount':'0.15',
+         'period_start':'2026-09-28T00:00:00Z','period_end':'2026-09-29T00:00:00Z'},
+    ]
+    result=reconcile_ledgers(metered,invoice,None,{'price_per_unit':'0.10','pricing':{}})
+    assert [f['code'] for f in result['findings']] == ['INVOICE_MISMATCH','INVOICE_MISMATCH']
+    assert [f['impact_eur'] for f in result['findings']] == [0.05,-0.05]
+    assert result['summary']['potential_underbilling_eur'] == 0.05
+    assert result['summary']['potential_overbilling_eur'] == 0.05
+
+
+def test_invoice_credit_reconciliation_uses_the_matching_billing_period():
+    from ledger_reconciliation import reconcile_ledgers
+    period={'period_start':'2026-09-27T00:00:00Z','period_end':'2026-09-28T00:00:00Z'}
+    metered=[{'event_id':'e1','customer_id':'cus_1','timestamp':'2026-09-27T10:00:00Z','quantity':'1','metric':'api'}]
+    invoice=[
+        {'invoice_id':'i1','customer_id':'cus_1','metric':'api','line_type':'usage','amount':'0.10',**period},
+        {'invoice_id':'i1','customer_id':'cus_1','line_type':'credit','amount':'-0.10',**period},
+    ]
+    credits=[{'customer_id':'cus_1','credit_amount':'0.20',**period}]
+    result=reconcile_ledgers(metered,invoice,credits,{'price_per_unit':'0.10','pricing':{}})
+    assert [f['code'] for f in result['findings']] == ['CREDIT_MISMATCH']
+    assert result['findings'][0]['impact_eur'] == 0.10
+
+
+def test_invoice_period_overlap_is_rejected_instead_of_double_matching():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[{'event_id':'e1','customer_id':'cus_1','timestamp':'2026-09-27T10:00:00Z','quantity':'1','metric':'api'}]
+    invoice=[
+        {'customer_id':'cus_1','metric':'api','amount':'0.10','period_start':'2026-09-27T00:00:00Z','period_end':'2026-09-28T00:00:00Z'},
+        {'customer_id':'cus_1','metric':'api','amount':'0.10','period_start':'2026-09-27T12:00:00Z','period_end':'2026-09-28T12:00:00Z'},
+    ]
+    try:
+        reconcile_ledgers(metered,invoice,None,{'price_per_unit':'0.10','pricing':{}})
+    except ValueError as exc:
+        assert 'periods overlap' in str(exc)
+    else:
+        assert False, 'overlapping invoice windows must not double count metered usage'
+
+
+def test_period_invoice_upload_shows_separate_period_findings_in_saved_report(tmp_path, monkeypatch):
+    monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'period-scan.sqlite3'))
+    events=(
+        b'event_id,customer_id,timestamp,quantity,metric\n'
+        b'e1,cus_1,2026-09-27T23:59:59Z,1,api\n'
+        b'e2,cus_1,2026-09-28T00:00:00Z,1,api\n'
+    )
+    invoice=(
+        b'invoice_id,customer_id,metric,line_type,amount,period_start,period_end\n'
+        b'i1,cus_1,api,usage,0.05,2026-09-27T00:00:00Z,2026-09-28T00:00:00Z\n'
+        b'i2,cus_1,api,usage,0.15,2026-09-28T00:00:00Z,2026-09-29T00:00:00Z\n'
+    )
+    r=client.post('/analyze',files={
+        'raw_file':('raw.csv',events,'text/csv'), 'metered_file':('metered.csv',events,'text/csv'),
+        'invoice_file':('invoice.csv',invoice,'text/csv'),
+    },data={'price_per_unit':'0.10','late_hours':'24','quantity_tolerance':'0','annualization_periods':'12','pricing_json':''})
+    assert r.status_code == 200
+    assert r.text.count('<b>INVOICE_MISMATCH</b>') == 2
+    match=re.search(r'href="/history/(\d+)"',r.text)
+    saved=client.get(f'/history/{match.group(1)}').text
+    assert '[2026-09-27' in saved and '[2026-09-28' in saved
+    assert 'Excluded from usage exposure cards' in saved
+
+
 def test_jsonl_and_bad_json_upload(tmp_path, monkeypatch):
     monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'scans.sqlite3'))
     raw=b'{"event_id":"e1","customer_id":"cus_1","timestamp":"2026-09-27T00:10:00Z","quantity":2}\n'
