@@ -1,0 +1,4 @@
+internal_customer_id,stripe_customer_id
+workspace_alpha,cus_alpha
+workspace_beta,cus_beta
+workspace_gamma,cus_gamma

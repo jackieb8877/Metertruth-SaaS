@@ -1,0 +1,71 @@
+{
+  "mode": "stripe_multi_customer_scan",
+  "meter_id": "mtr_demo",
+  "metric": "api_calls",
+  "grouping": "hour",
+  "summary": {
+    "customers_discovered": 3,
+    "customers_scanned": 3,
+    "customers_with_findings": 2,
+    "customers_clean": 1,
+    "customers_failed": 0,
+    "findings": 2,
+    "potential_underbilling_eur": 0.2,
+    "potential_overbilling_eur": 0.4,
+    "period_exposure_eur": 0.6
+  },
+  "customers": [
+    {
+      "customer_id": "cus_demo_c",
+      "findings": 1,
+      "potential_underbilling_eur": 0.0,
+      "potential_overbilling_eur": 0.4,
+      "period_exposure_eur": 0.4,
+      "buckets_compared": 1,
+      "status": "LEAKAGE"
+    },
+    {
+      "customer_id": "cus_demo_a",
+      "findings": 1,
+      "potential_underbilling_eur": 0.2,
+      "potential_overbilling_eur": 0.0,
+      "period_exposure_eur": 0.2,
+      "buckets_compared": 1,
+      "status": "LEAKAGE"
+    },
+    {
+      "customer_id": "cus_demo_b",
+      "findings": 0,
+      "potential_underbilling_eur": 0.0,
+      "potential_overbilling_eur": 0.0,
+      "period_exposure_eur": 0.0,
+      "buckets_compared": 1,
+      "status": "CLEAN"
+    }
+  ],
+  "errors": [],
+  "findings": [
+    {
+      "customer_id": "cus_demo_c",
+      "metric": "api_calls",
+      "bucket_start": 1790467200,
+      "expected_usage": 200.0,
+      "stripe_usage": 220.0,
+      "delta_usage": -20.0,
+      "impact_eur": -0.4,
+      "type": "AGGREGATE_OVER",
+      "status": "CONFIRMED"
+    },
+    {
+      "customer_id": "cus_demo_a",
+      "metric": "api_calls",
+      "bucket_start": 1790467200,
+      "expected_usage": 200.0,
+      "stripe_usage": 190.0,
+      "delta_usage": 10.0,
+      "impact_eur": 0.2,
+      "type": "AGGREGATE_UNDER",
+      "status": "CONFIRMED"
+    }
+  ]
+}

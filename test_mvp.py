@@ -1,0 +1,202 @@
+from pathlib import Path
+from fastapi.testclient import TestClient
+from app import app
+import re
+
+ROOT=Path(__file__).parent
+client=TestClient(app)
+
+def test_home_and_health():
+    assert client.get('/').status_code == 200
+    assert 'MeterTruth' in client.get('/').text
+    assert client.get('/health').json()['status'] == 'ok'
+
+def test_demo_analysis_and_export():
+    with open(ROOT/'demo_raw.csv','rb') as a, open(ROOT/'demo_metered.csv','rb') as b:
+        r=client.post('/analyze',files={'raw_file':('raw.csv',a,'text/csv'),'metered_file':('metered.csv',b,'text/csv')},data={'price_per_unit':'0.01','late_hours':'24','quantity_tolerance':'0','annualization_periods':'12','pricing_json':''})
+    assert r.status_code == 200
+    assert 'confirmed findings' in r.text
+    assert 'Underbilling' in r.text
+    assert 'Export JSON' in r.text
+
+def test_bad_csv_gets_400():
+    r=client.post('/analyze',files={'raw_file':('raw.csv',b'hello\n','text/csv'),'metered_file':('metered.csv',b'hello\n','text/csv')},data={})
+    assert r.status_code == 400
+    assert 'Could not analyze files' in r.text
+
+
+def test_json_upload_creates_reopenable_history_report(tmp_path, monkeypatch):
+    monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'scans.sqlite3'))
+    raw=b'{"events":[{"id":"e1","account_id":"cus_json","occurred_at":"2026-09-27T00:10:00Z","qty":10,"metric":"api"}]}'
+    metered=b'event_id,customer_id,timestamp,quantity,metric\ne1,cus_json,2026-09-27T00:10:00Z,9,api\n'
+    r=client.post('/analyze',files={
+        'raw_file':('raw.json',raw,'application/json'),
+        'metered_file':('metered.csv',metered,'text/csv'),
+    },data={'price_per_unit':'0.01','late_hours':'24','quantity_tolerance':'0','annualization_periods':'12','pricing_json':''})
+    assert r.status_code == 200
+    assert '1 confirmed findings' in r.text
+    match=re.search(r'href="/history/(\d+)"',r.text)
+    assert match
+    scan_id=match.group(1)
+    report=client.get(f'/history/{scan_id}')
+    assert report.status_code == 200
+    assert 'Revenue Leak Report' in report.text
+    assert 'WRONG_QUANTITY' in report.text
+    history=client.get('/history')
+    assert 'raw.json' in history.text and 'metered.csv' in history.text
+
+
+def test_jsonl_and_bad_json_upload(tmp_path, monkeypatch):
+    monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'scans.sqlite3'))
+    raw=b'{"event_id":"e1","customer_id":"cus_1","timestamp":"2026-09-27T00:10:00Z","quantity":2}\n'
+    metered=b'{"events":[{"event_id":"e1","customer_id":"cus_1","timestamp":"2026-09-27T00:10:00Z","quantity":2}]}'
+    good=client.post('/analyze',files={
+        'raw_file':('raw.ndjson',raw,'application/x-ndjson'),
+        'metered_file':('metered.json',metered,'application/json'),
+    },data={})
+    assert good.status_code == 200
+    assert '0 confirmed findings' in good.text
+    bad=client.post('/analyze',files={
+        'raw_file':('bad.json',b'{broken','application/json'),
+        'metered_file':('metered.json',metered,'application/json'),
+    },data={})
+    assert bad.status_code == 400
+    assert 'Invalid JSON' in bad.text
+
+
+def test_stripe_page_and_mock_reconciliation(monkeypatch):
+    assert client.get('/stripe').status_code == 200
+    assert 'read only' in client.get('/stripe').text.lower()
+    class FakeStripe:
+        def __init__(self, key):
+            assert key == 'rk_test_secret'
+        def list_meter_event_summaries(self, **kwargs):
+            return [{
+                'id':'sum_1','meter':kwargs['meter_id'],'customer_id':kwargs['customer_id'],
+                'start_time':1790467200,'end_time':1790470800,'aggregated_value':4
+            }]
+    monkeypatch.setattr('app.StripeReadClient', FakeStripe)
+    raw=b'event_id,customer_id,timestamp,quantity,metric\ne1,cus_123,2026-09-27T00:10:00Z,5,api\n'
+    r=client.post('/stripe/analyze', files={'raw_file':('raw.csv',raw,'text/csv')}, data={
+        'api_key':'rk_test_secret','meter_id':'mtr_123','customer_id':'cus_123','metric':'api',
+        'unit_price':'0.10','start_time':'2026-09-27T00:00:00','end_time':'2026-09-27T01:00:00',
+        'grouping':'hour','tolerance':'0'
+    })
+    assert r.status_code == 200
+    assert '1 aggregate findings' in r.text
+    assert '€0.10' in r.text
+    assert 'rk_test_secret' not in r.text
+
+
+def test_stripe_multi_customer_scan_route(monkeypatch, tmp_path):
+    monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'scans.sqlite3'))
+    class FakeStripe:
+        def __init__(self, key):
+            assert key == 'rk_test_secret'
+        def list_meter_event_summaries(self, **kwargs):
+            actual = {'cus_a': 7, 'cus_b': 4}[kwargs['customer_id']]
+            return [{
+                'id':'sum_'+kwargs['customer_id'],'meter':kwargs['meter_id'],'customer_id':kwargs['customer_id'],
+                'start_time':1790467200,'end_time':1790470800,'aggregated_value':actual
+            }]
+    monkeypatch.setattr('app.StripeReadClient', FakeStripe)
+    raw=(
+        b'event_id,customer_id,timestamp,quantity,metric\n'
+        b'e1,cus_a,2026-09-27T00:10:00Z,10,api\n'
+        b'e2,cus_b,2026-09-27T00:12:00Z,4,api\n'
+    )
+    r=client.post('/stripe/scan', files={'raw_file':('raw.csv',raw,'text/csv')}, data={
+        'api_key':'rk_test_secret','meter_id':'mtr_123','metric':'api','unit_price':'0.10',
+        'start_time':'2026-09-27T00:00:00','end_time':'2026-09-27T01:00:00','grouping':'hour','tolerance':'0'
+    })
+    assert r.status_code == 200
+    assert '1 customers with leakage signals' in r.text
+    assert 'cus_a' in r.text and 'cus_b' in r.text
+    assert '€0.30' in r.text
+    assert 'rk_test_secret' not in r.text
+    assert 'Export JSON' in r.text
+    match=re.search(r'href="/history/(\d+)"',r.text)
+    assert match
+    saved=client.get(f'/history/{match.group(1)}')
+    assert saved.status_code == 200
+    assert 'cus_a' in saved.text and 'cus_b' in saved.text
+
+
+def test_stripe_multi_customer_scan_with_identity_mapping(monkeypatch):
+    class FakeStripe:
+        def __init__(self, key):
+            assert key == 'rk_test_secret'
+        def list_meter_event_summaries(self, **kwargs):
+            actual = {'cus_a': 8, 'cus_b': 4}[kwargs['customer_id']]
+            return [{
+                'id':'sum_'+kwargs['customer_id'],'meter':kwargs['meter_id'],'customer_id':kwargs['customer_id'],
+                'start_time':1790467200,'end_time':1790470800,'aggregated_value':actual
+            }]
+    monkeypatch.setattr('app.StripeReadClient', FakeStripe)
+    raw=(
+        b'event_id,workspace_id,timestamp,quantity,metric\n'
+        b'e1,workspace_alpha,2026-09-27T00:10:00Z,10,api\n'
+        b'e2,workspace_beta,2026-09-27T00:12:00Z,4,api\n'
+        b'e3,workspace_missing,2026-09-27T00:14:00Z,9,api\n'
+    )
+    mapping=(
+        b'internal_customer_id,stripe_customer_id\n'
+        b'workspace_alpha,cus_a\n'
+        b'workspace_beta,cus_b\n'
+    )
+    r=client.post('/stripe/scan', files={
+        'raw_file':('raw.csv',raw,'text/csv'),
+        'mapping_file':('mapping.csv',mapping,'text/csv'),
+    }, data={
+        'api_key':'rk_test_secret','meter_id':'mtr_123','metric':'api','unit_price':'0.10',
+        'start_time':'2026-09-27T00:00:00','end_time':'2026-09-27T01:00:00','grouping':'hour','tolerance':'0'
+    })
+    assert r.status_code == 200
+    assert 'workspace_alpha' in r.text and 'cus_a' in r.text
+    assert 'workspace_missing' in r.text
+    assert '1 internal customers were not mapped' in r.text
+    assert '€0.20' in r.text
+    assert 'rk_test_secret' not in r.text
+
+
+def test_private_beta_onboarding_and_demo_routes():
+    r = client.get('/start')
+    assert r.status_code == 200
+    assert 'First scan' in r.text or 'FIRST SCAN' in r.text
+    assert 'Preflight your files' in r.text
+    d = client.get('/demo')
+    assert d.status_code == 200
+    assert '€0.60' in d.text
+    assert 'Synthetic' in d.text or 'synthetic' in d.text
+
+
+def test_preflight_route_ready_and_unmapped_warning():
+    raw=(
+        b'event_id,workspace_id,timestamp,quantity,metric\n'
+        b'e1,workspace_alpha,2026-09-27T00:10:00Z,10,api\n'
+        b'e2,workspace_missing,2026-09-27T00:14:00Z,9,api\n'
+    )
+    mapping=(
+        b'internal_customer_id,stripe_customer_id\n'
+        b'workspace_alpha,cus_a\n'
+    )
+    r=client.post('/preflight', files={
+        'raw_file':('raw.csv',raw,'text/csv'),
+        'mapping_file':('mapping.csv',mapping,'text/csv'),
+    })
+    assert r.status_code == 200
+    assert '>READY<' in r.text
+    assert 'Stripe-ready' in r.text
+    assert 'workspace_missing' not in r.text  # avoid leaking raw identifiers into generic summary
+    assert '1 internal customer IDs are unmapped' in r.text
+
+
+def test_preflight_route_blocks_without_mapping_for_internal_ids():
+    raw=(
+        b'event_id,workspace_id,timestamp,quantity,metric\n'
+        b'e1,workspace_alpha,2026-09-27T00:10:00Z,10,api\n'
+    )
+    r=client.post('/preflight', files={'raw_file':('raw.csv',raw,'text/csv')})
+    assert r.status_code == 200
+    assert '>BLOCKED<' in r.text
+    assert 'No Stripe customer IDs are available' in r.text

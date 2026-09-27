@@ -1,0 +1,44 @@
+{
+  "events": [
+    {
+      "event_id": "ok-1",
+      "customer_id": "acme",
+      "timestamp": "2026-09-10T10:00:01Z",
+      "quantity": "100",
+      "metric": "api",
+      "idempotency_key": "k-ok"
+    },
+    {
+      "event_id": "dup-1",
+      "customer_id": "beta",
+      "timestamp": "2026-09-10T10:02:01Z",
+      "quantity": "20",
+      "metric": "api",
+      "idempotency_key": "k-d1"
+    },
+    {
+      "event_id": "dup-1",
+      "customer_id": "beta",
+      "timestamp": "2026-09-10T10:02:02Z",
+      "quantity": "20",
+      "metric": "api",
+      "idempotency_key": "k-d2"
+    },
+    {
+      "event_id": "wrong-1",
+      "customer_id": "beta",
+      "timestamp": "2026-09-10T10:03:01Z",
+      "quantity": "700",
+      "metric": "tokens",
+      "idempotency_key": "k-w1"
+    },
+    {
+      "event_id": "orphan-1",
+      "customer_id": "gamma",
+      "timestamp": "2026-09-10T10:04:00Z",
+      "quantity": "5",
+      "metric": "api",
+      "idempotency_key": "k-o1"
+    }
+  ]
+}

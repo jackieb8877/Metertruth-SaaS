@@ -1,0 +1,5 @@
+event_id,customer_id,timestamp,quantity,metric
+u001,cus_demo_a,2026-09-27T00:05:00Z,120,api_calls
+u002,cus_demo_a,2026-09-27T00:15:00Z,80,api_calls
+u003,cus_demo_b,2026-09-27T00:08:00Z,50,api_calls
+u004,cus_demo_c,2026-09-27T00:40:00Z,200,api_calls

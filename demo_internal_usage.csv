@@ -1,0 +1,5 @@
+event_id,workspace_id,timestamp,quantity,metric
+u1,workspace_alpha,2026-09-27T00:10:00Z,10,api_calls
+u2,workspace_beta,2026-09-27T00:12:00Z,4,api_calls
+u3,workspace_gamma,2026-09-27T00:15:00Z,8,api_calls
+u4,workspace_unmapped,2026-09-27T00:20:00Z,3,api_calls

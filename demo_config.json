@@ -1,0 +1,7 @@
+{
+  "late_hours": 24,
+  "pricing": {
+    "api": {"unit_price": 0.02},
+    "tokens": {"unit_price": 0.001}
+  }
+}

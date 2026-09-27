@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "event_id": "ok-1",
+      "customer_id": "acme",
+      "timestamp": "2026-09-10T10:00:00Z",
+      "quantity": "100",
+      "metric": "api"
+    },
+    {
+      "event_id": "miss-1",
+      "customer_id": "acme",
+      "timestamp": "2026-09-10T10:01:00Z",
+      "quantity": "50",
+      "metric": "api"
+    },
+    {
+      "event_id": "dup-1",
+      "customer_id": "beta",
+      "timestamp": "2026-09-10T10:02:00Z",
+      "quantity": "20",
+      "metric": "api"
+    },
+    {
+      "event_id": "wrong-1",
+      "customer_id": "beta",
+      "timestamp": "2026-09-10T10:03:00Z",
+      "quantity": "1000",
+      "metric": "tokens"
+    }
+  ]
+}
