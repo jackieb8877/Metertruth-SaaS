@@ -65,7 +65,7 @@ Local source rows are passed in memory into the core. In history, a report may i
 
 ## Verification record
 
-- 65 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents, portfolio-rollup, precision-preserving input and invoice/credit mismatch tests.
+- 67 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents, portfolio-rollup, precision-preserving input and invoice/credit mismatch tests.
 - Python compile check passes for app, import layer, history, RecoveryCore and connector modules.
 - An earlier v0.6 project note recorded 44 passing tests; v0.7 added tests on top of that baseline.
 
@@ -77,7 +77,7 @@ Local source rows are passed in memory into the core. In history, a report may i
 - RecoveryCore findings include a canonical machine-readable `code` while preserving the existing `type` field for compatibility. `MISSING`, `DUPLICATE` and `ORPHAN_METERED` map to `MISSING_USAGE`, `DUPLICATE_USAGE` and `ORPHAN_METERED_EVENT`.
 - Event-level and Stripe aggregate/portfolio reconciliation now use shared Decimal helpers, with half-up cent rounding. Tests cover `0.1 + 0.2`, tier boundaries, positive/negative half cents, and rollups across customers.
 - Optional invoice imports compare invoice usage lines with metered quantity × configured prices by customer and metric. Optional credit imports compare positive credit ledger totals with absolute invoice credit-line amounts. These are separate downstream deltas and are not included in the source-to-meter headline exposure. Credits require invoice input. Period grouping, taxes, proration, refunds and provider-specific line semantics are not inferred.
-- New adversarial route tests confirm a source-to-meter shortfall and invoice/credit deltas remain separately reported without rolling downstream exposure into the core € cards. Full suite: 65/65.
+- New adversarial tests confirm a source-to-meter shortfall and invoice/credit deltas remain separately reported without rolling downstream exposure into the core € cards; tiered pricing aggregates split events before applying price tiers, and omitted invoice metrics are rejected when ambiguous. Full suite: 67/67.
 - The canonical-code and event-level Decimal source commits had successful Vercel status checks. The Work browser could not independently load the hosted URL in this check; runtime behavior beyond the owner's login test remains unverified.
 
 ## Competitive review and attack plan

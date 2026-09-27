@@ -16,7 +16,7 @@ from recoverycore_v02 import infer, _price_amount
 INVOICE_ALIASES = {
     "invoice_id": ["invoice_id", "invoice", "bill_id"],
     "customer_id": ["customer_id", "customer", "account_id", "customer_external_id"],
-    "metric": ["metric", "meter", "product", "description", "line_item"],
+    "metric": ["metric", "meter", "usage_type", "sku"],
     "amount": ["amount", "line_amount", "amount_due", "total", "subtotal", "net_amount"],
     "line_type": ["line_type", "type", "kind", "category"],
 }
@@ -27,7 +27,6 @@ CREDIT_ALIASES = {
 
 
 def _infer(headers: list[str], aliases: dict[str, list[str]]) -> dict[str, str]:
-    found = infer(headers)
     # Use RecoveryCore's header normalization while keeping ledger-specific aliases.
     from recoverycore_v02 import norm
     normalized = {norm(header): header for header in headers}
@@ -51,14 +50,15 @@ def reconcile_ledgers(metered: list[dict[str, str]], invoice: list[dict[str, str
         if not invoice_mapping["customer_id"] or not invoice_mapping["amount"]:
             raise ValueError("Invoice file needs customer_id and amount columns")
         metric_col = mm.get("metric")
-        expected: dict[tuple[str, str], Decimal] = defaultdict(lambda: ZERO)
+        expected_quantities: dict[tuple[str, str], Decimal] = defaultdict(lambda: ZERO)
         for row in metered:
             customer = str(row.get(mm["customer_id"], "")).strip()
             metric = str(row.get(metric_col, "default")).strip() if metric_col else "default"
             if not customer:
                 raise ValueError("Metered file contains a blank customer ID")
             quantity = required_decimal(row.get(mm["quantity"]), "Metered quantity")
-            expected[(customer, metric or "default")] += _price_amount(metric or "default", quantity, cfg)
+            expected_quantities[(customer, metric or "default")] += quantity
+        metrics = {metric for _, metric in expected_quantities}
 
         billed: dict[tuple[str, str], Decimal] = defaultdict(lambda: ZERO)
         credits_in_invoice: dict[str, Decimal] = defaultdict(lambda: ZERO)
@@ -80,11 +80,16 @@ def reconcile_ledgers(metered: list[dict[str, str]], invoice: list[dict[str, str
                 # Non-usage lines cannot be compared to metered consumption.
                 continue
             else:
-                metric = str(row.get(metric_col, "default")).strip() if metric_col else "default"
+                metric = str(row.get(metric_col, "")).strip() if metric_col else ""
+                if not metric:
+                    if len(metrics) > 1:
+                        raise ValueError("Invoice file needs a metric column when metered usage contains multiple metrics")
+                    metric = next(iter(metrics), "default")
                 key = (customer, metric or "default")
                 billed[key] += amount
                 evidence[key].append(row)
 
+        expected = {key: _price_amount(key[1], quantity, cfg) for key, quantity in expected_quantities.items()}
         for key in sorted(set(expected) | set(billed)):
             customer, metric = key
             expected_amount = expected[key]

@@ -94,6 +94,35 @@ def test_credit_upload_requires_invoice_file():
     assert 'Upload invoice lines' in r.text
 
 
+def test_invoice_tier_rating_aggregates_split_metered_rows_before_pricing():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[
+        {'event_id':'e1','customer_id':'cus_1','timestamp':'2026-09-27T00:00:00Z','quantity':'2','metric':'api'},
+        {'event_id':'e2','customer_id':'cus_1','timestamp':'2026-09-27T00:01:00Z','quantity':'2','metric':'api'},
+    ]
+    invoice=[{'invoice_id':'i1','customer_id':'cus_1','metric':'api','line_type':'usage','amount':'0.30'}]
+    result=reconcile_ledgers(metered,invoice,None,{
+        'price_per_unit':'0.10',
+        'pricing':{'api':{'tiers':[{'up_to':2,'unit_price':'0.10'},{'up_to':None,'unit_price':'0.05'}]}},
+    })
+    assert result['findings'] == []  # 2×€0.10 + 2×€0.05 = €0.30
+
+
+def test_invoice_omitted_metric_is_safe_only_for_single_metered_metric():
+    from ledger_reconciliation import reconcile_ledgers
+    metered=[
+        {'event_id':'e1','customer_id':'cus_1','timestamp':'2026-09-27T00:00:00Z','quantity':'2','metric':'api'},
+        {'event_id':'e2','customer_id':'cus_1','timestamp':'2026-09-27T00:01:00Z','quantity':'3','metric':'tokens'},
+    ]
+    invoice=[{'invoice_id':'i1','customer_id':'cus_1','line_type':'usage','amount':'0.05'}]
+    try:
+        reconcile_ledgers(metered,invoice,None,{'price_per_unit':'0.01','pricing':{}})
+    except ValueError as exc:
+        assert 'needs a metric column' in str(exc)
+    else:
+        assert False, 'ambiguous invoice line must not create misleading findings'
+
+
 def test_jsonl_and_bad_json_upload(tmp_path, monkeypatch):
     monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'scans.sqlite3'))
     raw=b'{"event_id":"e1","customer_id":"cus_1","timestamp":"2026-09-27T00:10:00Z","quantity":2}\n'
