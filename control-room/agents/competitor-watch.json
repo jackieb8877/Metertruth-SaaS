@@ -2,10 +2,16 @@
   "id": "competitor-watch",
   "name": "Competitor Watch",
   "status": "waiting",
-  "last_run": null,
+  "last_run": "2026-09-27T17:23:08Z",
   "focus": "Monitor competitors, saturation and creative angles",
-  "summary": "No new alert yet",
+  "summary": "First competitor baseline completed. Kit Muda Cero has pricing headroom; generic dog-car hammocks and compression cubes are genuinely saturated.",
   "blocker": null,
-  "progress": 20,
-  "events": []
+  "progress": 76,
+  "events": [
+    {
+      "ts": "2026-09-27T17:23:08Z",
+      "title": "Baseline complete",
+      "detail": "Recommend testing Kit Muda Cero at 39.90 EUR before lower price points, pending Finance."
+    }
+  ]
 }
