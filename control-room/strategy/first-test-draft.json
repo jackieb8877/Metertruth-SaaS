@@ -1,9 +1,9 @@
 {
   "experiment_id": "PR-TEST-001",
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-27T23:09:09Z",
-  "status": "SHOPIFY_DRAFT_CREATED_LAUNCH_BLOCKED",
-  "authority": "El propietario pide pasar a la primera prueba y confirma la instalación de Shopify. Se ha verificado acceso y creado el producto en borrador; no hay aprobación de gasto ni publicación comercial.",
+  "updated_at": "2026-09-27T23:51:36Z",
+  "status": "SHOPIFY_UNPUBLISHED_LANDING_INSTALLED_LAUNCH_BLOCKED",
+  "authority": "El propietario pide pasar a la primera prueba y continuar con Shopify conectado. Se ha creado el producto en borrador e instalado una landing en una copia no publicada del tema; no hay aprobación de gasto ni publicación comercial.",
   "product": {
     "name": "Cepillo quitapelos reutilizable con base autolimpiadora",
     "supplier_sku": "100102",
@@ -21,16 +21,27 @@
   },
   "shopify": {
     "domain": "ghg2tn-1u.myshopify.com",
-    "connection_status": "READ_AND_DRAFT_PRODUCT_WRITE_VERIFIED",
+    "connection_status": "READ_DRAFT_PRODUCT_AND_UNPUBLISHED_THEME_WRITE_VERIFIED",
     "plan_observed": "trial",
     "currency": "EUR",
     "theme_observed": {"id": "gid://shopify/OnlineStoreTheme/205995376983", "name": "Horizon", "role": "MAIN"},
-    "unpublished_theme_found": false,
-    "theme_modified": false,
-    "custom_section_installed": false,
-    "theme_write_permission_tested": false,
-    "contact_email_needs_owner_check": true,
-    "note": "No reinstalar: el conector ha leído la tienda y creado un DRAFT. La landing personalizada aún no está instalada y no se ha probado checkout/medición."
+    "unpublished_theme_found": true,
+    "unpublished_theme": {"id": "gid://shopify/OnlineStoreTheme/205996360023", "name": "rato. · PR-TEST-001 · borrador", "role": "UNPUBLISHED", "processing": false, "processingFailed": false},
+    "theme_modified": true,
+    "theme_modification_scope": "Solo la copia UNPUBLISHED; MAIN preservado",
+    "live_theme_modified": false,
+    "custom_section_installed": true,
+    "theme_write_permission_tested": true,
+    "theme_files_readback_verified": true,
+    "theme_files_match_tested_local_bytes": true,
+    "theme_editor_url": "https://admin.shopify.com/store/ghg2tn-1u/themes/205996360023/editor",
+    "theme_preview_url": "https://ghg2tn-1u.myshopify.com/?preview_theme_id=205996360023",
+    "authenticated_storefront_render_verified": false,
+    "preview_fetch_result": "URL not accessible via web tool; no authenticated browser render performed",
+    "contact_email_needs_owner_check": false,
+    "correct_contact_email_confirmed_by_owner": true,
+    "contact_email_correction_applied": false,
+    "note": "No reinstalar Shopify ni crear otro producto o tema. Landing de revisión instalada, sin compra, con texto provisional y activos visuales pendientes. La vista preview_only no es control de acceso ni una aprobación comercial. Leer los archivos de esta copia antes de editar; la sección instalada difiere de la original del repositorio."
   },
   "supplier": {
     "name": "Almacén Escriv Ecom",
@@ -129,6 +140,7 @@
     "product_selection_scope": "Solo candidato para preparar",
     "shopify_connection_verified": true,
     "shopify_product_draft_created": true,
+    "shopify_unpublished_theme_installed": true,
     "supplier_cost_and_delivery_checked": false,
     "stock_confirmed": false,
     "tax_and_consumer_terms_reviewed": false,
@@ -144,11 +156,13 @@
     "brief_copy_scripts_supplier_request": "control-room/artifacts/first-test-001/preparacion-20260927.md",
     "unpublished_shopify_page_config": "control-room/artifacts/first-test-001/page.pr-test-001.json",
     "existing_section_to_reuse": "control-room/artifacts/course-adrian/one-product-kit/pr-product-story.liquid",
-    "shopify_connection_and_draft_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md"
+    "original_section_note": "Fuente de partida, no versión actualmente instalada; leer el tema de trabajo antes de modificarlo",
+    "shopify_connection_and_draft_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md",
+    "shopify_theme_installation_evidence": "control-room/artifacts/first-test-001/theme-installed-20260927T235136Z.md"
   },
   "decision": {
-    "result": "SHOPIFY_DRAFT_VERIFIED_COMMERCIAL_LAUNCH_HOLD",
-    "reason": "Acceso de Shopify y creación del borrador comprobados mediante lectura posterior. Candidato y dos guiones preparados. Faltan confirmación del proveedor, costes completos, activos reales/derechos, integración visual en un tema no publicado, QA y aprobación del piloto. No hay resultados de venta medidos.",
-    "next": "Continuar sobre el producto Shopify existente, sin duplicarlo. Integrar la sección y plantilla en un tema no publicado; confirmar suministro y activos antes de publicidad. No pedir reinstalar Shopify."
+    "result": "UNPUBLISHED_LANDING_READBACK_VERIFIED_COMMERCIAL_HOLD",
+    "reason": "Cuatro archivos instalados y comprobados con hashes; MAIN preservado y producto DRAFT sin cambios. 34 comprobaciones locales de fuente/fixture superadas, no renderizado autenticado de Shopify ni compra real. Faltan confirmación del proveedor, costes completos, activos reales/derechos, medición, QA comercial y aprobación del piloto. No hay resultados de venta medidos.",
+    "next": "Continuar sobre el producto y tema existentes. Obtener autorización para enviar la solicitud de stock, portes, documentación y permiso de medios al proveedor; no incluye pedido ni compra. Completar activos y validar en Shopify antes de publicidad."
   }
 }
