@@ -1,0 +1,11 @@
+{
+  "id": "customer-voice",
+  "name": "Customer Voice",
+  "status": "waiting",
+  "last_run": null,
+  "focus": "Mine reviews, complaints, objections and unmet needs",
+  "summary": "Waiting for first review-mining cycle",
+  "blocker": null,
+  "progress": 10,
+  "events": []
+}
