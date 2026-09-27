@@ -2,10 +2,195 @@
   "id": "ads-intelligence",
   "name": "Ads Intelligence",
   "status": "waiting",
-  "last_run": null,
-  "focus": "Track winning ad angles, creatives and offers",
-  "summary": "Waiting for first ad-intelligence cycle",
-  "blocker": null,
-  "progress": 10,
-  "events": []
+  "last_run": "2026-09-27T18:23:11Z",
+  "focus": "Public ad/creative patterns, fatigue signals and test design for priority candidates",
+  "summary": "Material creative signal: generic pet-hair 'magic remover' creative is heavily repeated and shows weak recent organic/affiliate engagement in the examples observed, while the strongest durable pattern is explicit visual proof. Hard-bottom dog-seat extenders show current TikTok Shop demand but also a trust gap around rigidity/fit. Packing-cube creative remains visually legible but a recent 2026 example was weak, so it should be tested only with a sharply specific travel job.",
+  "blocker": "TikTok/Meta ad-platform performance metrics are not publicly verified in this cycle; TikTok direct pages are robot-blocked, so public mirrors, TikTok Shop pages and independently indexed demos were used. Observed engagement is not treated as ROAS/CTR.",
+  "progress": 72,
+  "material_change": true,
+  "material_change_reason": "Prioritize proof-led creative over generic 'magic' claims. For Muda Cero, test a 3-tool/3-surface routine rather than a single-tool commodity demo. For dog-car extenders, show structural/fit proof before lifestyle. De-prioritize generic packing-cube creative.",
+  "observations": [
+    {
+      "candidate": "Kit Muda Cero / reusable pet-hair tools",
+      "observed": [
+        {
+          "source": "Urlebird profile snapshot for @uprootclean",
+          "date_checked": "2026-09-27",
+          "url": "https://urlebird.com/es/user/uprootclean/",
+          "pattern": "High creative volume: 2.79K videos and 18 videos/month are reported by this third-party tracker; average views shown are 6.38K/video and video engagement is labeled 0.2%.",
+          "inference": "This is a saturation/fatigue warning for the generic pet-hair-remover angle, not proof that the product category is unprofitable."
+        },
+        {
+          "source": "EZROLL creator TikTok mirror",
+          "date_observed": "2026-08",
+          "url": "https://urlebird.com/es/video/say-goodbye-to-sticky-refills-the-ezroll-reusable-lint-roller-p-7594637598044228919/",
+          "pattern": "Hook/copy centers on 'say goodbye to sticky refills', then reusable/washable multi-surface benefit. Snapshot shows 768 views, 14 likes, 0 comments, 0 shares.",
+          "inference": "The eco/reusable angle alone is not a strong enough differentiator in this observed example."
+        },
+        {
+          "source": "ChomChom product demo",
+          "date_checked": "2026-09-27",
+          "url": "https://manuals.plus/video/9f673e6bc2e6da92c524b07f6cfd761b60072c8e5356797e682d1b05e8b074cb",
+          "pattern": "28-second vertical demo: empty chamber -> rapid passes on hairy surface -> chamber reopened full of hair.",
+          "inference": "Visible proof with a closed-loop payoff is a stronger creative building block than generic benefit copy."
+        },
+        {
+          "source": "ACE2ACE feature demo",
+          "date_checked": "2026-09-27",
+          "url": "https://manuals.plus/video/348adb4f2c85744c91ac8af9dc684a17c72f88b68ea7a7ccb4820971d739713e",
+          "pattern": "64-second multi-surface demo across chair, clothing, bedding and sofa, including self-cleaning/360-degree product explanation.",
+          "inference": "Longer demos can educate, but for paid acquisition the first proof moment should arrive much earlier."
+        }
+      ],
+      "saturation": "high at single-tool/generic-claim level; medium for a differentiated routine/bundle",
+      "opportunity": "Own a 3-step pet-to-home routine with one clear job per tool and show proof on exactly those surfaces."
+    },
+    {
+      "candidate": "Hard-bottom dog car seat cover / backseat extender",
+      "observed": [
+        {
+          "source": "TikTok Shop hard-bottom cover listing",
+          "date_checked": "2026-09-27",
+          "url": "https://shop.tiktok.com/us/pdp/dog-car-seat-cover-with-hard-bottom-waterproof-hammock/1731591271668224278",
+          "pattern": "Current listing shows 1.9K sold and 173 reviews at 4.5. The product message emphasizes hard bottom, waterproofing and fast install.",
+          "inference": "There is active commerce demand, but sales on a marketplace listing do not prove any particular ad creative works."
+        },
+        {
+          "source": "Same TikTok Shop listing review evidence",
+          "date_observed": "2026-07 to 2026-08",
+          "url": "https://shop.tiktok.com/us/pdp/dog-car-seat-cover-with-hard-bottom-waterproof-hammock/1731591271668224278",
+          "pattern": "A verified negative review says the received product looked flimsier than the image and lacked the expected structural support; another verified review reports it held two German shepherds well.",
+          "inference": "Trust is the differentiator: creative must prove rigidity, dimensions and fit honestly rather than imply unsupported load/stability."
+        },
+        {
+          "source": "TikTok Shop category examples",
+          "date_checked": "2026-09-27",
+          "url": "https://shop.tiktok.com/us/k/a-pets-planet-backseat-extender",
+          "pattern": "Multiple near-identical hard-bottom extenders are active, with examples showing 143+ sold and price/promo competition.",
+          "inference": "Product-level saturation is rising; generic lifestyle footage will blend in."
+        }
+      ],
+      "saturation": "medium-high and rising",
+      "opportunity": "Proof-led 'does it actually stay flat and fit my car?' creative with measurable dimensions, install sequence and realistic dog use."
+    },
+    {
+      "candidate": "Compression packing cubes",
+      "observed": [
+        {
+          "source": "TikTok creator mirror @angel_clark__",
+          "date_observed": "2026-08-04",
+          "url": "https://www.tikwm.com/video/7670273101409668382.html",
+          "pattern": "Generic 'save space when you travel' angle. Snapshot shows 5,393 views, 5 likes, 1 comment and 3 shares.",
+          "inference": "This specific recent example is weak; generic travel-hack framing should not be treated as a winning angle."
+        },
+        {
+          "source": "Parade coverage of BAGSMART TikTok demonstration",
+          "date_checked": "2026-09-27",
+          "url": "https://parade.com/travel/bagsmart-compression-cubes-carryon-packing-hack",
+          "pattern": "Creator demonstration reportedly fits 2/5/7 pairs of jeans in small/medium/large cubes and visibly shows thickness before vs after compression.",
+          "inference": "The durable creative mechanism is measurable transformation, not the product category itself."
+        },
+        {
+          "source": "Peekabox BAGSMART analysis",
+          "date_checked": "2026-09-27",
+          "url": "https://www.peekaboxtrends.com/bagsmart-compression-packing-cubes-review-do-they-actually-save-space",
+          "pattern": "Third-party analysis attributes historical TikTok virality to the visibly shrinking cube after the second zipper and cites 3M+ views for the product trend.",
+          "inference": "Historical virality increases saturation risk; a new test needs a specific traveler use-case, not another generic compression reveal."
+        }
+      ],
+      "saturation": "high",
+      "opportunity": "Only test a constrained job such as '7-day carry-on' or 'souvenir space' with exact before/after packing."
+    }
+  ],
+  "creative_tests": [
+    {
+      "rank": 1,
+      "candidate": "Kit Muda Cero",
+      "name": "3 tools / 3 surfaces / 1 routine",
+      "hypothesis": "A job-specific sequence will outperform a commodity single-tool 'magic hair remover' demo because it resolves the objection that one tool cannot work equally well on pet, upholstery and clothing.",
+      "format": "15-20s vertical UGC/demo; no polished AI visuals; real pet/home footage when samples exist.",
+      "hook": "Open on three visible hair problems in rapid succession, then assign one tool to each problem.",
+      "variable_to_change": "System-led 3-step routine vs single-tool before/after creative.",
+      "metrics_to_observe": [
+        "3-second hold rate",
+        "25% video completion",
+        "outbound CTR",
+        "PDP add-to-cart rate"
+      ],
+      "guardrails": [
+        "No universal-surface claim",
+        "No invented efficacy percentage",
+        "Use real product footage before paid launch"
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate": "Hard-bottom dog car seat extender",
+      "name": "Fit and rigidity proof",
+      "hypothesis": "Showing the real installation, flat platform and vehicle-fit boundaries will outperform generic dog-in-car lifestyle footage because the largest trust risk is 'is it actually rigid and will it fit?'.",
+      "format": "20-30s vertical proof demo with real car, real product and exact measured dimensions once supplier SKU is fixed.",
+      "hook": "Start with the rear-footwell gap, then show the rigid base bridging it in one cut.",
+      "variable_to_change": "Proof/fit-led creative vs lifestyle-led creative.",
+      "metrics_to_observe": [
+        "3-second hold rate",
+        "outbound CTR",
+        "fit-guide/PDP interaction rate",
+        "add-to-cart rate",
+        "fit-related pre-purchase questions"
+      ],
+      "guardrails": [
+        "Do not use 400/500/550 lb claims until exact SKU evidence is verified",
+        "Do not imply crash protection",
+        "Show vehicle compatibility limits"
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate": "Compression packing cubes",
+      "name": "Carry-on constraint test",
+      "hypothesis": "A specific travel job will outperform generic 'save space' copy in this saturated category.",
+      "format": "15-25s vertical side-by-side packing demo.",
+      "hook": "Carry-on will not close -> same clothing compressed -> visible space recovered.",
+      "variable_to_change": "Specific 7-day carry-on/souvenir-space job vs generic compression reveal.",
+      "metrics_to_observe": [
+        "6-second hold rate",
+        "share/save rate",
+        "outbound CTR",
+        "PDP add-to-cart rate"
+      ],
+      "guardrails": [
+        "Only run if supplier economics pass",
+        "Do not claim a percentage of space saved unless measured on our SKU"
+      ]
+    }
+  ],
+  "handoff": {
+    "creative_offer": [
+      "Make proof and specificity the creative spine for Muda Cero: 3 tools, 3 jobs, 3 surfaces. Avoid generic 'works like magic everywhere' copy.",
+      "For dog-car extenders, develop proof/fit creative only after exact SKU dimensions and construction are verified.",
+      "Treat packing cubes as a lower-priority saturated test; require a specific traveler job."
+    ],
+    "store_builder": [
+      "Muda Cero PDP should mirror the ad sequence: tool-to-surface mapping, short proof clips, then bundle explanation.",
+      "Dog-car extender PDP needs dimensions/fit guide and honest structural close-ups above lifestyle imagery.",
+      "Packing-cube PDP should lead with a concrete packing scenario and measured before/after once a SKU is selected."
+    ]
+  },
+  "events": [
+    {
+      "ts": "2026-09-27T18:23:11Z",
+      "title": "Pet-hair creative fatigue signal",
+      "detail": "Generic reusable-remover messaging is heavily repeated; recent public creator examples observed were weak, while closed-loop visual proof remains the strongest repeatable mechanism."
+    },
+    {
+      "ts": "2026-09-27T18:23:11Z",
+      "title": "Dog-car trust gap identified",
+      "detail": "Current TikTok Shop demand coexists with verified complaints about flimsy construction/visual mismatch, making real fit and rigidity proof a material creative opportunity."
+    },
+    {
+      "ts": "2026-09-27T18:23:11Z",
+      "title": "Three creative tests prioritized",
+      "detail": "Ranked tests: Muda Cero routine proof, dog-car fit/rigidity proof, packing-cube carry-on constraint."
+    }
+  ]
 }
