@@ -1,6 +1,6 @@
 from pathlib import Path
 from fastapi.testclient import TestClient
-from app import app
+from app import app, config_from_form, normalize_raw_for_stripe
 import re
 
 ROOT=Path(__file__).parent
@@ -10,6 +10,18 @@ def test_home_and_health():
     assert client.get('/').status_code == 200
     assert 'MeterTruth' in client.get('/').text
     assert client.get('/health').json()['status'] == 'ok'
+
+def test_stripe_input_normalization_preserves_decimal_precision():
+    rows = normalize_raw_for_stripe([{
+        'customer_id':'cus_1','timestamp':'2026-09-27T00:00:00Z',
+        'quantity':'0.123456789123456789','metric':'api'
+    }])
+    assert rows[0]['quantity'] == '0.123456789123456789'
+    cfg = config_from_form('0.000000000000000123', '24', '0.000000000000000003', '12',
+                           '{"api":{"unit_price":0.000000000000000123}}')
+    assert cfg['price_per_unit'] == '0.000000000000000123'
+    assert cfg['quantity_tolerance'] == '0.000000000000000003'
+    assert cfg['pricing']['api']['unit_price'] == '0.000000000000000123'
 
 def test_demo_analysis_and_export():
     with open(ROOT/'demo_raw.csv','rb') as a, open(ROOT/'demo_metered.csv','rb') as b:

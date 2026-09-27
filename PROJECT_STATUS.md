@@ -62,14 +62,14 @@ Local source rows are passed in memory into the core. In history, a report may i
 
 ## Verification record
 
-- 62 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents and portfolio-rollup tests.
+- 63 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents, portfolio-rollup and precision-preserving input tests.
 - Python compile check passes for app, import layer, history, RecoveryCore and connector modules.
 - An earlier v0.6 project note recorded 44 passing tests; v0.7 added tests on top of that baseline.
 
 ## 2026-09-27 continuation check
 
 - Owner confirmed the deployed Vercel URL prompted for and accepted the configured beta credentials. This verifies the user-visible shared beta gate; it does not verify tenant isolation or persistence.
-- The test dependencies installed from `requirements-dev.txt` into a temporary local virtual environment at €0. The full suite passes: 62/62.
+- The test dependencies installed from `requirements-dev.txt` into a temporary local virtual environment at €0. The full suite passes: 63/63.
 - Fresh local synthetic benchmarks: 100,000 adversarial raw events + 100,099 metered rows in 1.475s with 2,198 finding rows; €100 underbilling and €9.90 overbilling. One million clean raw + metered events reconciled in 15.525s with 0 findings and €0 exposure. These are workspace results, not production throughput guarantees.
 - RecoveryCore findings include a canonical machine-readable `code` while preserving the existing `type` field for compatibility. `MISSING`, `DUPLICATE` and `ORPHAN_METERED` map to `MISSING_USAGE`, `DUPLICATE_USAGE` and `ORPHAN_METERED_EVENT`.
 - Event-level and Stripe aggregate/portfolio reconciliation now use shared Decimal helpers, with half-up cent rounding. Tests cover `0.1 + 0.2`, tier boundaries, positive/negative half cents, and rollups across customers.

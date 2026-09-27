@@ -15,6 +15,7 @@ from fastapi import FastAPI, File, Form, UploadFile, Request
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
+from money import required_decimal
 from recoverycore_v02 import DEFAULT_CONFIG, infer, reconcile
 from stripe_bridge import reconcile_stripe_summaries
 from multi_scan import scan_stripe_customers
@@ -98,7 +99,7 @@ def normalize_raw_for_stripe(rows: list[dict[str, str]]) -> list[dict[str, Any]]
         "customer_id": str(row[mapping["customer_id"]]),
         "timestamp": row[mapping["timestamp"]],
         "timestamp_epoch": parse_iso_epoch(row[mapping["timestamp"]]),
-        "quantity": float(row[mapping["quantity"]]),
+        "quantity": row[mapping["quantity"]],
         "metric": str(row[mapping["metric"]]) if "metric" in mapping else "default",
     } for row in rows]
 
@@ -107,20 +108,22 @@ def config_from_form(price_per_unit: str, late_hours: str, quantity_tolerance: s
                      annualization_periods: str, pricing_json: str) -> dict[str, Any]:
     cfg = dict(DEFAULT_CONFIG)
     try:
-        cfg["price_per_unit"] = float(price_per_unit)
+        unit_price = required_decimal(price_per_unit, "Price per unit")
         cfg["late_hours"] = float(late_hours)
-        cfg["quantity_tolerance"] = float(quantity_tolerance)
+        tolerance = required_decimal(quantity_tolerance, "Quantity tolerance")
         cfg["annualization_periods"] = int(annualization_periods)
     except ValueError as exc:
         raise ValueError("Numeric configuration contains an invalid value") from exc
-    if cfg["price_per_unit"] < 0 or cfg["late_hours"] < 0 or cfg["quantity_tolerance"] < 0:
+    if unit_price < 0 or cfg["late_hours"] < 0 or tolerance < 0:
         raise ValueError("Price, late-hours and tolerance must be non-negative")
+    cfg["price_per_unit"] = format(unit_price, "f")
+    cfg["quantity_tolerance"] = format(tolerance, "f")
     if not 1 <= cfg["annualization_periods"] <= 365:
         raise ValueError("Annualization periods must be between 1 and 365")
     pricing_json = pricing_json.strip()
     if pricing_json:
         try:
-            pricing = json.loads(pricing_json)
+            pricing = json.loads(pricing_json, parse_float=str)
         except json.JSONDecodeError as exc:
             raise ValueError(f"Pricing JSON is invalid: {exc.msg}") from exc
         if not isinstance(pricing, dict):
@@ -409,7 +412,8 @@ async def stripe_multi_scan(
             identity_map = parse_identity_mapping_rows(mapping_rows)
         raw, identity_meta = apply_identity_mapping(raw, identity_map, strict=False)
         start_epoch, end_epoch = parse_iso_epoch(start_time), parse_iso_epoch(end_time)
-        price, tol = float(unit_price), float(tolerance)
+        price = required_decimal(unit_price, "Unit price")
+        tol = required_decimal(tolerance, "Usage tolerance")
         if price < 0 or tol < 0:
             raise ValueError("Unit price and tolerance must be non-negative")
         if grouping not in {"hour", "day"}:
@@ -460,7 +464,8 @@ async def stripe_analyze(
     try:
         raw = normalize_raw_for_stripe(parse_csv_bytes(await raw_file.read()))
         start_epoch, end_epoch = parse_iso_epoch(start_time), parse_iso_epoch(end_time)
-        price, tol = float(unit_price), float(tolerance)
+        price = required_decimal(unit_price, "Unit price")
+        tol = required_decimal(tolerance, "Usage tolerance")
         if price < 0 or tol < 0:
             raise ValueError("Unit price and tolerance must be non-negative")
         if grouping not in {"hour", "day"}:

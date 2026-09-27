@@ -8,6 +8,7 @@ MeterTruth is an independent revenue-assurance layer for usage-based SaaS. It co
 - Schema aliases remain inferred by RecoveryCore v0.2.
 - Findings keep their v0.x `type` for compatibility and expose a stable machine-readable `code` (for example `MISSING_USAGE`, `DUPLICATE_USAGE`, and `ORPHAN_METERED_EVENT`).
 - Event-level and Stripe aggregate/portfolio pricing uses decimal arithmetic; reportable euro impacts round to cents with half-up rounding.
+- CSV usage quantities and form/catalog rates are kept as decimal strings through normalization, avoiding a float conversion before reconciliation.
 - Event-level and read-only Stripe scans are stored in local SQLite scan history; original uploads and API keys are not stored.
 - Each scan can be reopened as an evidence-rich HTML Revenue Leak Report.
 - The existing guided onboarding, preflight, demo, customer mapping and read-only Stripe portfolio scan remain in place.
