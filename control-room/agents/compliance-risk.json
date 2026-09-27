@@ -1,3 +1,91 @@
 {
-  "status": "active"
+  "id": "compliance-risk",
+  "name": "Compliance & Risk",
+  "status": "active",
+  "last_run": "2026-09-27T17:46:24Z",
+  "focus": "Spain/EU launch readiness",
+  "summary": "Material change: from 27 Sep 2026 the EU harmonised legal-guarantee notice applies to online shops. Kit Muda Cero is WATCH, not automatically CE-blocked if kept as simple non-electrical tools, but GPSR traceability and role mapping remain mandatory. Pet grooming vacuum remains BLOCK.",
+  "blocker": "Before any sale: verify manufacturer and EU responsible person where required, product identifier, applicable warnings/instructions, supplier safety evidence, Spain packaging producer/EPR status, and the new harmonised guarantee notice.",
+  "progress": 68,
+  "decisions": [
+    {
+      "product": "Kit Muda Cero",
+      "decision": "WATCH",
+      "detail": "Simple non-electrical tools are not automatically CE products. GPSR applies. Selling under our own name/trademark may make us manufacturer."
+    },
+    {
+      "product": "Dog car seat cover / extender",
+      "decision": "WATCH",
+      "detail": "GPSR applies; avoid crash/restraint claims without evidence. Textile composition labelling may apply."
+    },
+    {
+      "product": "Pet grooming vacuum kit",
+      "decision": "BLOCK",
+      "detail": "Needs applicable EU conformity documentation, CE basis, technical documentation/DoC, electrical substance/EMC evidence, WEEE responsibilities and GPSR data."
+    },
+    {
+      "product": "Packing cubes",
+      "decision": "WATCH",
+      "detail": "If at least 80% textile fibres by weight, EU fibre-composition labelling applies."
+    },
+    {
+      "product": "Windshield sunshade",
+      "decision": "WATCH",
+      "detail": "GPSR applies; avoid universal-fit or measured temperature claims without evidence."
+    }
+  ],
+  "requirements": [
+    "GPSR online offer data per SKU: manufacturer; EU responsible person when needed; picture/type/identifier; applicable warnings.",
+    "Official EU legal-guarantee notice displayed prominently for online sales from 27 Sep 2026.",
+    "Spain: 3-year legal guarantee for new goods and generally 14-day withdrawal for distance sales.",
+    "Discounts need the lowest prior price from the previous 30 days.",
+    "Non-essential analytics/advertising cookies require prior consent with reject offered at the same level as accept.",
+    "Spain packaging producer status/RPP/SRAP must be mapped under the PPWR regime now applying.",
+    "Qualifying direct imports up to EUR150 can incur the temporary EUR3-per-item customs duty since 1 Jul 2026."
+  ],
+  "handoff": {
+    "orchestrator": [
+      "Muda Cero = WATCH; grooming vacuum = BLOCK.",
+      "Treat own-brand role mapping and packaging EPR as launch gates.",
+      "Include current low-value import duty in direct non-EU fulfilment economics."
+    ],
+    "store_builder": [
+      "Add GPSR fields per SKU before commerce.",
+      "Add official EU harmonised guarantee notice before checkout.",
+      "Keep non-essential trackers off until compliant consent UI exists."
+    ],
+    "launch_qa": [
+      "FAIL if guarantee notice or required GPSR fields are missing.",
+      "FAIL discounts without 30-day price history.",
+      "FAIL non-EU direct-ship costing that omits current duty treatment."
+    ]
+  },
+  "sources": [
+    "https://eur-lex.europa.eu/eli/C/2025/6233/oj/eng",
+    "https://eur-lex.europa.eu/eli/reg/2023/988",
+    "https://eur-lex.europa.eu/eli/reg_impl/2025/1960/oj/eng",
+    "https://www.miteco.gob.es/es/calidad-y-evaluacion-ambiental/temas/prevencion-y-gestion-residuos/registro-productores-producto/registro-productores-producto-seccion-envases.html",
+    "https://europa.eu/youreurope/business/product-rules-compliance/textiles-and-footwear/textile-label/index_en.htm",
+    "https://eur-lex.europa.eu/eli/reg/2026/382/oj/eng"
+  ],
+  "events": [
+    {
+      "time": "2026-09-27T17:46:24Z",
+      "severity": "high",
+      "title": "EU guarantee notice applies today",
+      "detail": "Online shops selling goods now need the harmonised legal-guarantee notice."
+    },
+    {
+      "time": "2026-09-27T17:46:24Z",
+      "severity": "high",
+      "title": "Own-brand role can raise GPSR duties",
+      "detail": "If Muda Cero components are marketed under our own name/trademark, manufacturer obligations may attach."
+    },
+    {
+      "time": "2026-09-27T17:46:24Z",
+      "severity": "medium",
+      "title": "Muda Cero gate refined",
+      "detail": "No automatic CE requirement identified for simple non-electrical tools; continue under WATCH pending GPSR evidence."
+    }
+  ]
 }
