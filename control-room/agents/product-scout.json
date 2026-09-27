@@ -2,10 +2,31 @@
   "id": "product-scout",
   "name": "Product Scout",
   "status": "waiting",
-  "last_run": "2026-09-27T16:24:39Z",
+  "last_run": "2026-09-27T16:49:00Z",
   "focus": "Discover products with real EU/Spain potential",
-  "summary": "Last scan completed; waiting for next cycle",
+  "summary": "No candidate clearly beats Kit Muda Cero yet. Portable pet water bottles and handheld vacuum sealers are worth watching, but price competition, non-EU fulfillment or compliance risk prevent promotion.",
   "blocker": null,
-  "progress": 36,
-  "events": []
+  "progress": 62,
+  "events": [
+    {
+      "ts": "2026-09-27T16:46:00Z",
+      "title": "Pet niche validated",
+      "detail": "Pet hair remover mitt, portable pet water bottle and grooming vacuum show strong recent TikTok velocity."
+    },
+    {
+      "ts": "2026-09-27T16:47:00Z",
+      "title": "Portable pet water bottle watchlisted",
+      "detail": "Strong recent views and low seller count, but current Spain retail pricing is highly commoditized."
+    },
+    {
+      "ts": "2026-09-27T16:48:00Z",
+      "title": "Handheld vacuum sealer watchlisted",
+      "detail": "Excellent visual demo and kitchen-storage trend fit, but verified EU dropshipping stock and food-contact/battery compliance remain unresolved."
+    },
+    {
+      "ts": "2026-09-27T16:49:00Z",
+      "title": "Cycle complete",
+      "detail": "No product promoted above the current leader."
+    }
+  ]
 }
