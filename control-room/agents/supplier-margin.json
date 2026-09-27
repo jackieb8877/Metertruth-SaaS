@@ -1,8 +1,8 @@
 {
   "id": "supplier-margin",
   "name": "Supplier & Margin",
-  "status": "active",
-  "last_run": "2026-09-27T16:14:13Z",
+  "status": "waiting",
+  "last_run": "2026-09-27T17:17:00Z",
   "focus": "EU sourcing, landed cost and fulfillment",
   "summary": "Validating blind dropshipping and landed cost",
   "blocker": "Verified blind dropshipping + landed cost",
