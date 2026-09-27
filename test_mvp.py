@@ -60,6 +60,40 @@ def test_json_upload_creates_reopenable_history_report(tmp_path, monkeypatch):
     assert 'raw.json' in history.text and 'metered.csv' in history.text
 
 
+def test_invoice_and_credit_import_reports_downstream_deltas_without_double_counting(tmp_path, monkeypatch):
+    monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'ledger.sqlite3'))
+    raw=b'event_id,customer_id,timestamp,quantity,metric\ne1,cus_1,2026-09-27T00:10:00Z,10,api\n'
+    metered=b'event_id,customer_id,timestamp,quantity,metric\ne1,cus_1,2026-09-27T00:10:00Z,9,api\n'
+    invoice=b'invoice_id,customer_id,metric,line_type,amount\ni1,cus_1,api,usage,0.80\ni1,cus_1,,credit,-0.20\n'
+    credits=b'customer_id,credit_amount\ncus_1,0.30\n'
+    r=client.post('/analyze',files={
+        'raw_file':('raw.csv',raw,'text/csv'), 'metered_file':('metered.csv',metered,'text/csv'),
+        'invoice_file':('invoice.csv',invoice,'text/csv'), 'credit_file':('credits.csv',credits,'text/csv'),
+    },data={'price_per_unit':'0.10','late_hours':'24','quantity_tolerance':'0','annualization_periods':'12','pricing_json':''})
+    assert r.status_code == 200
+    assert 'INVOICE_MISMATCH' in r.text and 'CREDIT_MISMATCH' in r.text
+    match=re.search(r'href="/history/(\d+)"',r.text)
+    report=client.get(f'/history/{match.group(1)}').text
+    assert 'Revenue Leak Report' in report
+    # Core usage still reports the 1 missing metered unit (€0.10); invoice
+    # exposure is calculated from metered usage (expected €0.90 vs €0.80).
+    assert 'Potential underbilling</span><strong>€0.10' in report
+    assert 'INVOICE_MISMATCH' in report and 'CREDIT_MISMATCH' in report
+    assert '€0.20' in report  # ledger underbilling is kept in a separate evidence row
+
+
+def test_credit_upload_requires_invoice_file():
+    raw=b'event_id,customer_id,timestamp,quantity\ne1,cus_1,2026-09-27T00:10:00Z,1\n'
+    credits=b'customer_id,credit_amount\ncus_1,1.00\n'
+    r=client.post('/analyze',files={
+        'raw_file':('raw.csv',raw,'text/csv'),
+        'metered_file':('metered.csv',raw,'text/csv'),
+        'credit_file':('credits.csv',credits,'text/csv'),
+    },data={})
+    assert r.status_code == 400
+    assert 'Upload invoice lines' in r.text
+
+
 def test_jsonl_and_bad_json_upload(tmp_path, monkeypatch):
     monkeypatch.setenv('METERTRUTH_DB_PATH', str(tmp_path/'scans.sqlite3'))
     raw=b'{"event_id":"e1","customer_id":"cus_1","timestamp":"2026-09-27T00:10:00Z","quantity":2}\n'

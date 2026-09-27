@@ -23,9 +23,10 @@ from identity_mapping import parse_identity_mapping_rows, apply_identity_mapping
 from stripe_client import StripeReadClient, StripeReadError
 from beta_readiness import build_preflight, executive_summary
 from data_import import MAX_UPLOAD as IMPORT_MAX_UPLOAD, parse_data_bytes
+from ledger_reconciliation import reconcile_ledgers
 import scan_history
 
-app = FastAPI(title="MeterTruth MVP", version="0.7.0")
+app = FastAPI(title="MeterTruth MVP", version="0.8.0")
 app.mount("/static", StaticFiles(directory=str(Path(__file__).with_name("static"))), name="static")
 
 MAX_UPLOAD = IMPORT_MAX_UPLOAD
@@ -146,7 +147,7 @@ def layout(body: str, title: str = "MeterTruth") -> str:
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)}</title><link rel="stylesheet" href="/static/app.css"></head>
 <body><header><div class="brand">MeterTruth <span>MVP</span></div><div class="tag">Independent usage → billing reconciliation · <a href="/history">Scan history</a></div></header>
-<main>{body}</main><footer>MeterTruth private beta v0.7 · RecoveryCore v0.2 · uploads are processed in memory</footer></body></html>'''
+<main>{body}</main><footer>MeterTruth private beta v0.8 · RecoveryCore v0.2 · uploads are processed in memory</footer></body></html>'''
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -160,6 +161,11 @@ def home() -> str:
 <form action="/analyze" method="post" enctype="multipart/form-data">
 <div class="grid2"><label>Source / raw usage CSV or JSON<input type="file" name="raw_file" accept=".csv,.json,.jsonl,.ndjson,text/csv,application/json" required></label>
 <label>Metered / billing usage CSV or JSON<input type="file" name="metered_file" accept=".csv,.json,.jsonl,.ndjson,text/csv,application/json" required></label></div>
+<details><summary>Optional invoice and credit checks</summary><div class="settings grid2">
+<label>Invoice lines CSV or JSON<input type="file" name="invoice_file" accept=".csv,.json,.jsonl,.ndjson,text/csv,application/json"></label>
+<label>Credit ledger CSV or JSON<input type="file" name="credit_file" accept=".csv,.json,.jsonl,.ndjson,text/csv,application/json"></label>
+<p class="hint wide">Invoice usage lines need customer_id and amount (metric and line_type are optional). Credit rows need customer_id and credit_amount/amount; invoice credit lines need line_type=credit and a signed or unsigned amount. Credit checks require an invoice file. These downstream checks are shown separately from usage leakage to avoid double counting.</p>
+</div></details>
 <details><summary>Pricing & detection settings</summary><div class="settings grid2">
 <label>Fallback price per unit (€)<input name="price_per_unit" value="0.01" inputmode="decimal"></label>
 <label>Late threshold (hours)<input name="late_hours" value="24" inputmode="decimal"></label>
@@ -179,6 +185,8 @@ def home() -> str:
 async def analyze(
     raw_file: UploadFile = File(...),
     metered_file: UploadFile = File(...),
+    invoice_file: UploadFile | None = File(None),
+    credit_file: UploadFile | None = File(None),
     price_per_unit: str = Form("0.01"),
     late_hours: str = Form("24"),
     quantity_tolerance: str = Form("0"),
@@ -190,6 +198,15 @@ async def analyze(
         metered = parse_data_bytes(await metered_file.read(), metered_file.filename or "metered.csv")
         cfg = config_from_form(price_per_unit, late_hours, quantity_tolerance, annualization_periods, pricing_json)
         report = reconcile(raw, metered, cfg)
+        invoices = parse_data_bytes(await invoice_file.read(), invoice_file.filename or "invoice.csv") if invoice_file and invoice_file.filename else None
+        credits = parse_data_bytes(await credit_file.read(), credit_file.filename or "credits.csv") if credit_file and credit_file.filename else None
+        if credits and not invoices:
+            raise ValueError("Upload invoice lines to check credit applications against the credit ledger")
+        ledger = reconcile_ledgers(metered, invoices, credits, cfg)
+        report["ledger_reconciliation"] = ledger
+        report["findings"].extend(ledger["findings"])
+        report["summary"]["findings"] += ledger["summary"]["findings"]
+        report["summary"]["confirmed_findings"] += ledger["summary"]["findings"]
         report["created_at"] = datetime.now(timezone.utc).isoformat()
         scan_id = scan_history.save(report, raw_file.filename or "raw.csv", metered_file.filename or "metered.csv")
     except (ValueError, KeyError) as exc:
@@ -213,6 +230,7 @@ async def analyze(
 <div class="card"><span>Overbilling</span><strong>{money(s["potential_overbilling_eur"])}</strong></div>
 <div class="card"><span>Period exposure</span><strong>{money(s["period_exposure_eur"])}</strong></div>
 <div class="card"><span>Annualized*</span><strong>{money(s["annualized_exposure_eur"])}</strong></div></section>
+{f'''<section class="panel compact"><h2>Invoice and credit checks · separate downstream exposure</h2><p>{ledger["summary"]["findings"]} ledger discrepancy rows; {money(ledger["summary"]["potential_underbilling_eur"])} possible underbilling and {money(ledger["summary"]["potential_overbilling_eur"])} possible overbilling. These values are informational and excluded from the usage exposure cards to avoid double counting.</p></section>''' if invoices else ''}
 <section class="panel compact"><h2>Detected schema</h2><p><b>Source:</b> {map_raw}</p><p><b>Metered:</b> {map_meter}</p></section>
 <section class="panel tablepanel"><div class="tabletitle"><div><h2>Findings</h2><p>{s["suspected_findings"]} suspected · {s["unverifiable_findings"]} unverifiable</p></div>
 <form action="/export" method="post"><input type="hidden" name="report_json" value="{report_json}"><button class="small" type="submit">Export JSON</button></form></div>
@@ -233,7 +251,7 @@ def export(report_json: str = Form(...)) -> Response:
 
 @app.get("/health")
 def health() -> dict[str, str]:
-    return {"status": "ok", "app": "MeterTruth 0.7.0", "kernel": "RecoveryCore 0.2.0"}
+    return {"status": "ok", "app": "MeterTruth 0.8.0", "kernel": "RecoveryCore 0.2.0"}
 
 
 def _report_document(report: dict[str, Any], scan_id: int) -> str:
@@ -276,7 +294,11 @@ def _report_document(report: dict[str, Any], scan_id: int) -> str:
             )
         table = f"<table><thead><tr><th>Type / status</th><th>Customer</th><th>Event</th><th>Estimated impact</th><th>Evidence summary</th><th>Recommended action</th><th>Source evidence</th></tr></thead><tbody>{''.join(rows) or '<tr><td colspan=\"7\">No discrepancies found.</td></tr>'}</tbody></table>"
         detail = f"{s.get('raw_events',0):,} product events compared with {s.get('metered_rows',0):,} metered rows."
-    body = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MeterTruth report #{scan_id}</title><link rel="stylesheet" href="/static/app.css"></head><body><header><div class="brand">MeterTruth <span>REPORT</span></div><div class="tag">Scan #{scan_id} · <a href="/history">History</a></div></header><main class="report"><p class="eyebrow">REVENUE ASSURANCE · {escape(str(report.get('created_at','')))}</p><h1>Revenue Leak Report</h1><p class="lede">{detail}</p><section class="cards"><div class="card"><span>Potential underbilling</span><strong>{cash(s.get('potential_underbilling_eur',0))}</strong></div><div class="card"><span>Potential overbilling</span><strong>{cash(s.get('potential_overbilling_eur',0))}</strong></div><div class="card"><span>Period exposure</span><strong>{cash(s.get('period_exposure_eur',0))}</strong></div><div class="card"><span>Findings</span><strong>{s.get('findings',0)}</strong></div></section><section class="panel"><h2>Findings and evidence</h2><div class="scroll">{table}</div><p class="hint">Amounts are potential exposure estimates. Review pricing, credits, adjustments and period rules before taking billing action.</p></section><p><a class="buttonlink secondary" href="/history">Back to history</a></p></main></body></html>'''
+    ledger = report.get("ledger_reconciliation", {}).get("summary")
+    ledger_panel = (f'<section class="panel compact"><h2>Invoice and credit checks · separate downstream exposure</h2>'
+                    f'<p>{ledger.get("findings", 0)} ledger discrepancy rows; {cash(ledger.get("potential_underbilling_eur", 0))} possible underbilling and {cash(ledger.get("potential_overbilling_eur", 0))} possible overbilling. Excluded from usage exposure cards to avoid double counting.</p></section>'
+                    if ledger and ledger.get("findings") else "")
+    body = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MeterTruth report #{scan_id}</title><link rel="stylesheet" href="/static/app.css"></head><body><header><div class="brand">MeterTruth <span>REPORT</span></div><div class="tag">Scan #{scan_id} · <a href="/history">History</a></div></header><main class="report"><p class="eyebrow">REVENUE ASSURANCE · {escape(str(report.get('created_at','')))}</p><h1>Revenue Leak Report</h1><p class="lede">{detail}</p><section class="cards"><div class="card"><span>Potential underbilling</span><strong>{cash(s.get('potential_underbilling_eur',0))}</strong></div><div class="card"><span>Potential overbilling</span><strong>{cash(s.get('potential_overbilling_eur',0))}</strong></div><div class="card"><span>Period exposure</span><strong>{cash(s.get('period_exposure_eur',0))}</strong></div><div class="card"><span>Findings</span><strong>{s.get('findings',0)}</strong></div></section>{ledger_panel}<section class="panel"><h2>Findings and evidence</h2><div class="scroll">{table}</div><p class="hint">Amounts are potential exposure estimates. Review pricing, credits, adjustments and period rules before taking billing action.</p></section><p><a class="buttonlink secondary" href="/history">Back to history</a></p></main></body></html>'''
     return body
 
 

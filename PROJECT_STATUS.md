@@ -1,7 +1,7 @@
 # MeterTruth — live project record
 
 **Updated:** 2026-09-27 (Atlantic/Canary)  
-**Candidate:** v0.7 private beta (canonical finding codes and Decimal arithmetic)
+**Candidate:** v0.8 private beta (invoice and credit ledger checks)
 
 **Spend:** €0. Test dependencies were installed only in a temporary environment; no paid services or campaigns used.
 
@@ -52,6 +52,9 @@ Local source rows are passed in memory into the core. In history, a report may i
 | Evidence and recovery recommendation | Implemented as review candidates |
 | Stable machine-readable codes for implemented findings | Implemented; legacy `type` values retained for existing consumers |
 | Revenue Leak Report | Implemented; reopenable from history |
+| Invoice usage line check | Implemented as optional CSV/JSON upload; metered quantities are priced and compared by customer + metric |
+| Credit ledger check | Implemented as optional CSV/JSON against invoice credit lines; credit ledger requires invoice input |
+| Ledger exposure isolation | Implemented; invoice/credit amounts are separate from source-to-meter exposure to prevent double counting |
 | Scan history for CSV/JSON and Stripe scans | Implemented in local SQLite; ephemeral on Vercel/serverless hosting |
 | Direct Stripe connector | Existing GET-only, aggregate-level, one meter at a time |
 | Pricing drift by price version | Not implemented |
@@ -62,7 +65,7 @@ Local source rows are passed in memory into the core. In history, a report may i
 
 ## Verification record
 
-- 63 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents, portfolio-rollup and precision-preserving input tests.
+- 65 automated tests pass: `pytest -q` in a temporary venv, including beta, CSV/JSON/JSONL/history, canonical finding-code, decimal quantity, cents, portfolio-rollup, precision-preserving input and invoice/credit mismatch tests.
 - Python compile check passes for app, import layer, history, RecoveryCore and connector modules.
 - An earlier v0.6 project note recorded 44 passing tests; v0.7 added tests on top of that baseline.
 
@@ -73,6 +76,8 @@ Local source rows are passed in memory into the core. In history, a report may i
 - Fresh local synthetic benchmarks: 100,000 adversarial raw events + 100,099 metered rows in 1.475s with 2,198 finding rows; €100 underbilling and €9.90 overbilling. One million clean raw + metered events reconciled in 15.525s with 0 findings and €0 exposure. These are workspace results, not production throughput guarantees.
 - RecoveryCore findings include a canonical machine-readable `code` while preserving the existing `type` field for compatibility. `MISSING`, `DUPLICATE` and `ORPHAN_METERED` map to `MISSING_USAGE`, `DUPLICATE_USAGE` and `ORPHAN_METERED_EVENT`.
 - Event-level and Stripe aggregate/portfolio reconciliation now use shared Decimal helpers, with half-up cent rounding. Tests cover `0.1 + 0.2`, tier boundaries, positive/negative half cents, and rollups across customers.
+- Optional invoice imports compare invoice usage lines with metered quantity × configured prices by customer and metric. Optional credit imports compare positive credit ledger totals with absolute invoice credit-line amounts. These are separate downstream deltas and are not included in the source-to-meter headline exposure. Credits require invoice input. Period grouping, taxes, proration, refunds and provider-specific line semantics are not inferred.
+- New adversarial route tests confirm a source-to-meter shortfall and invoice/credit deltas remain separately reported without rolling downstream exposure into the core € cards. Full suite: 65/65.
 - The canonical-code and event-level Decimal source commits had successful Vercel status checks. The Work browser could not independently load the hosted URL in this check; runtime behavior beyond the owner's login test remains unverified.
 
 ## Competitive review and attack plan
@@ -103,22 +108,22 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 ## Risks / findings
 
 1. Current reports assume EUR with two decimal places; multi-currency and non-two-decimal currencies are not modeled.
-2. Invoice, credit, and effective-date price reconciliation are missing and remain the most material product gaps.
+2. Invoice and credit checks use a narrow, explicit CSV/JSON schema and do not yet group by billing period; effective-date pricing is also missing.
 3. Stripe meter summaries are asynchronous and aggregate-level; a just-arrived usage event may not yet appear. A premature scan can create a false missing signal.
 4. Vercel/serverless local storage is ephemeral; current history is only a tester convenience, not persistent SaaS storage. Render Free also has ephemeral storage and sleeps.
 5. Basic Auth is one shared beta gate, not tenant isolation or a production identity system; no sensitive customer data should be used in this hosted beta.
 
 ## Next backlog, ordered
 
-1. Add invoice-total and credit-ledger import plus `INVOICE_MISMATCH` / `CREDIT_MISMATCH` checks that avoid double-counting event exposure.
-2. Effective-dated price catalogs and `PRICING_DRIFT`; add volume/graduated tier and billing-boundary fixtures.
-3. User-adjustable field mapping / preflight for unknown JSON and CSV schemas.
-4. Connector adapter seam and delayed re-check window for Stripe's asynchronous meter summaries; then evaluate Lago export before any credentials or OAuth.
-5. Durable history, tenant isolation and credential handling only after a design partner validates ongoing monitoring.
-6. Pricing validation: ask prospects to quantify existing month-end reconciliation time, missed-usage frequency, invoice disputes, and acceptable recovery fee.
+1. Make invoice and credit mapping user-adjustable; add billing-period grouping, taxes/credits/refunds fixtures and tiered invoice rating.
+2. Effective-dated price catalogs and `PRICING_DRIFT`; add pricing-change and billing-boundary fixtures.
+3. Connector adapter seam and delayed re-check window for Stripe's asynchronous meter summaries; evaluate Lago export before credentials or OAuth.
+4. Durable history, tenant isolation and credential handling only after a design partner validates ongoing monitoring.
+5. Pricing validation: ask prospects to quantify existing month-end reconciliation time, missed-usage frequency, invoice disputes, and acceptable recovery fee.
 
 ## Decisions
 
 - No new spending without explicit approval.
 - No OAuth, automatic invoice changes, refunds, or production data changes in this phase.
 - The user connected `jackieb8877/Metertruth-SaaS` and deployed the v0.7 candidate at Vercel. Repository updates continue on `main`; do not incur hosting or service costs without explicit approval.
+- v0.8 adds read-only invoice usage and credit checks. No billing mutations are performed; all output remains review evidence.
