@@ -1,0 +1,11 @@
+{
+  "id": "finance-profit",
+  "name": "Finance & Profit",
+  "status": "waiting",
+  "last_run": null,
+  "focus": "Break-even CAC, ROAS, contribution margin and profitability",
+  "summary": "Waiting for first finance cycle",
+  "blocker": null,
+  "progress": 10,
+  "events": []
+}
