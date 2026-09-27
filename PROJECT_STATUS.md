@@ -89,6 +89,15 @@ Evidence is qualitative at this point. Product documentation proves billing plat
 - Validation still needs at least a few real datasets and buyer interviews/design partners. No paid acquisition before evidence.
 - LLM-resilient value must come from recurring private datasets, persistent scans/history, connectors and verified recovery outcomes—not a chat explanation.
 
+## Deployment status — 2026-09-27
+
+- Owner-provided Vercel URL: https://metertruth-saa-s.vercel.app/
+- The homepage loaded in the Work browser and showed the upload, demo, scan-history and Stripe sections.
+- No Basic Auth prompt appeared on the homepage. Treat the deployment as publicly accessible until `BETA_USERNAME` and `BETA_PASSWORD` are confirmed in Vercel Production environment variables. Do not upload real customer data before then.
+- The Work browser blocked a direct `/health` check; remaining route checks were not completed. The Vercel connector returned `INVALID_ARGUMENT` for URL fetches, so no backend health status is claimed.
+- Vercel supports FastAPI, but its function filesystem is ephemeral and SQLite is not suitable for persistent/shared scan history. Vercel's Python functions only have writable `/tmp` scratch space; report history can disappear or differ across instances.
+- Before design-partner data: secure the production URL, use synthetic data for smoke tests, and move scan history to durable storage only after choosing a verified no-cost option.
+
 ## Risks / findings
 
 1. Monetary calculations in RecoveryCore v0.2 use binary floats. Existing event-level tests pass, but exact cent-safe tier/credit/invoice arithmetic is still required before finance-grade use.
