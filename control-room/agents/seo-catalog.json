@@ -1,11 +1,18 @@
 {
   "id": "seo-catalog",
   "name": "SEO & Catalog",
-  "status": "active",
-  "last_run": "2026-09-27T16:24:10Z",
-  "focus": "Commercial SEO and product merchandising",
-  "summary": "SEO cycle completed; awaiting next pass",
+  "status": "waiting",
+  "last_run": "2026-09-27T16:34:26Z",
+  "focus": "Commercial SEO architecture for pet grooming and pet-hair removal",
+  "summary": "SEO package v1 ready: separate grooming intent from surface-cleaning intent; metadata, FAQs, comparison pages and internal linking drafted.",
   "blocker": null,
-  "progress": 38,
-  "events": []
+  "progress": 55,
+  "events": [
+    {
+      "time": "2026-09-27T16:34:26Z",
+      "type": "package_ready",
+      "title": "SEO package v1 ready",
+      "detail": "Keep Kit Muda Cero focused on grooming and shedding prevention; keep the reusable roller focused on removing pet hair from sofa, clothes and car. Product-page titles, meta descriptions, FAQs, comparison pages and internal linking are ready to apply."
+    }
+  ]
 }
