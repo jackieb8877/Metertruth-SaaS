@@ -1,0 +1,11 @@
+{
+  "id": "orchestrator",
+  "name": "Orchestrator",
+  "status": "scheduled",
+  "last_run": null,
+  "focus": "Reconcile all agent outputs and choose next highest-impact action",
+  "summary": "Waiting for consolidation cycle",
+  "blocker": null,
+  "progress": 45,
+  "events": []
+}
