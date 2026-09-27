@@ -1,9 +1,9 @@
 {
-  "version": 3,
+  "version": 4,
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-27T22:48:28Z",
-  "status": "ACTIVE_TEST_PREPARATION_NOT_LAUNCHED",
-  "authority": "El propietario pide seguir el curso incluso si sustituye la estrategia anterior y pasar a la primera prueba. No ha aprobado un importe de gasto ni publicación comercial.",
+  "updated_at": "2026-09-27T23:09:09Z",
+  "status": "SHOPIFY_DRAFT_PREPARED_NOT_LAUNCHED",
+  "authority": "El propietario pide seguir el curso incluso si sustituye la estrategia anterior, pasar a la primera prueba y confirma la instalación de Shopify. No ha aprobado un importe de gasto ni publicación comercial.",
   "source": {
     "title": "Guía Para Principiantes De Dropshipping En 2026 (+27 horas)",
     "author": "Adrián Sáenz y colaboradores",
@@ -28,7 +28,7 @@
   "old_20_50_target": "SUPERSEDED_KEEP_AS_RESEARCH_ARCHIVE",
   "mandatory_collections": false,
   "current_product": "Cepillo quitapelos reutilizable con base autolimpiadora · Almacén Escriv Ecom · SKU 100102",
-  "current_product_status": "SELECTED_FOR_PREPARATION_NOT_VALIDATED",
+  "current_product_status": "SHOPIFY_DRAFT_CREATED_PRODUCT_NOT_VALIDATED",
   "active_experiment": "PR-TEST-001",
   "previous_leader": "Kit Muda Cero",
   "previous_leader_status": "REASSESS_NO_AUTOMATIC_GO",
@@ -41,7 +41,16 @@
   "stack": {
     "planned_store": "Shopify",
     "planned_supply_integration": "AutoDS",
-    "status": "COURSE_REFERENCE_NOT_CONNECTED_OR_PURCHASED",
+    "status": "SHOPIFY_CONNECTED_DRAFT_CREATED_SUPPLY_NOT_CONNECTED",
+    "shopify_domain": "ghg2tn-1u.myshopify.com",
+    "shopify_plan_observed": "trial",
+    "shopify_connection_verified": true,
+    "shopify_product_id": "gid://shopify/Product/11226693370199",
+    "shopify_variant_id": "gid://shopify/ProductVariant/55179956126039",
+    "shopify_product_status": "DRAFT",
+    "live_theme_modified": false,
+    "custom_section_installed": false,
+    "integration_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md",
     "first_test_adaptation": "Propuesta: pedido manual al proveedor del SKU al inicio; automatización posterior. No se ha contratado ni probado. Es adaptación nuestra, no el circuito AutoDS enseñado por el curso.",
     "custom_commerce_backend_required": false,
     "retain_existing_design_assets": true
@@ -96,5 +105,5 @@
     "consolidated_state_owner": "orchestrator",
     "scheduled_runs_are_not_continuous_workers": true
   },
-  "next_action": "Continuar PR-TEST-001: conectar Shopify, confirmar suministro y coste exacto del SKU 100102, producir dos vídeos con derechos, QA y propuesta final de presupuesto. Borradores en control-room/artifacts/first-test-001/preparacion-20260927.md. No ampliar catálogo ni activar compra, captación o anuncios."
+  "next_action": "Continuar PR-TEST-001 sobre el producto Shopify existente: preparar tema no publicado para integrar sección/plantilla, confirmar suministro y coste exacto del SKU 100102, obtener activos autorizados, QA y propuesta final de presupuesto. Shopify ya está conectado y el DRAFT se ha leído de vuelta; no volver a pedir instalarlo. No ampliar catálogo ni activar compra, captación o anuncios."
 }
