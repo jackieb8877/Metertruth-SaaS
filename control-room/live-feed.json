@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T17:35:00Z",
+  "updated_at": "2026-09-27T18:22:00.894Z",
   "events": [
     {
       "id": "product-scout-20260927T170312Z-observation",
@@ -200,6 +200,16 @@
       "title": "Finance gate complete",
       "detail": "Kit Muda Cero remains WATCH leaning GO at 39.90 EUR pending full non-ad variable-cost verification.",
       "status": "ok"
+    },
+    {
+      "id": "store-builder-20260927T182200Z-artifact",
+      "ts": "2026-09-27T18:22:00.894Z",
+      "agent_id": "store-builder",
+      "phase": "artifact",
+      "title": "Multiproduct storefront architecture advanced",
+      "detail": "Main non-commercial preview updated with three job-led collection entries, reusable PDP validation states and corrected catalogue mapping; 14/15 static checks pass.",
+      "artifact_path": "control-room/artifacts/store-builder/run-20260927T182200Z.md",
+      "status": "warning"
     }
   ]
 }
