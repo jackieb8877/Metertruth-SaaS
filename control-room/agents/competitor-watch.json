@@ -1,0 +1,11 @@
+{
+  "id": "competitor-watch",
+  "name": "Competitor Watch",
+  "status": "waiting",
+  "last_run": null,
+  "focus": "Monitor competitors, saturation and creative angles",
+  "summary": "No new alert yet",
+  "blocker": null,
+  "progress": 20,
+  "events": []
+}
