@@ -4,6 +4,8 @@ This repository includes `render.yaml` for a single **Free** Python web service.
 
 ## Before deploying
 
+Keep the deployment within the €0 budget: choose the Free service plan, do not upgrade, and do not add a payment method. Render can bill for usage beyond included outbound-bandwidth or build-pipeline amounts when a payment method is present; without one, it suspends affected free services/builds instead. Monitor included usage in the dashboard.
+
 Use the private-beta gate. In Render, set both secret environment variables:
 
 - `BETA_USERNAME`
@@ -43,4 +45,4 @@ This is still a beta control, not a production identity system. Do not treat sha
 
 ## Free-tier operational caveat
 
-Free services can sleep when idle, so the first request after inactivity may be slow. Their local filesystem is ephemeral: scan history may disappear after a restart or replacement. This is acceptable for tester validation but not a production SLA or durable audit record.
+Free services spin down after 15 minutes without traffic, and the first request after inactivity may take about a minute. Render's ephemeral filesystem loses local SQLite data when the service spins down, restarts, or redeploys. Treat scan history as temporary and never use this deployment for durable customer records or a production SLA.
