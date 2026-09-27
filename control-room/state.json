@@ -1,0 +1,124 @@
+{
+  "updated_at": "2026-09-27T16:14:35Z",
+  "project": "Project Rich — Dropshipping",
+  "agents": [
+    {
+      "id": "product-scout",
+      "name": "Product Scout",
+      "status": "waiting",
+      "cadence": "hourly",
+      "last_run": null,
+      "focus": "Discover products with real EU/Spain potential",
+      "summary": "Waiting for next scan",
+      "blocker": null,
+      "progress": 32
+    },
+    {
+      "id": "competitor-watch",
+      "name": "Competitor Watch",
+      "status": "waiting",
+      "cadence": "daily",
+      "last_run": null,
+      "focus": "Monitor competitors, saturation and creative angles",
+      "summary": "No new alert yet",
+      "blocker": null,
+      "progress": 20
+    },
+    {
+      "id": "build-loop",
+      "name": "Build Loop",
+      "status": "scheduled",
+      "cadence": "hourly",
+      "last_run": null,
+      "focus": "Orchestrate the highest-impact next task",
+      "summary": "Next build cycle pending",
+      "blocker": null,
+      "progress": 42
+    },
+    {
+      "id": "supplier-margin",
+      "name": "Supplier & Margin",
+      "status": "active",
+      "cadence": "hourly :15",
+      "last_run": "2026-09-27T16:14:13Z",
+      "focus": "EU sourcing, landed cost and fulfillment",
+      "summary": "Validating blind dropshipping and landed cost",
+      "blocker": "Verified blind dropshipping + landed cost",
+      "progress": 84
+    },
+    {
+      "id": "creative-offer",
+      "name": "Creative & Offer",
+      "status": "active",
+      "cadence": "hourly :30",
+      "last_run": "2026-09-27T16:13:53Z",
+      "focus": "Offer, hooks, bundles, UGC and CRO",
+      "summary": "Kit Muda Cero offer defined at €29.90 target",
+      "blocker": null,
+      "progress": 91
+    },
+    {
+      "id": "seo-catalog",
+      "name": "SEO & Catalog",
+      "status": "scheduled",
+      "cadence": "hourly :45",
+      "last_run": null,
+      "focus": "Commercial SEO and product merchandising",
+      "summary": "First cycle pending",
+      "blocker": null,
+      "progress": 29
+    },
+    {
+      "id": "launch-qa",
+      "name": "Launch QA",
+      "status": "scheduled",
+      "cadence": "daily",
+      "last_run": null,
+      "focus": "Checkout, legal, trust, mobile and analytics QA",
+      "summary": "First QA cycle pending",
+      "blocker": null,
+      "progress": 15
+    }
+  ],
+  "shortlist": [
+    {
+      "name": "Kit Muda Cero",
+      "status": "LEADER",
+      "offer": "€29.90 target",
+      "strength": "High",
+      "next": "Validate total landed cost + blind EU fulfillment"
+    },
+    {
+      "name": "Reusable pet-hair roller",
+      "status": "WATCH",
+      "offer": "€18–24 reference",
+      "strength": "Margin potential",
+      "next": "Confirm blind dropshipping"
+    },
+    {
+      "name": "Pet grooming vacuum",
+      "status": "RESERVE",
+      "offer": "TBD",
+      "strength": "Visual / viral",
+      "next": "Electronics + returns risk"
+    }
+  ],
+  "events": [
+    {
+      "time": "2026-09-27T16:14:13Z",
+      "agent": "Supplier & Margin",
+      "title": "EU sourcing improved",
+      "detail": "Reusable pet-hair roller found with attractive wholesale spread; blind fulfillment still unverified."
+    },
+    {
+      "time": "2026-09-27T16:13:53Z",
+      "agent": "Creative & Offer",
+      "title": "Hero offer defined",
+      "detail": "Kit Muda Cero positioned around preventing shed hair before it reaches sofa, clothes or car."
+    }
+  ],
+  "blocker": {
+    "title": "EU fulfillment verification",
+    "detail": "Need verified stock, landed cost, delivery SLA and blind dropshipping before GO."
+  }
+}
