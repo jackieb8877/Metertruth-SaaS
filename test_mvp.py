@@ -72,6 +72,7 @@ def test_invoice_and_credit_import_reports_downstream_deltas_without_double_coun
     },data={'price_per_unit':'0.10','late_hours':'24','quantity_tolerance':'0','annualization_periods':'12','pricing_json':''})
     assert r.status_code == 200
     assert 'INVOICE_MISMATCH' in r.text and 'CREDIT_MISMATCH' in r.text
+    assert '<b>Invoice:</b>' in r.text and 'amount' in r.text
     match=re.search(r'href="/history/(\d+)"',r.text)
     report=client.get(f'/history/{match.group(1)}').text
     assert 'Revenue Leak Report' in report

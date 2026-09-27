@@ -224,6 +224,9 @@ async def analyze(
     report_json = escape(json.dumps(report, ensure_ascii=False))
     map_raw = ", ".join(f"{escape(k)} → {escape(v)}" for k,v in mapping["raw"].items())
     map_meter = ", ".join(f"{escape(k)} → {escape(v)}" for k,v in mapping["metered"].items())
+    map_invoice = ", ".join(f"{escape(k)} → {escape(v)}" for k,v in ledger["input_mapping"]["invoice"].items() if v)
+    map_credits = ", ".join(f"{escape(k)} → {escape(v)}" for k,v in ledger["input_mapping"]["credits"].items() if v)
+    ledger_mapping = (f'<p><b>Invoice:</b> {map_invoice or "—"}</p><p><b>Credit ledger:</b> {map_credits or "—"}</p>' if invoices else "")
     body = f'''
 <section class="results-head"><div><p class="eyebrow">SCAN COMPLETE · #{scan_id}</p><h1>{s["confirmed_findings"]} confirmed findings</h1><p class="lede">{s["raw_events"]} source events compared with {s["metered_rows"]} metered rows.</p></div><div><a class="buttonlink secondary" href="/">New scan</a> <a class="buttonlink" href="/history/{scan_id}">Open saved report</a></div></section>
 <section class="cards"><div class="card"><span>Underbilling</span><strong>{money(s["potential_underbilling_eur"])}</strong></div>
@@ -231,7 +234,7 @@ async def analyze(
 <div class="card"><span>Period exposure</span><strong>{money(s["period_exposure_eur"])}</strong></div>
 <div class="card"><span>Annualized*</span><strong>{money(s["annualized_exposure_eur"])}</strong></div></section>
 {f'''<section class="panel compact"><h2>Invoice and credit checks · separate downstream exposure</h2><p>{ledger["summary"]["findings"]} ledger discrepancy rows; {money(ledger["summary"]["potential_underbilling_eur"])} possible underbilling and {money(ledger["summary"]["potential_overbilling_eur"])} possible overbilling. These values are informational and excluded from the usage exposure cards to avoid double counting.</p></section>''' if invoices else ''}
-<section class="panel compact"><h2>Detected schema</h2><p><b>Source:</b> {map_raw}</p><p><b>Metered:</b> {map_meter}</p></section>
+<section class="panel compact"><h2>Detected schema</h2><p><b>Source:</b> {map_raw}</p><p><b>Metered:</b> {map_meter}</p>{ledger_mapping}</section>
 <section class="panel tablepanel"><div class="tabletitle"><div><h2>Findings</h2><p>{s["suspected_findings"]} suspected · {s["unverifiable_findings"]} unverifiable</p></div>
 <form action="/export" method="post"><input type="hidden" name="report_json" value="{report_json}"><button class="small" type="submit">Export JSON</button></form></div>
 <div class="scroll"><table><thead><tr><th>Event</th><th>Customer</th><th>Finding</th><th>Status</th><th>Impact</th><th>Suggested action</th></tr></thead><tbody>{table}</tbody></table></div></section>
