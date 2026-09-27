@@ -31,7 +31,7 @@ a{color:var(--blue);text-decoration:none}button,select{font:inherit}
 .replay{display:grid;grid-template-columns:170px 1fr;gap:12px}.sessions{max-height:330px;overflow:auto}.session{padding:9px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;cursor:pointer;background:#0b1017}.session:hover,.session.sel{border-color:#4b5d7d}.session b{font-size:10px}.session div{font-size:9px;color:var(--muted);margin-top:3px}.replaypane{border:1px solid var(--line);border-radius:12px;padding:12px;background:#090d13}.stephead{display:flex;justify-content:space-between;align-items:center}.stephead button{background:#0d131d;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 8px;cursor:pointer}.stepbody{margin-top:12px}.bigphase{font-size:9px;font-weight:900;color:var(--vio);letter-spacing:.1em}.steptitle{font-size:16px;font-weight:900;margin-top:5px}.stepdetail{font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px}.scrub{width:100%;margin-top:13px}
 .alert{border-left:3px solid var(--amber);padding:9px 11px;background:#201b0d;border-radius:8px;font-size:10px;color:#e8dca6;line-height:1.45;margin-bottom:8px}.alert.critical{border-color:var(--red);background:#241010;color:#efb3b3}
 .foot{font-size:9px;color:var(--muted);margin-top:12px}.empty{font-size:10px;color:var(--muted);padding:12px}
-@media(max-width:1200px){.metrics{grid-template-columns:repeat(3,1fr)}.layout{grid-template-columns:1fr}.graph{grid-template-columns:repeat(3,1fr)}}@media(max-width:780px){.metrics{grid-template-columns:repeat(2,1fr)}.graph{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}.event{grid-template-columns:55px 90px 78px 1fr}.replay{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+.charts{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:14px;margin-top:14px}.chartbox{min-height:280px}.charthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.charthead h2{margin:0}.chartlegend{font-size:9px;color:var(--muted)}.svgchart{width:100%;height:220px;display:block}.axis{stroke:#2a3446;stroke-width:1}.gridline{stroke:#1d2633;stroke-width:1}.chartlabel{fill:#7e8aa0;font-size:9px}.barrect{fill:#79a9ff;opacity:.85}.barrect:hover{opacity:1}.linepath{fill:none;stroke:#70e3a6;stroke-width:3}.areapath{fill:url(#areaGrad);opacity:.35}.dotpt{fill:#70e3a6;stroke:#0b1017;stroke-width:2}.donutwrap{display:flex;align-items:center;justify-content:center;gap:18px;height:220px}.donut{width:170px;height:170px}.legendlist{display:grid;gap:7px}.legenditem{display:flex;align-items:center;gap:7px;font-size:9px;color:var(--muted)}.legenddot{width:9px;height:9px;border-radius:50%}.sourcebar{display:grid;grid-template-columns:110px 1fr 28px;gap:8px;align-items:center;margin:8px 0}.sourcebar .track{height:8px;background:#1a2230;border-radius:99px;overflow:hidden}.sourcebar .fillbar{height:100%;background:linear-gradient(90deg,var(--vio),var(--blue));border-radius:99px}.sourcebar .lbl{font-size:9px;color:#c8cfda;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sourcebar .num{font-size:9px;color:var(--muted);text-align:right}@media(max-width:1200px){.charts{grid-template-columns:1fr 1fr}.charts .chartbox:first-child{grid-column:1/-1}}{.metrics{grid-template-columns:repeat(3,1fr)}.layout{grid-template-columns:1fr}.graph{grid-template-columns:repeat(3,1fr)}}@media(max-width:780px){.metrics{grid-template-columns:repeat(2,1fr)}.graph{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}.event{grid-template-columns:55px 90px 78px 1fr}.replay{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -73,7 +73,30 @@ a{color:var(--blue);text-decoration:none}button,select{font:inherit}
   <div id="graph" class="graph"></div>
  </div>
 
- <div class="lower">
+ <div class="charts">
+  <div class="card chartbox">
+    <div class="charthead"><h2>Activity Over Time</h2><div class="chartlegend">events / 5 min</div></div>
+    <svg id="activityChart" class="svgchart" viewBox="0 0 700 220" preserveAspectRatio="none"></svg>
+  </div>
+  <div class="card chartbox">
+    <div class="charthead"><h2>Agent Workload</h2><div class="chartlegend">events / agent</div></div>
+    <svg id="agentChart" class="svgchart" viewBox="0 0 420 220" preserveAspectRatio="none"></svg>
+  </div>
+  <div class="card chartbox">
+    <div class="charthead"><h2>Phase Mix</h2><div class="chartlegend">last 60 min</div></div>
+    <div class="donutwrap"><svg id="phaseChart" class="donut" viewBox="0 0 120 120"></svg><div id="phaseLegend" class="legendlist"></div></div>
+  </div>
+  <div class="card chartbox" style="grid-column:span 2">
+    <div class="charthead"><h2>Top Sources</h2><div class="chartlegend">public URLs inspected</div></div>
+    <div id="sourceChart"></div>
+  </div>
+  <div class="card chartbox">
+    <div class="charthead"><h2>Run Intensity</h2><div class="chartlegend">steps / session</div></div>
+    <svg id="runChart" class="svgchart" viewBox="0 0 420 220" preserveAspectRatio="none"></svg>
+  </div>
+</div>
+
+<div class="lower">
   <div class="card">
    <h2>Opportunity Board</h2>
    <table class="table"><thead><tr><th>Product</th><th>Status</th><th>Offer</th><th>Strength</th><th>Next</th></tr></thead><tbody id="shortlist"></tbody></table>
@@ -120,7 +143,7 @@ function render(data){
  document.getElementById('mBlocked').textContent=states.filter(s=>s.blocker||s.status==='blocked').length;
  const lead=(state.shortlist||[]).find(x=>x.status==='LEADER');document.getElementById('mLeader').textContent=lead?.name||'—';
  document.getElementById('subtitle').textContent='Live telemetry · feed '+ago(data.feedUpdated)+' · '+new Date().toLocaleTimeString('es-ES',{timeZone:'Atlantic/Canary'});
- renderFilters(states);renderConsole(events);renderNow(work);renderNeeds(states,state);renderGraph(work);renderShortlist(state.shortlist||[]);renderSessions(events);
+ renderFilters(states);renderConsole(events);renderNow(work);renderNeeds(states,state);renderGraph(work);renderShortlist(state.shortlist||[]);renderSessions(events);renderCharts(events);
 }
 function renderFilters(states){
  const sel=document.getElementById('agentFilter'),cur=sel.value;sel.innerHTML='<option value="">All agents</option>'+states.map(s=>'<option value="'+esc(s.id)+'">'+esc(s.name||LABELS[s.id]||s.id)+'</option>').join('');sel.value=cur;
@@ -157,6 +180,47 @@ function renderReplay(session){
  stepIndex=Math.max(0,Math.min(stepIndex,session.events.length-1));const e=session.events[stepIndex];scrub.max=Math.max(0,session.events.length-1);scrub.value=stepIndex;document.getElementById('stepCount').textContent=(stepIndex+1)+' / '+session.events.length+' · '+esc(LABELS[session.agent]||session.agent);
  body.innerHTML='<div class="bigphase">'+esc((e.phase||'action').toUpperCase())+' · '+esc(clock(e.ts))+'</div><div class="steptitle">'+esc(e.title||'Update')+'</div><div class="stepdetail">'+esc(e.detail||'')+'</div><div class="links">'+(e.source_url?'<a href="'+esc(e.source_url)+'" target="_blank" rel="noopener">open source ↗</a>':'')+(e.artifact_path?'<span class="artifact">'+esc(e.artifact_path)+'</span>':'')+'</div>';
 }
+function svgEl(tag,attrs={},text=''){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text)e.textContent=text;return e}
+function clearSvg(id){const s=document.getElementById(id);while(s.firstChild)s.removeChild(s.firstChild);return s}
+function bucketEvents(events,mins=5,count=12){
+ const now=Date.now(),size=mins*60000,arr=Array(count).fill(0);
+ events.forEach(e=>{const d=now-new Date(e.ts).getTime();if(d>=0&&d<count*size){const idx=count-1-Math.floor(d/size);if(idx>=0&&idx<count)arr[idx]++}});
+ return arr
+}
+function renderActivity(events){
+ const svg=clearSvg('activityChart'),w=700,h=220,p=28,vals=bucketEvents(events,5,12),max=Math.max(1,...vals);
+ const defs=svgEl('defs'),grad=svgEl('linearGradient',{id:'areaGrad',x1:'0',x2:'0',y1:'0',y2:'1'});grad.appendChild(svgEl('stop',{offset:'0%','stop-color':'#70e3a6'}));grad.appendChild(svgEl('stop',{offset:'100%','stop-color':'#70e3a6','stop-opacity':'0'}));defs.appendChild(grad);svg.appendChild(defs);
+ for(let i=0;i<4;i++){const y=p+(h-2*p)*i/3;svg.appendChild(svgEl('line',{x1:p,y1:y,x2:w-p,y2:y,class:'gridline'}))}
+ const pts=vals.map((v,i)=>[p+(w-2*p)*i/(vals.length-1),h-p-(h-2*p)*v/max]);
+ const line='M '+pts.map(p=>p.join(',')).join(' L ');
+ const area=line+' L '+pts[pts.length-1][0]+','+(h-p)+' L '+pts[0][0]+','+(h-p)+' Z';
+ svg.appendChild(svgEl('path',{d:area,class:'areapath'}));svg.appendChild(svgEl('path',{d:line,class:'linepath'}));
+ pts.forEach((pt,i)=>{const c=svgEl('circle',{cx:pt[0],cy:pt[1],r:4,class:'dotpt'});c.appendChild(svgEl('title',{},vals[i]+' events'));svg.appendChild(c)});
+ vals.forEach((v,i)=>{if(i%2===0)svg.appendChild(svgEl('text',{x:p+(w-2*p)*i/(vals.length-1),y:h-7,'text-anchor':'middle',class:'chartlabel'},'-'+((vals.length-1-i)*5)+'m'))});
+}
+function renderAgentChart(events){
+ const svg=clearSvg('agentChart'),w=420,h=220,p=24,cut=Date.now()-60*60000,counts={};events.filter(e=>new Date(e.ts).getTime()>=cut).forEach(e=>counts[e.agent_id]=(counts[e.agent_id]||0)+1);
+ const rows=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8),max=Math.max(1,...rows.map(x=>x[1]));
+ rows.forEach(([id,v],i)=>{const y=10+i*25,bw=(w-150)*v/max;svg.appendChild(svgEl('text',{x:4,y:y+13,class:'chartlabel'},LABELS[id]||id));const r=svgEl('rect',{x:130,y,width:bw,height:14,rx:7,class:'barrect'});r.appendChild(svgEl('title',{},v+' events'));svg.appendChild(r);svg.appendChild(svgEl('text',{x:136+bw,y:y+12,class:'chartlabel'},String(v)))});
+ if(!rows.length)svg.appendChild(svgEl('text',{x:20,y:40,class:'chartlabel'},'No recent activity'));
+}
+function renderPhaseChart(events){
+ const svg=clearSvg('phaseChart'),legend=document.getElementById('phaseLegend'),cut=Date.now()-60*60000,counts={};events.filter(e=>new Date(e.ts).getTime()>=cut).forEach(e=>counts[e.phase||'action']=(counts[e.phase||'action']||0)+1);
+ const colors={start:'#79a9ff',action:'#69e7ff',observation:'#7ce7ca',decision:'#ffd166',artifact:'#b18cff',blocked:'#ff7d7d',done:'#70e3a6',error:'#ff4d6d'},entries=Object.entries(counts),total=Math.max(1,entries.reduce((s,[,v])=>s+v,0));
+ let off=0;entries.forEach(([k,v])=>{const pct=v/total,len=pct*251.2;svg.appendChild(svgEl('circle',{cx:60,cy:60,r:40,fill:'none',stroke:colors[k]||'#8f9bad','stroke-width':18,'stroke-dasharray':len+' '+(251.2-len),'stroke-dashoffset':-off,transform:'rotate(-90 60 60)'}));off+=len});
+ svg.appendChild(svgEl('text',{x:60,y:57,'text-anchor':'middle',class:'chartlabel'},String(total)));svg.appendChild(svgEl('text',{x:60,y:70,'text-anchor':'middle',class:'chartlabel'},'events'));
+ legend.innerHTML=entries.sort((a,b)=>b[1]-a[1]).map(([k,v])=>'<div class="legenditem"><span class="legenddot" style="background:'+(colors[k]||'#8f9bad')+'"></span>'+esc(k)+' · '+v+'</div>').join('')||'<div class="empty">No data</div>';
+}
+function renderSources(events){
+ const cut=Date.now()-60*60000,counts={};events.filter(e=>e.source_url&&new Date(e.ts).getTime()>=cut).forEach(e=>{let host=e.source_url;try{host=new URL(e.source_url).hostname.replace(/^www\./,'')}catch{}counts[host]=(counts[host]||0)+1});
+ const rows=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8),max=Math.max(1,...rows.map(x=>x[1]));document.getElementById('sourceChart').innerHTML=rows.length?rows.map(([h,v])=>'<div class="sourcebar"><div class="lbl">'+esc(h)+'</div><div class="track"><div class="fillbar" style="width:'+(100*v/max)+'%"></div></div><div class="num">'+v+'</div></div>').join(''):'<div class="empty">No source URLs in the last hour.</div>';
+}
+function renderRunChart(events){
+ const svg=clearSvg('runChart'),w=420,h=220,p=24,ss=buildSessions(events).slice(0,10).reverse(),max=Math.max(1,...ss.map(s=>s.events.length));
+ ss.forEach((s,i)=>{const x=p+i*((w-2*p)/Math.max(1,ss.length)),bw=Math.max(10,(w-2*p)/Math.max(1,ss.length)-8),bh=(h-55)*s.events.length/max,y=h-30-bh;const r=svgEl('rect',{x,y,width:bw,height:bh,rx:5,class:'barrect'});r.appendChild(svgEl('title',{},LABELS[s.agent]+' · '+s.events.length+' steps'));svg.appendChild(r);svg.appendChild(svgEl('text',{x:x+bw/2,y:h-12,'text-anchor':'middle',class:'chartlabel'},(LABELS[s.agent]||s.agent).split(' ')[0].slice(0,5)))});
+ if(!ss.length)svg.appendChild(svgEl('text',{x:20,y:40,class:'chartlabel'},'No sessions yet'));
+}
+function renderCharts(events){renderActivity(events);renderAgentChart(events);renderPhaseChart(events);renderSources(events);renderRunChart(events)}
 async function tick(){
  if(paused){schedule(5000);return}
  try{
