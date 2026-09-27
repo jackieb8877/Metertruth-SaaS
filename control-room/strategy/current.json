@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "strategy_id": "adrian-one-product-v1",
+  "updated_at": "2026-09-27T20:54:14Z",
+  "status": "ACTIVE_PLANNING_NOT_LAUNCHED",
+  "authority": "El propietario pide seguir el curso incluso si sustituye la estrategia anterior.",
+  "source": {
+    "title": "Guía Para Principiantes De Dropshipping En 2026 (+27 horas)",
+    "author": "Adrián Sáenz y colaboradores",
+    "video_url": "https://www.youtube.com/watch?v=Q4Ykcwh5Osc",
+    "transcript": "curso dropshipping.txt",
+    "full_course_review_complete": false,
+    "review_scope": "Bloques estratégicos de arranque, pasajes de configuración, primer test de Meta, análisis/optimización y selección para orgánico/TikTok Shop; no auditoría íntegra de 27 horas."
+  },
+  "read_first": "control-room/strategy/plan_aplicacion_adrian.md",
+  "launch_model": "one_product_store_sequential_tests",
+  "max_simultaneous_commercial_product_tests": 1,
+  "catalog_launch_target": null,
+  "old_20_50_target": "SUPERSEDED_KEEP_AS_RESEARCH_ARCHIVE",
+  "mandatory_collections": false,
+  "current_product": null,
+  "previous_leader": "Kit Muda Cero",
+  "previous_leader_status": "REASSESS_NO_AUTOMATIC_GO",
+  "market": {
+    "country_proposal": "ES",
+    "language_proposal": "es",
+    "status": "PROPOSED_NOT_CONFIGURED",
+    "coverage": "Confirmar cobertura y costes; no tratar todas las zonas de España como equivalentes."
+  },
+  "stack": {
+    "planned_store": "Shopify",
+    "planned_supply_integration": "AutoDS",
+    "status": "COURSE_REFERENCE_NOT_CONNECTED_OR_PURCHASED",
+    "custom_commerce_backend_required": false,
+    "retain_existing_design_assets": true
+  },
+  "initial_channel": "Meta Ads",
+  "later_channels": ["Google Ads", "Tráfico orgánico", "TikTok Ads", "Amazon", "TikTok Shop"],
+  "test_example_from_course": {
+    "campaigns": 1,
+    "adsets": 2,
+    "creatives_per_adset": 1,
+    "daily_eur_per_adset": 10,
+    "destination": "product_page",
+    "conversion_event": "purchase",
+    "source_times": ["04:53:34-04:56:58", "05:02:42-05:03:53", "05:10:27-05:12:23"],
+    "status": "ILLUSTRATIVE_NOT_AUTHORIZED"
+  },
+  "budget": {
+    "approved_paid_spend_eur": 0,
+    "approved_total_test_budget_eur": null,
+    "requires_owner_approval": true,
+    "subscriptions_authorized": false,
+    "orders_authorized": false,
+    "campaigns_authorized": false
+  },
+  "supplier_policy": {
+    "eu_stock_preference_not_absolute_filter": true,
+    "international_options_allowed_for_research": true,
+    "valid_destination_delivery_and_cost_required": true,
+    "factory_optimization_after_initial_sales": true
+  },
+  "economics": {
+    "price_multiplier_reference": [2, 3],
+    "reference_is_not_net_profit": true,
+    "fixed_50_percent_pre_ad_gate": "NOT_A_COURSE_RULE_DO_NOT_USE_AS_UNIVERSAL_GATE",
+    "break_even_required": true,
+    "shipping_included_price_preferred": true,
+    "missing_costs_must_remain_explicit": true
+  },
+  "guardrails": [
+    "No fake reviews, stock, earnings, scientific/health claims or false price history",
+    "No copying third-party ads without rights",
+    "No payments, subscriptions, campaign publication or legal commitments without authorization",
+    "No false claim of complete course audit",
+    "No synthetic live activity",
+    "Preserve existing work and current SHA; do not overwrite newer agent outputs"
+  ],
+  "coordination": {
+    "experiment_file": "control-room/strategy/first-test-draft.json",
+    "decision_owner": "manual_coordinator_in_conversation",
+    "agents_may_propose_not_authorize_paid_launch": true,
+    "do_not_write_other_agents_state": true,
+    "consolidated_state_owner": "orchestrator",
+    "scheduled_runs_are_not_continuous_workers": true
+  },
+  "next_action": "Preparar una candidatura de prueba con producto, coste/entrega, avatar y dos creatividades según el curso; sin esperar a 20–50 SKUs ni fijar Muda Cero como ganador."
+}
