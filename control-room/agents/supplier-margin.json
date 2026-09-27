@@ -2,11 +2,11 @@
   "id": "supplier-margin",
   "name": "Supplier & Margin",
   "status": "waiting",
-  "last_run": "2026-09-27T18:15:30Z",
+  "last_run": "2026-09-27T19:14:39Z",
   "focus": "EU sourcing, landed cost and supplier consolidation for 20–50 SKUs",
-  "summary": "BigBuy remains the strongest consolidation path for the pet cluster. Two Muda Cero components are publicly priced at €2.57 and €5.43. The current reusable roller candidate at $6.73 is about €5.89 at 1 USD = 0.875274 EUR, taking the 3-piece product subtotal to about €13.89 before shipping. At Finance's €39.90 test price and €16.49 non-ad cost ceiling, only €2.60 remains for shipping, fees and returns, so this roller path is too tight for GO. A $49 soft dog-seat cover and $41.24 six-piece packing cube set fail economics; a $16.10 windshield umbrella and $22.81 five-piece compression set remain WATCH because EU ship-from and exact shipping are not publicly verified.",
-  "blocker": "Need a cheaper Spain/EU reusable pet-hair roller or an exact full-kit shipping quote. Product-level EU ship-from and shipping cost remain unverified for the top challenger SKUs.",
-  "progress": 94,
+  "summary": "BigBuy remains the primary consolidation anchor, but a same-ecosystem reusable roller path is not viable: the public Rellair InnovaGoods listing is €11.89 and sold out, so it does not solve Muda Cero economics or stock. Hertwill is added as a WATCH secondary EU supplier channel: free tier up to 5 products, automated stock/fulfilment, no inventory/MOQ, neutral packaging, EU delivery in 3–8 business days, Spain standard-parcel shipping €7.99–15.99 excl. VAT, returns, and Shopify/WooCommerce/Wix/API support. Exact wholesale prices and product shipping are account-gated, and different brands ship separately.",
+  "blocker": "Muda Cero still needs a reusable roller at <=€3.49 or an exact full-kit shipping quote. Hertwill exact wholesale price + SKU shipping require a free account/login before Finance can model the channel.",
+  "progress": 96,
   "fx": {
     "usd_eur": 0.875274,
     "observed_at": "2026-09-27T17:32:00Z"
@@ -82,6 +82,16 @@
       "cost_eur_fx": 14.09,
       "margin_note": "Potential near ~€49.90; EU ship-from and exact shipping unverified",
       "evidence": "https://www.spocket.co/dropship/tech-accessories/car-sunshade-umbrela-car-front-window-sunshade-cover-car-sun-54812308"
+    },
+    {
+      "sku": "Muda Cero reusable roller — Rellair InnovaGoods",
+      "supplier": "BigBuy / InnovaGoods",
+      "classification": "FAIL for current economics; WATCH as supplier coverage",
+      "public_listing_price_eur": 11.89,
+      "stock": "sold out on public storefront",
+      "landed_cost": "not publicly verifiable; listing price is not treated as wholesale cost",
+      "margin_note": "Far above the <=€3.49 roller target needed to preserve ~€5 for shipping+fees+returns at €39.90.",
+      "evidence": "https://pets-bigbuy.myshopify.com/products/pet-hair-remover-roller-rellair-innovagoods"
     }
   ],
   "supplier_coverage": {
@@ -94,18 +104,26 @@
     },
     "Spocket": {
       "note": "Platform supports neutral packaging/branded invoicing and many US/EU suppliers, but SKU-level origin must be verified individually"
+    },
+    "Hertwill": {
+      "coverage": [
+        "EU/US branded catalogue",
+        "pet/home/travel adjacent products",
+        "automated fulfilment"
+      ],
+      "note": "Free plan up to 5 products and 10 orders/month. EU delivery 3–8 business days. Spain standard parcel shipping €7.99–15.99 excl. VAT. Exact wholesale prices and product shipping require login. Different brands ship separately, so bundle consolidation is weaker than one-warehouse sourcing."
     }
   },
   "handoff": {
     "finance": [
-      "At €39.90, current Muda Cero product subtotal is ~€13.89, leaving only €2.60 for shipping+fees+returns under the 50% contribution gate.",
-      "To preserve €5.00 for shipping+fees+returns at €39.90, target roller product cost <=€3.49.",
-      "Reject the $49 soft dog-seat cover and $41.24 six-piece packing-cube supplier options."
+      "Keep the Muda Cero 39.90 EUR gate unchanged: target reusable roller <=3.49 EUR or obtain exact full-kit shipping.",
+      "Do not use the Rellair €11.89 public listing as wholesale cost; it is sold out and not a wholesale quote.",
+      "Hertwill merits a zero-subscription 5-SKU margin test once exact wholesale price and Spain shipping are visible."
     ],
     "orchestrator": [
-      "BigBuy remains the best consolidation anchor for the pet cluster.",
-      "Do not treat Spocket platform-level fast shipping as SKU-level proof; origin/SLA remains missing for roller, cubes and sunshade.",
-      "Second HERO hard-bottom dog cover remains unsourced in EU dropship."
+      "BigBuy remains primary anchor but still lacks a viable verified third Muda Cero component.",
+      "Add Hertwill as WATCH secondary supplier channel for catalogue depth at zero subscription validation cost.",
+      "Prefer same-brand/same-warehouse bundles on Hertwill because multi-brand orders ship separately with separate freight."
     ]
   },
   "events": [
@@ -123,6 +141,24 @@
       "ts": "2026-09-27T18:16:00Z",
       "title": "BigBuy retained as consolidation anchor",
       "detail": "Two Muda Cero components remain covered by one Spain/EU-oriented supplier; exact shipping and roller sourcing remain unresolved."
+    },
+    {
+      "ts": "2026-09-27T19:14:39Z",
+      "run_id": "supplier-margin-20260927T191439Z",
+      "title": "BigBuy same-ecosystem roller rejected",
+      "detail": "Rellair InnovaGoods is publicly listed at €11.89 and sold out; coverage improves in theory, but economics and stock fail the current Muda Cero gate."
+    },
+    {
+      "ts": "2026-09-27T19:14:39Z",
+      "run_id": "supplier-margin-20260927T191439Z",
+      "title": "Hertwill added as WATCH supplier channel",
+      "detail": "Free 5-product tier, automated EU fulfilment, neutral packaging and 3–8 business-day EU delivery create a zero-subscription validation path."
+    },
+    {
+      "ts": "2026-09-27T19:14:39Z",
+      "run_id": "supplier-margin-20260927T191439Z",
+      "title": "Cross-brand consolidation penalty identified",
+      "detail": "Hertwill ships different brands separately, so cross-brand bundles incur separate freight and should be penalized in sourcing scores."
     }
   ]
 }
