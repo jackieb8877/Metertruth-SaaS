@@ -1,9 +1,9 @@
 {
-  "version": 4,
+  "version": 5,
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-27T23:09:09Z",
-  "status": "SHOPIFY_DRAFT_PREPARED_NOT_LAUNCHED",
-  "authority": "El propietario pide seguir el curso incluso si sustituye la estrategia anterior, pasar a la primera prueba y confirma la instalación de Shopify. No ha aprobado un importe de gasto ni publicación comercial.",
+  "updated_at": "2026-09-27T23:51:36Z",
+  "status": "SHOPIFY_UNPUBLISHED_LANDING_INSTALLED_NOT_LAUNCHED",
+  "authority": "El propietario pide seguir el curso incluso si sustituye la estrategia anterior, pasar a la primera prueba, confirma Shopify y pide continuar. No ha aprobado un importe de gasto ni publicación comercial.",
   "source": {
     "title": "Guía Para Principiantes De Dropshipping En 2026 (+27 horas)",
     "author": "Adrián Sáenz y colaboradores",
@@ -41,7 +41,7 @@
   "stack": {
     "planned_store": "Shopify",
     "planned_supply_integration": "AutoDS",
-    "status": "SHOPIFY_CONNECTED_DRAFT_CREATED_SUPPLY_NOT_CONNECTED",
+    "status": "SHOPIFY_CONNECTED_UNPUBLISHED_LANDING_INSTALLED_SUPPLY_NOT_CONNECTED",
     "shopify_domain": "ghg2tn-1u.myshopify.com",
     "shopify_plan_observed": "trial",
     "shopify_connection_verified": true,
@@ -49,8 +49,17 @@
     "shopify_variant_id": "gid://shopify/ProductVariant/55179956126039",
     "shopify_product_status": "DRAFT",
     "live_theme_modified": false,
-    "custom_section_installed": false,
-    "integration_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md",
+    "custom_section_installed": true,
+    "unpublished_theme_id": "gid://shopify/OnlineStoreTheme/205996360023",
+    "unpublished_theme_name": "rato. · PR-TEST-001 · borrador",
+    "theme_editor_url": "https://admin.shopify.com/store/ghg2tn-1u/themes/205996360023/editor",
+    "theme_preview_url": "https://ghg2tn-1u.myshopify.com/?preview_theme_id=205996360023",
+    "theme_files_readback_verified": true,
+    "theme_files_match_local_tested_bytes": true,
+    "authenticated_storefront_render_verified": false,
+    "integration_evidence": "control-room/artifacts/first-test-001/theme-installed-20260927T235136Z.md",
+    "previous_product_creation_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md",
+    "integration_note": "Usar esta copia y leer sus archivos actuales. No crear otra copia ni reinstalar la sección antigua por defecto. Modo preview_only con contenido provisional y sin compra; no equivale a control de acceso o validación comercial.",
     "first_test_adaptation": "Propuesta: pedido manual al proveedor del SKU al inicio; automatización posterior. No se ha contratado ni probado. Es adaptación nuestra, no el circuito AutoDS enseñado por el curso.",
     "custom_commerce_backend_required": false,
     "retain_existing_design_assets": true
@@ -105,5 +114,5 @@
     "consolidated_state_owner": "orchestrator",
     "scheduled_runs_are_not_continuous_workers": true
   },
-  "next_action": "Continuar PR-TEST-001 sobre el producto Shopify existente: preparar tema no publicado para integrar sección/plantilla, confirmar suministro y coste exacto del SKU 100102, obtener activos autorizados, QA y propuesta final de presupuesto. Shopify ya está conectado y el DRAFT se ha leído de vuelta; no volver a pedir instalarlo. No ampliar catálogo ni activar compra, captación o anuncios."
+  "next_action": "PR-TEST-001: confirmar stock, coste facturado, portes y permisos de medios del SKU 100102. Solicitud al proveedor redactada, no enviada; requiere autorización. Trabajar sobre el producto DRAFT y el tema UNPUBLISHED existentes. Validar renderizado autenticado, activos, medición y compra antes del GO comercial. No reinstalar Shopify ni crear otra copia de tema; no ampliar catálogo, contratar, pedir productos, publicar ni activar anuncios."
 }
