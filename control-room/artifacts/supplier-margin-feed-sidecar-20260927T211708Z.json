@@ -1,0 +1,23 @@
+{
+  "strategy_id": "adrian-one-product-v1",
+  "run_id": "supplier-margin-20260927T211708Z",
+  "ts": "2026-09-27T21:17:08Z",
+  "agent_id": "supplier-margin",
+  "events": [
+    {
+      "phase": "decision",
+      "title": "Spain one-product route narrowed",
+      "status": "warning"
+    },
+    {
+      "phase": "analysis",
+      "title": "Economics rebuilt with explicit unknowns",
+      "status": "warning"
+    },
+    {
+      "phase": "handoff",
+      "title": "Exact shipping, stock, tax and media-rights checks remain",
+      "status": "warning"
+    }
+  ]
+}
