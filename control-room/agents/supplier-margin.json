@@ -2,30 +2,127 @@
   "id": "supplier-margin",
   "name": "Supplier & Margin",
   "status": "waiting",
-  "last_run": "2026-09-27T17:17:00Z",
-  "focus": "EU sourcing, landed cost and fulfillment",
-  "summary": "Two current dropship listings from the same Spain-based supplier cover the grooming glove and self-cleaning slicker. Their observed product subtotal is 8.00 EUR before delivery. The reusable home roller still lacks a verified Spain/EU fulfillment path, so final landed cost remains pending.",
-  "blocker": "Verify a Spain/EU reusable roller and an exact delivery quote before final landed cost.",
-  "progress": 91,
-  "events": [],
-  "supplier_checks": [
+  "last_run": "2026-09-27T18:15:30Z",
+  "focus": "EU sourcing, landed cost and supplier consolidation for 20–50 SKUs",
+  "summary": "BigBuy remains the strongest consolidation path for the pet cluster. Two Muda Cero components are publicly priced at €2.57 and €5.43. The current reusable roller candidate at $6.73 is about €5.89 at 1 USD = 0.875274 EUR, taking the 3-piece product subtotal to about €13.89 before shipping. At Finance's €39.90 test price and €16.49 non-ad cost ceiling, only €2.60 remains for shipping, fees and returns, so this roller path is too tight for GO. A $49 soft dog-seat cover and $41.24 six-piece packing cube set fail economics; a $16.10 windshield umbrella and $22.81 five-piece compression set remain WATCH because EU ship-from and exact shipping are not publicly verified.",
+  "blocker": "Need a cheaper Spain/EU reusable pet-hair roller or an exact full-kit shipping quote. Product-level EU ship-from and shipping cost remain unverified for the top challenger SKUs.",
+  "progress": 94,
+  "fx": {
+    "usd_eur": 0.875274,
+    "observed_at": "2026-09-27T17:32:00Z"
+  },
+  "sku_checks": [
     {
-      "product": "Pet Brush & Massage Glove Relpet InnovaGoods",
+      "sku": "Muda Cero glove",
       "supplier": "BigBuy via Spocket",
       "classification": "PASS",
-      "cost_eur": 2.57
+      "cost_eur": 2.57,
+      "landed_cost": "shipping pending",
+      "evidence": "https://www.spocket.co/dropship/pets/pet-brush-masage-glove-relpet-inovagods"
     },
     {
-      "product": "Backcombing brush Gloria Self-cleaning",
+      "sku": "Muda Cero slicker",
       "supplier": "BigBuy via Spocket",
       "classification": "PASS",
-      "cost_eur": 5.43
+      "cost_eur": 5.43,
+      "landed_cost": "shipping pending",
+      "evidence": "https://www.spocket.co/dropship/pets/backcombing-brush-gloria-selfcleaning"
     },
     {
-      "product": "2 Way Pet Hair Remover Roller",
+      "sku": "Muda Cero reusable roller",
       "supplier": "Green Smokey via Spocket",
       "classification": "WATCH",
-      "cost_usd": 6.73
+      "cost_usd": 6.73,
+      "cost_eur_fx": 5.89,
+      "landed_cost": "shipping and ship-from pending",
+      "margin_note": "3-piece subtotal ~€13.89; only €2.60 remains for shipping+fees+returns under current 50% gate",
+      "evidence": "https://www.spocket.co/dropship/home-garden/2-way-pet-hair-remover-roler-removing-dog-cat"
+    },
+    {
+      "sku": "Dog car seat cover soft Oxford",
+      "supplier": "Fuchsia Molly via Spocket",
+      "classification": "FAIL",
+      "cost_usd": 49,
+      "cost_eur_fx": 42.89,
+      "margin_note": "Fails against observed €39.99–59.95 mainstream retail; also not hard-bottom",
+      "evidence": "https://www.spocket.co/dropship/automotive/dog-seat-covers"
+    },
+    {
+      "sku": "VEVOR hard-bottom dog back-seat extender",
+      "supplier": "Doba / VEVOR",
+      "classification": "FAIL",
+      "ship_from": "United States",
+      "sla": "2–7 days",
+      "margin_note": "Fails current Spain/EU sourcing gate",
+      "evidence": "https://www.doba.com/product/sKbyCOJvUeDN/dropshipping-vevor-back-seat-extender-for-dogsdog-hammock-for-car-back-seat-dog-car-seat-cover-with-hard-bottom-dog-car-seat-bed-53x248-supports-350lb-with-mesh-window-and-storage-pocket-for-car-suvtruck.html"
+    },
+    {
+      "sku": "Compression packing cubes 6pc",
+      "supplier": "Ultramarine Dione via Spocket",
+      "classification": "FAIL",
+      "cost_usd": 41.24,
+      "cost_eur_fx": 36.1,
+      "margin_note": "Fails against ~€39.99–49.99 branded EU retail before shipping/fees",
+      "evidence": "https://www.spocket.co/dropship/tech-accessories/6-pcs-travel-cubes-storage-toiletry-bag-clothes-lugage-organ"
+    },
+    {
+      "sku": "Compression packing cubes 5pc",
+      "supplier": "AliExpress via Spocket",
+      "classification": "WATCH",
+      "cost_usd": 22.81,
+      "cost_eur_fx": 19.97,
+      "margin_note": "Could work only near ~€49.90 with low shipping; EU warehouse not verified",
+      "evidence": "https://www.spocket.co/dropship/other/5pcs-compresed-packing-cubes-travel-storage-organizer-set-mesh-visual--64649021"
+    },
+    {
+      "sku": "Windshield sunshade umbrella",
+      "supplier": "Yellow Angel via Spocket",
+      "classification": "WATCH",
+      "cost_usd": 16.1,
+      "cost_eur_fx": 14.09,
+      "margin_note": "Potential near ~€49.90; EU ship-from and exact shipping unverified",
+      "evidence": "https://www.spocket.co/dropship/tech-accessories/car-sunshade-umbrela-car-front-window-sunshade-cover-car-sun-54812308"
+    }
+  ],
+  "supplier_coverage": {
+    "BigBuy": {
+      "coverage": [
+        "glove",
+        "slicker"
+      ],
+      "note": "Spain/EU-oriented dropshipping, API and broad multi-channel catalog; exact full-kit shipping still pending"
+    },
+    "Spocket": {
+      "note": "Platform supports neutral packaging/branded invoicing and many US/EU suppliers, but SKU-level origin must be verified individually"
+    }
+  },
+  "handoff": {
+    "finance": [
+      "At €39.90, current Muda Cero product subtotal is ~€13.89, leaving only €2.60 for shipping+fees+returns under the 50% contribution gate.",
+      "To preserve €5.00 for shipping+fees+returns at €39.90, target roller product cost <=€3.49.",
+      "Reject the $49 soft dog-seat cover and $41.24 six-piece packing-cube supplier options."
+    ],
+    "orchestrator": [
+      "BigBuy remains the best consolidation anchor for the pet cluster.",
+      "Do not treat Spocket platform-level fast shipping as SKU-level proof; origin/SLA remains missing for roller, cubes and sunshade.",
+      "Second HERO hard-bottom dog cover remains unsourced in EU dropship."
+    ]
+  },
+  "events": [
+    {
+      "ts": "2026-09-27T18:15:30Z",
+      "title": "Muda Cero roller path tightened",
+      "detail": "Current 3-piece product subtotal is ~€13.89 before shipping; only €2.60 remains under the current 50% contribution gate."
+    },
+    {
+      "ts": "2026-09-27T18:15:45Z",
+      "title": "Two challenger suppliers rejected",
+      "detail": "Soft dog-seat cover at $49 and six-piece packing cubes at $41.24 fail current economics."
+    },
+    {
+      "ts": "2026-09-27T18:16:00Z",
+      "title": "BigBuy retained as consolidation anchor",
+      "detail": "Two Muda Cero components remain covered by one Spain/EU-oriented supplier; exact shipping and roller sourcing remain unresolved."
     }
   ]
 }
