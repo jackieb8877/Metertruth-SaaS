@@ -1,5 +1,93 @@
 {
   "version": 2,
-  "updated_at": "2026-09-27T16:54:01Z",
-  "events": []
+  "updated_at": "2026-09-27T16:49:00Z",
+  "events": [
+    {
+      "id": "product-scout-20260927T164251Z-start",
+      "ts": "2026-09-27T16:42:51Z",
+      "agent_id": "product-scout",
+      "phase": "start",
+      "title": "Starting product discovery cycle",
+      "detail": "Scanning recent EU/Spain demand, visual potential, margin, logistics and saturation signals.",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T164400Z-action",
+      "ts": "2026-09-27T16:44:00Z",
+      "agent_id": "product-scout",
+      "phase": "action",
+      "title": "Scanning TikTok product velocity",
+      "detail": "Checking recent pet, automotive, tech and kitchen product velocity for visual products with low return risk.",
+      "source_url": "https://velocityspy.com/trending/pet-supplies/",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T164600Z-observation",
+      "ts": "2026-09-27T16:46:00Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Pet-hair niche still has demand, but supply reliability is the risk",
+      "detail": "Pet grooming vacuum, pet hair remover mitt and portable pet products show strong recent view velocity; fulfillment reliability remains a key filter.",
+      "source_url": "https://velocityspy.com/trending/pet-supplies/",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T164700Z-action",
+      "ts": "2026-09-27T16:47:00Z",
+      "agent_id": "product-scout",
+      "phase": "action",
+      "title": "Checking portable pet hydration products",
+      "detail": "Comparing recent TikTok demand with Spain retail pricing and product simplicity.",
+      "source_url": "https://flyface.es/en/products/285ml-leak-proof-feeder-dogs-bottle-portable-dog-drinker-2-in-1-stainless-steel-silicon-lightweight-travel-pet-supplies",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T164730Z-observation",
+      "ts": "2026-09-27T16:47:30Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Portable pet water bottle has traction but weak differentiation",
+      "detail": "Recent TikTok velocity is strong and the product is simple/non-fragile, but Spain pricing is already highly commoditized, compressing margin and differentiation.",
+      "source_url": "https://velocityspy.com/trending/pet-supplies/",
+      "status": "warning"
+    },
+    {
+      "id": "product-scout-20260927T164800Z-action",
+      "ts": "2026-09-27T16:48:00Z",
+      "agent_id": "product-scout",
+      "phase": "action",
+      "title": "Testing handheld vacuum sealer candidate",
+      "detail": "Evaluating visual demonstration, pricing and availability for a cordless vacuum sealer with reusable bags.",
+      "source_url": "https://www.kalibratr.com/trending/kitchen",
+      "status": "running"
+    },
+    {
+      "id": "product-scout-20260927T164830Z-observation",
+      "ts": "2026-09-27T16:48:30Z",
+      "agent_id": "product-scout",
+      "phase": "observation",
+      "title": "Vacuum sealer is visually strong but not ready to promote",
+      "detail": "The shrinking-bag demo is compelling and the category has current momentum, but verified EU dropshipping stock is weak and battery/food-contact compliance adds risk.",
+      "source_url": "https://www.kalibratr.com/trending/kitchen",
+      "status": "warning"
+    },
+    {
+      "id": "product-scout-20260927T164900Z-decision",
+      "ts": "2026-09-27T16:49:00Z",
+      "agent_id": "product-scout",
+      "phase": "decision",
+      "title": "Keep current leader unchanged",
+      "detail": "No newly scanned product clears the current leader on combined demand, visual proof, logistics simplicity, margin potential and risk.",
+      "status": "ok"
+    },
+    {
+      "id": "product-scout-20260927T164901Z-done",
+      "ts": "2026-09-27T16:49:01Z",
+      "agent_id": "product-scout",
+      "phase": "done",
+      "title": "Discovery cycle complete",
+      "detail": "Watchlist updated internally; no user notification required.",
+      "status": "ok"
+    }
+  ]
 }
