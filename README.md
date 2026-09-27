@@ -1,8 +1,8 @@
-# MeterTruth MVP v0.7 — private beta candidate
+# MeterTruth MVP v0.8 — private beta candidate
 
 MeterTruth is an independent revenue-assurance layer for usage-based SaaS. It compares product-source usage with metered/billing usage, flags discrepancies with evidence, and produces a reviewable Revenue Leak Report. It does not issue invoices or mutate billing providers.
 
-## v0.7 changes
+## v0.8 changes
 
 - Main reconciliation upload accepts CSV, JSON arrays/objects, common `data`/`events`/`rows` wrappers, JSONL and NDJSON (UTF-8; maximum 5 MiB per file).
 - Schema aliases remain inferred by RecoveryCore v0.2.
@@ -11,6 +11,7 @@ MeterTruth is an independent revenue-assurance layer for usage-based SaaS. It co
 - CSV usage quantities and form/catalog rates are kept as decimal strings through normalization, avoiding a float conversion before reconciliation.
 - Event-level and read-only Stripe scans are stored in local SQLite scan history; original uploads and API keys are not stored.
 - Each scan can be reopened as an evidence-rich HTML Revenue Leak Report.
+- Optional invoice lines and credit ledger uploads detect `INVOICE_MISMATCH` and `CREDIT_MISMATCH`; the report displays inferred ledger columns and keeps downstream deltas separate from raw-to-meter leakage.
 - The existing guided onboarding, preflight, demo, customer mapping and read-only Stripe portfolio scan remain in place.
 - Optional Basic Auth, CSP/security headers and `/health` remain part of the private beta.
 
@@ -42,6 +43,6 @@ pytest -q
 
 RecoveryCore v0.2 covers missing, duplicate, wrong quantity, customer mismatch, metric mismatch, late/out-of-period events, orphan metered rows, idempotency collisions, flat/tiered price configuration and an economic exposure report. CSV↔JSON event-level reconciliation and stored scan reports are now supported.
 
-Invoice and credit checks are now available as optional uploads. Invoice usage lines are compared against metered quantity priced with the configured rate; credit ledger totals are compared with invoice credit lines. These downstream findings are presented separately from source-to-meter leakage to avoid double counting. The MVP does **not yet** infer effective-dated pricing catalogs, implement billing-period-aware tier rating, or prove a recovery action was successfully applied. Stripe portfolio mode remains aggregate-level and read-only. See `PROJECT_STATUS.md` for assumptions and limits.
+Invoice and credit checks are available as optional uploads. Invoice usage lines need `customer_id` and `amount`; `metric` and `line_type` can be provided to disambiguate multiple meters and identify credit rows (`line_type=credit`). When a single metric is present, an omitted invoice metric is inferred. Credit ledger rows need `customer_id` and `credit_amount` (or `amount`). The invoice file must include its credit lines for credit reconciliation. Invoice usage totals are compared with metered quantities priced using the configured flat or tiered catalog, aggregated per customer and metric. Taxes, refunds, period splitting, effective-dated price catalogs and proof that a recovery action was applied are not inferred. These downstream findings are shown separately from source-to-meter leakage to avoid double counting. Stripe portfolio mode remains aggregate-level and read-only. See `PROJECT_STATUS.md` for assumptions and limits.
 
 No original upload, Stripe key, invoice adjustment, refund or customer mutation is retained/performed. Hosted deployment on Vercel uses ephemeral local storage; scan history can disappear on restart. Do not use production customer data until authentication, retention and storage requirements are independently reviewed.
