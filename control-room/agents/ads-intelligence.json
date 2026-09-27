@@ -2,13 +2,13 @@
   "id": "ads-intelligence",
   "name": "Ads Intelligence",
   "status": "waiting",
-  "last_run": "2026-09-27T18:23:11Z",
+  "last_run": "2026-09-27T19:18:28Z",
   "focus": "Public ad/creative patterns, fatigue signals and test design for priority candidates",
-  "summary": "Material creative signal: generic pet-hair 'magic remover' creative is heavily repeated and shows weak recent organic/affiliate engagement in the examples observed, while the strongest durable pattern is explicit visual proof. Hard-bottom dog-seat extenders show current TikTok Shop demand but also a trust gap around rigidity/fit. Packing-cube creative remains visually legible but a recent 2026 example was weak, so it should be tested only with a sharply specific travel job.",
+  "summary": "Material update: do not acquire customers with a generic reusable roller. Current public evidence shows branded entry from Scotch-Brite plus commodity TikTok Shop rollers with minimal sales, reinforcing the need for a system-led Muda Cero story. Dog-car extenders now show strong creative homogeneity around 400/500/550-lb support, waterproofing and universal fit; the opportunity is to prove dimensions, installation and real flatness instead of echoing the same load claims.",
   "blocker": "TikTok/Meta ad-platform performance metrics are not publicly verified in this cycle; TikTok direct pages are robot-blocked, so public mirrors, TikTok Shop pages and independently indexed demos were used. Observed engagement is not treated as ROAS/CTR.",
-  "progress": 72,
+  "progress": 78,
   "material_change": true,
-  "material_change_reason": "Prioritize proof-led creative over generic 'magic' claims. For Muda Cero, test a 3-tool/3-surface routine rather than a single-tool commodity demo. For dog-car extenders, show structural/fit proof before lifestyle. De-prioritize generic packing-cube creative.",
+  "material_change_reason": "Creative strategy tightened after two fresh signals: branded competition now includes a current Scotch-Brite reusable pet-fur roller, making a standalone roller even harder to differentiate; hard-bottom dog-seat extenders are converging on near-identical 400/500/550-lb, waterproof, universal-fit claims, so structural proof and fit certainty should replace brute load-claim creative.",
   "observations": [
     {
       "candidate": "Kit Muda Cero / reusable pet-hair tools",
@@ -100,80 +100,128 @@
       ],
       "saturation": "high",
       "opportunity": "Only test a constrained job such as '7-day carry-on' or 'souvenir space' with exact before/after packing."
+    },
+    {
+      "candidate": "Cross-cycle update: Muda Cero + hard-bottom dog car extender + sunshade",
+      "observed": [
+        {
+          "source": "Scotch-Brite official product page",
+          "date_checked": "2026-09-27",
+          "url": "https://www.scotch-brite.com/3M/en_US/p/d/b5005705007/",
+          "pattern": "A major cleaning brand now markets a reusable pet-fur roller around no refills, no batteries, transparent debris cover, repeated back-and-forth use and multi-surface cleaning.",
+          "inference": "Standalone 'reusable / no sticky sheets' positioning is now even less ownable. Muda Cero needs to sell a routine/system, not a generic roller benefit."
+        },
+        {
+          "source": "TikTok Shop reusable roller examples",
+          "date_checked": "2026-09-27",
+          "url": "https://shop.tiktok.com/us/pdp/roller-pet-hair-remover-eco-friendly-portable-reusable-lint-roller/1732418770514252337",
+          "pattern": "A current commodity roller listing repeats reusable, portable, eco-friendly and multi-surface benefits and shows only 2 sold in the indexed snapshot.",
+          "inference": "One listing does not prove category demand, but it reinforces how undifferentiated the generic roller proposition has become."
+        },
+        {
+          "source": "TikTok Shop dog-car extender category examples",
+          "date_checked": "2026-09-27",
+          "url": "https://shop.tiktok.com/us/k/a-pets-planet-backseat-extender",
+          "pattern": "Near-identical extenders are active around hard-bottom construction, waterproofing, mesh windows and 400-550 lb support claims; individual listings span 0 sold to 143 sold in current indexed examples.",
+          "inference": "The category is not uniformly dead, but claim convergence is high. Repeating '550 lb / waterproof / universal fit' is unlikely to create distinctive acquisition creative."
+        },
+        {
+          "source": "TikTok Shop hard-bottom extender content description",
+          "date_checked": "2026-09-27",
+          "url": "https://shop.tiktok.com/us/pdp/hard-bottom-dog-car-seat-cover-waterproof-400-lb-capacity-mesh-pockets-foldable-design/1732583662780846497",
+          "pattern": "The indexed product page explicitly describes video content that shows use, setup, comparison and unboxing.",
+          "inference": "Competitors already use functional demo formats. Our differentiation must be the quality and honesty of proof: measure-before-buy, exact fit boundaries, real flatness and installation sequence."
+        },
+        {
+          "source": "Model-specific windshield sunshade references",
+          "date_checked": "2026-09-27",
+          "url": "https://www.tparts.com/collections/model-3-standard-2026/products/model-3-y-s-windshield-sunshade-umbrella",
+          "pattern": "Specialist aftermarket pages foreground exact vehicle compatibility, while a fresh generic TikTok Shop 145cm 'universal' umbrella listing shows 0 sold in its indexed snapshot.",
+          "inference": "For sunshades, fit certainty may be a stronger trust lever than generic 'universal' convenience. This remains a low-priority seasonal test until supplier dimensions are verified."
+        }
+      ],
+      "saturation": "High for generic pet-hair roller and dog-extender claims; medium-high for generic sunshade positioning.",
+      "opportunity": "Shift from feature repetition to fit/routine proof: Muda Cero = system story; dog extender = measure/install/flatness; sunshade = verified compatibility."
     }
   ],
   "creative_tests": [
     {
       "rank": 1,
       "candidate": "Kit Muda Cero",
-      "name": "3 tools / 3 surfaces / 1 routine",
-      "hypothesis": "A job-specific sequence will outperform a commodity single-tool 'magic hair remover' demo because it resolves the objection that one tool cannot work equally well on pet, upholstery and clothing.",
-      "format": "15-20s vertical UGC/demo; no polished AI visuals; real pet/home footage when samples exist.",
-      "hook": "Open on three visible hair problems in rapid succession, then assign one tool to each problem.",
-      "variable_to_change": "System-led 3-step routine vs single-tool before/after creative.",
+      "name": "System vs commodity roller",
+      "hypothesis": "A problem-to-tool routine will outperform a standalone reusable-roller proposition because 'reusable / no sticky sheets / multi-surface' is now common even among major cleaning brands and commodity listings.",
+      "format": "15-20s vertical proof sequence. Start with two or three distinct pet-hair jobs, then assign one tool to each. If only the 2-piece grooming-core economics pass, run the same structure as a 2-step routine rather than forcing the roller into the offer.",
+      "hook": "One problem is not one surface: pet -> coat / sofa -> textile / cleanup -> finish, using only the tools actually in the validated SKU.",
+      "variable_to_change": "System-led routine vs generic reusable-roller benefit creative.",
       "metrics_to_observe": [
         "3-second hold rate",
-        "25% video completion",
+        "25% completion",
         "outbound CTR",
-        "PDP add-to-cart rate"
+        "PDP tool-to-job interaction",
+        "add-to-cart rate"
       ],
       "guardrails": [
-        "No universal-surface claim",
-        "No invented efficacy percentage",
-        "Use real product footage before paid launch"
+        "Do not advertise an unsourced 3-piece kit",
+        "No universal-surface claims",
+        "Real sample footage before paid launch",
+        "Keep ad and landing offer identical"
       ]
     },
     {
       "rank": 2,
       "candidate": "Hard-bottom dog car seat extender",
-      "name": "Fit and rigidity proof",
-      "hypothesis": "Showing the real installation, flat platform and vehicle-fit boundaries will outperform generic dog-in-car lifestyle footage because the largest trust risk is 'is it actually rigid and will it fit?'.",
-      "format": "20-30s vertical proof demo with real car, real product and exact measured dimensions once supplier SKU is fixed.",
-      "hook": "Start with the rear-footwell gap, then show the rigid base bridging it in one cut.",
-      "variable_to_change": "Proof/fit-led creative vs lifestyle-led creative.",
+      "name": "Measure first, then prove flatness",
+      "hypothesis": "Fit-certainty and structural proof will outperform 400/500/550-lb claim-led creative because those load claims are already highly repeated and difficult for buyers to trust.",
+      "format": "20-30s vertical demo with tape measure -> installation -> side profile of rigid bridge -> dog settles -> cleanup. Use the exact final SKU and vehicle.",
+      "hook": "Before you buy one of these, measure this gap.",
+      "variable_to_change": "Fit/installation/flatness proof vs headline load-capacity claim.",
       "metrics_to_observe": [
         "3-second hold rate",
         "outbound CTR",
-        "fit-guide/PDP interaction rate",
+        "fit-guide interaction",
         "add-to-cart rate",
-        "fit-related pre-purchase questions"
+        "fit-related pre-purchase questions",
+        "return reason mix once live"
       ],
       "guardrails": [
-        "Do not use 400/500/550 lb claims until exact SKU evidence is verified",
-        "Do not imply crash protection",
-        "Show vehicle compatibility limits"
+        "No load claim without supplier evidence",
+        "No crash-protection implication",
+        "Show incompatible fit boundaries",
+        "Do not call universal if measurements exclude vehicles"
       ]
     },
     {
       "rank": 3,
-      "candidate": "Compression packing cubes",
-      "name": "Carry-on constraint test",
-      "hypothesis": "A specific travel job will outperform generic 'save space' copy in this saturated category.",
-      "format": "15-25s vertical side-by-side packing demo.",
-      "hook": "Carry-on will not close -> same clothing compressed -> visible space recovered.",
-      "variable_to_change": "Specific 7-day carry-on/souvenir-space job vs generic compression reveal.",
+      "candidate": "Windshield sunshade umbrella",
+      "name": "Compatibility certainty",
+      "hypothesis": "Verified fit guidance will outperform a generic 'universal 2-second umbrella' angle because generic listings are crowded and specialist pages sell confidence through vehicle compatibility.",
+      "format": "12-18s vertical: vehicle/model or windshield dimensions -> open in one motion -> show mirror/dashboard clearance -> fold and store.",
+      "hook": "The umbrella part is easy. The fit is what matters.",
+      "variable_to_change": "Compatibility-led creative vs generic heat/UV/universal convenience creative.",
       "metrics_to_observe": [
         "6-second hold rate",
-        "share/save rate",
         "outbound CTR",
-        "PDP add-to-cart rate"
+        "fit-guide interaction",
+        "add-to-cart rate",
+        "fit-related questions"
       ],
       "guardrails": [
-        "Only run if supplier economics pass",
-        "Do not claim a percentage of space saved unless measured on our SKU"
+        "Only test after exact SKU dimensions and EU supplier path are verified",
+        "No temperature-reduction percentage unless measured on our SKU",
+        "Do not claim universal fit"
       ]
     }
   ],
   "handoff": {
     "creative_offer": [
-      "Make proof and specificity the creative spine for Muda Cero: 3 tools, 3 jobs, 3 surfaces. Avoid generic 'works like magic everywhere' copy.",
-      "For dog-car extenders, develop proof/fit creative only after exact SKU dimensions and construction are verified.",
-      "Treat packing cubes as a lower-priority saturated test; require a specific traveler job."
+      "For Muda Cero, stop treating the reusable roller as the differentiator. Build the offer around a system/routine; if the 2-piece grooming-core contingency wins Finance, preserve the routine structure with only validated tools.",
+      "For dog-car extenders, remove generic 400/500/550-lb strength claims from the creative spine. Lead with measure-before-buy, exact fit, installation and visible flatness.",
+      "Keep sunshade as seasonal CROSS-SELL; if tested, sell compatibility certainty rather than generic 'universal' convenience."
     ],
     "store_builder": [
-      "Muda Cero PDP should mirror the ad sequence: tool-to-surface mapping, short proof clips, then bundle explanation.",
-      "Dog-car extender PDP needs dimensions/fit guide and honest structural close-ups above lifestyle imagery.",
-      "Packing-cube PDP should lead with a concrete packing scenario and measured before/after once a SKU is selected."
+      "Muda Cero landing/PDP must mirror the exact validated bundle shown in the ad; no 3-tool creative linking to a 2-tool offer.",
+      "Dog-car extender PDP should place vehicle measurement guidance, dimensions and construction proof before lifestyle imagery or strength claims.",
+      "Sunshade PDP needs a fit/measurement module before any paid creative test."
     ]
   },
   "events": [
@@ -191,6 +239,21 @@
       "ts": "2026-09-27T18:23:11Z",
       "title": "Three creative tests prioritized",
       "detail": "Ranked tests: Muda Cero routine proof, dog-car fit/rigidity proof, packing-cube carry-on constraint."
+    },
+    {
+      "ts": "2026-09-27T19:18:28Z",
+      "title": "Branded roller competition raises differentiation bar",
+      "detail": "Scotch-Brite now markets the same reusable/no-refill pet-fur-removal territory, reinforcing that Muda Cero should not lead with a commodity roller proposition."
+    },
+    {
+      "ts": "2026-09-27T19:18:28Z",
+      "title": "Dog-extender claim convergence confirmed",
+      "detail": "Current TikTok Shop examples converge on hard-bottom, waterproof, universal-fit and 400-550 lb claims; fit and structural proof are a clearer creative white space."
+    },
+    {
+      "ts": "2026-09-27T19:18:28Z",
+      "title": "Creative tests reprioritized",
+      "detail": "Ranked tests are now Muda Cero system-vs-commodity, dog-extender measure/flatness proof, and sunshade compatibility certainty."
     }
   ]
 }
