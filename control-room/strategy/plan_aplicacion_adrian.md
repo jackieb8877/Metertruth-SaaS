@@ -1,3 +1,29 @@
+# Project Rich / rato. — ADRIAN ONLY
+
+## Regla de autoridad
+
+Desde el 28/09/2026, por instrucción expresa del propietario, **la única fuente de decisión para dropshipping es el curso «Guía Para Principiantes De Dropshipping En 2026 (+27 horas)» de Adrián Sáenz y colaboradores, usando la transcripción aportada por el propietario.**
+
+Todo plan, producto, proveedor, regla de margen, arquitectura de catálogo, canal, diseño o procedimiento anterior queda **ARCHIVADO y NO DEBE influir** en la ejecución actual, salvo que coincida de forma explícita con lo enseñado en el curso. Si el curso no cubre un punto, se debe marcar **NOT_COVERED_BY_COURSE**; no se rellena el hueco con conocimiento general ni con estrategias previas.
+
+El trabajo previo de Shopify se conserva solo para no destruir datos: la tienda correcta es `w1fr1w-0y.myshopify.com`, pero producto, tema, copy y proveedor anteriores quedan congelados hasta ser revalidados o recreados en la secuencia del curso.
+
+## Secuencia obligatoria
+
+1. Crear/configurar Shopify según el curso.
+2. Crear/conectar AutoDS según el curso.
+3. Elegir producto con los criterios y métodos del curso: problema real + no fácilmente disponible; búsqueda mediante TikTok o AutoDS (Hand Picked Products, AdSpy, Trending Products), revisando país, coste, envío, pedidos, anuncios, público y competidores cuando la herramienta lo muestre.
+4. Importar el producto como Draft desde AutoDS y trabajar una **one product store** con nombre/dominio genéricos reutilizables.
+5. Diseñar la tienda con el enfoque del curso: profesional, orientada a confianza, banner, beneficios, material visual, CTA, uso, FAQs, reviews/testimonios reales cuando existan, y producto como protagonista.
+6. Configurar backend: mercado único inicial, pagos, envío, dominio, políticas y demás ajustes que el curso cubre.
+7. Empezar captación con Meta Ads cuando la tienda esté lista, siguiendo la estructura inicial enseñada.
+8. Medir y decidir; después de primeras ventas, usar sourcing request para comparar proveedores/fábricas y mejorar coste, calidad, envío y branding. Otros canales vienen después, como enseña el curso.
+
+
+---
+
+## Archivo de interpretación anterior — NO APLICAR SI CONTRADICE ADRIAN ONLY
+
 # Project Rich / rato. — Aplicación del método de Adrián
 
 ## Decisión vigente
