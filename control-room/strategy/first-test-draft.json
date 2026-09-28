@@ -1,15 +1,15 @@
 {
   "experiment_id": "PR-TEST-001",
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-28T10:59:18Z",
-  "status": "CORRECT_STORE_EXISTING_DRAFT_VERIFIED_LAUNCH_BLOCKED",
-  "authority": "El propietario centra el trabajo exclusivamente en dropshipping y ha identificado la tienda correcta. Esta actualización verifica su conexión y el producto existente; no crea productos, edita temas, publica, contrata ni activa tareas.",
-  "scope": "DROPSHIPPING_ONLY",
+  "updated_at": "2026-09-28T12:16:00+01:00",
+  "status": "FROZEN_BY_ADRIAN_ONLY_RESET",
+  "authority": "El propietario ha ordenado que PR-TEST-001 deje de ser la prueba vigente hasta que el producto sea reseleccionado siguiendo exclusivamente el curso de Adrián.",
+  "scope": "HISTORICAL_ONLY",
   "product": {
     "name": "Cepillo quitapelos reutilizable con base autolimpiadora",
     "supplier_sku": "100102",
     "use": "Ropa y tapicerías; no cepillado directo del animal",
-    "selection_status": "SELECTED_FOR_PREPARATION_NOT_VALIDATED",
+    "selection_status": "FROZEN_NOT_SELECTED_UNDER_CURRENT_METHOD",
     "store_product_id": "gid://shopify/Product/10922895901005",
     "store_variant_id": "gid://shopify/ProductVariant/54886767493453",
     "store_variant_sku": "PR-TEST-001-100102",
@@ -53,11 +53,15 @@
     "contact_email_matches_owner_confirmed": true,
     "contact_email_correction_applied": null,
     "contact_email_note": "El correo observado ya coincide con el confirmado por el propietario. No se ha cambiado desde esta actualización.",
-    "note": "Continuar solo en esta tienda. El producto ya existe: no duplicarlo. Leer temas y archivos actuales antes de editar; no usar los IDs ni la evidencia de instalación de tiendas antiguas para afirmar que la propuesta está instalada aquí."
+    "note": "El DRAFT puede permanecer por seguridad, pero no debe publicarse, editarse ni usarse como evidencia de selección vigente hasta completar la reselección según el curso."
   },
   "store_guard": {
     "allowed_domain": "w1fr1w-0y.myshopify.com",
-    "excluded_domains": ["fryrk1-ns.myshopify.com", "ghg2tn-1u.myshopify.com", "d1swq0-f3.myshopify.com"],
+    "excluded_domains": [
+      "fryrk1-ns.myshopify.com",
+      "ghg2tn-1u.myshopify.com",
+      "d1swq0-f3.myshopify.com"
+    ],
     "verify_store_and_resource_before_write": true,
     "create_another_store": false,
     "scope": "Instrucción operativa; no control técnico desplegado en Shopify."
@@ -80,15 +84,15 @@
     "neutral_packaging": "SUPPLIER_PUBLIC_CLAIM_NOT_TESTED",
     "fulfilment_proposal": "Manual al inicio; no contratar integración adicional antes de validar. No pedido realizado.",
     "previous_research": "control-room/artifacts/supplier-margin-economics-20260927T211708Z.json",
-    "this_update": "Investigación anterior conservada; proveedor, stock y precios no reconsultados en este cambio de foco."
+    "this_update": "Toda esta ruta de proveedor queda archivada como investigación previa; no es la ruta de suministro vigente bajo ADRIAN_ONLY."
   },
   "market_proposal": "España peninsular / español / EUR; confirmar códigos postales cubiertos. No abrir islas ni otros países en este piloto.",
   "page_url": null,
   "avatar": "Hipótesis: persona que convive con perro o gato y retira pelo de ropa o tapicería con frecuencia.",
   "problem": "Pelo visible en textiles y trabajo de limpiar el propio útil de limpieza.",
-  "offer": "Una unidad con base a 24,90 EUR de precio final con envío incluido a Península; contenido y viabilidad pendientes. Sin kit, descuento ficticio ni suscripción.",
+  "offer": "ARCHIVED_DO_NOT_USE",
   "retail_price_total_eur": 24.9,
-  "price_status": "HYPOTHESIS_OBSERVED_IN_CORRECT_STORE_DRAFT_NOT_A_VALIDATED_OFFER",
+  "price_status": "ARCHIVED_HYPOTHESIS_DO_NOT_USE",
   "costs_eur": {
     "product": null,
     "delivery": null,
@@ -150,7 +154,10 @@
     "net_contribution": null
   },
   "review": {
-    "course_window_example_days": [3, 7],
+    "course_window_example_days": [
+      3,
+      7
+    ],
     "window_not_automatic_kill_rule": true,
     "attribution_and_sample_required": true,
     "vary_one_factor_at_a_time": true,
@@ -192,8 +199,8 @@
     "use_for_writes": false
   },
   "decision": {
-    "result": "DROPSHIPPING_ONLY_PREPARATION_CONTINUES_COMMERCIAL_HOLD",
-    "reason": "Tienda correcta y producto existente comprobados. Proveedor, coste completo, activos, QA y autorización comercial siguen pendientes en este registro. La actualización no acredita ejecución de agentes ni migración de tema.",
-    "next": "Trabajar en paralelo por entregables: suministro/economía, comprador/oferta/creativos y tienda/medición. Comprobar el tema actual antes de editar y no duplicar el DRAFT. Evaluar alternativas solo cuando haya evidencia que mejore o descarte el candidato."
+    "result": "FROZEN_RESET_TO_PRODUCT_DISCOVERY",
+    "reason": "El propietario exige seguir solo el curso de Adrián. Este experimento se preparó con decisiones y adaptaciones anteriores que ya no deben influir.",
+    "next": "Volver al bloque de elección de producto del curso y seleccionar de nuevo antes de reactivar una prueba."
   }
 }
