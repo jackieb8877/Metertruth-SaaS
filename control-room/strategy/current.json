@@ -1,8 +1,8 @@
 {
   "version": 5,
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-27T23:51:36Z",
-  "status": "SHOPIFY_UNPUBLISHED_LANDING_INSTALLED_NOT_LAUNCHED",
+  "updated_at": "2026-09-28T08:38:00+01:00",
+  "status": "NEW_SHOPIFY_STORE_DRAFT_AND_AB_THEME_INSTALLED_NOT_LAUNCHED",
   "authority": "El propietario pide seguir el curso incluso si sustituye la estrategia anterior, pasar a la primera prueba, confirma Shopify y pide continuar. No ha aprobado un importe de gasto ni publicación comercial.",
   "source": {
     "title": "Guía Para Principiantes De Dropshipping En 2026 (+27 horas)",
@@ -28,7 +28,7 @@
   "old_20_50_target": "SUPERSEDED_KEEP_AS_RESEARCH_ARCHIVE",
   "mandatory_collections": false,
   "current_product": "Cepillo quitapelos reutilizable con base autolimpiadora · Almacén Escriv Ecom · SKU 100102",
-  "current_product_status": "SHOPIFY_DRAFT_CREATED_PRODUCT_NOT_VALIDATED",
+  "current_product_status": "NEW_STORE_SHOPIFY_DRAFT_CREATED_PRODUCT_NOT_VALIDATED",
   "active_experiment": "PR-TEST-001",
   "previous_leader": "Kit Muda Cero",
   "previous_leader_status": "REASSESS_NO_AUTOMATIC_GO",
@@ -41,12 +41,12 @@
   "stack": {
     "planned_store": "Shopify",
     "planned_supply_integration": "AutoDS",
-    "status": "SHOPIFY_CONNECTED_UNPUBLISHED_LANDING_INSTALLED_SUPPLY_NOT_CONNECTED",
-    "shopify_domain": "ghg2tn-1u.myshopify.com",
+    "status": "NEW_STORE_CONNECTED_DRAFT_CREATED_AB_THEME_UNPUBLISHED",
+    "shopify_domain": "fryrk1-ns.myshopify.com",
     "shopify_plan_observed": "trial",
     "shopify_connection_verified": true,
-    "shopify_product_id": "gid://shopify/Product/11226693370199",
-    "shopify_variant_id": "gid://shopify/ProductVariant/55179956126039",
+    "shopify_product_id": "gid://shopify/Product/16068265804106",
+    "shopify_variant_id": "gid://shopify/ProductVariant/63719435764042",
     "shopify_product_status": "DRAFT",
     "live_theme_modified": false,
     "custom_section_installed": true,
@@ -65,7 +65,13 @@
     "retain_existing_design_assets": true
   },
   "initial_channel": "Meta Ads",
-  "later_channels": ["Google Ads", "Tráfico orgánico", "TikTok Ads", "Amazon", "TikTok Shop"],
+  "later_channels": [
+    "Google Ads",
+    "Tráfico orgánico",
+    "TikTok Ads",
+    "Amazon",
+    "TikTok Shop"
+  ],
   "test_example_from_course": {
     "campaigns": 1,
     "adsets": 2,
@@ -73,7 +79,11 @@
     "daily_eur_per_adset": 10,
     "destination": "product_page",
     "conversion_event": "purchase",
-    "source_times": ["04:53:34-04:56:58", "05:02:42-05:03:53", "05:10:27-05:12:23"],
+    "source_times": [
+      "04:53:34-04:56:58",
+      "05:02:42-05:03:53",
+      "05:10:27-05:12:23"
+    ],
     "status": "ILLUSTRATIVE_NOT_AUTHORIZED"
   },
   "budget": {
@@ -91,7 +101,10 @@
     "factory_optimization_after_initial_sales": true
   },
   "economics": {
-    "price_multiplier_reference": [2, 3],
+    "price_multiplier_reference": [
+      2,
+      3
+    ],
     "reference_is_not_net_profit": true,
     "fixed_50_percent_pre_ad_gate": "NOT_A_COURSE_RULE_DO_NOT_USE_AS_UNIVERSAL_GATE",
     "break_even_required": true,
@@ -114,5 +127,5 @@
     "consolidated_state_owner": "orchestrator",
     "scheduled_runs_are_not_continuous_workers": true
   },
-  "next_action": "PR-TEST-001: confirmar stock, coste facturado, portes y permisos de medios del SKU 100102. Solicitud al proveedor redactada, no enviada; requiere autorización. Trabajar sobre el producto DRAFT y el tema UNPUBLISHED existentes. Validar renderizado autenticado, activos, medición y compra antes del GO comercial. No reinstalar Shopify ni crear otra copia de tema; no ampliar catálogo, contratar, pedir productos, publicar ni activar anuncios."
+  "next_action": "Continuar PR-TEST-001 en fryrk1-ns.myshopify.com sobre el tema no publicado rato. · PR-TEST-001 · A+B. Prioridad: activos reales/autorizados, confirmación de proveedor y costes, QA visual/checkout y medición antes de publicar o gastar."
 }
