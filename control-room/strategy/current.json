@@ -1,14 +1,14 @@
 {
-  "version": 6,
+  "version": 7,
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-28T10:59:18Z",
-  "status": "DROPSHIPPING_ONLY_CORRECT_STORE_DRAFT_VERIFIED_LAUNCH_BLOCKED",
-  "authority": "El propietario pide centrarse exclusivamente en dropshipping. Se mantiene el método de arranque aprobado y PR-TEST-001. No hay nueva autorización de gasto, publicación comercial ni reactivación de tareas en esta actualización.",
+  "updated_at": "2026-09-28T12:16:00+01:00",
+  "status": "ADRIAN_ONLY_RESET_RESELECTION_REQUIRED",
+  "authority": "El propietario ordena abandonar operativamente toda estrategia de dropshipping anterior a Adrián y seguir únicamente lo enseñado en el curso de Adrián Sáenz y colaboradores. El trabajo previo se conserva solo como archivo histórico y no puede influir en decisiones salvo que coincida explícitamente con el curso.",
   "scope": {
-    "only_initiative": "Project Rich / rato. — Dropshipping",
+    "only_initiative": "Dropshipping — ADRIAN_ONLY",
     "other_initiatives": "OUT_OF_SCOPE_DO_NOT_ALLOCATE_WORK_IN_THIS_PROJECT",
     "delete_other_projects": false,
-    "goal": "Cerrar y ejecutar una primera prueba comercial medible cuando suministro, oferta, activos, QA y presupuesto estén listos.",
+    "goal": "Reejecutar el proceso desde el inicio y en el orden del curso de Adrián, sin introducir criterios, proveedores, estructuras, canales o reglas heredadas de planes anteriores.",
     "workstreams_are_not_running_workers": true
   },
   "source": {
@@ -26,30 +26,30 @@
     "review_completed_at": "2026-09-27T22:32:55.125023Z",
     "source_sha256": "21e76869996c7869505a00755330a49ede2a06da01060911057d49c2a6e8f794",
     "review_handoff": "control-room/artifacts/course-adrian/revision-completa-transcripcion.md",
-    "agent_read_instruction": "Leer el handoff y la transcripción relevante antes de atribuir una enseñanza. Conservar diferencias entre profesores y separar enseñanza, ejemplo, evidencia actual y adaptación. Este cambio de foco no es una nueva revisión del curso ni autoriza acciones comerciales."
+    "agent_read_instruction": "FUENTE ÚNICA DE DECISIÓN: curso/transcripción de Adrián y colaboradores. No usar criterios previos del proyecto ni conocimiento general para decidir qué hacer. Si el curso no cubre un punto, declararlo como no cubierto y pedir decisión o verificación externa separada."
   },
-  "read_first": "control-room/strategy/current.json",
+  "read_first": "control-room/strategy/plan_aplicacion_adrian.md",
   "course_application_plan": "control-room/strategy/plan_aplicacion_adrian.md",
-  "launch_model": "one_product_store_sequential_tests",
+  "launch_model": "ADRIAN_COURSE_SEQUENCE_STRICT",
   "max_simultaneous_commercial_product_tests": 1,
   "catalog_launch_target": null,
   "old_20_50_target": "SUPERSEDED_KEEP_AS_RESEARCH_ARCHIVE",
   "mandatory_collections": false,
-  "current_product": "Cepillo quitapelos reutilizable con base autolimpiadora · Almacén Escriv Ecom · SKU proveedor 100102",
-  "current_product_status": "CORRECT_STORE_DRAFT_OBSERVED_NOT_MARKET_VALIDATED",
-  "active_experiment": "PR-TEST-001",
+  "current_product": "FROZEN_HISTORICAL_CANDIDATE_NOT_SELECTED_UNDER_RESET",
+  "current_product_status": "FROZEN_PENDING_RESELECTION_USING_ADRIAN_PRODUCT_DISCOVERY",
+  "active_experiment": null,
   "previous_leader": "Kit Muda Cero",
-  "previous_leader_status": "REASSESS_NO_AUTOMATIC_GO",
+  "previous_leader_status": "ARCHIVE_ONLY_DO_NOT_USE",
   "market": {
-    "country_proposal": "ES",
-    "language_proposal": "es",
-    "status": "PROPOSED_NOT_CONFIGURED_VERIFIED",
+    "country_proposal": null,
+    "language_proposal": null,
+    "status": "UNSELECTED_AFTER_RESET",
     "coverage": "España peninsular para el piloto; confirmar cobertura por código postal y costes. No tratar todas las zonas de España como equivalentes."
   },
   "stack": {
     "planned_store": "Shopify",
     "planned_supply_integration": "AutoDS",
-    "status": "CORRECT_STORE_AND_EXISTING_DRAFT_READ_VERIFIED_THEME_NOT_RECHECKED",
+    "status": "SHOPIFY_STORE_CONNECTED_BUT_COMMERCIAL_BUILD_FROZEN_PENDING_ADRIAN_RESELECTION",
     "shopify_domain": "w1fr1w-0y.myshopify.com",
     "shopify_name_observed": "My Store 2",
     "shopify_plan_observed": "Basic",
@@ -74,22 +74,26 @@
     "integration_evidence": null,
     "previous_product_creation_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md",
     "previous_evidence_scope": "Histórico de otra tienda; no demuestra instalación en la tienda vigente.",
-    "integration_note": "La lectura actual confirma el producto existente en la tienda correcta; no duplicarlo ni atribuir su creación a esta actualización. Consultar temas y archivos actuales antes de editar. null en los campos de tema significa no comprobado aquí, no que el tema no exista. No reutilizar IDs ni previews de las tiendas excluidas.",
+    "integration_note": "La tienda correcta sigue siendo w1fr1w-0y.myshopify.com. El producto DRAFT existente y cualquier tema previo quedan congelados; no borrarlos ni usarlos como decisión válida hasta que el proceso de Adrián vuelva a seleccionar producto/mercado y la tienda se reconstruya conforme al curso.",
     "first_test_adaptation": "Propuesta: pedido manual al proveedor del SKU al inicio; automatización posterior. No se ha contratado ni probado. Es adaptación nuestra, no el circuito AutoDS enseñado por el curso.",
     "custom_commerce_backend_required": false,
     "retain_existing_design_assets": true
   },
   "store_guard": {
     "allowed_domain": "w1fr1w-0y.myshopify.com",
-    "excluded_domains": ["fryrk1-ns.myshopify.com", "ghg2tn-1u.myshopify.com", "d1swq0-f3.myshopify.com"],
+    "excluded_domains": [
+      "fryrk1-ns.myshopify.com",
+      "ghg2tn-1u.myshopify.com",
+      "d1swq0-f3.myshopify.com"
+    ],
     "verify_live_store_before_each_write": true,
     "verify_resource_belongs_to_allowed_store": true,
     "create_another_store": false,
     "domain_mismatch_action": "STOP_WRITES_AND_REPORT_EXACT_MISMATCH",
     "note": "Norma operativa para los agentes; no es una restricción técnica instalada en Shopify."
   },
-  "initial_channel": "Meta Ads",
-  "later_channels": ["Google Ads", "Tráfico orgánico", "TikTok Ads", "Amazon", "TikTok Shop"],
+  "initial_channel": null,
+  "later_channels": [],
   "test_example_from_course": {
     "campaigns": 1,
     "adsets": 2,
@@ -97,7 +101,11 @@
     "daily_eur_per_adset": 10,
     "destination": "product_page",
     "conversion_event": "purchase",
-    "source_times": ["04:53:34-04:56:58", "05:02:42-05:03:53", "05:10:27-05:12:23"],
+    "source_times": [
+      "04:53:34-04:56:58",
+      "05:02:42-05:03:53",
+      "05:10:27-05:12:23"
+    ],
     "status": "ILLUSTRATIVE_NOT_AUTHORIZED"
   },
   "budget": {
@@ -116,7 +124,10 @@
     "factory_optimization_after_initial_sales": true
   },
   "economics": {
-    "price_multiplier_reference": [2, 3],
+    "price_multiplier_reference": [
+      2,
+      3
+    ],
     "reference_is_not_net_profit": true,
     "fixed_50_percent_pre_ad_gate": "NOT_A_COURSE_RULE_DO_NOT_USE_AS_UNIVERSAL_GATE",
     "break_even_required": true,
@@ -124,22 +135,43 @@
     "missing_costs_must_remain_explicit": true
   },
   "workstreams": [
-    {"owners": ["product-scout", "competitor-watch"], "deliverable": "Reevaluar el candidato actual y mantener hasta tres alternativas justificadas; no construir un catálogo de 50 fichas ni bloquearse esperando la web.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
-    {"owners": ["supplier-margin", "finance-profit"], "deliverable": "Cerrar stock, paquete, coste facturado, envío y margen para adquisición del SKU concreto; registrar pendientes sin inventarlos.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
-    {"owners": ["customer-voice", "creative-offer"], "deliverable": "Objeciones y propuesta de valor con evidencia; dos guiones y lista de activos utilizables, con derechos y afirmaciones revisados.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
-    {"owners": ["store-builder", "seo-catalog"], "deliverable": "Continuar la ficha y landing A+B en la tienda permitida, con edición reversible y sin duplicar trabajo de Work; SEO del único experimento, no colecciones masivas.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
-    {"owners": ["ads-intelligence", "launch-qa", "compliance-risk"], "deliverable": "Preparar prueba Meta y medición, resolver requisitos concretos y QA; presupuesto, publicación y pedidos continúan sujetos a autorización.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
-    {"owners": ["orchestrator"], "deliverable": "Consolidar solo evidencias reales bajo esta política, marcar registros stale y retirar porcentajes sin base; no atribuir este trabajo del coordinador a otros agentes.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"}
+    {
+      "owners": [
+        "coordinator"
+      ],
+      "deliverable": "Rehacer desde cero el bloque de selección de producto exactamente con el método del curso: problema + no fácilmente disponible + búsqueda TikTok/AutoDS Hand Picked/AdSpy/Trending, con país, coste, envío, pedidos, anuncios, público y competidores según enseña Adrián.",
+      "status": "NEXT"
+    },
+    {
+      "owners": [
+        "supplier-margin"
+      ],
+      "deliverable": "No buscar proveedor por método previo. Usar AutoDS como recorrido de suministro inicial del curso; sourcing request exhaustivo solo después de primeras ventas.",
+      "status": "BLOCKED_UNTIL_PRODUCT_RESELECTED"
+    },
+    {
+      "owners": [
+        "store-builder",
+        "creative-offer"
+      ],
+      "deliverable": "No continuar diseño previo. Tras reselección, construir one-product store siguiendo la secuencia y bloques del curso; reutilizar solo elementos que coincidan explícitamente con esa enseñanza.",
+      "status": "BLOCKED_UNTIL_PRODUCT_RESELECTED"
+    },
+    {
+      "owners": [
+        "ads-intelligence"
+      ],
+      "deliverable": "No preparar campañas hasta tienda/producto listos según curso. Meta será el primer canal cuando toque en la secuencia.",
+      "status": "BLOCKED_UNTIL_STORE_READY"
+    }
   ],
   "guardrails": [
-    "No fake reviews, stock, earnings, scientific/health claims or false price history",
-    "No copying third-party ads without rights",
-    "No payments, subscriptions, campaign publication or legal commitments without authorization",
-    "No false claim of complete course audit",
-    "No synthetic live activity",
-    "Preserve existing work and current SHA; do not overwrite newer agent outputs",
-    "Only dropshipping work belongs to this scope; preserve unrelated repositories and projects",
-    "Assignment is not execution; do not claim continuous agents or completed handoffs without evidence"
+    "Do not use pre-Adrian dropshipping strategy as decision input",
+    "Do not preserve previous product, supplier, price, catalog, margin gate or channel plan by inertia",
+    "When the course is silent, say NOT_COVERED_BY_COURSE instead of filling the gap",
+    "No spending, publication, subscriptions, orders or ads without explicit approval",
+    "Preserve historical files only for audit; do not treat them as current strategy",
+    "Use only w1fr1w-0y.myshopify.com for Shopify work"
   ],
   "coordination": {
     "experiment_file": "control-room/strategy/first-test-draft.json",
@@ -151,12 +183,12 @@
     "scheduled_tasks_changed_this_update": false,
     "agent_receipt_of_new_policy_verified": false,
     "dashboard_reconciliation_verified": false,
-    "precedence": "Esta política prevalece sobre objetivos de catálogo y destinos Shopify antiguos. Leer archivos actuales y consultar la tienda antes de actuar."
+    "precedence": "ADRIAN_ONLY_RESET overrides all earlier dropshipping plans, agent JSON priorities, catalog targets and supplier strategies."
   },
   "superseded_configuration": {
     "file_blob_sha": "02e5a94151381a16cdb64e7b7bc630038ebc7bf3",
     "scope": "Configuración anterior preservada en Git; mezclaba fryrk1-ns y ghg2tn-1u con IDs históricos.",
     "use_for_writes": false
   },
-  "next_action": "Cerrar la viabilidad de suministro y costes de PR-TEST-001 mientras Store Builder continúa en la tienda permitida. Reutilizar el producto DRAFT 10922895901005; consultar el tema actual, no crear otra tienda ni sobrescribir trabajo concurrente. Las incógnitas de proveedor no se resuelven rediseñando la web. Si el candidato falla, proponer una alternativa con evidencia antes de otro test."
+  "next_action": "Reiniciar desde la selección de producto exactamente como la enseña Adrián. No continuar proveedor, web o ads del candidato anterior hasta completar esa reselección."
 }
