@@ -1,57 +1,66 @@
 {
   "experiment_id": "PR-TEST-001",
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-28T08:38:00+01:00",
-  "status": "NEW_STORE_DRAFT_AND_AB_THEME_INSTALLED_LAUNCH_BLOCKED",
-  "authority": "El propietario pide pasar a la primera prueba y continuar con Shopify conectado. Se ha creado el producto en borrador e instalado una landing en una copia no publicada del tema; no hay aprobación de gasto ni publicación comercial.",
+  "updated_at": "2026-09-28T10:59:18Z",
+  "status": "CORRECT_STORE_EXISTING_DRAFT_VERIFIED_LAUNCH_BLOCKED",
+  "authority": "El propietario centra el trabajo exclusivamente en dropshipping y ha identificado la tienda correcta. Esta actualización verifica su conexión y el producto existente; no crea productos, edita temas, publica, contrata ni activa tareas.",
+  "scope": "DROPSHIPPING_ONLY",
   "product": {
     "name": "Cepillo quitapelos reutilizable con base autolimpiadora",
     "supplier_sku": "100102",
     "use": "Ropa y tapicerías; no cepillado directo del animal",
     "selection_status": "SELECTED_FOR_PREPARATION_NOT_VALIDATED",
-    "store_product_id": "gid://shopify/Product/16068265804106",
-    "store_variant_id": "gid://shopify/ProductVariant/63719435764042",
+    "store_product_id": "gid://shopify/Product/10922895901005",
+    "store_variant_id": "gid://shopify/ProductVariant/54886767493453",
+    "store_variant_sku": "PR-TEST-001-100102",
+    "store_product_handle": "cepillo-quitapelos-reutilizable-con-base-autolimpiadora",
     "shopify_status": "DRAFT",
     "shopify_readback_verified": true,
-    "shopify_inventory_item_id": "gid://shopify/InventoryItem/57285212930391",
-    "shopify_location_id": "gid://shopify/Location/125600104791",
+    "shopify_readback_date": "2026-09-28",
+    "observed_created_at": "2026-09-28T10:16:35Z",
+    "observed_updated_at": "2026-09-28T10:23:11Z",
+    "created_by_this_update": false,
+    "shopify_inventory_item_id": null,
+    "shopify_location_id": null,
     "shopify_available_inventory": 0,
+    "inventory_scope": "Producto y variante con cantidad 0 observados; sucursal e inventoryItem no consultados en esta comprobación.",
+    "featured_media_observed": null,
     "package_contents_verified": false,
     "supplier_description_verified_physically": false
   },
   "shopify": {
-    "domain": "fryrk1-ns.myshopify.com",
-    "connection_status": "NEW_STORE_READ_DRAFT_PRODUCT_AND_UNPUBLISHED_THEME_WRITE_VERIFIED",
-    "plan_observed": "trial",
+    "domain": "w1fr1w-0y.myshopify.com",
+    "name_observed": "My Store 2",
+    "connection_status": "CORRECT_STORE_AND_EXISTING_PRODUCT_READ_VERIFIED",
+    "plan_observed": "Basic",
     "currency": "EUR",
-    "theme_observed": {
-      "id": "gid://shopify/OnlineStoreTheme/205995376983",
-      "name": "Horizon",
-      "role": "MAIN"
-    },
-    "unpublished_theme_found": true,
-    "unpublished_theme": {
-      "id": "gid://shopify/OnlineStoreTheme/208500785482",
-      "name": "rato. · PR-TEST-001 · A+B",
-      "role": "UNPUBLISHED",
-      "processing": false,
-      "processingFailed": false
-    },
-    "theme_modified": true,
-    "theme_modification_scope": "Solo tema UNPUBLISHED A+B; MAIN Horizon preservado",
-    "live_theme_modified": false,
-    "custom_section_installed": true,
-    "theme_write_permission_tested": true,
-    "theme_files_readback_verified": true,
-    "theme_files_match_tested_local_bytes": true,
-    "theme_editor_url": "https://admin.shopify.com/store/fryrk1-ns/themes/208500785482/editor",
-    "theme_preview_url": "https://fryrk1-ns.myshopify.com/?preview_theme_id=208500785482",
-    "authenticated_storefront_render_verified": false,
-    "preview_fetch_result": "URL not accessible via web tool; no authenticated browser render performed",
+    "theme_observed": null,
+    "unpublished_theme_found": null,
+    "unpublished_theme": null,
+    "theme_modified": null,
+    "theme_modification_scope": "No tema consultado ni modificado por esta actualización; null significa desconocido, no inexistente.",
+    "live_theme_modified": null,
+    "custom_section_installed": null,
+    "theme_write_permission_tested": null,
+    "theme_files_readback_verified": null,
+    "theme_files_match_tested_local_bytes": null,
+    "theme_editor_url": null,
+    "theme_preview_url": null,
+    "authenticated_storefront_render_verified": null,
+    "preview_fetch_result": "NOT_RECHECKED_FOR_CORRECT_STORE",
     "contact_email_needs_owner_check": false,
     "correct_contact_email_confirmed_by_owner": true,
-    "contact_email_correction_applied": false,
-    "note": "Nueva tienda seleccionada por el propietario. Producto DRAFT y propuesta visual A+B instalados en copia UNPUBLISHED. No publicar ni activar checkout/ads hasta cerrar proveedor, activos, costes y QA."
+    "contact_email_matches_owner_confirmed": true,
+    "contact_email_correction_applied": null,
+    "contact_email_note": "El correo observado ya coincide con el confirmado por el propietario. No se ha cambiado desde esta actualización.",
+    "note": "Continuar solo en esta tienda. El producto ya existe: no duplicarlo. Leer temas y archivos actuales antes de editar; no usar los IDs ni la evidencia de instalación de tiendas antiguas para afirmar que la propuesta está instalada aquí."
+  },
+  "store_guard": {
+    "allowed_domain": "w1fr1w-0y.myshopify.com",
+    "excluded_domains": ["fryrk1-ns.myshopify.com", "ghg2tn-1u.myshopify.com", "d1swq0-f3.myshopify.com"],
+    "verify_store_and_resource_before_write": true,
+    "create_another_store": false,
+    "scope": "Instrucción operativa; no control técnico desplegado en Shopify."
   },
   "supplier": {
     "name": "Almacén Escriv Ecom",
@@ -70,7 +79,8 @@
     "contact_message_status": "DRAFT_NOT_SENT",
     "neutral_packaging": "SUPPLIER_PUBLIC_CLAIM_NOT_TESTED",
     "fulfilment_proposal": "Manual al inicio; no contratar integración adicional antes de validar. No pedido realizado.",
-    "previous_research": "control-room/artifacts/supplier-margin-economics-20260927T211708Z.json"
+    "previous_research": "control-room/artifacts/supplier-margin-economics-20260927T211708Z.json",
+    "this_update": "Investigación anterior conservada; proveedor, stock y precios no reconsultados en este cambio de foco."
   },
   "market_proposal": "España peninsular / español / EUR; confirmar códigos postales cubiertos. No abrir islas ni otros países en este piloto.",
   "page_url": null,
@@ -78,7 +88,7 @@
   "problem": "Pelo visible en textiles y trabajo de limpiar el propio útil de limpieza.",
   "offer": "Una unidad con base a 24,90 EUR de precio final con envío incluido a Península; contenido y viabilidad pendientes. Sin kit, descuento ficticio ni suscripción.",
   "retail_price_total_eur": 24.9,
-  "price_status": "HYPOTHESIS_SAVED_TO_SHOPIFY_DRAFT_NOT_PUBLISHED",
+  "price_status": "HYPOTHESIS_OBSERVED_IN_CORRECT_STORE_DRAFT_NOT_A_VALIDATED_OFFER",
   "costs_eur": {
     "product": null,
     "delivery": null,
@@ -119,7 +129,7 @@
   },
   "approved_spend_eur": 0,
   "proposed_total_budget_eur": 60,
-  "budget_scope": "Solo inversión publicitaria propuesta; impuestos/comisiones de facturación, muestra, tienda, pedidos y devoluciones no están incluidos ni autorizados.",
+  "budget_scope": "Solo inversión publicitaria propuesta; impuestos/comisiones de facturación, muestra, tienda, pedidos y devoluciones no están incluidos ni autorizados. No es el gasto histórico del negocio. El plan Basic observado no se ha contratado ni facturado en esta actualización.",
   "proposed_total_eur_per_creative": 30,
   "proposed_max_duration_days": 3,
   "total_cap_configuration_verified": false,
@@ -140,10 +150,7 @@
     "net_contribution": null
   },
   "review": {
-    "course_window_example_days": [
-      3,
-      7
-    ],
+    "course_window_example_days": [3, 7],
     "window_not_automatic_kill_rule": true,
     "attribution_and_sample_required": true,
     "vary_one_factor_at_a_time": true,
@@ -157,7 +164,8 @@
     "product_selection_scope": "Solo candidato para preparar",
     "shopify_connection_verified": true,
     "shopify_product_draft_created": true,
-    "shopify_unpublished_theme_installed": true,
+    "shopify_product_draft_creation_note": "Existencia verificada mediante consulta; no creado en esta actualización.",
+    "shopify_unpublished_theme_installed": null,
     "supplier_cost_and_delivery_checked": false,
     "stock_confirmed": false,
     "tax_and_consumer_terms_reviewed": false,
@@ -175,11 +183,17 @@
     "existing_section_to_reuse": "control-room/artifacts/course-adrian/one-product-kit/pr-product-story.liquid",
     "original_section_note": "Fuente de partida, no versión actualmente instalada; leer el tema de trabajo antes de modificarlo",
     "shopify_connection_and_draft_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md",
-    "shopify_theme_installation_evidence": "control-room/artifacts/first-test-001/theme-installed-20260927T235136Z.md"
+    "shopify_theme_installation_evidence": "control-room/artifacts/first-test-001/theme-installed-20260927T235136Z.md",
+    "evidence_scope_note": "Los dos informes Shopify citados son históricos de otra tienda. No acreditan la instalación actual en w1fr1w-0y."
+  },
+  "superseded_configuration": {
+    "file_blob_sha": "c931ab571f4f6916841c7516668a8b448bd763ee",
+    "scope": "Registro previo de fryrk1-ns que también conservaba IDs de ghg2tn-1u; preservado en Git, no usar para escrituras.",
+    "use_for_writes": false
   },
   "decision": {
-    "result": "NEW_STORE_AB_DRAFT_READY_COMMERCIAL_LAUNCH_HOLD",
-    "reason": "Nueva tienda Shopify conectada, producto DRAFT creado y concepto visual A+B instalado en tema no publicado. Faltan proveedor, costes, activos reales/derechos, QA y aprobación comercial.",
-    "next": "Añadir activos reales y autorizados del SKU, comprobar proveedor/costes y validar la experiencia en Shopify antes del GO."
+    "result": "DROPSHIPPING_ONLY_PREPARATION_CONTINUES_COMMERCIAL_HOLD",
+    "reason": "Tienda correcta y producto existente comprobados. Proveedor, coste completo, activos, QA y autorización comercial siguen pendientes en este registro. La actualización no acredita ejecución de agentes ni migración de tema.",
+    "next": "Trabajar en paralelo por entregables: suministro/economía, comprador/oferta/creativos y tienda/medición. Comprobar el tema actual antes de editar y no duplicar el DRAFT. Evaluar alternativas solo cuando haya evidencia que mejore o descarte el candidato."
   }
 }
