@@ -1,16 +1,16 @@
 {
   "experiment_id": "PR-TEST-001",
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-27T23:51:36Z",
-  "status": "SHOPIFY_UNPUBLISHED_LANDING_INSTALLED_LAUNCH_BLOCKED",
+  "updated_at": "2026-09-28T08:38:00+01:00",
+  "status": "NEW_STORE_DRAFT_AND_AB_THEME_INSTALLED_LAUNCH_BLOCKED",
   "authority": "El propietario pide pasar a la primera prueba y continuar con Shopify conectado. Se ha creado el producto en borrador e instalado una landing en una copia no publicada del tema; no hay aprobación de gasto ni publicación comercial.",
   "product": {
     "name": "Cepillo quitapelos reutilizable con base autolimpiadora",
     "supplier_sku": "100102",
     "use": "Ropa y tapicerías; no cepillado directo del animal",
     "selection_status": "SELECTED_FOR_PREPARATION_NOT_VALIDATED",
-    "store_product_id": "gid://shopify/Product/11226693370199",
-    "store_variant_id": "gid://shopify/ProductVariant/55179956126039",
+    "store_product_id": "gid://shopify/Product/16068265804106",
+    "store_variant_id": "gid://shopify/ProductVariant/63719435764042",
     "shopify_status": "DRAFT",
     "shopify_readback_verified": true,
     "shopify_inventory_item_id": "gid://shopify/InventoryItem/57285212930391",
@@ -20,28 +20,38 @@
     "supplier_description_verified_physically": false
   },
   "shopify": {
-    "domain": "ghg2tn-1u.myshopify.com",
-    "connection_status": "READ_DRAFT_PRODUCT_AND_UNPUBLISHED_THEME_WRITE_VERIFIED",
+    "domain": "fryrk1-ns.myshopify.com",
+    "connection_status": "NEW_STORE_READ_DRAFT_PRODUCT_AND_UNPUBLISHED_THEME_WRITE_VERIFIED",
     "plan_observed": "trial",
     "currency": "EUR",
-    "theme_observed": {"id": "gid://shopify/OnlineStoreTheme/205995376983", "name": "Horizon", "role": "MAIN"},
+    "theme_observed": {
+      "id": "gid://shopify/OnlineStoreTheme/205995376983",
+      "name": "Horizon",
+      "role": "MAIN"
+    },
     "unpublished_theme_found": true,
-    "unpublished_theme": {"id": "gid://shopify/OnlineStoreTheme/205996360023", "name": "rato. · PR-TEST-001 · borrador", "role": "UNPUBLISHED", "processing": false, "processingFailed": false},
+    "unpublished_theme": {
+      "id": "gid://shopify/OnlineStoreTheme/208500785482",
+      "name": "rato. · PR-TEST-001 · A+B",
+      "role": "UNPUBLISHED",
+      "processing": false,
+      "processingFailed": false
+    },
     "theme_modified": true,
-    "theme_modification_scope": "Solo la copia UNPUBLISHED; MAIN preservado",
+    "theme_modification_scope": "Solo tema UNPUBLISHED A+B; MAIN Horizon preservado",
     "live_theme_modified": false,
     "custom_section_installed": true,
     "theme_write_permission_tested": true,
     "theme_files_readback_verified": true,
     "theme_files_match_tested_local_bytes": true,
-    "theme_editor_url": "https://admin.shopify.com/store/ghg2tn-1u/themes/205996360023/editor",
-    "theme_preview_url": "https://ghg2tn-1u.myshopify.com/?preview_theme_id=205996360023",
+    "theme_editor_url": "https://admin.shopify.com/store/fryrk1-ns/themes/208500785482/editor",
+    "theme_preview_url": "https://fryrk1-ns.myshopify.com/?preview_theme_id=208500785482",
     "authenticated_storefront_render_verified": false,
     "preview_fetch_result": "URL not accessible via web tool; no authenticated browser render performed",
     "contact_email_needs_owner_check": false,
     "correct_contact_email_confirmed_by_owner": true,
     "contact_email_correction_applied": false,
-    "note": "No reinstalar Shopify ni crear otro producto o tema. Landing de revisión instalada, sin compra, con texto provisional y activos visuales pendientes. La vista preview_only no es control de acceso ni una aprobación comercial. Leer los archivos de esta copia antes de editar; la sección instalada difiere de la original del repositorio."
+    "note": "Nueva tienda seleccionada por el propietario. Producto DRAFT y propuesta visual A+B instalados en copia UNPUBLISHED. No publicar ni activar checkout/ads hasta cerrar proveedor, activos, costes y QA."
   },
   "supplier": {
     "name": "Almacén Escriv Ecom",
@@ -102,7 +112,11 @@
   ],
   "shared_video_body": "Demostración real del mismo SKU sobre tejido, limpieza en su base y vaciado; cierre idéntico, unos 25 segundos en total. No demostración de eficacia generada por IA ni testimonios inventados.",
   "ad_design": "Receta inicial de Víctor: una campaña de ventas, dos conjuntos con un vídeo cada uno, compra y destino ficha. Mantener oferta, audiencia y cuerpo iguales; variar gancho. No tratar como A/B aleatorio controlado.",
-  "course_budget_example": {"daily_eur_per_adset": 10, "adsets": 2, "authorization": false},
+  "course_budget_example": {
+    "daily_eur_per_adset": 10,
+    "adsets": 2,
+    "authorization": false
+  },
   "approved_spend_eur": 0,
   "proposed_total_budget_eur": 60,
   "budget_scope": "Solo inversión publicitaria propuesta; impuestos/comisiones de facturación, muestra, tienda, pedidos y devoluciones no están incluidos ni autorizados.",
@@ -126,7 +140,10 @@
     "net_contribution": null
   },
   "review": {
-    "course_window_example_days": [3, 7],
+    "course_window_example_days": [
+      3,
+      7
+    ],
     "window_not_automatic_kill_rule": true,
     "attribution_and_sample_required": true,
     "vary_one_factor_at_a_time": true,
@@ -161,8 +178,8 @@
     "shopify_theme_installation_evidence": "control-room/artifacts/first-test-001/theme-installed-20260927T235136Z.md"
   },
   "decision": {
-    "result": "UNPUBLISHED_LANDING_READBACK_VERIFIED_COMMERCIAL_HOLD",
-    "reason": "Cuatro archivos instalados y comprobados con hashes; MAIN preservado y producto DRAFT sin cambios. 34 comprobaciones locales de fuente/fixture superadas, no renderizado autenticado de Shopify ni compra real. Faltan confirmación del proveedor, costes completos, activos reales/derechos, medición, QA comercial y aprobación del piloto. No hay resultados de venta medidos.",
-    "next": "Continuar sobre el producto y tema existentes. Obtener autorización para enviar la solicitud de stock, portes, documentación y permiso de medios al proveedor; no incluye pedido ni compra. Completar activos y validar en Shopify antes de publicidad."
+    "result": "NEW_STORE_AB_DRAFT_READY_COMMERCIAL_LAUNCH_HOLD",
+    "reason": "Nueva tienda Shopify conectada, producto DRAFT creado y concepto visual A+B instalado en tema no publicado. Faltan proveedor, costes, activos reales/derechos, QA y aprobación comercial.",
+    "next": "Añadir activos reales y autorizados del SKU, comprobar proveedor/costes y validar la experiencia en Shopify antes del GO."
   }
 }
