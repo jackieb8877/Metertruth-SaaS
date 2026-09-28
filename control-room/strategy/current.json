@@ -1,9 +1,16 @@
 {
-  "version": 5,
+  "version": 6,
   "strategy_id": "adrian-one-product-v1",
-  "updated_at": "2026-09-28T08:38:00+01:00",
-  "status": "NEW_SHOPIFY_STORE_DRAFT_AND_AB_THEME_INSTALLED_NOT_LAUNCHED",
-  "authority": "El propietario pide seguir el curso incluso si sustituye la estrategia anterior, pasar a la primera prueba, confirma Shopify y pide continuar. No ha aprobado un importe de gasto ni publicación comercial.",
+  "updated_at": "2026-09-28T10:59:18Z",
+  "status": "DROPSHIPPING_ONLY_CORRECT_STORE_DRAFT_VERIFIED_LAUNCH_BLOCKED",
+  "authority": "El propietario pide centrarse exclusivamente en dropshipping. Se mantiene el método de arranque aprobado y PR-TEST-001. No hay nueva autorización de gasto, publicación comercial ni reactivación de tareas en esta actualización.",
+  "scope": {
+    "only_initiative": "Project Rich / rato. — Dropshipping",
+    "other_initiatives": "OUT_OF_SCOPE_DO_NOT_ALLOCATE_WORK_IN_THIS_PROJECT",
+    "delete_other_projects": false,
+    "goal": "Cerrar y ejecutar una primera prueba comercial medible cuando suministro, oferta, activos, QA y presupuesto estén listos.",
+    "workstreams_are_not_running_workers": true
+  },
   "source": {
     "title": "Guía Para Principiantes De Dropshipping En 2026 (+27 horas)",
     "author": "Adrián Sáenz y colaboradores",
@@ -19,59 +26,70 @@
     "review_completed_at": "2026-09-27T22:32:55.125023Z",
     "source_sha256": "21e76869996c7869505a00755330a49ede2a06da01060911057d49c2a6e8f794",
     "review_handoff": "control-room/artifacts/course-adrian/revision-completa-transcripcion.md",
-    "agent_read_instruction": "Antes de aplicar enseñanzas del curso, leer el handoff de revisión completa. Sustituye los registros de lectura parcial; conserva las diferencias entre profesores y separa enseñanza, ejemplo, evidencia propia y adaptación. No autoriza acciones comerciales."
+    "agent_read_instruction": "Leer el handoff y la transcripción relevante antes de atribuir una enseñanza. Conservar diferencias entre profesores y separar enseñanza, ejemplo, evidencia actual y adaptación. Este cambio de foco no es una nueva revisión del curso ni autoriza acciones comerciales."
   },
-  "read_first": "control-room/strategy/plan_aplicacion_adrian.md",
+  "read_first": "control-room/strategy/current.json",
+  "course_application_plan": "control-room/strategy/plan_aplicacion_adrian.md",
   "launch_model": "one_product_store_sequential_tests",
   "max_simultaneous_commercial_product_tests": 1,
   "catalog_launch_target": null,
   "old_20_50_target": "SUPERSEDED_KEEP_AS_RESEARCH_ARCHIVE",
   "mandatory_collections": false,
-  "current_product": "Cepillo quitapelos reutilizable con base autolimpiadora · Almacén Escriv Ecom · SKU 100102",
-  "current_product_status": "NEW_STORE_SHOPIFY_DRAFT_CREATED_PRODUCT_NOT_VALIDATED",
+  "current_product": "Cepillo quitapelos reutilizable con base autolimpiadora · Almacén Escriv Ecom · SKU proveedor 100102",
+  "current_product_status": "CORRECT_STORE_DRAFT_OBSERVED_NOT_MARKET_VALIDATED",
   "active_experiment": "PR-TEST-001",
   "previous_leader": "Kit Muda Cero",
   "previous_leader_status": "REASSESS_NO_AUTOMATIC_GO",
   "market": {
     "country_proposal": "ES",
     "language_proposal": "es",
-    "status": "PROPOSED_NOT_CONFIGURED",
+    "status": "PROPOSED_NOT_CONFIGURED_VERIFIED",
     "coverage": "España peninsular para el piloto; confirmar cobertura por código postal y costes. No tratar todas las zonas de España como equivalentes."
   },
   "stack": {
     "planned_store": "Shopify",
     "planned_supply_integration": "AutoDS",
-    "status": "NEW_STORE_CONNECTED_DRAFT_CREATED_AB_THEME_UNPUBLISHED",
-    "shopify_domain": "fryrk1-ns.myshopify.com",
-    "shopify_plan_observed": "trial",
+    "status": "CORRECT_STORE_AND_EXISTING_DRAFT_READ_VERIFIED_THEME_NOT_RECHECKED",
+    "shopify_domain": "w1fr1w-0y.myshopify.com",
+    "shopify_name_observed": "My Store 2",
+    "shopify_plan_observed": "Basic",
     "shopify_connection_verified": true,
-    "shopify_product_id": "gid://shopify/Product/16068265804106",
-    "shopify_variant_id": "gid://shopify/ProductVariant/63719435764042",
+    "shopify_contact_email_matches_owner_confirmed": true,
+    "shopify_product_id": "gid://shopify/Product/10922895901005",
+    "shopify_variant_id": "gid://shopify/ProductVariant/54886767493453",
+    "shopify_variant_sku_observed": "PR-TEST-001-100102",
     "shopify_product_status": "DRAFT",
-    "live_theme_modified": false,
-    "custom_section_installed": true,
-    "unpublished_theme_id": "gid://shopify/OnlineStoreTheme/205996360023",
-    "unpublished_theme_name": "rato. · PR-TEST-001 · borrador",
-    "theme_editor_url": "https://admin.shopify.com/store/ghg2tn-1u/themes/205996360023/editor",
-    "theme_preview_url": "https://ghg2tn-1u.myshopify.com/?preview_theme_id=205996360023",
-    "theme_files_readback_verified": true,
-    "theme_files_match_local_tested_bytes": true,
-    "authenticated_storefront_render_verified": false,
-    "integration_evidence": "control-room/artifacts/first-test-001/theme-installed-20260927T235136Z.md",
+    "product_created_at_observed": "2026-09-28T10:16:35Z",
+    "product_updated_at_observed": "2026-09-28T10:23:11Z",
+    "shopify_readback_date": "2026-09-28",
+    "live_theme_modified": null,
+    "custom_section_installed": null,
+    "unpublished_theme_id": null,
+    "unpublished_theme_name": null,
+    "theme_editor_url": null,
+    "theme_preview_url": null,
+    "theme_files_readback_verified": null,
+    "theme_files_match_local_tested_bytes": null,
+    "authenticated_storefront_render_verified": null,
+    "integration_evidence": null,
     "previous_product_creation_evidence": "control-room/artifacts/first-test-001/shopify-draft-20260927T230909Z.md",
-    "integration_note": "Usar esta copia y leer sus archivos actuales. No crear otra copia ni reinstalar la sección antigua por defecto. Modo preview_only con contenido provisional y sin compra; no equivale a control de acceso o validación comercial.",
+    "previous_evidence_scope": "Histórico de otra tienda; no demuestra instalación en la tienda vigente.",
+    "integration_note": "La lectura actual confirma el producto existente en la tienda correcta; no duplicarlo ni atribuir su creación a esta actualización. Consultar temas y archivos actuales antes de editar. null en los campos de tema significa no comprobado aquí, no que el tema no exista. No reutilizar IDs ni previews de las tiendas excluidas.",
     "first_test_adaptation": "Propuesta: pedido manual al proveedor del SKU al inicio; automatización posterior. No se ha contratado ni probado. Es adaptación nuestra, no el circuito AutoDS enseñado por el curso.",
     "custom_commerce_backend_required": false,
     "retain_existing_design_assets": true
   },
+  "store_guard": {
+    "allowed_domain": "w1fr1w-0y.myshopify.com",
+    "excluded_domains": ["fryrk1-ns.myshopify.com", "ghg2tn-1u.myshopify.com", "d1swq0-f3.myshopify.com"],
+    "verify_live_store_before_each_write": true,
+    "verify_resource_belongs_to_allowed_store": true,
+    "create_another_store": false,
+    "domain_mismatch_action": "STOP_WRITES_AND_REPORT_EXACT_MISMATCH",
+    "note": "Norma operativa para los agentes; no es una restricción técnica instalada en Shopify."
+  },
   "initial_channel": "Meta Ads",
-  "later_channels": [
-    "Google Ads",
-    "Tráfico orgánico",
-    "TikTok Ads",
-    "Amazon",
-    "TikTok Shop"
-  ],
+  "later_channels": ["Google Ads", "Tráfico orgánico", "TikTok Ads", "Amazon", "TikTok Shop"],
   "test_example_from_course": {
     "campaigns": 1,
     "adsets": 2,
@@ -79,11 +97,7 @@
     "daily_eur_per_adset": 10,
     "destination": "product_page",
     "conversion_event": "purchase",
-    "source_times": [
-      "04:53:34-04:56:58",
-      "05:02:42-05:03:53",
-      "05:10:27-05:12:23"
-    ],
+    "source_times": ["04:53:34-04:56:58", "05:02:42-05:03:53", "05:10:27-05:12:23"],
     "status": "ILLUSTRATIVE_NOT_AUTHORIZED"
   },
   "budget": {
@@ -92,7 +106,8 @@
     "requires_owner_approval": true,
     "subscriptions_authorized": false,
     "orders_authorized": false,
-    "campaigns_authorized": false
+    "campaigns_authorized": false,
+    "note": "Límites de nueva ejecución por agentes; no equivalen a gasto histórico del negocio. Basic está observado en Shopify; no se ha consultado facturación ni se ha contratado un plan en esta actualización."
   },
   "supplier_policy": {
     "eu_stock_preference_not_absolute_filter": true,
@@ -101,23 +116,30 @@
     "factory_optimization_after_initial_sales": true
   },
   "economics": {
-    "price_multiplier_reference": [
-      2,
-      3
-    ],
+    "price_multiplier_reference": [2, 3],
     "reference_is_not_net_profit": true,
     "fixed_50_percent_pre_ad_gate": "NOT_A_COURSE_RULE_DO_NOT_USE_AS_UNIVERSAL_GATE",
     "break_even_required": true,
     "shipping_included_price_preferred": true,
     "missing_costs_must_remain_explicit": true
   },
+  "workstreams": [
+    {"owners": ["product-scout", "competitor-watch"], "deliverable": "Reevaluar el candidato actual y mantener hasta tres alternativas justificadas; no construir un catálogo de 50 fichas ni bloquearse esperando la web.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
+    {"owners": ["supplier-margin", "finance-profit"], "deliverable": "Cerrar stock, paquete, coste facturado, envío y margen para adquisición del SKU concreto; registrar pendientes sin inventarlos.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
+    {"owners": ["customer-voice", "creative-offer"], "deliverable": "Objeciones y propuesta de valor con evidencia; dos guiones y lista de activos utilizables, con derechos y afirmaciones revisados.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
+    {"owners": ["store-builder", "seo-catalog"], "deliverable": "Continuar la ficha y landing A+B en la tienda permitida, con edición reversible y sin duplicar trabajo de Work; SEO del único experimento, no colecciones masivas.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
+    {"owners": ["ads-intelligence", "launch-qa", "compliance-risk"], "deliverable": "Preparar prueba Meta y medición, resolver requisitos concretos y QA; presupuesto, publicación y pedidos continúan sujetos a autorización.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"},
+    {"owners": ["orchestrator"], "deliverable": "Consolidar solo evidencias reales bajo esta política, marcar registros stale y retirar porcentajes sin base; no atribuir este trabajo del coordinador a otros agentes.", "status": "ASSIGNED_NOT_EXECUTED_BY_THIS_UPDATE"}
+  ],
   "guardrails": [
     "No fake reviews, stock, earnings, scientific/health claims or false price history",
     "No copying third-party ads without rights",
     "No payments, subscriptions, campaign publication or legal commitments without authorization",
     "No false claim of complete course audit",
     "No synthetic live activity",
-    "Preserve existing work and current SHA; do not overwrite newer agent outputs"
+    "Preserve existing work and current SHA; do not overwrite newer agent outputs",
+    "Only dropshipping work belongs to this scope; preserve unrelated repositories and projects",
+    "Assignment is not execution; do not claim continuous agents or completed handoffs without evidence"
   ],
   "coordination": {
     "experiment_file": "control-room/strategy/first-test-draft.json",
@@ -125,7 +147,16 @@
     "agents_may_propose_not_authorize_paid_launch": true,
     "do_not_write_other_agents_state": true,
     "consolidated_state_owner": "orchestrator",
-    "scheduled_runs_are_not_continuous_workers": true
+    "scheduled_runs_are_not_continuous_workers": true,
+    "scheduled_tasks_changed_this_update": false,
+    "agent_receipt_of_new_policy_verified": false,
+    "dashboard_reconciliation_verified": false,
+    "precedence": "Esta política prevalece sobre objetivos de catálogo y destinos Shopify antiguos. Leer archivos actuales y consultar la tienda antes de actuar."
   },
-  "next_action": "Continuar PR-TEST-001 en fryrk1-ns.myshopify.com sobre el tema no publicado rato. · PR-TEST-001 · A+B. Prioridad: activos reales/autorizados, confirmación de proveedor y costes, QA visual/checkout y medición antes de publicar o gastar."
+  "superseded_configuration": {
+    "file_blob_sha": "02e5a94151381a16cdb64e7b7bc630038ebc7bf3",
+    "scope": "Configuración anterior preservada en Git; mezclaba fryrk1-ns y ghg2tn-1u con IDs históricos.",
+    "use_for_writes": false
+  },
+  "next_action": "Cerrar la viabilidad de suministro y costes de PR-TEST-001 mientras Store Builder continúa en la tienda permitida. Reutilizar el producto DRAFT 10922895901005; consultar el tema actual, no crear otra tienda ni sobrescribir trabajo concurrente. Las incógnitas de proveedor no se resuelven rediseñando la web. Si el candidato falla, proponer una alternativa con evidencia antes de otro test."
 }
